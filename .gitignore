@@ -1,0 +1,35 @@
+.DS_Store
+*~
+
+# TeX compiled files
+*.log
+*.aux
+*.dvi
+*.gz
+*.out
+
+# toc files
+*.toc
+*.lof
+*.lot
+*.ilg
+*.ind
+
+# bib files
+*.bbl
+*.blg
+*.bib.bak
+*.bib.sav
+
+# Other
+*.gz(busy)
+*.gz
+*.equ
+*.xdv
+*.tmp
+*.bcf
+*.run.xml
+
+# editor
+.vscode/
+!.vscode/settings.json
