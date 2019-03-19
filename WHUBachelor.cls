@@ -23,7 +23,7 @@
 \ProvidesClass{WHUBachelor}[Wuhan University Thesis Template for Bachelor Degree]
 
 %%% ---- 载入Class ----- %%%
-\LoadClass[a4paper,openany,oneside,fntef]{book} % A4大小，book布局
+\LoadClass[a4paper,openany,oneside]{book} % A4大小，book布局
 
 \RequirePackage[AutoFakeBold=true,AutoFakeSlant=true]{xeCJK}[2017/08/08]
 \RequirePackage[zihao=-4,UTF8,heading=true]{ctex}[2016/12/27]
@@ -33,11 +33,11 @@
 \geometry{left=3cm,right=3cm,top=2.5cm,bottom=2.0cm}
 
 \RequirePackage{fancyhdr}
-\newcommand{\footstyle}{\fancyfoot[C]{\songti \zihao{5} \thepage}}  % 设置页脚样式
 \pagestyle{fancy}
 \fancyhf{} % 清空原有样式
-\footstyle
+\fancyfoot[C]{\songti \zihao{5} \thepage}
 \renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
 
 %%% ---- 定义字体 ----- %%%
 \renewcommand{\normalsize}{\zihao{-4}} % 正常字号
@@ -50,7 +50,7 @@
 \renewcommand{\baselinestretch}{1.5}
 % 设置各个标题样式
 \ctexset{chapter={format={\centering \heiti \zihao{-2}}, number={\zihao{-2} % 各章标题 黑体小2号
-    \arabic{chapter}},name={,},afterskip={30pt},beforeskip={20pt}}}
+    \arabic{chapter}},name={,},afterskip={0.5ex},beforeskip={0.8ex}}}
 \ctexset{section={format={\raggedright \heiti \zihao{4}}}}          % 一级标题 黑体 4号
 \ctexset{subsection={format={\raggedright \heiti \zihao{-4}}}}      % 二级标题 黑体小4号
 \ctexset{subsubsection={format={\raggedright \heiti \zihao{-4}}}}   % 三级标题 黑体小4号
@@ -68,6 +68,7 @@
 \RequirePackage{amsmath, amssymb}
 \RequirePackage{array}
 \RequirePackage{graphicx}
+\RequirePackage{fontspec}
 
 %%% ---- 参考文献设置 ----- %%%
 \RequirePackage{natbib}
