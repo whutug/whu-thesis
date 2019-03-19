@@ -1,67 +1,45 @@
 % !Mode:: "TeX:UTF-8"
 
 %%% ---- 封面 ----- %%%
-\setcounter{page}{1}
 \begin{titlepage}
   \begin{center}
-    \vspace*{10pt}
-    {\heiti \zihao{5}%
-      \hfill
-      \newlength{\myLen}\settowidth{\myLen}{学号\ ：\hspace{3mm}\the\StudentNumber\hspace{3mm}}
-      \begin{minipage}[t]{\myLen}
-        学号\ ：\uline{\hfill\hspace{3mm}\the\StudentNumber\hspace{3mm}\hfill}  \\[2mm]
-        密级\ ：\uline{\hfill\the\miji\hfill}
-      \end{minipage}
-    }
-
-    \par
-    \vspace*{70pt} % 插入空白
-    \begin{center}
-      \songti \zihao{1} 武汉大学本科毕业论文 \@author
-    \end{center}
-
-    \vspace*{54pt}
-
-    % \fbox{
-    \begin{minipage}[c][6cm]{12cm}
-      \centering
-      \heiti \zihao{2} \the\Ctitle
+    {\heiti \zihao{5} \hfill 
+    \begin{minipage}[t]{4.5cm}
+      学号\ ：\uline{\hfill\hspace{3mm}\the\stunum\hspace{3mm}\hfill} \\[2mm]
+      密级\ ：\uline{\hfill\the\miji\hfill}
+    \end{minipage}}
+    \par \vspace*{6em}
+    {\songti \zihao{1} 武汉大学本科毕业论文}
+    \par \vspace{6em}
+    \begin{minipage}[c][6cm]{14cm}
+        \setlength{\baselineskip}{32pt} 
+        \centering {\heiti \zihao{2} \the\ctitle}
     \end{minipage}
-
-    \par
-    \vspace{80pt}
-    {\songti\zihao{-3}
+    \par \vspace{6em}
+    {\songti \zihao{-3}
       \newcommand\maketabox[1]{\makebox[3.5cm][s]{#1}}
-      \begin{tabular}{cp{5cm}}
-        \maketabox{院(系)名\ 称\ ：}   & \the\Cschoolname \\[1ex]
-        \maketabox{专\ 业\ 名\ 称\ ：} & \the\Cmajor      \\[1ex]
-        \maketabox{学\ 生\ 姓\ 名\ ：} & \the\Cauthor     \\[1ex]
-        \maketabox{指\ 导\ 教\ 师\ ：} & \the\Csupervisor \\[1ex]
-      \end{tabular}
-    }
-    \par
-    \vspace{40pt}
-    {
-      {\songti \zihao{-2} \the\Cdate}
-    }
-  \end{center}%
+      \begin{tabular}{cl}
+        \maketabox{院(系)名\ 称\ ：}   & \the\cschool   \\[1ex]
+        \maketabox{专\ 业\ 名\ 称\ ：} & \the\cmajor    \\[1ex]
+        \maketabox{学\ 生\ 姓\ 名\ ：} & \the\cauthor   \\[1ex]
+        \maketabox{指\ 导\ 教\ 师\ ：} & \the\cadvisor  \\[1ex]
+      \end{tabular}}
+    \par \vspace{6em}
+    {\songti \zihao{-2} \the\cdate}
+  \end{center}
   \clearpage
 \end{titlepage}
 
 
 %%% ---- 郑重申明页 ----- %%%
-\newpage
-\thispagestyle{empty}
-\renewcommand{\baselinestretch}{1.5}  %下文的行距
-
+\newpage \thispagestyle{empty}
 \vspace*{44pt}
 \begin{center}{\ziju{0.5}\songti \zihao{2} \textbf{郑重声明}}\end{center}
 \par\vspace*{20pt}
 \setlength{\baselineskip}{23pt}
 {\zihao{4}
   本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
-  \par
-  \vspace*{88pt}
+  \par \vspace*{88pt}
   \hspace*{0.5cm}本人签名: \underline{\hspace{3.5cm}}
   \hspace{2cm}日期: \underline{\hspace{3.5cm}}\hfill\par}
 
@@ -69,32 +47,19 @@
 \newcommand\cnkeywords[1]{ {\noindent\heiti\zihao{-4} 关键词: }\zihao{-4}#1}
 \newcommand\enkeywords[1]{ {\noindent\bfseries\zihao{-4} Key words: }\zihao{-4}#1}
 
-
 %%% ---- 中文摘要及关键词 ----- %%%
-\newpage
-\thispagestyle{empty}
-\vspace{10pt}
-\begin{center}{\ziju{2}\heiti \zihao{-2} 摘要}\end{center}
+\newpage \thispagestyle{empty}
+\begin{center}{\ziju{2} \heiti \zihao{-2} 摘要}\end{center}
 \baselineskip=23pt
-{\songti \zihao{-4}%
-
-  \the\CNabstract
-}
-\par
-\vspace*{2em}
+{\songti \zihao{-4} \par \the\CNabstract}
+\par \vspace*{2em}
 \cnkeywords{\the\CNkeywords}
 
 
 %%% ---- 英文摘要及关键词 ----- %%%
-\newpage
-\thispagestyle{empty}
-\vspace{10pt}
+\newpage \thispagestyle{empty}
 \begin{center}{\zihao{-2} \textbf{ABSTRACT}}\end{center}
 \baselineskip=23pt
-{\zihao{-4}%
-
-\the\ENabstract
-}
-\par
-\vspace*{2em}
+{\zihao{-4} \par \the\ENabstract}
+\par \vspace*{2em}
 \enkeywords{\the\ENkeywords}
