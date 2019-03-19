@@ -47,7 +47,7 @@
 
 %%% ---- 定义标题和段落样式 ----- %%%
 % 定义1.5倍行距
-\renewcommand{\baselinestretch}{1.62}
+\renewcommand{\baselinestretch}{1.5}
 % 设置各个标题样式
 \ctexset{chapter={format={\centering \heiti \zihao{-2}}, number={\zihao{-2} % 各章标题 黑体小2号
     \arabic{chapter}},name={,},afterskip={30pt},beforeskip={20pt}}}
@@ -83,16 +83,16 @@
 \node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}} %圆圈数字①
 
 % 定义toks
-\newtoks\StudentNumber      % 学号
+\newtoks\stunum             % 学号
 \newtoks\miji               % 密级
-\newtoks\Cmajor             % 学科专业中文
-\newtoks\Ctitle             % 题目
-\newtoks\Cauthor            % 作者名字
-\newtoks\Csupervisor        % 指导教师
-\newtoks\Cschoolname        % 学院
-\newtoks\Cdate              % 日期
+\newtoks\cmajor             % 学科专业中文
+\newtoks\ctitle             % 题目
+\newtoks\cauthor            % 作者名字
+\newtoks\cadvisor           % 指导教师
+\newtoks\cschool            % 学院
+\newtoks\cdate              % 日期
+
 \newtoks\CNabstract         % 中文摘要
 \newtoks\CNkeywords         % 中文关键词
 \newtoks\ENabstract         % 英文摘要
 \newtoks\ENkeywords         % 英文关键词
-
