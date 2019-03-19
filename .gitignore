@@ -31,5 +31,5 @@
 *.run.xml
 
 # editor
-.vscode/
+.vscode/*
 !.vscode/settings.json
