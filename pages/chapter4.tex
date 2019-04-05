@@ -1,0 +1,83 @@
+% !Mode:: "TeX:UTF-8"
+
+\chapter{其它格式}
+\section{代码}
+\subsection{原始代码}
+朴实的代码块：
+
+\begin{verbatim}
+import numpy as np
+print("Hello world!")
+\end{verbatim}
+
+\subsection{代码风格化}
+代码高亮，更多使用请参考 \href{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}{Code Highlighting with minted}
+
+\usemintedstyle{vs}
+\begin{minted}[linenos,baselinestretch=1.0,frame=lines]{cpp}
+#include <iostream>
+using namespace std;
+
+int main() 
+{
+    cout << "Hello, World!";
+    return 0;
+}
+\end{minted}
+
+\subsection{算法描述/伪代码}
+参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms}
+
+% \begin{algorithm}[]
+%   \SetKwInOut{Input}{输入}
+%   \SetKwInOut{Output}{输出}
+%   \caption{\sc DeepWalk\((G, w, d, \gamma, t)\)}\label{DeepWalk}
+%   \Input{图\(G(V,E)\) \\
+%     窗大小\(w\) \\
+%     嵌入维度\(d\) \\
+%     每个节点游走数\(\gamma\) \\
+%     游走距离\(t\)
+%   }
+%   \Output{节点表征矩阵\(\Phi\in\mathbb{R}^{|V|\times d}\)
+%   }
+%   初始化：从\(\mathcal{U}^{|V|\times d}\)采样\(\Phi\) \\
+%   从\(V\)建立二叉树\(T\) \\
+%   \For{\(i=0\) to \(\gamma\)}{
+%     \(\mathcal{O}\) = Shuffle(\(V\)) \\
+%     \ForEach{\(v_i\in\mathcal{O}\)}{
+%       \(\mathcal{W}_{v_i}=RandomWalk(G, v_i, t)\) \\
+%       \(\textsc{SkipGram}(\Phi, \mathcal{W}_{v_i}, w)\)
+%     }
+%   }
+% \end{algorithm}
+
+
+\section{绘图}
+关于绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package}
+
+% \begin{figure*}[!htb]
+%   \centering
+%   \begin{subfigure}[t]{0.5\textwidth}
+%       \centering
+%       \begin{tikzpicture}
+%         \begin{axis}
+%         \addplot[color=red]{exp(x)};
+%         \end{axis}
+%       \end{tikzpicture}
+%       \caption{2D example}
+%       \label{fig:2d}
+%   \end{subfigure}%
+%   ~ 
+%   \begin{subfigure}[t]{0.5\textwidth}
+%       \centering
+%       \begin{tikzpicture}
+%         \begin{axis}
+%         \addplot3[surf,]
+%         {exp(-x^2-y^2)*x};
+%         \end{axis}
+%       \end{tikzpicture}
+%       \caption{3D example}
+%       \label{fig:3d}
+%   \end{subfigure}
+%   \caption{Figures}
+% \end{figure*}

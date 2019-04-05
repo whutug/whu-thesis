@@ -1,0 +1,137 @@
+% !Mode:: "TeX:UTF-8"
+
+\chapter{公式插图表格}
+
+\section{公式的使用}
+在文中引用公式可以这么写：$a^2+b^2=c^2$这是勾股定理，他还可以表示为$c=\sqrt{a^2+b^2}$，还可以让公式单独一段并且加上编号
+
+\begin{equation}
+\sin^2{\theta}+\cos^2{\theta}=1 \label{eq:pingfanghe}
+\end{equation}
+
+还可以通过添加标签在正文中引用公式，如式\eqref{eq:pingfanghe}。
+
+我们还可以轻松打出一个漂亮的矩阵
+
+\begin{equation}
+  \mathbf{A}=
+  \left[\begin{matrix}
+    1&2&3&4\\
+    11&22&33&44\\
+  \end{matrix}\right] \times
+  \left[\begin{matrix}
+    22&24\\
+    32&34\\
+    42&44\\
+    52&54\\
+  \end{matrix}\right]
+\end{equation}
+
+或者多个带编号的公式
+
+\begin{eqnarray}
+  f_1(x)=12x^2+36x+\sin x\\
+  f_2(x)=\sqrt{3}{x^3+3x}
+\end{eqnarray}
+
+\section{插图的使用}
+
+\LaTeX 环境下可以使用常见的图片格式：JPEG、PNG、PDF、EPS等。当然也可以使用\LaTeX 直接绘制矢量图形。
+
+图示例如下：
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.2\textwidth]
+  {figures/whulogo.png}\\
+  \caption{插图示例}
+  \label{fig:whu}
+\end{figure}
+
+\verb|[htbp]|选项分别是此处、页顶、页底、独立一页。\verb|[width=\textwidth]|让图片占满整行，或\verb|[width=2cm]|直接设置宽度。可以随时在文中进行引用，如图~\ref{fig:whu}。
+
+\section{表格的使用}
+
+表格的输入可能会比较麻烦，可以使用在线的工具，如~\href{https://www.tablesgenerator.com/}{Tables Generator}~能便捷的创建表格。\href{https://en.wikibooks.org/wiki/LaTeX/Tables}{LaTeX/Tables}~上及~\href{https://www.tug.org/pracjourn/2007-1/mori/mori.pdf}{Tables in LaTeX}~也有更多的示例能够参考。
+
+\subsection{普通表格}
+下面是一些普通表格的示例
+
+\begin{table}[ht]
+  \centering
+  \caption{简单表格}
+  \label{tab:1}
+  \begin{tabular}{|l|c|r|}
+    \hline
+    我是& 一只 & 普通\\
+    \hline
+    的& 表格& 呀\\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+  \centering
+  \caption{一般三线表}
+  \label{tab:2}
+  \begin{tabular}{ccc}
+    \hline
+    姓名& 学号& 性别\\
+    \hline
+    张三& 001& 男\\
+    李四& 002& 女\\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsection{统计表格}
+要创建占满整个文字宽度的表格需要使用到tabularx，如不需要，使用tabular就行。引用表格与其它引用一样，只需要：表~\ref{tab:3}。
+
+\begin{table}[ht]
+  \centering
+  \caption{统计数据表格}
+  \label{tab:3}
+  \begin{tabularx}{\textwidth}{CCCC}
+    \toprule
+    序号&年龄&身高&体重\\
+    \midrule
+    1&14&156&42\\
+    2&16&158&45\\
+    3&14&162&48\\
+    4&15&163&50\\
+    \cmidrule{2-4} %添加2-4列的中线
+    平均&15&159.75&46.25\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{列表的使用}
+下面演示了创建有序及无序列表，如需其它样式，\href{https://www.latex-tutorial.com/tutorials/lists/}{LaTeX Lists}~上有更多的示例。
+
+\subsection{有序列表}
+这是一个计数的列表
+  \begin{enumerate}
+      \item 第一项
+          \begin{enumerate}
+              \item 第一项中的第一项
+              \item 第一项中的第二项
+          \end{enumerate}
+      \item 第二项
+    \begin{enumerate}[label=(\roman*)]
+      \item 第一项中的第一项
+      \item 第一项中的第二项
+    \end{enumerate}
+      \item 第三项
+  \end{enumerate}
+
+\subsection{不计数列表}
+  这是一个不计数的列表
+  \begin{itemize}
+      \item 第一项
+      \begin{itemize}
+          \item 第一项中的第一项
+          \item 第一项中的第二项
+      \end{itemize}
+      \item 第二项
+      \item 第三项
+  \end{itemize}
