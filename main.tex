@@ -7,7 +7,7 @@
   \miji{}
 
   \stunum{2015301200666}
-  \ctitle{{\LaTeX} Bachelor Thesis Template \linebreak 毕业论文模板使用指南 \linebreak 论文题目}
+  \ctitle{{\LaTeX} Template for Undergraduate Thesis \linebreak Wuhan University \linebreak 毕业论文模板使用指南}
   \cschool{院系名称}
   \cmajor{专业名称}
   \cauthor{作者姓名}
@@ -183,14 +183,100 @@
 		\item 第三项
 	\end{itemize}
 
-  \chapter{测试}
-  \section{第三小节}
-	这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字
-	\section{新的大节}
-	新的大节会自动出现在新的一页上
-	\section{参考文献和交叉引用}\label{sec:ref}
-	\subsection{参考文献}
-  这是一个参考文献引用的范例\cite{Stone_1998}
+  \chapter{文献引用}
+
+  \section{脚注}
+  注释是对论文中特定名词或新名词的注解。注释可用页末注或篇末注的一种。选择页末注的应在注释与正文之间加细线分隔，线宽度为1磅，线的长度不应超过纸张的三分之一宽度。同一页类列出多个注释的，应根据注释的先后顺序编排序号。字体为宋体5号，注释序号以“\circled{1}、\circled{2}”等数字形式标示在被注释词条的右上角。页末或篇末注释条目的序号应按照“\circled{1}、\circled{2}”等数字形式与被注释词条保持一致。示例我需要注释啊\footnote{我是解释注释的}。
+
+  \section{引用文中小节}\label{sec:ref}
+  如引用小节~\ref{sec:ref}
+
+  \section{引用参考文献}
+  这是一个参考文献引用的范例\cite{kuhn2004man}
+
+  还可以采用上标的引用方式\upcite{江泽民1989能源发展趋势及主要节能措施}
+
+  \chapter{其它格式}
+  \section{代码}
+  \subsection{原始代码}
+  朴实的代码块：
+
+  \begin{verbatim}
+    import numpy as np
+    print("Hello world!")
+  \end{verbatim}
+
+  \subsection{代码风格化}
+  代码高亮，更多使用请参考 \href{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}{Code Highlighting with minted}
+
+  \usemintedstyle{vs}
+  \begin{minted}[linenos,baselinestretch=1.0,frame=lines]{cpp}
+    #include <iostream>
+    using namespace std;
+
+    int main() 
+    {
+        cout << "Hello, World!";
+        return 0;
+    }
+  \end{minted}
+
+  \subsection{算法描述/伪代码}
+  参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms}
+
+  % \begin{algorithm}[]
+  %   \SetKwInOut{Input}{输入}
+  %   \SetKwInOut{Output}{输出}
+  %   \caption{\sc DeepWalk\((G, w, d, \gamma, t)\)}\label{DeepWalk}
+  %   \Input{图\(G(V,E)\) \\
+  %     窗大小\(w\) \\
+  %     嵌入维度\(d\) \\
+  %     每个节点游走数\(\gamma\) \\
+  %     游走距离\(t\)
+  %   }
+  %   \Output{节点表征矩阵\(\Phi\in\mathbb{R}^{|V|\times d}\)
+  %   }
+  %   初始化：从\(\mathcal{U}^{|V|\times d}\)采样\(\Phi\) \\
+  %   从\(V\)建立二叉树\(T\) \\
+  %   \For{\(i=0\) to \(\gamma\)}{
+  %     \(\mathcal{O}\) = Shuffle(\(V\)) \\
+  %     \ForEach{\(v_i\in\mathcal{O}\)}{
+  %       \(\mathcal{W}_{v_i}=RandomWalk(G, v_i, t)\) \\
+  %       \(\textsc{SkipGram}(\Phi, \mathcal{W}_{v_i}, w)\)
+  %     }
+  %   }
+  % \end{algorithm}
+
+  
+  \section{绘图}
+  关于绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package}
+
+  % \begin{figure*}[!htb]
+  %   \centering
+  %   \begin{subfigure}[t]{0.5\textwidth}
+  %       \centering
+  %       \begin{tikzpicture}
+  %         \begin{axis}
+  %         \addplot[color=red]{exp(x)};
+  %         \end{axis}
+  %       \end{tikzpicture}
+  %       \caption{2D example}
+  %       \label{fig:2d}
+  %   \end{subfigure}%
+  %   ~ 
+  %   \begin{subfigure}[t]{0.5\textwidth}
+  %       \centering
+  %       \begin{tikzpicture}
+  %         \begin{axis}
+  %         \addplot3[surf,]
+  %         {exp(-x^2-y^2)*x};
+  %         \end{axis}
+  %       \end{tikzpicture}
+  %       \caption{3D example}
+  %       \label{fig:3d}
+  %   \end{subfigure}
+  %   \caption{Figures}
+  % \end{figure*}
 
   % 生成参考文献
   % 使用方法：\bibliography{参考文件1文件名, 参考文献2文件名, ...}
