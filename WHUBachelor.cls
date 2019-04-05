@@ -30,14 +30,18 @@
 
 %%% ---- 定义页边距 ----- %%%
 \RequirePackage{geometry}
-\geometry{left=3cm,right=3cm,top=2.5cm,bottom=2.0cm}
+\geometry{left=3cm,right=3cm,top=2.5cm,bottom=2.0cm,includefoot,xetex}
 
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{} % 清空原有样式
-\fancyfoot[C]{\songti \zihao{5} \thepage}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+\RequirePackage{fancyhdr}%页眉页脚宏包
+\renewcommand{\headrulewidth}{0pt}%页眉线宽
+\renewcommand{\footrulewidth}{0pt}%页脚线宽
+
+% 默认页面页眉页脚样式
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\zihao{5}\thepage}% 页码位于页脚居中
+}
+\pagestyle{plain}
 
 %%% ---- 定义字体 ----- %%%
 \renewcommand{\normalsize}{\zihao{-4}} % 正常字号
@@ -47,6 +51,7 @@
 
 %%% ---- 定义标题和段落样式 ----- %%%
 % 定义1.5倍行距
+\RequirePackage{setspace}
 \renewcommand{\baselinestretch}{1.5}
 % 设置各个标题样式
 \ctexset{chapter={format={\centering \heiti \zihao{-2}}, number={\zihao{-2} % 各章标题 黑体小2号
@@ -55,8 +60,36 @@
 \ctexset{subsection={format={\raggedright \heiti \zihao{-4}}}}      % 二级标题 黑体小4号
 \ctexset{subsubsection={format={\raggedright \heiti \zihao{-4}}}}   % 三级标题 黑体小4号
 
-\setcounter{tocdepth}{4}        % 目录层级数
-\setcounter{secnumdepth}{4}     % 标题层级数
+% 目录样式设置
+\RequirePackage{tocloft}
+\setcounter{tocdepth}{2}        % 目录层级数
+\setcounter{secnumdepth}{3}     % 标题层级数
+
+\renewcommand{\cfttoctitlefont}{\hfill\heiti\zihao{-2}} % 目录标题 黑体小 2 号
+\renewcommand{\contentsname}{目\hspace{2em}录}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\setlength\cftbeforetoctitleskip{-1cm}
+\setlength\cftaftertoctitleskip{0ex}
+
+\renewcommand{\cftdot}{$\cdot$}
+\renewcommand{\cftdotsep}{1}%点间距
+\renewcommand{\cftchapdotsep}{\cftdotsep}
+
+\renewcommand\cftchapfont{\heiti\zihao{4}} % 目录章标题 黑体 4 号
+\renewcommand\cftsecfont{\songti\zihao{-4}}
+\renewcommand\cftsubsecfont{\songti\zihao{-4}}
+\renewcommand\cftsubsubsecfont{\songti\zihao{-4}}
+\renewcommand\cftchappagefont{\heiti\zihao{4}} % 目录页码字体
+\renewcommand\cftsecpagefont{\songti\zihao{5}}
+\renewcommand\cftsubsecpagefont{\songti\zihao{5}}
+\renewcommand\cftsubsubsecpagefont{\songti\zihao{5}}
+
+\renewcommand\cftchapafterpnum{\vskip5pt}
+\renewcommand\cftsecafterpnum{\vskip3pt}
+\renewcommand\cftsubsecafterpnum{\vskip2pt}
+\setlength{\cftsecindent}{0em}
+\setlength{\cftsubsecindent}{0em}
+\setlength{\cftsubsubsecindent}{1.85em}
 
 %%% ---- 图表标题设置 ----- %%%
 \RequirePackage[labelsep=quad]{caption}     % 序号之后空一格写标题
@@ -73,7 +106,7 @@
 \RequirePackage{booktabs}
 
 % 列表样式
-\RequirePackage{enumitem}
+\RequirePackage{enumerate, enumitem}
 \setlist{noitemsep}
 
 % 修改脚注
@@ -92,11 +125,10 @@
 
 
 %%% ---- 引入宏包 ----- %%%
-\RequirePackage{amsmath, amssymb}
+\RequirePackage{amsmath, amssymb, amsthm}
 \RequirePackage{array}
 \RequirePackage{graphicx, subcaption}
 \RequirePackage{fontspec}
-\RequirePackage{hyperref} % 引用
 \RequirePackage{minted} % 代码高亮
 \RequirePackage{algorithm2e, algorithmic} % 算法代码
 \RequirePackage{tikz, pgfplots} % 绘图
@@ -109,6 +141,9 @@
 
 \bibliographystyle{data/gbt7714-2005}                   % 参考文献样式
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}    %自定义新命令\upcite, 使参考文献引用以上标出现
+
+\RequirePackage{hyperref}%引用链接颜色设置
+\hypersetup{citecolor=magenta,linkcolor=black,urlcolor=blue}
 
 \graphicspath{{figures/}} % 图片文件路径
 
