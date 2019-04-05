@@ -43,7 +43,7 @@
 \renewcommand{\normalsize}{\zihao{-4}} % 正常字号
 \setmainfont{Times New Roman}
 \setsansfont{Times New Roman}
-
+\setmonofont{Times New Roman}
 
 %%% ---- 定义标题和段落样式 ----- %%%
 % 定义1.5倍行距
@@ -76,12 +76,31 @@
 \RequirePackage{enumitem}
 \setlist{noitemsep}
 
+% 修改脚注
+\makeatletter%
+\long\def\@makefnmark{%
+\hbox {{\normalfont \textsuperscript{\circled{\@thefnmark}}}}}%
+\makeatother
+\makeatletter%
+\long\def\@makefntext#1{%
+  \parindent 1em\noindent \hb@xt@ 1.8em{\hss \circled{\@thefnmark}}#1}%
+\makeatother
+\skip\footins=10mm plus 1mm
+\footnotesep=6pt
+\renewcommand{\footnotesize}{\songti\zihao{5}}
+\renewcommand\footnoterule{\vspace*{-3pt}\hrule width 0.3\columnwidth height 1pt \vspace*{2.6pt}}
+
+
 %%% ---- 引入宏包 ----- %%%
 \RequirePackage{amsmath, amssymb}
 \RequirePackage{array}
-\RequirePackage{graphicx}
+\RequirePackage{graphicx, subcaption}
 \RequirePackage{fontspec}
-\RequirePackage{hyperref}
+\RequirePackage{hyperref} % 引用
+\RequirePackage{minted} % 代码高亮
+\RequirePackage{algorithm2e, algorithmic} % 算法代码
+\RequirePackage{tikz, pgfplots} % 绘图
+
 
 %%% ---- 参考文献设置 ----- %%%
 \RequirePackage{natbib}
