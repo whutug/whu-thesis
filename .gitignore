@@ -33,3 +33,4 @@
 # editor
 .vscode/*
 !.vscode/settings.json
+_minted*
