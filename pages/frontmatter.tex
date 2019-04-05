@@ -63,3 +63,14 @@
 {\zihao{-4} \par \the\ENabstract}
 \par \vspace*{2em}
 \enkeywords{\the\ENkeywords}
+
+\renewcommand{\baselinestretch}{1}\normalsize
+\baselineskip=23pt % 正文行距为 23 磅
+
+\cleardoublepage
+\pagenumbering{gobble} % 去掉目录页码
+\tableofcontents
+
+\cleardoublepage
+\pagenumbering{arabic} % 重新计数页码
+\setcounter{page}{1}
