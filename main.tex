@@ -4,48 +4,224 @@
 
 \begin{document}
 
-    \stunum{2015301200xxx} %学号
-    \miji{} % 密级,空着
-    \cmajor{XXX XXX} % 学科专业中文名
-    \ctitle{Altera DDR IPCore \linebreak 在海量图像无级缩放硬件 \linebreak 实现系统中的应用} % 中文题目，请注意适当位置换行或者自动换行
-    \cauthor{XXX} % 作者
-    \cadvisor{XXX\quad 副教授} % 指导教师中文名
-    \cschool{XXXX学院} % 学院中文名
-    \cdate{二〇一九年五月} % 日期
+  \miji{}
 
-    \CNabstract{
-        目前对于CCD相机捕获的卫星图像的浏览和动态缩放这个比较棘手的问题的解决方案大多是通过对原始图像进行分割，然后分块显示。这些方法实现起来相对比较容易，开发成本也比较低，但是局限性非常之大，使浏览极为不便，移植性也较差。在本项目中为了解决海量图像方面的这个技术瓶颈，提出了大容量缓存加无级缩放算法的方案。
-    }
-    \CNkeywords{关键词1；关键词2；关键词3}
+  \stunum{2015301200666}
+  \ctitle{{\LaTeX} Bachelor Thesis Template \linebreak 毕业论文模板使用指南 \linebreak 论文题目}
+  \cschool{院系名称}
+  \cmajor{专业名称}
+  \cauthor{作者姓名}
+  \cadvisor{指导教师姓名\quad 职称}
+  \cdate{二〇一九年五月}
 
-    \ENabstract{
-        This paper is carried out on the basis of the 211 project-Ssmi-physical simulation system for ship motion control.
-    }
-    \ENkeywords{motion control； autopilot； neural； GIS}
+  \CNabstract{
+      请使用中文分号“；”分割关键词！\par
+      摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容\par
+      摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容
+  }
+  \CNkeywords{关键词1；关键词2；关键词3}
 
-    \include{pages/frontmatter}
+  \ENabstract{
+      Please use English semicolon and space to separate key words. \par
+      This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. \par
+      This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. 
+  }
+  \ENkeywords{key1; key2; key3}
 
-    % 正文开始
-    \mainmatter
+  \include{pages/frontmatter}
 
-    \chapter{绪论}
-    \section{概述}
-    IP（Intellectual Property）就是常说的知识产权，IPCore（知识产权核）则是指用于产品应用的专用集成电路（ASIC）或者可编程逻辑器件（PGA）的逻辑块或数据块。
-    \subsection{DDR IP Core的时序性描述}
-    \subsubsection{对DDR SDRAM的初始化时序}
-    通过DDR IPCore 对DDR 和DDR2 SDRAM进行初始化是有分别的，由于在本次项目设计过程中实际采用的是DDR SDRAM，因此本文仅仅对前者的初始化时序进行讨论。
-    
-    \chapter{测试}
-    \section{第三小节}
+  % 正文开始
+  \mainmatter
+
+  \chapter{绪论}
+  \section{概述}
+  与Word等所见即所得编辑工具不同，使用 \LaTeX 工具排版可以将写作与排版过程分离，写作者只需要关心文字的部分，而剩下的排版工作全部交给工具自动完成。
+  \section{格式要求}
+  正文宋体小4，正文行间距固定为23磅
+
+  通过空一行（两次回车）实现段落换行，仅仅是回车并不会产生新的段落 \par
+
+  也可以通过\verb|\par|命令来新起一段
+  \section{各节一级标题}
+  我是内容
+  \subsection{各节二级标题}
+  你是内容
+  \subsubsection{各节三级标题}
+  他是内容
+  \section{字体字号}
+  {\songti \bfseries 宋体加粗} {\textbf{English}}
+
+  {\songti \itshape 宋体斜体} {\textit{English}}
+
+  {\songti \bfseries \itshape 宋体粗斜体} {\textbf{\textit{English}}}
+  
+  \chapter{公式插图表格}
+  \section{公式的使用}
+  在文中引用公式可以这么写：$a^2+b^2=c^2$这是勾股定理，他还可以表示为$c=\sqrt{a^2+b^2}$，还可以让公式单独一段并且加上编号
+  \begin{equation}
+  \sin^2{\theta}+\cos^2{\theta}=1 \label{eq:pingfanghe}
+  \end{equation}
+  还可以通过添加标签在正文中引用公式，如式\eqref{eq:pingfanghe}。
+
+  我们还可以轻松打出一个漂亮的矩阵
+  \begin{equation}
+    \mathbf{A}=
+    \left[\begin{matrix}
+      1&2&3&4\\
+      11&22&33&44\\
+    \end{matrix}\right] \times
+    \left[\begin{matrix}
+      22&24\\
+      32&34\\
+      42&44\\
+      52&54\\
+    \end{matrix}\right]
+  \end{equation}
+  或者多个带编号的公式
+
+  \begin{eqnarray}
+    f_1(x)=12x^2+36x+\sin x\\
+    f_2(x)=\sqrt{3}{x^3+3x}
+  \end{eqnarray}
+  
+  \section{插图的使用}
+  \LaTeX 环境下可以使用常见的图片格式：JPEG、PNG、PDF、EPS等。当然也可以使用\LaTeX 直接绘制矢量图形。
+
+  图示例如下：
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.2\textwidth]
+    {figures/whulogo.png}\\
+    \caption{插图示例}
+    \label{fig:whu}
+  \end{figure}
+
+  \verb|[htbp]|选项分别是此处、页顶、页底、独立一页。\verb|[width=\textwidth]|让图片占满整行，或\verb|[width=2cm]|直接设置宽度。可以随时在文中进行引用，如图~\ref{fig:whu}。
+
+  \section{表格的使用}
+  表格的输入可能会比较麻烦，可以使用在线的工具，如~\href{https://www.tablesgenerator.com/}{Tables Generator}~能便捷的创建表格。\href{https://en.wikibooks.org/wiki/LaTeX/Tables}{LaTeX/Tables}~上及~\href{https://www.tug.org/pracjourn/2007-1/mori/mori.pdf}{Tables in LaTeX}~也有更多的示例能够参考。
+
+  \subsection{普通表格}
+  下面是一些普通表格的示例
+
+  \begin{table}[ht]
+    \centering
+    \caption{简单表格}
+    \label{tab:1}
+    \begin{tabular}{|l|c|r|}
+      \hline
+      我是& 一只 & 普通\\
+      \hline
+      的& 表格& 呀\\
+      \hline
+    \end{tabular}
+  \end{table}
+  
+  \begin{table}[ht]
+    \centering
+    \caption{一般三线表}
+    \label{tab:2}
+    \begin{tabular}{ccc}
+      \hline
+      姓名& 学号& 性别\\
+      \hline
+      张三& 001& 男\\
+      李四& 002& 女\\
+      \hline
+    \end{tabular}
+  \end{table}
+  
+  \subsection{统计表格}
+  要创建占满整个文字宽度的表格需要使用到tabularx，如不需要，使用tabular就行。引用表格与其它引用一样，只需要：表~\ref{tab:3}。
+
+  \begin{table}[ht]
+    \centering
+    \caption{统计数据表格}
+    \label{tab:3}
+    \begin{tabularx}{\textwidth}{CCCC}
+      \toprule
+      序号&年龄&身高&体重\\
+      \midrule
+      1&14&156&42\\
+      2&16&158&45\\
+      3&14&162&48\\
+      4&15&163&50\\
+      \cmidrule{2-4} %添加2-4列的中线
+      平均&15&159.75&46.25\\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \section{列表的使用}
+  下面演示了创建有序及无序列表，如需其它样式，\href{https://www.latex-tutorial.com/tutorials/lists/}{LaTeX Lists}~上有更多的示例。
+
+  \subsection{有序列表}
+  这是一个计数的列表
+	\begin{enumerate}
+		\item 第一项
+			\begin{enumerate}
+				\item 第一项中的第一项
+				\item 第一项中的第二项
+			\end{enumerate}
+		\item 第二项
+      \begin{enumerate}[label=(\roman*)]
+        \item 第一项中的第一项
+        \item 第一项中的第二项
+      \end{enumerate}
+		\item 第三项
+	\end{enumerate}
+
+  \subsection{不计数列表}
+	这是一个不计数的列表
+	\begin{itemize}
+		\item 第一项
+		\begin{itemize}
+			\item 第一项中的第一项
+			\item 第一项中的第二项
+		\end{itemize}
+		\item 第二项
+		\item 第三项
+	\end{itemize}
+
+  \chapter{测试}
+  \section{第三小节}
 	这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字这是一大段文字
 	\section{新的大节}
 	新的大节会自动出现在新的一页上
 	\section{参考文献和交叉引用}\label{sec:ref}
 	\subsection{参考文献}
-    这是一个参考文献引用的范例\cite{Stone_1998}
+  这是一个参考文献引用的范例\cite{Stone_1998}
 
-    % 生成参考文献
-    % 使用方法：\bibliography{参考文件1文件名, 参考文献2文件名, ...}
-    \bibliography{ref/refs}
+  % 生成参考文献
+  % 使用方法：\bibliography{参考文件1文件名, 参考文献2文件名, ...}
+  \bibliography{ref/refs}
+
+  \chapter*{致谢}
+  表达对完成论文和学业提供帮助的老师、同学、亲人的感激之情。
+
+
+  % 下面是附录
+  \appendix
+
+  \chapter{这是附录}
+
+  \section{第一个测试}
+  测试公式编号
+  \begin{equation}
+    1+1=2.
+  \end{equation}
+
+  表格编号测试
+
+  \begin{table}[h]
+    \centering
+    \caption{测试表格}
+    \begin{tabular}{*{20}c}
+      \hline
+      11 & 13  & 13  & 13  & 13 \\
+      12 & 14  & 13  & 13  & 13 \\
+      \hline
+    \end{tabular}
+  \end{table}
 
 \end{document}
