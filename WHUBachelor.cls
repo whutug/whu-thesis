@@ -64,11 +64,24 @@
 \renewcommand\figurename{\zihao{-4} 图}
 \renewcommand\tablename{\bf\zihao{-4} 表} 
 
+% 使用tabularx创建占满宽度的表格
+\RequirePackage{tabularx, makecell}
+\newcolumntype{L}{X}
+\newcolumntype{C}{>{\centering \arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft \arraybackslash}X}
+
+\RequirePackage{booktabs}
+
+% 列表样式
+\RequirePackage{enumitem}
+\setlist{noitemsep}
+
 %%% ---- 引入宏包 ----- %%%
 \RequirePackage{amsmath, amssymb}
 \RequirePackage{array}
 \RequirePackage{graphicx}
 \RequirePackage{fontspec}
+\RequirePackage{hyperref}
 
 %%% ---- 参考文献设置 ----- %%%
 \RequirePackage{natbib}
@@ -82,6 +95,7 @@
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{%
 \node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}} %圆圈数字①
+\renewcommand{\eqref}[1]{\textup{{\normalfont（\ref{#1}）\normalfont}}}
 
 % 定义toks
 \newtoks\stunum             % 学号
