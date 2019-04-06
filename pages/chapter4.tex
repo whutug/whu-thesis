@@ -1,32 +1,58 @@
-% !Mode:: "TeX:UTF-8"
+% Chapter 4
 
 \chapter{其它格式}
 \section{代码}
 \subsection{原始代码}
 朴实的代码块：
 
+使用verbatim可以得到原样的输出，如下：
+
 \begin{verbatim}
-import numpy as np
-print("Hello world!")
+    print("Hello world!")
 \end{verbatim}
 
-\subsection{代码风格化}
-代码高亮，更多使用请参考 \href{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}{Code Highlighting with minted}
+使用\href{https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings}{listings}环境可以对代码进行进一步的格式化，如下：
 
-\usemintedstyle{vs}
-\begin{minted}[linenos,baselinestretch=1.0,frame=lines]{cpp}
-#include <iostream>
-using namespace std;
+\lstset{basicstyle=\ttfamily,breaklines=true}
+\begin{lstlisting}[language=Python,frame=single]
+import numpy as np
 
-int main() 
-{
-    cout << "Hello, World!";
-    return 0;
-}
-\end{minted}
+a = np.zeros((2,2))
+print(a)
+\end{lstlisting}
+
+\subsection{代码高亮}
+还可以对代码进行高亮，请参考 \href{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}{Code Highlighting with minted}。注意使用Minted库时，需要系统默认Python有Pygments库，可以通过\verb|$ pip install Pygments| 来进行安装。
+
+% \usemintedstyle{vs}
+% \begin{minted}[linenos,baselinestretch=1.0,frame=lines]{cpp}
+% #include <iostream>
+% using namespace std;
+
+% int main() 
+% {
+%     cout << "Hello, World!";
+%     return 0;
+% }
+% \end{minted}
 
 \subsection{算法描述/伪代码}
-参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms}
+参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms}，下面是一个简单的示例：
+
+\begin{algorithm}[H]
+  \SetAlgoLined
+  \KwResult{Write here the result }
+   initialization\;
+   \While{While condition}{
+    instructions\;
+    \eIf{condition}{
+     instructions1\;
+     }{
+     instructions3\;
+    }
+   }
+  \caption{How to write algorithms}
+\end{algorithm}
 
 % \begin{algorithm}[]
 %   \SetKwInOut{Input}{输入}
@@ -53,31 +79,4 @@ int main()
 
 
 \section{绘图}
-关于绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package}
-
-% \begin{figure*}[!htb]
-%   \centering
-%   \begin{subfigure}[t]{0.5\textwidth}
-%       \centering
-%       \begin{tikzpicture}
-%         \begin{axis}
-%         \addplot[color=red]{exp(x)};
-%         \end{axis}
-%       \end{tikzpicture}
-%       \caption{2D example}
-%       \label{fig:2d}
-%   \end{subfigure}%
-%   ~ 
-%   \begin{subfigure}[t]{0.5\textwidth}
-%       \centering
-%       \begin{tikzpicture}
-%         \begin{axis}
-%         \addplot3[surf,]
-%         {exp(-x^2-y^2)*x};
-%         \end{axis}
-%       \end{tikzpicture}
-%       \caption{3D example}
-%       \label{fig:3d}
-%   \end{subfigure}
-%   \caption{Figures}
-% \end{figure*}
+关于使用 \LaTeX{} 绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package}
