@@ -75,6 +75,5 @@
     }
   ],
   "latex-workshop.view.pdf.viewer": "tab",
-  "latex-workshop.intellisense.citation.label": "title",
-  
+  "latex-workshop.intellisense.citation.label": "title"
 }
