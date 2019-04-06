@@ -151,17 +151,103 @@
 \node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}} %圆圈数字①
 \renewcommand{\eqref}[1]{\textup{{\normalfont（\ref{#1}）\normalfont}}}
 
-% 定义toks
-\newtoks\stunum             % 学号
-\newtoks\miji               % 密级
-\newtoks\cmajor             % 学科专业中文
-\newtoks\ctitle             % 题目
-\newtoks\cauthor            % 作者名字
-\newtoks\cadvisor           % 指导教师
-\newtoks\cschool            % 学院
-\newtoks\cdate              % 日期
+%%% ---- 自定义命令 ----- %%%
 
-\newtoks\CNabstract         % 中文摘要
-\newtoks\CNkeywords         % 中文关键词
-\newtoks\ENabstract         % 英文摘要
-\newtoks\ENkeywords         % 英文关键词
+%%% ---- 封面 ----- %%%
+\makeatletter
+\def\stunum#1{\def\@stunum{#1}}\def\@stunum{}         % 学号
+\def\ctitle#1{\def\@ctitle{#1}}\def\@ctitle{}         % 题目
+\def\cschool#1{\def\@cschool{#1}}\def\@cschool{}      % 院系
+\def\cmajor#1{\def\@cmajor{#1}}\def\@cmajor{}         % 专业
+\def\cauthor#1{\def\@cauthor{#1}}\def\@cauthor{}      % 作者
+\def\cadvisor#1{\def\@cadvisor{#1}}\def\@cadvisor{}   % 老师
+\def\cdate#1{\def\@cdate{#1}}\def\@cdate{}            % 日期
+
+% 论文标题页
+\def\maketitlepage{
+  \thispagestyle{empty}
+  \begin{center}
+    {\heiti \zihao{5} \hfill 
+    \begin{minipage}[t]{4.5cm}
+      学号\ ：\uline{\hfill\hspace{3mm}\@stunum\hspace{3mm}\hfill} \\[2mm]
+      密级\ ：\uline{\hfill \hfill}
+    \end{minipage}}
+    \par \vspace*{6em}
+    {\songti \zihao{1} 武汉大学本科毕业论文}
+    \par \vspace{6em}
+    \begin{minipage}[c][6cm]{14cm}
+        \setlength{\baselineskip}{32pt} 
+        \centering {\heiti \zihao{2} \@ctitle}
+    \end{minipage}
+    \par \vspace{6em}
+    {\songti \zihao{-3}
+      \begin{tabular}{cl}
+        \makebox[3.5cm][s]{院(系)名\ 称\ ：}   & \@cschool   \\[1ex]
+        \makebox[3.5cm][s]{专\ 业\ 名\ 称\ ：} & \@cmajor    \\[1ex]
+        \makebox[3.5cm][s]{学\ 生\ 姓\ 名\ ：} & \@cauthor   \\[1ex]
+        \makebox[3.5cm][s]{指\ 导\ 教\ 师\ ：} & \@cadvisor  \\[1ex]
+      \end{tabular}}
+    \par \vspace{6em}
+    {\songti \zihao{-2} \@cdate}
+  \end{center}
+  \clearpage
+}
+
+% 论文申明页
+\def\makestatement{
+  \thispagestyle{empty}
+  \vspace*{44pt}
+  \begin{center}{\ziju{0.5}\songti \zihao{2} \textbf{郑重声明}}\end{center}
+  \par\vspace*{20pt}
+  \setlength{\baselineskip}{23pt}
+  {\zihao{4}
+  本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
+  \par \vspace*{88pt}
+  \hspace*{0.5cm}本人签名: \underline{\hspace{3.5cm}}
+  \hspace{2cm}日期: \underline{\hspace{3.5cm}}\hfill\par}
+}
+
+%%% ---- 摘要 ----- %%%
+% 中文摘要
+\newenvironment{cnabstract}[1]{
+	\def \cnkeyword {#1}
+	\clearpage
+  \thispagestyle{empty}
+	% \addcontentsline{toc}{chapter}{摘要}
+  \begin{center} {\heiti \zihao{-2} 摘 \hspace{2em} 要} \end{center}
+  \baselineskip=23pt
+
+}{
+	\vspace*{2em}
+	\par\noindent {\heiti\zihao{-4} 关键词：} \cnkeyword
+	\clearpage
+}
+
+% 英文摘要
+\newenvironment{enabstract}[1]{
+	\def \enkeyword {#1}
+  \clearpage
+  \thispagestyle{empty}  
+  \begin{center} {\heiti \zihao{-2} \textbf{ABSTRACT}} \end{center}
+  \baselineskip=23pt
+
+}{
+	\vspace*{2em}
+	\par\noindent {\bfseries\zihao{-4} Key words:} \enkeyword
+	\clearpage
+}
+
+%%% ---- 目录 ----- %%%
+% 生成目录
+\newcommand{\contents}{
+  \cleardoublepage
+  \pagenumbering{gobble} % 去掉目录页码
+  \tableofcontents
+
+  \cleardoublepage
+  \pagenumbering{arabic} % 重新计数页码
+  \setcounter{page}{1}
+
+  \renewcommand{\baselinestretch}{1}\normalsize
+  \baselineskip=23pt % 正文行距为 23 磅
+}
