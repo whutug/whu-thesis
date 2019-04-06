@@ -1,57 +1,37 @@
-% !Mode:: "TeX:UTF-8"
+%% Bachelor Thesis Template of Wuhan Uniersity
+%%
+%% Created by Fing
 
 \documentclass[]{WHUBachelor}
 
 \begin{document}
-
-  \miji{}
-
+%%----------- 封面部分 ----------- %%
   \stunum{2015301200666}
-  \ctitle{{\LaTeX} Template for Undergraduate Thesis \linebreak Wuhan University \linebreak 毕业论文模板使用指南}
+  \ctitle{\LaTeX{} Template for Undergraduate Thesis \linebreak Wuhan University \linebreak 毕业论文模板使用指南}
   \cschool{院系名称}
   \cmajor{专业名称}
   \cauthor{作者姓名}
   \cadvisor{指导教师姓名\quad 职称}
   \cdate{二〇一九年五月}
 
-  \CNabstract{
-      请使用中文分号“；”分割关键词！
+  \maketitlepage            % 封面
+  \makestatement            % 申明
 
-      摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容
+%%----------- 前言部分 ----------- %%
+  \include{pages/abstract}  % 摘要
+  \contents                 % 目录
 
-      摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容
-  }
-  \CNkeywords{关键词1；关键词2；关键词3}
-
-  \ENabstract{
-      Please use English semicolon and space to separate key words.
-
-      This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract.
-
-      This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. This is abstract. 
-  }
-  \ENkeywords{key1; key2; key3}
-
-  % 封面、声明、摘要
-  \include{pages/frontmatter}
-
-  % 正文开始
-  \mainmatter
-
+%%----------- 主体部分 ----------- %%
   \include{pages/chapter1}
   \include{pages/chapter2}
   \include{pages/chapter3}
   \include{pages/chapter4}
 
-  % 生成参考文献
-  % 使用方法：\bibliography{参考文件1文件名, 参考文献2文件名, ...}
+%%----------- 结尾部分 ----------- %%
   \addcontentsline{toc}{chapter}{参考文献}
-  \bibliography{ref/refs}
+  \bibliography{ref/refs}   % 参考文献
 
-  % 致谢
-  \include{pages/thanks}
-
-  % 附录
-  \include{pages/appendix}
+  \include{pages/thanks}    % 致谢
+  \include{pages/appendix}  % 附录
 
 \end{document}
