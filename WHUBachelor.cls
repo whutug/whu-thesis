@@ -28,6 +28,7 @@
 \RequirePackage[AutoFakeBold=true,AutoFakeSlant=true]{xeCJK}[2017/08/08]
 \RequirePackage[zihao=-4,UTF8,heading=true]{ctex}[2016/12/27]
 
+
 %%% ---- 定义页边距 ----- %%%
 \RequirePackage{geometry}
 \geometry{left=3cm,right=3cm,top=2.5cm,bottom=2.0cm,includefoot,xetex}
@@ -36,6 +37,7 @@
 \renewcommand{\headrulewidth}{0pt}%页眉线宽
 \renewcommand{\footrulewidth}{0pt}%页脚线宽
 
+
 % 默认页面页眉页脚样式
 \fancypagestyle{plain}{
     \fancyhf{}
@@ -43,11 +45,13 @@
 }
 \pagestyle{plain}
 
+
 %%% ---- 定义字体 ----- %%%
 \renewcommand{\normalsize}{\zihao{-4}} % 正常字号
 \setmainfont{Times New Roman}
 \setsansfont{Times New Roman}
 \setmonofont{Times New Roman}
+
 
 %%% ---- 定义标题和段落样式 ----- %%%
 % 定义1.5倍行距
@@ -59,6 +63,7 @@
 \ctexset{section={format={\raggedright \heiti \zihao{4}}}}          % 一级标题 黑体 4号
 \ctexset{subsection={format={\raggedright \heiti \zihao{-4}}}}      % 二级标题 黑体小4号
 \ctexset{subsubsection={format={\raggedright \heiti \zihao{-4}}}}   % 三级标题 黑体小4号
+
 
 % 目录样式设置
 \RequirePackage{tocloft}
@@ -129,7 +134,7 @@
 \RequirePackage{array}
 \RequirePackage{graphicx, subcaption}
 \RequirePackage{fontspec}
-\RequirePackage{minted} % 代码高亮
+\RequirePackage{listings, minted} % 代码高亮
 \RequirePackage{algorithm2e, algorithmic} % 算法代码
 \RequirePackage{tikz, pgfplots} % 绘图
 
