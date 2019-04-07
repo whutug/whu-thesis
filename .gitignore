@@ -29,6 +29,7 @@
 *.tmp
 *.bcf
 *.run.xml
+*.thm
 
 # editor
 .vscode/*
