@@ -84,7 +84,7 @@
 \renewcommand\cftsecfont{\songti\zihao{-4}}
 \renewcommand\cftsubsecfont{\songti\zihao{-4}}
 \renewcommand\cftsubsubsecfont{\songti\zihao{-4}}
-\renewcommand\cftchappagefont{\heiti\zihao{4}} % 目录页码字体
+\renewcommand\cftchappagefont{\heiti\zihao{5}} % 目录页码字体
 \renewcommand\cftsecpagefont{\songti\zihao{5}}
 \renewcommand\cftsubsecpagefont{\songti\zihao{5}}
 \renewcommand\cftsubsubsecpagefont{\songti\zihao{5}}
