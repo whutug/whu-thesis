@@ -128,33 +128,58 @@
 \renewcommand{\footnotesize}{\songti\zihao{5}}
 \renewcommand\footnoterule{\vspace*{-3pt}\hrule width 0.3\columnwidth height 1pt \vspace*{2.6pt}}
 
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{%
+\node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}} % 圆圈数字①
 
 %%% ---- 引入宏包 ----- %%%
-\RequirePackage{amsmath, amssymb, amsthm}
-\RequirePackage{array}
+\RequirePackage{amsmath, amssymb}
+\RequirePackage[amsmath,thmmarks]{ntheorem} % 定理
 \RequirePackage{graphicx, subcaption}
-\RequirePackage{fontspec}
 \RequirePackage{listings, minted} % 代码高亮
 \RequirePackage{algorithm2e, algorithmic} % 算法代码
 \RequirePackage{tikz, pgfplots} % 绘图
+\RequirePackage{fontspec, color, url, array}
+
+
+%%% ---- 数学定理样式 ----- %%%
+\theoremstyle{plain}
+\theoremheaderfont{\heiti}
+\theorembodyfont{\songti} \theoremindent0em
+\theorempreskip{0pt}
+\theorempostskip{0pt}
+\theoremnumbering{arabic}
+%\theoremsymbol{} %定理结束时自动添加的标志
+\newtheorem{theorem}{\hspace{2em}定理}[section]
+\newtheorem{definition}{\hspace{2em}定义}[section]
+\newtheorem{lemma}{\hspace{2em}引理}[section]
+\newtheorem{corollary}{\hspace{2em}推论}[section]
+\newtheorem{proposition}{\hspace{2em}性质}[section]
+\newtheorem{example}{\hspace{2em}例}[section]
+\newtheorem{remark}{\hspace{2em}注}[section]
+
+\theoremstyle{nonumberplain}
+\theoremheaderfont{\heiti}
+\theorembodyfont{\normalfont \rm \songti}
+\theoremindent0em \theoremseparator{\hspace{1em}}
+\theoremsymbol{$\square$}
+\newtheorem{proof}{\hspace{2em}证明}
 
 
 %%% ---- 参考文献设置 ----- %%%
 \RequirePackage{natbib}
 \setcitestyle{numbers,square,comma}
 \ctexset{bibname={参考文献}}
+\bibliographystyle{data/gbt7714-2005}  % 参考文献样式
 
-\bibliographystyle{data/gbt7714-2005}                   % 参考文献样式
-\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}    %自定义新命令\upcite, 使参考文献引用以上标出现
+\RequirePackage{hyperref} % 引用
+\hypersetup{citecolor=magenta,linkcolor=black,urlcolor=blue} % 设置引用链接颜色
 
-\RequirePackage{hyperref}%引用链接颜色设置
-\hypersetup{citecolor=magenta,linkcolor=black,urlcolor=blue}
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 自定义新命令\upcite, 使参考文献引用以上标出现
+\renewcommand{\eqref}[1]{\textup{{\normalfont（\ref{#1}）\normalfont}}} % 公式引用使用中文括号
 
 \graphicspath{{figures/}} % 图片文件路径
 
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{%
-\node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}} %圆圈数字①
-\renewcommand{\eqref}[1]{\textup{{\normalfont（\ref{#1}）\normalfont}}}
+% --------------------------------------
 
 %%% ---- 自定义命令 ----- %%%
 
