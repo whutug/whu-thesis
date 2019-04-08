@@ -30,6 +30,30 @@
 将该模板上传至网站后，在 Menu 中将编译器（Compiler）由 `pdfLaTeX` 切换到 `XeLaTeX` 即可正常编译。下面是示例
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/5097752/55670605-2a193580-58b9-11e9-8483-6bd314565dff.png" width="800px">
+  <img src="https://user-images.githubusercontent.com/5097752/55670605-2a193580-58b9-11e9-8483-6bd314565dff.png" width="600px">
 </p>
 
+## 问题反馈
+
+如果发现模板有问题，请按照以下步骤操作：
+
+1. 阅读学校的标准，判断是否符合学校的要求；
+2. 前往项目 [Wiki](https://github.com/mtobeiyf/whu-thesis/wiki) 查看相关说明；
+3. 将 TeX 发行版和宏包升级到最新，并且将模板升级到 Github 上最新版本， 查看问题是否已经修复；
+4. 在 [GitHub Issues](https://github.com/mtobeiyf/whu-thesis/issues) 中搜索该问题的关键词；
+5. 提出新的 [Issue](https://github.com/mtobeiyf/whu-thesis/issues)，并说明系统、TeX 版本、出现的问题等关键信息。
+
+## 更多链接
+
+* [武汉大学本科生毕业论文（设计）工作管理办法](http://ugs.whu.edu.cn/info/1049/1935.htm)
+* [武汉大学毕业论文（设计）智能管理系统](http://210.42.121.231/bysj/)
+
+## 后续计划
+
+支持打印模式、课程报告模式；支持硕士、博士论文模板等。欢迎提交 Pull Request。
+
+## 致谢
+
+* [黄正华老师的模板](http://aff.whu.edu.cn/huangzh/)
+* 相关开源项目：
+  * [bsThesisWHU](https://github.com/csarron/bsThesisWHU), [HUSTPaperTemp](https://github.com/skinaze/HUSTPaperTemp), [SJTUThesis](https://github.com/sjtug/SJTUThesis), [ustcthesis](https://github.com/ustctug/ustcthesis), [TJU-thesis-template](https://github.com/liangzhenduo0608/TJU-thesis-template), [xdba-thesis](https://github.com/xdlinux/xdba-thesis), [NEUBachelorThesis](https://github.com/tzaiyang/NEUBachelorThesis)
