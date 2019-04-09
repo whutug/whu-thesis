@@ -1,6 +1,7 @@
 # 武汉大学毕业论文LaTeX模板
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Last Commit](https://img.shields.io/github/last-commit/mtobeiyf/whu-thesis.svg)](https://github.com/mtobeiyf/whu-thesis/commits/)
 
 本项目为武汉大学**本科生**毕业论文LaTeX模板。
 
