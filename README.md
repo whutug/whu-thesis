@@ -28,10 +28,10 @@
 
 [Overleaf](https://www.overleaf.com/) 是一个简洁的在线 LaTeX 编辑器。无需安装，实时共享，版本控制。该模板支持了 Overleaf 的在线编辑。
 
-将该模板上传至网站后，在 Menu 中将编译器（Compiler）由 `pdfLaTeX` 切换到 `XeLaTeX` 即可正常编译。下面是示例
+将模板上传后，需要设置 `XeLaTeX` 为编译器，具体步骤请查看 [Overleaf 在线编辑](https://github.com/mtobeiyf/whu-thesis/wiki/Overleaf-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91)
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/5097752/55670605-2a193580-58b9-11e9-8483-6bd314565dff.png" width="600px">
+  <img src="https://user-images.githubusercontent.com/5097752/55882483-319d4f00-5bd7-11e9-86ff-687106144e16.png" width="800px">
 </p>
 
 ## 问题反馈
