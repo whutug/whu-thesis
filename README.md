@@ -13,6 +13,8 @@
   <img src="https://user-images.githubusercontent.com/5097752/55679059-f250d300-5936-11e9-8dfe-937a64a0c6bf.png" width="800px">
 </p>
 
+正文样例可以参照 [PDF样例文档](https://github.com/mtobeiyf/whu-thesis/files/3076143/main.pdf)
+
 ## 如何使用
 
 推荐两种方式进行编辑和编译：
