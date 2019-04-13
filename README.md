@@ -1,9 +1,9 @@
-# 武汉大学毕业论文LaTeX模板
+# 武汉大学毕业论文 LaTeX 模板
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Last Commit](https://img.shields.io/github/last-commit/mtobeiyf/whu-thesis.svg)](https://github.com/mtobeiyf/whu-thesis/commits/)
 
-本项目为武汉大学**本科生**毕业论文LaTeX模板。
+本项目为武汉大学**本科生**毕业论文 LaTeX 模板。
 
 根据《武汉大学本科生毕业论文（设计）书写印制规范》编写，力求合规，简洁，易于实现，用户友好。
 
@@ -13,7 +13,7 @@
   <img src="https://user-images.githubusercontent.com/5097752/55679059-f250d300-5936-11e9-8dfe-937a64a0c6bf.png" width="800px">
 </p>
 
-正文样例可以参照 [PDF样例文档](https://github.com/mtobeiyf/whu-thesis/files/3076143/main.pdf)
+正文样例可以参照 [PDF 样例文档](https://github.com/mtobeiyf/whu-thesis/files/3076143/main.pdf)
 
 ## 如何使用
 
