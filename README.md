@@ -34,6 +34,10 @@
   <img src="https://user-images.githubusercontent.com/5097752/55882483-319d4f00-5bd7-11e9-86ff-687106144e16.png" width="800px">
 </p>
 
+## 详细说明
+
+关于模板使用、参考文献引用等常见问题请移步 [Wiki](https://github.com/mtobeiyf/whu-thesis/wiki)
+
 ## 问题反馈
 
 如果发现模板有问题，请按照以下步骤操作：
