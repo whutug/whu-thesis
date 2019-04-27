@@ -166,7 +166,7 @@
 
 
 %%% ---- 参考文献设置 ----- %%%
-\RequirePackage{natbib}
+\RequirePackage[sort&compress]{natbib}
 \setcitestyle{numbers,square,comma}
 \ctexset{bibname={参考文献}}
 \bibliographystyle{data/gbt7714-2005}  % 参考文献样式
