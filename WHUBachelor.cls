@@ -175,7 +175,16 @@
 \hypersetup{citecolor=magenta,linkcolor=black,urlcolor=blue} % 设置引用链接颜色
 
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 自定义新命令\upcite, 使参考文献引用以上标出现
+
 \renewcommand{\eqref}[1]{\textup{{\normalfont（\ref{#1}）\normalfont}}} % 公式引用使用中文括号
+
+% 清除公式上下间距
+\AtBeginDocument{
+	\setlength{\abovedisplayskip}{6pt}
+	\setlength{\belowdisplayskip}{6pt}
+	\setlength{\abovedisplayshortskip}{0pt}
+	\setlength{\belowdisplayshortskip}{0pt} 
+}
 
 \graphicspath{{figures/}} % 图片文件路径
 
