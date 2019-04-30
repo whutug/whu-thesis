@@ -3,8 +3,7 @@
 \chapter{公式插图表格}
 
 \section{公式的使用}
-在文中引用公式可以这么写：$a^2+b^2=c^2$这是勾股定理，他还可以表示为$c=\sqrt{a^2+b^2}$，还可以让公式单独一段并且加上编号
-
+在文中引用公式可以这么写：$a^2+b^2=c^2$这是勾股定理，他还可以表示为$c=\sqrt{a^2+b^2}$，还可以让公式单独一段并且加上编号。注意，公式前请不要空行。
 \begin{equation}
 \sin^2{\theta}+\cos^2{\theta}=1 \label{eq:pingfanghe}
 \end{equation}
@@ -12,7 +11,6 @@
 还可以通过添加标签在正文中引用公式，如式\eqref{eq:pingfanghe}。
 
 我们还可以轻松打出一个漂亮的矩阵
-
 \begin{equation}
   \mathbf{A}=
   \left[\begin{matrix}
@@ -27,12 +25,14 @@
   \end{matrix}\right]
 \end{equation}
 
-或者多个带编号的公式
+或者多行对齐的的公式
+\begin{equation}
+  \begin{aligned}
+    f_1(x)&=(x+y)^2\\
+          &=x^2+2xy+y^2
+  \end{aligned}
+\end{equation}
 
-\begin{eqnarray}
-  f_1(x)=12x^2+36x+\sin x\\
-  f_2(x)=\sqrt{3}{x^3+3x}
-\end{eqnarray}
 
 \section{插图的使用}
 
@@ -42,7 +42,7 @@
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=0.2\textwidth]
+  \includegraphics[width=0.3\textwidth]
   {figures/whulogo.png}\\
   \caption{插图示例}
   \label{fig:whu}
