@@ -135,7 +135,8 @@
 \RequirePackage{amsmath, amssymb}
 \RequirePackage[amsmath,thmmarks]{ntheorem} % 定理
 \RequirePackage{graphicx, subcaption}
-\RequirePackage{listings, minted} % 代码高亮
+\RequirePackage{listings}  % 代码段
+%\RequirePackage{minted}   % 代码高亮，请先用python安装pygments库
 \RequirePackage{algorithm2e, algorithmic} % 算法代码
 \RequirePackage{tikz, pgfplots} % 绘图
 \RequirePackage{fontspec, color, url, array}
@@ -169,7 +170,7 @@
 \RequirePackage[sort&compress]{natbib}
 \setcitestyle{numbers,square,comma}
 \ctexset{bibname={参考文献}}
-\bibliographystyle{data/gbt7714-2005}  % 参考文献样式
+\bibliographystyle{data/gbt7714-2005-whu}  % 参考文献样式
 
 \RequirePackage{hyperref} % 引用
 \hypersetup{citecolor=magenta,linkcolor=black,urlcolor=blue} % 设置引用链接颜色
