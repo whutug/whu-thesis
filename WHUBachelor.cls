@@ -108,7 +108,8 @@
 \newcolumntype{C}{>{\centering \arraybackslash}X}
 \newcolumntype{R}{>{\raggedleft \arraybackslash}X}
 
-\RequirePackage{booktabs}
+\RequirePackage{longtable} % 做长表格的包
+\RequirePackage{booktabs} % 做三线表的包
 
 % 列表样式
 \RequirePackage{enumerate, enumitem}
