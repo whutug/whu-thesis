@@ -141,6 +141,7 @@
 \RequirePackage{tikz, pgfplots} % 绘图
 \RequirePackage{fontspec, color, url, array}
 
+\renewcommand{\algorithmcfname}{算法} % 算法两字用中文显示
 
 %%% ---- 数学定理样式 ----- %%%
 \theoremstyle{plain}
