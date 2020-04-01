@@ -24,7 +24,7 @@ print(a)
 \subsection{代码高亮}
 还可以对代码进行高亮，请参考 \href{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}{Code Highlighting with minted}。
 请先到cls文件中启用minted库。
-注意使用Minted库时，需要系统默认Python有Pygments库，可以通过\verb|$ pip install Pygments| 来进行安装。
+注意使用Minted库时，需要系统默认Python有Pygments库，可以通过\verb|$ pip install Pygments| 来进行安装。且需要在编译时加上\verb|--shell-escape|参数，否则会报错。
 
 % \usemintedstyle{vs}
 % \begin{minted}[linenos,baselinestretch=1.0,frame=lines]{cpp}
@@ -42,6 +42,7 @@ print(a)
 参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms}，下面是一个简单的示例：
 
 \begin{algorithm}[H]
+  \setstretch{1.5} % 代码间行距设定
   \SetAlgoLined
   \KwResult{Write here the result }
    initialization\;
@@ -79,8 +80,10 @@ print(a)
 %   }
 % \end{algorithm}
 
-
 \section{绘图}
 
 关于使用 \LaTeX{} 绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package} 中的例子。
 一般建议使用如Photoshop、PowerPoint等制图，再转换成PDF等格式插入。
+
+\section{写在最后}
+工具不重要，对工具的合理运用才重要。希望本模板对大家的论文写作有所帮助。

@@ -4,19 +4,7 @@
 %% Copyright \copyright\ 2019 Fing @ WHU
 %% $ v0.1, 2019/03/18$
 %%
-%% This library is free software; you can redistribute it and/or
-%% modify it under the terms of the GNU Lesser General Public
-%% License as published by the Free Software Foundation; either
-%% version 2.1 of the License, or (at your option) any later version.
-%% 
-%% This library is distributed in the hope that it will be useful,
-%% but WITHOUT ANY WARRANTY; without even the implied warranty of
-%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-%% Lesser General Public License for more details.
-%% 
-%% You should have received a copy of the GNU Lesser General Public
-%% License along with this library; if not, write to the Free Software
-%% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+%% This project uses the MIT License, see LICENSE for more details.
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
@@ -58,7 +46,7 @@
 \RequirePackage{setspace}
 \renewcommand{\baselinestretch}{1.5}
 % 设置各个标题样式
-\ctexset{chapter={format={\centering \heiti \zihao{-2}}, number={\zihao{-2} % 各章标题 黑体小2号
+\ctexset{chapter={format={\centering \heiti \zihao{-2}}, number={   % 各章标题 黑体小2号 // 修改：标题和数字字号一致 
     \arabic{chapter}},name={,},afterskip={0.5ex},beforeskip={0.8ex}}}
 \ctexset{section={format={\raggedright \heiti \zihao{4}}}}          % 一级标题 黑体 4号
 \ctexset{subsection={format={\raggedright \heiti \zihao{-4}}}}      % 二级标题 黑体小4号
@@ -98,8 +86,10 @@
 
 %%% ---- 图表标题设置 ----- %%%
 \RequirePackage[labelsep=quad]{caption}     % 序号之后空一格写标题
-\captionsetup[table]{textfont=bf}           % 设置表格标题字体为黑体
-\renewcommand\figurename{\zihao{-4} 图}
+% 设置表格标题字体为黑体, 设置图片标题字体为黑体
+\captionsetup[table]{textfont=bf}           
+\captionsetup[figure]{textfont=bf}          
+\renewcommand\figurename{\bf\zihao{-4} 图}  
 \renewcommand\tablename{\bf\zihao{-4} 表} 
 
 % 使用tabularx创建占满宽度的表格
@@ -108,7 +98,8 @@
 \newcolumntype{C}{>{\centering \arraybackslash}X}
 \newcolumntype{R}{>{\raggedleft \arraybackslash}X}
 
-\RequirePackage{booktabs}
+\RequirePackage{longtable} % 做长表格的包
+\RequirePackage{booktabs} % 做三线表的包
 
 % 列表样式
 \RequirePackage{enumerate, enumitem}
@@ -141,6 +132,7 @@
 \RequirePackage{tikz, pgfplots} % 绘图
 \RequirePackage{fontspec, color, url, array}
 
+\renewcommand{\algorithmcfname}{算法} % 算法两字用中文显示
 
 %%% ---- 数学定理样式 ----- %%%
 \theoremstyle{plain}
