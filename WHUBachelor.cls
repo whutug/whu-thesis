@@ -33,14 +33,6 @@
 }
 \pagestyle{plain}
 
-
-%%% ---- 定义字体 ----- %%%
-\renewcommand{\normalsize}{\zihao{-4}} % 正常字号
-\setmainfont{Times New Roman}
-\setsansfont{Times New Roman}
-\setmonofont{Times New Roman}
-
-
 %%% ---- 定义标题和段落样式 ----- %%%
 % 定义1.5倍行距
 \RequirePackage{setspace}
@@ -131,6 +123,20 @@
 \RequirePackage{algorithm2e, algorithmic} % 算法代码
 \RequirePackage{tikz, pgfplots} % 绘图
 \RequirePackage{fontspec, color, url, array}
+
+\RequirePackage{txfontsb} % Times 风格（数学）字体
+% 或
+% \RequirePackage{unicode-math}
+% \setmathfont{TeX Gyre Termes Math} % 另一款 Times 风格数学字体，需要单独安装
+% 以上两者任选其一
+
+%%% ---- 定义字体 ----- %%%
+\renewcommand{\normalsize}{\zihao{-4}} % 正常字号
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Times New Roman}
+
+
 
 \renewcommand{\algorithmcfname}{算法} % 算法两字用中文显示
 
