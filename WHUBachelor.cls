@@ -133,10 +133,11 @@
 %%% ---- 定义字体 ----- %%%
 \renewcommand{\normalsize}{\zihao{-4}} % 正常字号
 \setmainfont{Times New Roman}
-\setsansfont{Times New Roman}
-\setmonofont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
 
-
+\RequirePackage{siunitx}
+\sisetup{detect-all}
 
 \renewcommand{\algorithmcfname}{算法} % 算法两字用中文显示
 
