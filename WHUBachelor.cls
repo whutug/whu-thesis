@@ -124,7 +124,7 @@
 \RequirePackage{tikz, pgfplots} % 绘图
 \RequirePackage{fontspec, color, url, array}
 
-\RequirePackage{txfontsb} % Times 风格（数学）字体
+\RequirePackage{newtxmath} % Times 风格（数学）字体
 % 或
 % \RequirePackage{unicode-math}
 % \setmathfont{TeX Gyre Termes Math} % 另一款 Times 风格数学字体，需要单独安装
