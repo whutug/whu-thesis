@@ -132,9 +132,9 @@
 
 %%% ---- 定义字体 ----- %%%
 \renewcommand{\normalsize}{\zihao{-4}} % 正常字号
-\setmainfont{Times New Roman}
-\setsansfont{Times New Roman}
-\setmonofont{Times New Roman}
+\setmainfont[Ligatures=Rare]{Times New Roman}
+\setsansfont[Ligatures=Rare]{Times New Roman}
+\setmonofont[Ligatures=Rare]{Times New Roman}
 
 
 
