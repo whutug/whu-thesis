@@ -124,10 +124,11 @@
 \RequirePackage{tikz, pgfplots} % 绘图
 \RequirePackage{fontspec, color, url, array}
 
-\RequirePackage{txfontsb} % Times 风格（数学）字体
+\RequirePackage{txfonts} % Times 风格（数学）字体
 % 或
 % \RequirePackage{unicode-math}
 % \setmathfont{TeX Gyre Termes Math} % 另一款 Times 风格数学字体，需要单独安装
+% \setmathfont{XITS Math} % 另一款 Times 风格数学字体，需要单独安装
 % 以上两者任选其一
 
 %%% ---- 定义字体 ----- %%%
@@ -220,10 +221,10 @@
     \par \vspace{6em}
     {\songti \zihao{-3}
       \begin{tabular}{cl}
-        \makebox[3.5cm][s]{院(系)名\ 称\ ：}   & \@cschool   \\[1ex]
-        \makebox[3.5cm][s]{专\ 业\ 名\ 称\ ：} & \@cmajor    \\[1ex]
-        \makebox[3.5cm][s]{学\ 生\ 姓\ 名\ ：} & \@cauthor   \\[1ex]
-        \makebox[3.5cm][s]{指\ 导\ 教\ 师\ ：} & \@cadvisor  \\[1ex]
+        \makebox[4cm][s]{院\ \hspace{-1em}（系）\hspace{-1em}\ 名\ 称\ ：}   & \@cschool   \\[1ex]
+        \makebox[4cm][s]{专\ 业\ 名\ 称\ ：}                                 & \@cmajor    \\[1ex]
+        \makebox[4cm][s]{学\ 生\ 姓\ 名\ ：}                                 & \@cauthor   \\[1ex]
+        \makebox[4cm][s]{指\ 导\ 教\ 师\ ：}                                 & \@cadvisor  \\[1ex]
       \end{tabular}}
     \par \vspace{6em}
     {\songti \zihao{-2} \@cdate}
