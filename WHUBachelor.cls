@@ -21,15 +21,15 @@
 \RequirePackage{geometry}
 \geometry{left=3cm,right=3cm,top=2.5cm,bottom=2.0cm,includefoot,xetex}
 
-\RequirePackage{fancyhdr}%页眉页脚宏包
-\renewcommand{\headrulewidth}{0pt}%页眉线宽
-\renewcommand{\footrulewidth}{0pt}%页脚线宽
+\RequirePackage{fancyhdr}           % 页眉页脚宏包
+\renewcommand{\headrulewidth}{0pt}  % 页眉线宽
+\renewcommand{\footrulewidth}{0pt}  % 页脚线宽
 
 
 % 默认页面页眉页脚样式
 \fancypagestyle{plain}{
     \fancyhf{}
-    \fancyfoot[C]{\zihao{5}\thepage}% 页码位于页脚居中
+    \fancyfoot[C]{\zihao{5}\thepage}  % 页码位于页脚居中
 }
 \pagestyle{plain}
 
@@ -57,7 +57,7 @@
 \setlength\cftaftertoctitleskip{0ex}
 
 \renewcommand{\cftdot}{$\cdot$}
-\renewcommand{\cftdotsep}{1}%点间距
+\renewcommand{\cftdotsep}{1}  % 点间距
 \renewcommand{\cftchapdotsep}{\cftdotsep}
 
 \renewcommand\cftchapfont{\heiti\zihao{4}} % 目录章标题 黑体 4 号
@@ -78,9 +78,8 @@
 
 %%% ---- 图表标题设置 ----- %%%
 \RequirePackage[labelsep=quad]{caption}     % 序号之后空一格写标题
-% 设置表格标题字体为黑体, 设置图片标题字体为宋体 //将图标题从黑体改为宋体
-\captionsetup[table]{textfont=bf}           
-\captionsetup[figure]{textfont=}          
+% 设置表格标题字体为黑体, 设置图标题字体为宋体
+\captionsetup[table]{textfont=bf}
 \renewcommand\figurename{\songti\zihao{-4} 图}  
 \renewcommand\tablename{\bf\zihao{-4} 表} 
 
@@ -90,8 +89,8 @@
 \newcolumntype{C}{>{\centering \arraybackslash}X}
 \newcolumntype{R}{>{\raggedleft \arraybackslash}X}
 
-\RequirePackage{longtable} % 做长表格的包
-\RequirePackage{booktabs} % 做三线表的包
+\RequirePackage{longtable}  % 做长表格的包
+\RequirePackage{booktabs}   % 做三线表的包
 
 % 列表样式
 \RequirePackage{enumerate, enumitem}
@@ -116,30 +115,28 @@
 
 %%% ---- 引入宏包 ----- %%%
 \RequirePackage{amsmath, amssymb}
-\RequirePackage[amsmath,thmmarks]{ntheorem} % 定理
+\RequirePackage[amsmath,thmmarks]{ntheorem}  % 定理
 \RequirePackage{graphicx, subcaption}
-\RequirePackage{listings}  % 代码段
-%\RequirePackage{minted}   % 代码高亮，请先用python安装pygments库
-\RequirePackage{algorithm2e, algorithmic} % 算法代码
-\RequirePackage{tikz, pgfplots} % 绘图
+\RequirePackage{listings}                    % 代码段
+% \RequirePackage{minted}                    % 代码高亮（需要 python 安装 pygments 库）
+\RequirePackage{algorithm2e, algorithmic}    % 算法代码
+\RequirePackage{tikz, pgfplots}              % 绘图
 \RequirePackage{fontspec, color, url, array}
 
-\RequirePackage{txfonts} % Times 风格（数学）字体
-% 或
-% \RequirePackage{unicode-math}
+\RequirePackage{txfonts}                     % Times 风格（数学）字体
+% 或 \RequirePackage{unicode-math}
 % \setmathfont{TeX Gyre Termes Math} % 另一款 Times 风格数学字体，需要单独安装
 % \setmathfont{XITS Math} % 另一款 Times 风格数学字体，需要单独安装
 % 以上两者任选其一
 
 %%% ---- 定义字体 ----- %%%
-\renewcommand{\normalsize}{\zihao{-4}} % 正常字号
+\renewcommand{\normalsize}{\zihao{-4}}         % 正常字号
+% 设置英文字体为 Times New Roman
 \setmainfont[Ligatures=Rare]{Times New Roman}
 \setsansfont[Ligatures=Rare]{Times New Roman}
 \setmonofont[Ligatures=Rare]{Times New Roman}
 
-
-
-\renewcommand{\algorithmcfname}{算法} % 算法两字用中文显示
+\renewcommand{\algorithmcfname}{算法}          % 算法两字用中文显示
 
 %%% ---- 数学定理样式 ----- %%%
 \theoremstyle{plain}
