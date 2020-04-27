@@ -2,20 +2,36 @@
 %%
 %% Created by Fing
 
+%% 武汉大学计算机学院本科生实验报告模板
+%%
+%% Modified by HappyTianHao
+
+%% 编译顺序：xelatex->bibtex->xeletex->xeletex
+
 \documentclass[]{WHUBachelor}
 
 \begin{document}
 %%----------- 封面部分 ----------- %%
-  \stunum{xxxxxxxxxxxxx}
-  \ctitle{\LaTeX{} Template for Undergraduate Thesis \linebreak Wuhan University \linebreak 毕业论文模板使用指南}
+  \ctitle{\LaTeX{} Template for Wuhan University \linebreak CS \& SE Undergraduate Report  \linebreak 计算机学院实验报告模板使用指南}
   \cschool{院系名称}
-  \cmajor{专业名称}
-  \cauthor{作者姓名}
-  \cadvisor{教师姓名\quad 职称}
+  \cmajor{计算机科学与技术}
+  \cclass{课程名称}
+  \advisorA{教师一姓名\quad 职称}
+  \advisorB{教师二姓名\quad 职称}    % 若需要，请在模板中修改
+  \stunum{xxxxxxxxxxxxx}
+  \stuname{学生姓名}
+  \grpname{团队名称}
+  \cauthorA{成员一(xxxxxxxxxxxxx)}
+  \cauthorB{成员二(xxxxxxxxxxxxx)}
+  \cauthorC{成员三(xxxxxxxxxxxxx)}  % 若需要，请在模板中修改
+  \cauthorD{成员四(xxxxxxxxxxxxx)}  % 若需要，请在模板中修改
   \cdate{二〇二〇年五月}
 
-  \maketitlepage            % 封面
-  \makestatement            % 申明
+  \maketitlepageindividual       % 个人实验报告封面
+  \makestatementindividual       % 个人实验报告申明
+
+  \maketitlepagegroup            % 团队实验报告封面
+  \makestatementgroup            % 团队实验报告申明
 
 %%----------- 前言部分 ----------- %%
   \include{pages/abstract}  % 摘要
@@ -35,5 +51,7 @@
 
   \include{pages/thanks}    % 致谢
   \include{pages/appendix}  % 附录
+
+  \makecommentpage
 
 \end{document}

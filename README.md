@@ -1,3 +1,12 @@
+# 武汉大学计算机学院实验报告 LaTeX 模板
+
+本项目**Fork**了武汉大学**本科生**毕业论文 LaTeX 模板并将其修改成了
+武汉大学计算机学院实验报告 LaTeX 模板。
+
+以下为**原项目**武汉大学**本科生**毕业论文 LaTeX 模板的README介绍：
+
+---
+
 # 武汉大学毕业论文 LaTeX 模板
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

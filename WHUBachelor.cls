@@ -191,37 +191,47 @@
 
 %%% ---- 封面 ----- %%%
 \makeatletter
-\def\stunum#1{\def\@stunum{#1}}\def\@stunum{}         % 学号
 \def\ctitle#1{\def\@ctitle{#1}}\def\@ctitle{}         % 题目
 \def\cschool#1{\def\@cschool{#1}}\def\@cschool{}      % 院系
 \def\cmajor#1{\def\@cmajor{#1}}\def\@cmajor{}         % 专业
-\def\cauthor#1{\def\@cauthor{#1}}\def\@cauthor{}      % 作者
-\def\cadvisor#1{\def\@cadvisor{#1}}\def\@cadvisor{}   % 老师
+\def\cclass#1{\def\@cclass{#1}}\def\@cclass{}         % 课程
+\def\advisorA#1{\def\@advisorA{#1}}\def\@advisorA{}   % 指导教师A
+\def\advisorB#1{\def\@advisorB{#1}}\def\@advisorB{}   % 指导教师B
+\def\stunum#1{\def\@stunum{#1}}\def\@stunum{}         % 学号
+\def\stuname#1{\def\@stuname{#1}}\def\@stuname{}      % 姓名
+\def\grpname#1{\def\@grpname{#1}}\def\@grpname{}      % 团队名称
+\def\cauthorA#1{\def\@cauthorA{#1}}\def\@cauthorA{}   % 成员A
+\def\cauthorB#1{\def\@cauthorB{#1}}\def\@cauthorB{}   % 成员B
+\def\cauthorC#1{\def\@cauthorC{#1}}\def\@cauthorC{}   % 成员C
+\def\cauthorD#1{\def\@cauthorD{#1}}\def\@cauthorD{}   % 成员D
 \def\cdate#1{\def\@cdate{#1}}\def\@cdate{}            % 日期
 
-% 论文标题页
-\def\maketitlepage{
+% 个人实验报告标题页
+\def\maketitlepageindividual{
   \thispagestyle{empty}
   \begin{center}
     {\heiti \zihao{5} \hfill 
     \begin{minipage}[t]{4.5cm}
-      学号\ ：\uline{\hfill\hspace{3mm}\@stunum\hspace{3mm}\hfill} \\[2mm]
-      密级\ ：\uline{\hfill \hfill}
+      %学号\ ：\uline{\hfill\hspace{3mm}\@stunum\hspace{3mm}\hfill} \\[2mm]
+      %密级\ ：\uline{\hfill \hfill}
     \end{minipage}}
-    \par \vspace*{6em}
-    {\songti \zihao{1} 武汉大学本科毕业论文}
-    \par \vspace{6em}
+    \par \vspace*{4em}
+    {\songti \zihao{1} \textbf{武汉大学计算机学院\linebreak \linebreak 本科生实验报告}}
+    \par \vspace{3em}
     \begin{minipage}[c][6cm]{14cm}
         \setlength{\baselineskip}{32pt} 
-        \centering {\heiti \zihao{2} \@ctitle}
+        \centering {\heiti \zihao{2} \textbf{\@ctitle}}
     \end{minipage}
-    \par \vspace{6em}
+    \par \vspace{3em}
     {\songti \zihao{-3}
       \begin{tabular}{cl}
-        \makebox[4cm][s]{院\ \hspace{-1em}（系）\hspace{-1em}\ 名\ 称\ ：}   & \@cschool   \\[1ex]
+        %\makebox[4cm][s]{院\ \hspace{-1em}（系）\hspace{-1em}\ 名\ 称\ ：}   & \@cschool   \\[1ex]
         \makebox[4cm][s]{专\ 业\ 名\ 称\ ：}                                 & \@cmajor    \\[1ex]
-        \makebox[4cm][s]{学\ 生\ 姓\ 名\ ：}                                 & \@cauthor   \\[1ex]
-        \makebox[4cm][s]{指\ 导\ 教\ 师\ ：}                                 & \@cadvisor  \\[1ex]
+        \makebox[4cm][s]{课\ 程\ 名\ 称\ ：}                                 & \@cclass    \\[1ex]
+        \makebox[4cm][s]{指\ 导\ 教\ 师\ ：}                                 & \@advisorA  \\[1ex]
+        %\makebox[4cm][s]{指\ 导\ 教\ 师\ ：}                                 & \@advisorB  \\[1ex]
+        \makebox[4cm][s]{学\ 生\ 学\ 号\ ：}                                 & \@stunum    \\[1ex]
+        \makebox[4cm][s]{学\ 生\ 姓\ 名\ ：}                                 & \@stuname   \\[1ex]
       \end{tabular}}
     \par \vspace{6em}
     {\songti \zihao{-2} \@cdate}
@@ -229,18 +239,70 @@
   \clearpage
 }
 
-% 论文申明页
-\def\makestatement{
+% 个人实验报告申明页
+\def\makestatementindividual{
   \thispagestyle{empty}
   \vspace*{44pt}
   \begin{center}{\ziju{0.5}\songti \zihao{2} \textbf{郑重声明}}\end{center}
   \par\vspace*{20pt}
   \setlength{\baselineskip}{23pt}
   {\zihao{4}
-  本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
+  本人呈交的实验报告，是在指导老师的指导下，独立进行实验工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本实验报告不包含他人享有著作权的内容。对本实验报告做出贡献的其他个人和集体，均已在文中以明确的方式标明。本实验报告的知识产权归属于培养单位。
   \par \vspace*{88pt}
   \hspace*{0.5cm}本人签名: \underline{\hspace{3.5cm}}
   \hspace{2cm}日期: \underline{\hspace{3.5cm}}\hfill\par}
+  \clearpage
+}
+
+% 团队实验报告标题页
+\def\maketitlepagegroup{
+  \thispagestyle{empty}
+  \begin{center}
+    {\heiti \zihao{5} \hfill 
+    \begin{minipage}[t]{4.5cm}
+      %学号\ ：\uline{\hfill\hspace{3mm}\@stunum\hspace{3mm}\hfill} \\[2mm]
+      %密级\ ：\uline{\hfill \hfill}
+    \end{minipage}}
+    \par \vspace*{4em}
+    {\songti \zihao{1} \textbf{武汉大学计算机学院\linebreak \linebreak 本科生实验报告}}
+    \par \vspace{3em}
+    \begin{minipage}[c][6cm]{14cm}
+        \setlength{\baselineskip}{32pt} 
+        \centering {\heiti \zihao{2} \textbf{\@ctitle}}
+    \end{minipage}
+    \par \vspace{3em}
+    {\songti \zihao{-3}
+      \begin{tabular}{cl}
+        %\makebox[4cm][s]{院\ \hspace{-1em}（系）\hspace{-1em}\ 名\ 称\ ：}   & \@cschool   \\[1ex]
+        \makebox[4cm][s]{专\ 业\ 名\ 称\ \quad ：}                             & \@cmajor    \\[1ex]
+        \makebox[4cm][s]{课\ 程\ 名\ 称\ \quad ：}                             & \@cclass    \\[1ex]
+        \makebox[4cm][s]{团\ 队\ 名\ 称\ \quad ：}                             & \@grpname   \\[1ex]
+        \makebox[4cm][s]{指\ 导\ 教\ 师\ 一：}                                 & \@advisorA  \\[1ex]
+        %\makebox[4cm][s]{指\ 导\ 教\ 师\ 二：}                                 & \@advisorB  \\[1ex]
+        \makebox[4cm][s]{团\ 队\ 成\ 员\ 一：}                                 & \@cauthorA  \\[1ex]
+        \makebox[4cm][s]{团\ 队\ 成\ 员\ 二：}                                 & \@cauthorB  \\[1ex]
+        %\makebox[4cm][s]{团\ 队\ 成\ 员\ 三：}                                 & \@cauthorC  \\[1ex]
+        %\makebox[4cm][s]{团\ 队\ 成\ 员\ 四：}                                 & \@cauthorD  \\[1ex]
+      \end{tabular}}
+    \par \vspace{6em}
+    {\songti \zihao{-2} \@cdate}
+  \end{center}
+  \clearpage
+}
+
+% 团队实验报告申明页
+\def\makestatementgroup{
+  \thispagestyle{empty}
+  \vspace*{44pt}
+  \begin{center}{\ziju{0.5}\songti \zihao{2} \textbf{郑重声明}}\end{center}
+  \par\vspace*{20pt}
+  \setlength{\baselineskip}{23pt}
+  {\zihao{4}
+  本团队呈交的实验报告，是在指导老师的指导下，独立进行实验工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本实验报告不包含他人享有著作权的内容。对本实验报告做出贡献的其他个人和集体，均已在文中以明确的方式标明。本实验报告的知识产权归属于培养单位。
+  \par \vspace*{88pt}
+  \hspace*{0cm}团队成员签名: \underline{\hspace{3.5cm}}
+  \hspace{1.5cm}日期: \underline{\hspace{3.5cm}}\hfill\par}
+  \clearpage
 }
 
 %%% ---- 摘要 ----- %%%
@@ -286,4 +348,28 @@
 
   \renewcommand{\baselinestretch}{1}\normalsize
   \baselineskip=23pt % 正文行距为 23 磅
+}
+
+% 教师评语评分页
+\def\makecommentpage{
+  \thispagestyle{empty}
+  \vspace*{30pt}
+  \begin{center}{\songti \zihao{3} 教师评语评分}\end{center}
+  \par 评语：\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\uline{\hfill}\hspace{1cm}\vspace*{2pt}
+  \par\vspace*{66pt}
+  \hspace*{7cm}评分: \underline{\hspace{3.5cm}}
+  \par\vspace*{36pt}
+  \hspace*{8cm}评阅人: 
+  \par\hspace*{8cm}\quad\quad 年\quad\quad 月\quad\quad 日
+  \par （备注：对该实验报告给予优点和不足的评价，并给出百分制评分。）
+  \clearpage
 }
