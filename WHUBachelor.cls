@@ -15,7 +15,7 @@
 
 \RequirePackage[AutoFakeBold=true,AutoFakeSlant=true]{xeCJK}[2017/08/08]
 \RequirePackage[zihao=-4,UTF8,heading=true]{ctex}[2016/12/27]
-
+\RequirePackage{xeCJKfntef}
 
 %%% ---- 定义页边距 ----- %%%
 \RequirePackage{geometry}
@@ -124,10 +124,6 @@
 \RequirePackage{fontspec, color, url, array}
 
 \RequirePackage{txfonts}                     % Times 风格（数学）字体
-% 或 \RequirePackage{unicode-math}
-% \setmathfont{TeX Gyre Termes Math} % 另一款 Times 风格数学字体，需要单独安装
-% \setmathfont{XITS Math} % 另一款 Times 风格数学字体，需要单独安装
-% 以上两者任选其一
 
 %%% ---- 定义字体 ----- %%%
 \renewcommand{\normalsize}{\zihao{-4}}         % 正常字号
