@@ -79,9 +79,10 @@
 %%% ---- 图表标题设置 ----- %%%
 \RequirePackage[labelsep=quad]{caption}     % 序号之后空一格写标题
 % 设置表格标题字体为黑体, 设置图标题字体为宋体
-\captionsetup[table]{textfont=bf}
+\DeclareCaptionFont{heiti}{\heiti}
+\captionsetup[table]{textfont=heiti}
 \renewcommand\figurename{\songti\zihao{-4} 图}  
-\renewcommand\tablename{\bf\zihao{-4} 表} 
+\renewcommand\tablename{\heiti\zihao{-4} 表} 
 
 % 使用tabularx创建占满宽度的表格
 \RequirePackage{tabularx, makecell}
