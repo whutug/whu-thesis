@@ -1,0 +1,37 @@
+# This workflow enables CI for compiling TeX file
+# GitHub Action Docs: https://help.github.com/en/actions
+
+name: LaTeX Compile
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Compile the LaTeX document with XeLaTeX
+    - name: Compile TeX
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: main.tex
+        args: -xelatex -file-line-error -interaction=nonstopmode -shell-escape
+        extra_system_packages: "py-pygments msttcorefonts-installer fontconfig"
+        pre_compile: "update-ms-fonts && fc-cache -f && rm -rf main.pdf"
+
+    # Upload compiled pdf to artifacts if compiled successfully
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      if: success()
+      with:
+        path: main.pdf
