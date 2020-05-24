@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Last Commit](https://img.shields.io/github/last-commit/mtobeiyf/whu-thesis.svg)](https://github.com/mtobeiyf/whu-thesis/commits/)
+[![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
+[![](https://github.com/mtobeiyf/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/mtobeiyf/whu-thesis/actions)
 
 本项目为武汉大学**本科生**毕业论文 LaTeX 模板。
 

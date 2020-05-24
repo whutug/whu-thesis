@@ -34,4 +34,5 @@ jobs:
       uses: actions/upload-artifact@v2
       if: success()
       with:
+        name: main.pdf
         path: main.pdf
