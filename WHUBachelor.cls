@@ -115,14 +115,15 @@
 \node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}} % 圆圈数字①
 
 %%% ---- 引入宏包 ----- %%%
-\RequirePackage{amsmath, amssymb}
+\RequirePackage{amsmath, amssymb, bm}
 \RequirePackage[amsmath,thmmarks]{ntheorem}  % 定理
 \RequirePackage{graphicx, subcaption}
 \RequirePackage{listings}                    % 代码段
 % \RequirePackage{minted}                    % 代码高亮（需要 python 安装 pygments 库）
 \RequirePackage{algorithm2e, algorithmic}    % 算法代码
 \RequirePackage{tikz, pgfplots}              % 绘图
-\RequirePackage{fontspec, color, url, array}
+\pgfplotsset{compat=1.17}
+\RequirePackage{fontspec, xcolor, url, array, hologo}
 
 \RequirePackage{txfonts}                     % Times 风格（数学）字体
 
@@ -130,8 +131,10 @@
 \renewcommand{\normalsize}{\zihao{-4}}         % 正常字号
 % 设置英文字体为 Times New Roman
 \setmainfont[Ligatures=Rare]{Times New Roman}
-\setsansfont[Ligatures=Rare]{Times New Roman}
-\setmonofont[Ligatures=Rare]{Times New Roman}
+% \setsansfont[Ligatures=Rare]{Times New Roman}
+% \setmonofont[Ligatures=Rare]{Times New Roman}
+\usepackage{sourcesanspro}
+\usepackage{sourcecodepro}
 
 \renewcommand{\algorithmcfname}{算法}          % 算法两字用中文显示
 
@@ -179,6 +182,9 @@
 	\setlength{\abovedisplayshortskip}{0pt}
 	\setlength{\belowdisplayshortskip}{0pt} 
 }
+
+% 调整平行号为倾斜
+\renewcommand\parallel{\mathrel{/\mskip-2.5mu/}}
 
 \graphicspath{{figures/}} % 图片文件路径
 
@@ -284,3 +290,9 @@
   \renewcommand{\baselinestretch}{1}\normalsize
   \baselineskip=23pt % 正文行距为 23 磅
 }
+
+\newcommand\pkg[1]{\texttt{#1}\textsuperscript{\sffamily PKG}}
+\newcommand\env[1]{\texttt{#1}\textsuperscript{\sffamily ENV}}
+\newcommand\app[1]{\textsf{#1}}
+\newcommand\cls[1]{\texttt{#1}\textsuperscript{\sffamily CLS}}
+\newcommand\format[1]{\textsf{#1}}
