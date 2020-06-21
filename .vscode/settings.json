@@ -4,17 +4,16 @@
   },
   "latex-workshop.latex.tools": [
     {
-      "name": "latexmk",
+      "name": "XeLaTeXmk",
       "command": "latexmk",
       "args": [
+        "-xelatex",
         "-synctex=1",
+        "-shell-escape",
         "-interaction=nonstopmode",
         "-file-line-error",
-        "-pdf",
-        "-outdir=%OUTDIR%",
-        "%DOC%"
-      ],
-      "env": {}
+        "%DOCFILE%.tex"
+      ]
     },
     {
       "name": "pdflatex",
@@ -50,27 +49,18 @@
   ],
   "latex-workshop.latex.recipes": [
     {
+      "name": "latexmk 🔃",
+      "tools": [
+        "XeLaTeXmk"
+      ]
+    },
+    {
       "name": "xelatex ➞ bibtex ➞ xelatex × 2",
       "tools": [
         "xelatex",
         "bibtex",
         "xelatex",
         "xelatex"
-      ]
-    },
-    {
-      "name": "latexmk 🔃",
-      "tools": [
-        "latexmk"
-      ]
-    },
-    {
-      "name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
-      "tools": [
-        "pdflatex",
-        "bibtex",
-        "pdflatex",
-        "pdflatex"
       ]
     }
   ],
