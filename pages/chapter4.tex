@@ -5,15 +5,12 @@
 \subsection{原始代码}
 朴实的代码块：
 
-使用verbatim可以得到原样的输出，如下：
-
+使用 \env{verbatim} 环境可以得到如下原样的输出。
 \begin{verbatim}
-    print("Hello world!")
+print("Hello world!")
 \end{verbatim}
 
-使用\href{https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings}{listings}环境可以对代码进行进一步的格式化，如下：
-
-\lstset{basicstyle=\ttfamily,breaklines=true}
+使用 \pkg{listings} 包提供的 \env{lstlisting} 环境可以对代码进行进一步的格式化。
 \begin{lstlisting}[language=Python,frame=single]
 import numpy as np
 
@@ -22,9 +19,9 @@ print(a)
 \end{lstlisting}
 
 \subsection{代码高亮}
-还可以对代码进行高亮，请参考 \href{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}{Code Highlighting with minted}。
-请先到cls文件中启用minted库。
-注意使用Minted库时，需要系统默认Python有Pygments库，可以通过\verb|$ pip install Pygments| 来进行安装。且需要在编译时加上\verb|--shell-escape|参数，否则会报错。
+\pkg{minted} 包所提供的 \env{minted} 环境还可以对代码进行高亮，请参考 \href{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}{Code Highlighting with minted}。在使用 \env{minted} 环境前，请先在\cls{whuthesis.cls} 文件中启用 \pkg{minted} 包。
+
+注意使用 \pkg{minted} 包时，需要系统默认 \app{Python} 有 \app{Pygments} 库，可以通过 \verb|$ pip install Pygments| 来进行安装。且需要在编译时加上 \verb|--shell-escape| 参数，否则会报错。
 
 % \usemintedstyle{vs}
 % \begin{minted}[linenos,baselinestretch=1.0,frame=lines]{cpp}
@@ -39,51 +36,29 @@ print(a)
 % \end{minted}
 
 \subsection{算法描述/伪代码}
-参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms}，下面是一个简单的示例：
+参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms} 与 \pkg{algorithm2e} 文档，给出一个简单的示例，见算法 \ref{alg:alg1}。
 
-\begin{algorithm}[H]
-  \setstretch{1.5} % 代码间行距设定
+\begin{algorithm}
   \SetAlgoLined
-  \KwResult{Write here the result }
-   initialization\;
-   \While{While condition}{
-    instructions\;
-    \eIf{condition}{
-     instructions1\;
-     }{
-     instructions3\;
+  \KwResult{Write here the result}
+    initialization\;
+    \While{While condition}{
+      instructions\;
+      \eIf{condition}{
+        instructions1\;
+      }{
+        instructions3\;
+      }
     }
-   }
-  \caption{How to write algorithms}
+  \caption{如何写算法}\label{alg:alg1}
 \end{algorithm}
 
-% \begin{algorithm}[]
-%   \SetKwInOut{Input}{输入}
-%   \SetKwInOut{Output}{输出}
-%   \caption{\sc DeepWalk\((G, w, d, \gamma, t)\)}\label{DeepWalk}
-%   \Input{图\(G(V,E)\) \\
-%     窗大小\(w\) \\
-%     嵌入维度\(d\) \\
-%     每个节点游走数\(\gamma\) \\
-%     游走距离\(t\)
-%   }
-%   \Output{节点表征矩阵\(\Phi\in\mathbb{R}^{|V|\times d}\)
-%   }
-%   初始化：从\(\mathcal{U}^{|V|\times d}\)采样\(\Phi\) \\
-%   从\(V\)建立二叉树\(T\) \\
-%   \For{\(i=0\) to \(\gamma\)}{
-%     \(\mathcal{O}\) = Shuffle(\(V\)) \\
-%     \ForEach{\(v_i\in\mathcal{O}\)}{
-%       \(\mathcal{W}_{v_i}=RandomWalk(G, v_i, t)\) \\
-%       \(\textsc{SkipGram}(\Phi, \mathcal{W}_{v_i}, w)\)
-%     }
-%   }
-% \end{algorithm}
-
 \section{绘图}
+关于使用 \LaTeX{} 绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package}。一般建议使用如 \app{Photoshop}、\app{PowerPoint} 等制图，再转换成 \fmt{PDF} 等格式插入。
 
-关于使用 \LaTeX{} 绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package} 中的例子。
-一般建议使用如Photoshop、PowerPoint等制图，再转换成PDF等格式插入。
+\section{单位}
+单位的输入请使用 \pkg{siunitx} 包中提供的 \verb|\si| 与 \verb|\SI| 命令。在以前，\LaTeX{} 中输入角度需要使用 \verb|$^\circ$| 的奇技淫巧，现在只需要 \verb|\ang| 命令解决问题。当然 \pkg{siunitx} 包中还提供了不少其他有用的命令，有需要的可以自行阅读 \pkg{siunitx} 文档。
+
 
 \section{写在最后}
 工具不重要，对工具的合理运用才重要。希望本模板对大家的论文写作有所帮助。

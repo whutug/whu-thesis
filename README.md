@@ -78,5 +78,6 @@
 - [TJU-thesis-template](https://github.com/liangzhenduo0608/TJU-thesis-template)
 - [xdba-thesis](https://github.com/xdlinux/xdba-thesis)
 - [NEUBachelorThesis](https://github.com/tzaiyang/NEUBachelorThesis)
+- [ThuThesis](https://github.com/tuna/thuthesis)
 
 </details>

@@ -1,17 +1,46 @@
 % Chapter 1
 
 \chapter{绪论}
+\section{模板概述}
+\WhuThesis（\textbf{W}u\textbf{h}an \textbf{U}niversity \LaTeX{} \textbf{Thesis} Template）是为了帮助武汉大学毕业生撰写毕业论文（设计）而编写的 \LaTeX{} 模板，现时段暂时只提供本科生毕业论文（设计）模板。
 
-\section{概述}
+模板根据《\href{https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf}{武汉大学本科生毕业论文（设计）书写印制规范}》编写，力求合规，简洁，易于实现，用户友好。
 
-与Word等所见即所得编辑工具不同，使用 \LaTeX 工具排版可以将写作与排版过程分离，写作者只需要关心文字的部分，而剩下的排版工作全部交给工具自动完成。
+与 \app{Word} 等所见即所得编辑工具不同，使用 \LaTeX 工具排版可以将写作与排版过程分离，写作者只需要关心文字的部分，而剩下的排版工作全部交给工具自动完成。
+
+本手册假定用户已经能处理一般的 \LaTeX{} 文档，并对 \hologo{BibTeX}有一定了解。如果从未接触过 \TeX{} 和 \LaTeX{}，建议先学习相关的基础知识。
+
+\begin{notice}
+    模板的作用在于减少论文写作过程中格式调整的时间。前提是遵守模板的用法，否则即便用了 \WhuThesis 也难以保证输出的论文符合学校规范。
+\end{notice}
+
+用户如果遇到 bug，或者发现与学校《印制规范》的要求不一致，可以尝试以下办法：
+\begin{enumerate}
+    \item 阅读学校的\href{https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf}{书写印制规范文件}，判断是否符合要求；
+    \item 前往项目 \href{https://github.com/mtobeiyf/whu-thesis/wiki}{wiki} 查看相关说明；
+    \item 将 \TeX{} 发行版和宏包升级到最新，并且将模板升级到 Github 上最新版本，查看问题是否已经修复；
+    \item 在 \href{https://github.com/mtobeiyf/whu-thesis/issues}{GitHub Issues 页面}中搜索该问题的关键词；
+    \item 提出新的 \href{https://github.com/mtobeiyf/whu-thesis/issues}{issue}，并说明系统、\TeX{} 版本、出现的问题等关键信息。
+\end{enumerate}
+
+\section{模板选项}
+模板共提供了 \verb|degree| 与 \verb|class| 两类选项，其中 \verb|degree| 下有 \verb|bachelor|（默认）、\verb|master|、\verb|doctor| 三选项，\verb|class| 下有 \verb|paper|（默认）、\verb|design|、\verb|manual| 三选项，合计两类六选项。
+
+\verb|degree| 选项用于学位选择。虽然提供了 \verb|bachelor|、\verb|master|、\verb|doctor| 三个选项，但现时段只有 \verb|bachelor| 可以使用，也即只提供本科毕业论文（设计）模板。
+
+\verb|class| 选项用于文档类型。其中 \verb|paper| 与 \verb|design| 的区别只在于封面显示的是“武汉大学毕业论文”还是“武汉大学毕业设计”。此功能只是实验性功能，《印制规范》中并无相关要求。\verb|manual| 选项则只用于本手册编写，不用于论文的实际撰写过程。
+
+在使用模板选项时，既可以使用 <\textit{key}> = <\textit{value}> 格式，也可以直接输入选项名。
+
+另外，虽然标准文档类的选项亦可以使用，但只推荐视指导老师要求使用 \verb|oneside| 与 \verb|twoside|（默认）两选项之一。\verb|twoside| 选项启用时，各章会在奇数页（右边）开始。
 
 \section{格式要求}
-正文宋体小四，正文行间距固定为23磅。
+正文字号宋体小四，正文行间距固定为 23 点（point，pt，\app{Word} 中译作“磅”）。
 
-通过空一行（两次回车）实现段落换行，仅仅是回车并不会产生新的段落。 \par
+空格键和 Tab 键输入的空白字符视为“空格”。连续的若干个空白字符视为一个空。一行开头的空格忽略不计。\par
+行末的回车视为一个空格；但连续两个回车，也就是空行，会将文字分段。多个空行被视为一个空行。也可以在行末使用 \verb|\par| 命令分段。
 
-也可以通过 \verb|\par| 命令来新起一段。
+使用 \verb|%| 进行注释。在这个字符之后直到行末，所有的字符都被忽略，行末的回车也不引入空格。% 我是注释
 
 \section{各节一级标题}
 我是内容
@@ -23,11 +52,42 @@
 他是内容
 
 \section{字体字号}
-{\songti \bfseries 宋体加粗} {\textbf{English}}
+与 \CTeX 文档类不同，\WhuThesis 只定义了中文的宋体与{\heiti 黑体}，而并未定义楷体与仿宋体。出于多方面考量，宋体与黑体也只使用了 Windows 平台下的中易宋体与中易黑体。作为对 \app{Word} 的模仿，文档内亦可对宋体使用\textbf{伪粗体}与\textit{伪斜体}，在此之上，两者可组合形成\textbf{\textit{粗斜体}}。
 
-{\songti \itshape 宋体斜体} {\textit{English}}
+\begin{notice}
+    虽然《印制规范》内并无相关要求，但 \WhuThesis 仍然对西文的无衬线（\textsf{sans serif}）字体与等宽（\texttt{mono}）字体进行了定义，并在手册里进行了使用。在下一行建议的基础上，论文撰写的过程中也可以自行更改与使用。
 
-{\songti \bfseries \itshape 宋体粗斜体} {\textbf{\textit{English}}}
+    除非你非常清楚自己在干什么，否则不要轻易改变字体。当然\\
+    \begin{quote}
+        文档\textbf{内}{\tiny 使用}的字体越{\huge \textsf{多}}，\textit{文档}就越具有\textbf{\textit{可读性}}{\large 与}{\Large 美}{\huge 观}{\Huge 性}。
+    \end{quote}
+\end{notice}
 
 \section{编译}
-本模板必须使用XeLaTeX + BibTeX编译，否则会直接报错。 本模板支持多个平台，结合sublime/vscode/overleaf都可以使用。
+本模板必须使用 \hologo{XeLaTeX} + \hologo{BibTeX} 编译，否则会直接报错。 本模板支持多个平台，结合 \app{sublime}/\app{vscode}/\app{overleaf} 都可以使用。
+
+\subsection{latexmk}
+\verb|latexmk| 命令支持全自动生成 \LaTeX 编写的文档，并且支持使用不同的工具链来进行生成，它会自动运行多次工具直到交叉引用都被解决。编译链如下所示。
+\lstset{basicstyle=\ttfamily, breaklines=true}
+\begin{lstlisting}[language=bash]
+$ latexmk main.tex  # 生成 main.pdf
+$ latexmk -c        # 清理编译生成的辅助文件
+\end{lstlisting}
+
+\verb|latexmk| 的编译过程是通过 \verb|latexmkrc| 文件来配置的，如果要进一步了解，可以参考 \verb|latexmk| 文档。
+
+\subsection{\hologo{XeLaTeX} + \hologo{BibTeX}}
+用户也可以直接使用 \hologo{XeLaTeX} + \hologo{BibTeX} 进行编译，编译链如下所示。
+\begin{lstlisting}[language=bash]
+$ xelatex main.tex  
+$ bibtex main.aux   # 生成 .bbl 文件
+$ xelatex main.tex  # 解决引用
+$ xelatex main.tex  # 生成 main.pdf
+\end{lstlisting}
+
+在特殊情况下，可能需要在编译时加入 \verb|-shell-escape| 选项，如
+\begin{lstlisting}[language=bash]
+$ xelatex -shell-escape main.tex 
+\end{lstlisting}
+
+如果用户使用 \app{vscode} 进行写作，在目录内的\ .vscode 文件夹内已经有配置好的 latexmk 与 \hologo{XeLaTeX} 编译链，用户可直接使用。
