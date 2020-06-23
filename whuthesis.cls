@@ -276,7 +276,7 @@
 \def\major#1{\def\whu@major{#1}}\def\whu@major{}              % 专业
 \def\author#1{\def\whu@author{#1}}\def\whu@author{}           % 作者
 \def\advisor#1{\def\whu@advisor{#1}}\def\whu@advisor{}        % 老师
-\def\proftitle#1{\def\whu@proftitle{#1}}\def\whu@proftitle{}  % 老师
+\def\proftitle#1{\def\whu@proftitle{#1}}\def\whu@proftitle{}  % 职称
 \def\date#1{\def\whu@date{#1}}\def\whu@date{}                 % 日期
 
 %%% ---- 论文标题页 ----- %%%
