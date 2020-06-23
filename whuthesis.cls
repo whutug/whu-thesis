@@ -209,8 +209,6 @@
 \renewcommand{\normalsize}{\zihao{-4}}         % 正常字号
 % 设置英文字体为 Times New Roman
 \setmainfont{Times New Roman}[Ligatures = Rare]
-\setsansfont{TeX Gyre Heros}
-\setmonofont{TeX Gyre Cursor}
 
 \setCJKmainfont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
 \setCJKsansfont{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]

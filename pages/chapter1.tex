@@ -55,7 +55,7 @@
 与 \CTeX 文档类不同，\WhuThesis 只定义了中文的宋体与{\heiti 黑体}，而并未定义楷体与仿宋体。出于多方面考量，宋体与黑体也只使用了 Windows 平台下的中易宋体与中易黑体。作为对 \app{Word} 的模仿，文档内亦可对宋体使用\textbf{伪粗体}与\textit{伪斜体}，在此之上，两者可组合形成\textbf{\textit{粗斜体}}。
 
 \begin{notice}
-    虽然《印制规范》内并无相关要求，但 \WhuThesis 仍然对西文的无衬线（\textsf{sans serif}）字体与等宽（\texttt{mono}）字体进行了定义，并在手册里进行了使用。在下一行建议的基础上，论文撰写的过程中也可以自行更改与使用。
+    《印制规范》内并未对西文的无衬线（\textsf{sans serif}）字体与等宽（\texttt{mono}）字体进行要求，但 \WhuThesis 并未将其显式地将其全部定义为 Times New Roman。手册中的无衬线体与等宽字体仍使用 \LaTeX{} 的默认无衬线与等宽字体。在下一段建议的基础上，用户可以使用 \verb|\setsansfont| 与 \verb|\setmonofont| 命令对无衬线体与等宽字体进行更改与使用。
 
     除非你非常清楚自己在干什么，否则不要轻易改变字体。当然\\
     \begin{quote}
