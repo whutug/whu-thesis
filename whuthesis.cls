@@ -188,14 +188,11 @@
 \setlist{nosep}
 
 % 修改脚注
-\makeatletter%
 \long\def\@makefnmark{%
 \hbox {{\normalfont \textsuperscript{\circled{\@thefnmark}}}}}%
-\makeatother
-\makeatletter%
+
 \long\def\@makefntext#1{%
   \parindent 1em\noindent \hb@xt@ 1.8em{\hss \circled{\@thefnmark}}#1}%
-\makeatother
 \skip\footins=10mm plus 1mm
 \footnotesep=6pt
 \renewcommand{\footnotesize}{\songti\zihao{5}}
