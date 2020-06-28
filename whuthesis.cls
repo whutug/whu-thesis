@@ -198,8 +198,8 @@
 \renewcommand{\footnotesize}{\songti\zihao{5}}
 \renewcommand\footnoterule{\vspace*{-3pt}\hrule width 0.3\columnwidth height 1pt \vspace*{2.6pt}}
 
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{%
-\node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}} % 圆圈数字①
+\newcommand*\circled[1]{\makebox[1em][c]{\tikz[baseline=(char.base)]{%
+\node[shape=circle,draw,inner sep=0pt,minimum size=0.96em,line width=0.4pt] (char) {#1};}}} % 圆圈数字①
 
 
 %%% ---- 定义字体 ----- %%%
