@@ -10,6 +10,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{whuthesis}[Wuhan University Thesis Template]
 
+\RequirePackage{iftex}
+\RequireXeTeX
+
 %%% ---- 文档选项 ----- %%%
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -265,14 +268,22 @@
 
 %%% ---- 封面 ----- %%%
 \makeatletter
-\def\stunum#1{\def\whu@stunum{#1}}\def\whu@stunum{}           % 学号
-\def\title#1{\def\whu@title{#1}}\def\whu@title{}              % 题目
-\def\school#1{\def\whu@school{#1}}\def\whu@school{}           % 院系
-\def\major#1{\def\whu@major{#1}}\def\whu@major{}              % 专业
-\def\author#1{\def\whu@author{#1}}\def\whu@author{}           % 作者
-\def\advisor#1{\def\whu@advisor{#1}}\def\whu@advisor{}        % 老师
-\def\proftitle#1{\def\whu@proftitle{#1}}\def\whu@proftitle{}  % 职称
-\def\date#1{\def\whu@date{#1}}\def\whu@date{}                 % 日期
+\def\stunum#1{\def\whu@stunum{#1}}                                              % 学号
+\def\whu@stunum{\@latex@error{未给出学号 \noexpand\stunum}\@ehc}
+\def\title#1{\def\whu@title{#1}}                                                % 题目
+\def\whu@title{\@latex@error{未给出题目 \noexpand\title}\@ehc}
+\def\school#1{\def\whu@school{#1}}                                              % 院系
+\def\whu@school{\@latex@error{未给出院系 \noexpand\school}\@ehc}
+\def\major#1{\def\whu@major{#1}}                                                % 专业
+\def\whu@major{\@latex@error{未给出专业 \noexpand\major}\@ehc}
+\def\author#1{\def\whu@author{#1}}                                              % 作者
+\def\whu@author{\@latex@error{未给出作者 \noexpand\author}\@ehc}
+\def\advisor#1{\def\whu@advisor{#1}}                                            % 老师
+\def\whu@advisor{\@latex@error{未给出指导教师 \noexpand\advisor}\@ehc}
+\def\proftitle#1{\def\whu@proftitle{#1}}                                        % 职称
+\def\whu@proftitle{\@latex@error{未给出指导教师职称 \noexpand\proftitle}\@ehc}
+\def\date#1{\def\whu@date{#1}}                                                  % 日期
+\def\whu@date{\zhdigits{\the\year}年\zhnumber{\the\month}月}
 
 %%% ---- 论文标题页 ----- %%%
 \def\maketitlepage{

@@ -64,7 +64,7 @@
 \end{notice}
 
 \section{编译}
-本模板必须使用 \hologo{XeLaTeX} + \hologo{BibTeX} 编译，否则会直接报错。 本模板支持多个平台，结合 \app{sublime}/\app{vscode}/\app{overleaf} 都可以使用。
+本模板必须使用 \hologo{XeLaTeX} + \hologo{BibTeX} 编译，否则会直接报错。 本模板支持多个平台，结合 \app{sublime}/\app{vscode}/\app{overleaf} 都可以使用。编译之前请确保已经给出了学号 \verb|\stunum|、题目 \verb|\title|、院系 \verb|\school|、专业 \verb|\major|、作者 \verb|\author|、指导教师 \verb|\advisor| 及职称 \verb|\proftitle| 等七个必需信息，以及日期 \verb|\date| 一个可选信息。必需信息缺失时，模板会报错，日期信息缺失时，默认为汉数字形式的编译时间点的年月，即\zhdigits{\the\year}年\zhnumber{\the\month}月。
 
 \subsection{latexmk}
 \verb|latexmk| 命令支持全自动生成 \LaTeX 编写的文档，并且支持使用不同的工具链来进行生成，它会自动运行多次工具直到交叉引用都被解决。编译链如下所示。
