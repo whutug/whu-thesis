@@ -16,15 +16,16 @@
       ]
     },
     {
-      "name": "pdflatex",
-      "command": "pdflatex",
+      "name": "LuaLaTeXmk",
+      "command": "latexmk",
       "args": [
+        "-lualatex",
         "-synctex=1",
+        "-shell-escape",
         "-interaction=nonstopmode",
         "-file-line-error",
-        "%DOC%"
-      ],
-      "env": {}
+        "%DOCFILE%.tex"
+      ]
     },
     {
       "name": "xelatex",
@@ -35,23 +36,38 @@
         "-file-line-error",
         "-shell-escape",
         "%DOC%"
-      ],
-      "env": {}
+      ]
+    },
+    {
+      "name": "lualatex",
+      "command": "lualatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-shell-escape",
+        "%DOC%"
+      ]
     },
     {
       "name": "bibtex",
       "command": "bibtex",
       "args": [
         "%DOCFILE%"
-      ],
-      "env": {}
+      ]
     }
   ],
   "latex-workshop.latex.recipes": [
     {
-      "name": "latexmk 🔃",
+      "name": "xelatexmk",
       "tools": [
         "XeLaTeXmk"
+      ]
+    },
+    {
+      "name": "lualatexmk",
+      "tools": [
+        "LuaLaTeXmk"
       ]
     },
     {
@@ -61,6 +77,15 @@
         "bibtex",
         "xelatex",
         "xelatex"
+      ]
+    },
+    {
+      "name": "lualatex ➞ bibtex ➞ lualatex × 2",
+      "tools": [
+        "lualatex",
+        "bibtex",
+        "lualatex",
+        "lualatex"
       ]
     }
   ],

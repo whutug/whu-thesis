@@ -11,7 +11,11 @@
 \ProvidesClass{whuthesis}[Wuhan University Thesis Template]
 
 \RequirePackage{iftex}
-\RequireXeTeX
+\ifluatex\else\ifxetex\else%
+  \ClassError{whuthesis}{%
+    ** 请使用 XeLaTeX 或 LuaLaTeX 进行编译！ **\MessageBreak%
+  }{}
+\fi\fi
 
 %%% ---- 文档选项 ----- %%%
 \RequirePackage{kvoptions}
@@ -39,9 +43,8 @@
 
 %%% ---- 载入 Class ----- %%%
 \LoadClass[a4paper, zihao=-4, fontset=none, hyperref]{ctexbook} % A4 大小，book 布局
-\RequirePackage{xeCJKfntef}
+\RequirePackage{ulem}
 \hypersetup{hidelinks}
-
 
 \ifdefstring{\whu@class}{paper}{
   \newcommand\whu@heading{武汉大学本科毕业论文}
@@ -53,10 +56,10 @@
 
 \ifdefstring{\whu@class}{manual}{
   \newcommand\whu@heading{武汉大学 \LaTeX{} 模板使用手册}
-  \newcommand\pkg[1]{\texttt{#1}\textsuperscript{\sffamily PKG}}
-  \newcommand\env[1]{\texttt{#1}\textsuperscript{\sffamily ENV}}
+  \newcommand\pkg[1]{\textsf{#1}}
+  \newcommand\env[1]{\texttt{#1}}
   \newcommand\app[1]{\textsf{#1}}
-  \newcommand\cls[1]{\texttt{#1}\textsuperscript{\sffamily CLS}}
+  \newcommand\cls[1]{\textsf{#1}}
   \newcommand\fmt[1]{\textsf{#1}}
   \RequirePackage{hologo}
   \newcommand\WhuThesis{{\sc WhuThesis}}
@@ -304,10 +307,10 @@
     \par \vspace{6em}
     {\centering \songti \zihao{-3}
       \begin{tabular}{cl}
-        \makebox[8em][s]{院\ \hspace{-1em}（系）\hspace{-1em}\ 名\ 称：}   & \whu@school                        \\[1ex]
-        \makebox[8em][s]{专\ 业\ 名\ 称：}                                 & \whu@major                         \\[1ex]
-        \makebox[8em][s]{学\ 生\ 姓\ 名：}                                 & \whu@author                        \\[1ex]
-        \makebox[8em][s]{指\ 导\ 教\ 师：}                                 & \whu@advisor \quad \whu@proftitle  \\[1ex]
+        \makebox[8em][s]{院\ \makebox[1em]{\hspace{-1em}（系）\hspace{-1em}}\ 名\ 称：} & \whu@school                        \\[1ex]
+        \makebox[8em][s]{专\ 业\ 名\ 称：}                                              & \whu@major                         \\[1ex]
+        \makebox[8em][s]{学\ 生\ 姓\ 名：}                                              & \whu@author                        \\[1ex]
+        \makebox[8em][s]{指\ 导\ 教\ 师：}                                              & \whu@advisor \quad \whu@proftitle  \\[1ex]
       \end{tabular}}
     \par \vspace{6em}
     {\songti \zihao{-2} \whu@date}

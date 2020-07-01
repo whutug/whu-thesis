@@ -37,8 +37,10 @@
 \section{格式要求}
 正文字号宋体小四，正文行间距固定为 23 点（point，pt，\app{Word} 中译作“磅”）。
 
-空格键和 Tab 键输入的空白字符视为“空格”。连续的若干个空白字符视为一个空。一行开头的空格忽略不计。\par
+空格键和 Tab       键输入的空白字符视为“空格”。连续的若干个空白字符视为一个空。一行开头的空格忽略不计。\par
 行末的回车视为一个空格；但连续两个回车，也就是空行，会将文字分段。多个空行被视为一个空行。也可以在行末使用 \verb|\par| 命令分段。
+
+
 
 使用 \verb|%| 进行注释。在这个字符之后直到行末，所有的字符都被忽略，行末的回车也不引入空格。% 我是注释
 
@@ -64,22 +66,41 @@
 \end{notice}
 
 \section{编译}
-本模板必须使用 \hologo{XeLaTeX} + \hologo{BibTeX} 编译，否则会直接报错。 本模板支持多个平台，结合 \app{sublime}/\app{vscode}/\app{overleaf} 都可以使用。编译之前请确保已经给出了学号 \verb|\stunum|、题目 \verb|\title|、院系 \verb|\school|、专业 \verb|\major|、作者 \verb|\author|、指导教师 \verb|\advisor| 及职称 \verb|\proftitle| 等七个必需信息，以及日期 \verb|\date| 一个可选信息。必需信息缺失时，模板会报错，日期信息缺失时，默认为汉数字形式的编译时间点的年月，即\zhdigits{\the\year}年\zhnumber{\the\month}月。
+本模板必须使用 \hologo{XeLaTeX} 或 \hologo{LuaLaTeX} 配合 \hologo{BibTeX} 编译，否则会直接报错。一般来说，\hologo{XeLaTeX} 引擎的编译速度较快且占用资源较少，而 \hologo{LuaLaTeX} 引擎的编译结果似乎有更好的跨平台规范性。若使用 LuaHB\TeX{} 引擎编译，配合 \pkg{emoji} 包，还可进一步使用 Emoji 等功能。本模板支持多个平台，结合 \app{sublime}/\app{vscode}/\app{overleaf} 都可以使用。编译之前请确保已经给出了学号 \verb|\stunum|、题目 \verb|\title|、院系 \verb|\school|、专业 \verb|\major|、作者 \verb|\author|、指导教师 \verb|\advisor| 及职称 \verb|\proftitle| 等七个必需信息，以及日期 \verb|\date| 一个可选信息。必需信息缺失时，模板会报错，日期信息缺失时，默认为汉数字形式的编译时间点的年月，即\zhdigits{\the\year}年\zhnumber{\the\month}月。
+
+\begin{notice}
+    由于 \CTeX 宏集会根据用户使用的编译方式，在底层选择不同的中文支持方式。因此不同的编译方式和中文支持方式会在一定程度上影响 \CTeX 宏集的行为，如对空格、标点的处理等。一般来说，使用 \hologo{XeLaTeX} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \hologo{LuaLaTeX} 编译时中西文间不插入空格。
+\end{notice}
 
 \subsection{latexmk}
-\verb|latexmk| 命令支持全自动生成 \LaTeX 编写的文档，并且支持使用不同的工具链来进行生成，它会自动运行多次工具直到交叉引用都被解决。编译链如下所示。
+\verb|latexmk| 命令支持全自动生成 \LaTeX{} 编写的文档，并且支持使用不同的工具链来进行生成，它会自动运行多次工具直到交叉引用都被解决。编译链如下所示。
+
+如果使用 \hologo{XeLaTeX} 进行编译，编译命令为
 \lstset{basicstyle=\ttfamily, breaklines=true}
 \begin{lstlisting}[language=bash]
-$ latexmk -xelatex main.tex     # 生成 main.pdf
+$ latexmk -xelatex main.tex
 \end{lstlisting}
 
-\subsection{\hologo{XeLaTeX} + \hologo{BibTeX}}
-用户也可以直接使用 \hologo{XeLaTeX} + \hologo{BibTeX} 进行编译，编译链如下所示。
+如果使用 \hologo{LuaLaTeX} 进行编译，编译命令为
+\lstset{basicstyle=\ttfamily, breaklines=true}
+\begin{lstlisting}[language=bash]
+$ latexmk -lualatex main.tex
+\end{lstlisting}
+
+\subsection{\hologo{XeLaTeX}（或 \hologo{LuaLaTeX}） + \hologo{BibTeX}}
+用户也可以直接使用 \hologo{XeLaTeX} 或 \hologo{LuaLaTeX} 配合 \hologo{BibTeX} 进行编译，编译链如下所示。
 \begin{lstlisting}[language=bash]
 $ xelatex main.tex  
-$ bibtex main.aux   # 生成 .bbl 文件
-$ xelatex main.tex  # 解决引用
-$ xelatex main.tex  # 生成 main.pdf
+$ bibtex main.aux
+$ xelatex main.tex
+$ xelatex main.tex
+\end{lstlisting}
+或
+\begin{lstlisting}[language=bash]
+$ lualatex main.tex  
+$ bibtex main.aux
+$ lualatex main.tex
+$ lualatex main.tex
 \end{lstlisting}
 
 在特殊情况下，可能需要在编译时加入 \verb|-shell-escape| 选项，如
@@ -87,4 +108,4 @@ $ xelatex main.tex  # 生成 main.pdf
 $ xelatex -shell-escape main.tex 
 \end{lstlisting}
 
-如果用户使用 \app{vscode} 进行写作，在目录内的\ .vscode 文件夹内已经有配置好的 latexmk 与 \hologo{XeLaTeX} 编译链，用户可直接使用。
+如果用户使用 \app{vscode} 进行写作，在目录内的\ .vscode 文件夹内已经有配置好的 latexmk 与 \hologo{XeLaTeX}、\hologo{LuaLaTeX} 编译链，用户可直接使用。
