@@ -11,7 +11,7 @@
 \ProvidesClass{whuthesis}[Wuhan University Thesis Template]
 
 \RequirePackage{iftex}
-\ifluatex\else\ifxetex\else%
+\ifluatex\else\ifxetex\else% 
   \ClassError{whuthesis}{%
     ** 请使用 XeLaTeX 或 LuaLaTeX 进行编译！ **\MessageBreak%
   }{}
