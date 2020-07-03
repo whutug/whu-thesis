@@ -46,6 +46,16 @@
 \RequirePackage{ulem}
 \hypersetup{hidelinks}
 
+\RequirePackage{iftex}
+\ifluatex%
+  \RequirePackage{emoji}
+  % \setemojifont{Segoe UI Emoji}
+  \providecommand{\emojitest}{如：\emoji{hot-pepper}\emoji{pear}\emoji{four}\emoji{syringe}\emoji{sweat-drops}\emoji{cow-face}\emoji{beer}。}
+\fi
+\ifxetex%
+  \providecommand{\emojitest}{\hologo{XeLaTeX} 则暂不支持。}
+\fi
+
 \ifdefstring{\whu@class}{paper}{
   \newcommand\whu@heading{武汉大学本科毕业论文}
 }{\relax}
@@ -63,7 +73,7 @@
   \newcommand\fmt[1]{\textsf{#1}}
   \RequirePackage{hologo}
   \newcommand\WhuThesis{{\sc WhuThesis}}
-  \newenvironment{notice}{\color{red}{{\sffamily 注意：}}}{}
+  \newenvironment{notice}{\color{red}{{\heiti 注意：}}}{}
   \hypersetup{
     colorlinks=true
   } % 设置引用链接颜色

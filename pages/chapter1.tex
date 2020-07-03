@@ -66,7 +66,7 @@
 \end{notice}
 
 \section{编译}
-本模板必须使用 \hologo{XeLaTeX} 或 \hologo{LuaLaTeX} 配合 \hologo{BibTeX} 编译，否则会直接报错。一般来说，\hologo{XeLaTeX} 引擎的编译速度较快且占用资源较少，而 \hologo{LuaLaTeX} 引擎的编译结果似乎有更好的跨平台规范性。若使用 LuaHB\TeX{} 引擎编译，配合 \pkg{emoji} 包，还可进一步使用 Emoji 等功能。本模板支持多个平台，结合 \app{sublime}/\app{vscode}/\app{overleaf} 都可以使用。编译之前请确保已经给出了学号 \verb|\stunum|、题目 \verb|\title|、院系 \verb|\school|、专业 \verb|\major|、作者 \verb|\author|、指导教师 \verb|\advisor| 及职称 \verb|\proftitle| 等七个必需信息，以及日期 \verb|\date| 一个可选信息。必需信息缺失时，模板会报错，日期信息缺失时，默认为汉数字形式的编译时间点的年月，即\zhdigits{\the\year}年\zhnumber{\the\month}月。
+本模板必须使用 \hologo{XeLaTeX} 或 \hologo{LuaLaTeX} 配合 \hologo{BibTeX} 编译，否则会直接报错。一般来说，\hologo{XeLaTeX} 引擎的编译速度较快且占用资源较少，而 \hologo{LuaLaTeX} 引擎的编译结果似乎有更好的跨平台规范性。配合 \pkg{lua-visual-debug} 包，可以得到更详细的编译结果。若使用 LuaHB\TeX{} 引擎编译，配合 \pkg{emoji} 包，还可进一步使用 Emoji 等功能。\emojitest 本模板支持多个平台，结合 \app{sublime}/\app{vscode}/\app{overleaf} 都可以使用。编译之前请确保已经给出了学号 \verb|\stunum|、题目 \verb|\title|、院系 \verb|\school|、专业 \verb|\major|、作者 \verb|\author|、指导教师 \verb|\advisor| 及职称 \verb|\proftitle| 等七个必需信息，以及日期 \verb|\date| 一个可选信息。必需信息缺失时，模板会报错，日期信息缺失时，默认为汉数字形式的编译时间点的年月，即\zhdigits{\the\year}年\zhnumber{\the\month}月。
 
 \begin{notice}
     由于 \CTeX 宏集会根据用户使用的编译方式，在底层选择不同的中文支持方式。因此不同的编译方式和中文支持方式会在一定程度上影响 \CTeX 宏集的行为，如对空格、标点的处理等。一般来说，使用 \hologo{XeLaTeX} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \hologo{LuaLaTeX} 编译时中西文间不插入空格。
