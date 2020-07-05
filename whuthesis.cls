@@ -66,6 +66,8 @@
 
 \ifdefstring{\whu@class}{manual}{
   \newcommand\whu@heading{武汉大学 \LaTeX{} 模板使用手册}
+  \newcommand*{\meta}[1]{{%
+    \ensuremath{\langle}\rmfamily\itshape#1\/\ensuremath{\rangle}}}
   \newcommand\pkg[1]{\textsf{#1}}
   \newcommand\env[1]{\texttt{#1}}
   \newcommand\app[1]{\textsf{#1}}
@@ -80,8 +82,7 @@
 }{\relax}
 
 %%% ---- 引入宏包 ----- %%%
-\RequirePackage{amsmath, amssymb}
-\RequirePackage[amsmath, thmmarks]{ntheorem}  % 定理
+\RequirePackage{amsmath, amssymb, amsthm}
 \RequirePackage{listings}                     % 代码段
 % \RequirePackage{minted}                    
 %% 代码高亮（需要 python 安装 pygments 库）
@@ -205,10 +206,10 @@
 
 % 修改脚注
 \long\def\@makefnmark{%
-\hbox {{\normalfont \textsuperscript{\circled{\@thefnmark}}}}}%
+\hbox {{\textsuperscript{\circled{\@thefnmark}}}}}%
 
 \long\def\@makefntext#1{%
-  \parindent 1em\noindent \hb@xt@ 1.8em{\hss \circled{\@thefnmark}}#1}%
+  \noindent \hb@xt@ 1em{\circled{\@thefnmark}}#1}%
 \skip\footins=10mm plus 1mm
 \footnotesep=6pt
 \renewcommand{\footnotesize}{\songti\zihao{5}}
@@ -235,27 +236,28 @@
 \setmathfont{TeX Gyre Termes Math}
 
 %%% ---- 数学定理样式 ----- %%%
-\theoremstyle{plain}
-\theoremheaderfont{\heiti}
-\theorembodyfont{\songti} \theoremindent0em
-\theorempreskip{0pt}
-\theorempostskip{0pt}
-\theoremnumbering{arabic}
-%\theoremsymbol{} %定理结束时自动添加的标志
-\newtheorem{theorem}{\hspace{2em}定理}[section]
-\newtheorem{definition}{\hspace{2em}定义}[section]
-\newtheorem{lemma}{\hspace{2em}引理}[section]
-\newtheorem{corollary}{\hspace{2em}推论}[section]
-\newtheorem{proposition}{\hspace{2em}性质}[section]
-\newtheorem{example}{\hspace{2em}例}[section]
-\newtheorem{remark}{\hspace{2em}注}[section]
+\newtheoremstyle{whu}
+  {0pt}{0pt}  % 上下间距
+  {\songti}   % 正文字体
+  {2em}       % 缩进距离
+  {\heiti}    % 标题字体
+  {：}{0pt}   % 结束标记及间隔
+  {}
+\theoremstyle{whu}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{corollary}{推论}[section]
+\newtheorem{proposition}{性质}[section]
+\newtheorem{example}{例}[section]
+\newtheorem{remark}{注}[section]
 
-\theoremstyle{nonumberplain}
-\theoremheaderfont{\heiti}
-\theorembodyfont{\normalfont \rm \songti}
-\theoremindent0em \theoremseparator{\hspace{1em}}
-\theoremsymbol{$\square$}
-\newtheorem{proof}{\hspace{2em}证明}
+\renewenvironment{proof}[1][证明]{%
+  \pushQED{\qed}%
+    {\heiti #1：}
+}{%
+  \popQED
+}
 
 
 %%% ---- 参考文献设置 ----- %%%

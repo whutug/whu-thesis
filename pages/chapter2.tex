@@ -203,7 +203,22 @@
   \item 第三项
 \end{itemize}
 
-\section{定理的使用}
+\section{数学环境的使用}
+\WhuThesis 简单定义了 8 种数学环境，具体见表~\ref{tab:数学环境}，使用方法如下所示。
+
+\begin{table}
+  \caption{\WhuThesis 定义的数学环境}\label{tab:数学环境}
+  \begin{tabularx}{\textwidth}{CCCC}
+    \toprule
+    theorem     & definition & lemma  & corollary \\
+    定理        & 定义       & 引理   & 推论      \\
+    \midrule
+    proposition & example    & remark & proof     \\
+    性质        & 例         & 注     & 证明      \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
 \begin{theorem}
   设向量 \(\symbfit{a} \neq \symbf{0}\)，那么向量\(\symbfit{b} \parallel \symbfit{a}\) 的充分必要条件是：存在唯一的实数 \(\lambda\)，使 \(\symbfit{b} = \lambda \symbfit{a}\)。
 \end{theorem}
@@ -225,3 +240,24 @@
 \begin{remark}
   这是一条注。
 \end{remark}
+\begin{proof}
+  留作练习。
+\end{proof}
+
+若要定义自己的数学环境，可通过如下代码实现：
+\begin{lstlisting}[language=tex]
+\newtheorem{nonsense}{胡说}
+\newtheorem*{bullshit}{八道}
+\end{lstlisting}
+其中，带星号 * 的命令不会自动编号。
+
+\newtheorem{nonsense}{胡说}
+\newtheorem*{bullshit}{八道}
+
+\begin{nonsense}
+  啊吧啊吧啊吧。
+\end{nonsense}
+
+\begin{bullshit}
+  不啦不啦不啦。
+\end{bullshit}
