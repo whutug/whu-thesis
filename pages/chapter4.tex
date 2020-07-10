@@ -43,15 +43,15 @@ print(a)
 \begin{algorithm}
   \SetAlgoLined
   \KwResult{Write here the result}
-    initialization\;
-    \While{While condition}{
-      instructions\;
-      \eIf{condition}{
-        instructions1\;
-      }{
-        instructions3\;
-      }
+  initialization\;
+  \While{While condition}{
+    instructions\;
+    \eIf{condition}{
+      instructions1\;
+    }{
+      instructions3\;
     }
+  }
   \caption{如何写算法}\label{alg:alg1}
 \end{algorithm}
 
@@ -61,6 +61,15 @@ print(a)
 \section{单位}
 单位的输入请使用 \pkg{siunitx} 包中提供的 \verb|\si| 与 \verb|\SI| 命令。在以前，\LaTeX{} 中输入角度需要使用 \verb|$^\circ$| 的奇技淫巧，现在只需要 \verb|\ang| 命令解决问题。当然 \pkg{siunitx} 包中还提供了不少其他有用的命令，有需要的可以自行阅读 \pkg{siunitx} 文档。
 
+\section{物理符号}
+\WhuThesis 亦使用了 \pkg{physics} 宏包，旨在让用户更加方便、简洁地使用、输入物理符号。示例如下
+\begin{equation}
+  \begin{aligned}
+    \int_0^\frac{\symup{\pi}}{2} \abs{\sin{x}} \dd{x} & = 2 \int_0^{\symup{\pi}} \sin{x} \dd{x} \\
+                                                      & = -2 \eval{\cos{x}}_0^{\symup{\pi}}     \\
+                                                      & = 4
+  \end{aligned}
+\end{equation}
 
 \section{写在最后}
 工具不重要，对工具的合理运用才重要。希望本模板对大家的论文写作有所帮助。

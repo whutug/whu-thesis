@@ -74,7 +74,7 @@
   \newcommand\cls[1]{\textsf{#1}}
   \newcommand\fmt[1]{\textsf{#1}}
   \RequirePackage{hologo}
-  \newcommand\WhuThesis{{\sc WhuThesis}}
+  \newcommand\WhuThesis{{\sc Whu\-The\-sis}}
   \newenvironment{notice}{\color{red}{{\heiti 注意：}}}{}
   \hypersetup{
     colorlinks=true
@@ -96,6 +96,7 @@
 \RequirePackage{xcolor, url, array}
 \urlstyle{rm}
 
+\RequirePackage{physics}
 \RequirePackage{siunitx}
 \sisetup{
   detect-all,
@@ -233,7 +234,7 @@
 \newcommand*{\heiti}{\CJKfamily{zhhei}}
 
 \RequirePackage{unicode-math}
-\setmathfont{TeX Gyre Termes Math}
+\setmathfont{XITS Math}
 
 %%% ---- 数学定理样式 ----- %%%
 \newtheoremstyle{whu}
