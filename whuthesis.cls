@@ -86,7 +86,7 @@
 \RequirePackage{listings}                     % 代码段
 % \RequirePackage{minted}                    
 %% 代码高亮（需要 python 安装 pygments 库）
-\RequirePackage{algorithm2e, algorithmic}     % 算法代码
+\RequirePackage{algorithm2e}     % 算法代码
 \renewcommand\algorithmcfname{算法}
 \SetAlCapSty{}
 \SetAlCapFnt{\heiti}
