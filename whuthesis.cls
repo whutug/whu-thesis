@@ -8,14 +8,14 @@
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{whuthesis}[Wuhan University Thesis Template]
+\ProvidesClass{whuthesis}[2019/03/18 v0.1 Wuhan University Thesis Template]
 
 \RequirePackage{iftex}
 \ifluatex\else\ifxetex\else% 
-  \ClassError{whuthesis}{%
-    ** 请使用 XeLaTeX 或 LuaLaTeX 进行编译！ **\MessageBreak%
-  }{}
-\fi\fi
+    \ClassError{whuthesis}{%
+      ** 请使用 XeLaTeX 或 LuaLaTeX 进行编译！ **\MessageBreak%
+    }{}
+  \fi\fi
 
 %%% ---- 文档选项 ----- %%%
 \RequirePackage{kvoptions}
@@ -25,17 +25,17 @@
   prefix = whu@,
   setkeys = \kvsetkeys
 }
-\newcommand{\ekv}[1]{\kvsetkeys{whu}{#1}}
+\newcommand{\whu@defkey}[1]{\kvsetkeys{whu}{#1}}
 
 \DeclareStringOption[bachelor]{degree}
-\DeclareVoidOption{bachelor}{\ekv{degree=bachelor}}
-\DeclareVoidOption{master}{\ekv{degree=master}}
-\DeclareVoidOption{doctor}{\ekv{degree=doctor}}
+\DeclareVoidOption{bachelor}{\whu@defkey{degree=bachelor}}
+\DeclareVoidOption{master}{\whu@defkey{degree=master}}
+\DeclareVoidOption{doctor}{\whu@defkey{degree=doctor}}
 
 \DeclareStringOption[paper]{class}
-\DeclareVoidOption{paper}{\ekv{class=paper}}
-\DeclareVoidOption{design}{\ekv{class=design}}
-\DeclareVoidOption{manual}{\ekv{class=manual}}
+\DeclareVoidOption{paper}{\whu@defkey{class=paper}}
+\DeclareVoidOption{design}{\whu@defkey{class=design}}
+\DeclareVoidOption{manual}{\whu@defkey{class=manual}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
@@ -67,7 +67,7 @@
 \ifdefstring{\whu@class}{manual}{
   \newcommand\whu@heading{武汉大学 \LaTeX{} 模板使用手册}
   \newcommand*{\meta}[1]{{%
-    \ensuremath{\langle}\rmfamily\itshape#1\/\ensuremath{\rangle}}}
+        \ensuremath{\langle}\rmfamily\itshape#1\/\ensuremath{\rangle}}}
   \newcommand\pkg[1]{\textsf{#1}}
   \newcommand\env[1]{\texttt{#1}}
   \newcommand\app[1]{\textsf{#1}}
@@ -90,7 +90,8 @@
 \renewcommand\algorithmcfname{算法}
 \SetAlCapSty{}
 \SetAlCapFnt{\heiti}
-\SetAlgoCaptionSeparator{　}
+\SetAlgoCaptionSeparator{\hspace*{0.75em}}
+
 \RequirePackage{tikz, pgfplots}               % 绘图
 \pgfplotsset{compat=1.17}
 \RequirePackage{xcolor, url, array}
@@ -100,7 +101,7 @@
 \RequirePackage{siunitx}
 \sisetup{
   detect-all,
-	group-digits = false
+  group-digits = false
 }
 
 %%% ---- 定义页面样式 ----- %%%
@@ -126,24 +127,24 @@
 \ctexset{
   chapter = {
     format = {
-      \centering \heiti \zihao{-2}
-    },
-    number = { 
-      \arabic{chapter}
-    },
+        \centering \heiti \zihao{-2}
+      },
+    number = {
+        \arabic{chapter}
+      },
     name = {,},
     afterskip = {0.5ex},
     beforeskip = {0.8ex}
-  },  % 各章标题 黑体小 2 号
+   },  % 各章标题 黑体小 2 号
   section = {
     format = {\heiti \zihao{4}}
-  },  % 一级标题 黑体 4 号
+   },  % 一级标题 黑体 4 号
   subsection = {
-    format = {\heiti \zihao{-4}}
-  },  % 二级标题 黑体小 4 号
+      format = {\heiti \zihao{-4}}
+    },  % 二级标题 黑体小 4 号
   subsubsection = {
-    format = {\heiti \zihao{-4}}
-  }   % 三级标题 黑体小4号
+      format = {\heiti \zihao{-4}}
+    }   % 三级标题 黑体小4号
 }
 
 %%% ---- 目录样式设置 ----- %%%
@@ -207,7 +208,7 @@
 
 % 修改脚注
 \long\def\@makefnmark{%
-\hbox {{\textsuperscript{\circled{\@thefnmark}}}}}%
+  \hbox {{\textsuperscript{\circled{\@thefnmark}}}}}%
 
 \long\def\@makefntext#1{%
   \noindent \hb@xt@ 1em{\circled{\@thefnmark}}#1}%
@@ -217,7 +218,7 @@
 \renewcommand\footnoterule{\vspace*{-3pt}\hrule width 0.3\columnwidth height 1pt \vspace*{2.6pt}}
 
 \newcommand*\circled[1]{\makebox[1em][c]{\tikz[baseline=(char.base)]{%
-\node[shape=circle,draw,inner sep=0pt,minimum size=1em] (char) {#1};}}} % 圆圈数字①
+      \node[shape=circle,draw,inner sep=0pt,minimum size=1em] (char) {#1};}}} % 圆圈数字①
 
 
 %%% ---- 定义字体 ----- %%%
@@ -238,12 +239,12 @@
 
 %%% ---- 数学定理样式 ----- %%%
 \newtheoremstyle{whu}
-  {0pt}{0pt}  % 上下间距
-  {\songti}   % 正文字体
-  {2em}       % 缩进距离
-  {\heiti}    % 标题字体
-  {：}{0pt}   % 结束标记及间隔
-  {}
+{0pt}{0pt}  % 上下间距
+{\songti}   % 正文字体
+{2em}       % 缩进距离
+{\heiti}    % 标题字体
+{：}{0pt}   % 结束标记及间隔
+{}
 \theoremstyle{whu}
 \newtheorem{theorem}{定理}[section]
 \newtheorem{definition}{定义}[section]
@@ -255,7 +256,7 @@
 
 \renewenvironment{proof}[1][证明]{%
   \pushQED{\qed}%
-    {\heiti #1：}
+  {\heiti #1：}
 }{%
   \popQED
 }
@@ -272,10 +273,10 @@
 
 % 清除公式上下间距
 \AtBeginDocument{
-	\setlength{\abovedisplayskip}{6pt}
-	\setlength{\belowdisplayskip}{6pt}
-	\setlength{\abovedisplayshortskip}{0pt}
-	\setlength{\belowdisplayshortskip}{0pt} 
+  \setlength{\abovedisplayskip}{6pt}
+  \setlength{\belowdisplayskip}{6pt}
+  \setlength{\abovedisplayshortskip}{0pt}
+  \setlength{\belowdisplayshortskip}{0pt}
 }
 
 % --------------------------------------
@@ -305,30 +306,30 @@
 \def\maketitlepage{
   \pagestyle{empty}
   \begin{center}
-    {\heiti \zihao{5} \hfill 
-    \begin{minipage}[t]{5cm}
-      学号 \uline{\makebox[3cm][c]{\whu@stunum}} \\[2mm]
-      密级 \uline{\makebox[3cm][c]{}}
-    \end{minipage}}
+    {\heiti \zihao{5} \hfill
+      \begin{minipage}[t]{5cm}
+        学号 \uline{\makebox[3cm][c]{\whu@stunum}} \\[2mm]
+        密级 \uline{\makebox[3cm][c]{}}
+      \end{minipage}}
     \par \vspace*{6em}
     {\songti \zihao{1} \whu@heading}
     \par \vspace{6em}
     \begin{minipage}[c][6cm]{14cm}
-        \setlength{\baselineskip}{32pt} 
-        \centering {\heiti \zihao{2} \whu@title}
+      \setlength{\baselineskip}{32pt}
+      \centering {\heiti \zihao{2} \whu@title}
     \end{minipage}
     \par \vspace{6em}
     {\centering \songti \zihao{-3}
       \begin{tabular}{cl}
-        \makebox[8em][s]{院\ \makebox[1em]{\hspace{-1em}（系）\hspace{-1em}}\ 名\ 称：} & \whu@school                        \\[1ex]
-        \makebox[8em][s]{专\ 业\ 名\ 称：}                                              & \whu@major                         \\[1ex]
-        \makebox[8em][s]{学\ 生\ 姓\ 名：}                                              & \whu@author                        \\[1ex]
-        \makebox[8em][s]{指\ 导\ 教\ 师：}                                              & \whu@advisor \quad \whu@proftitle  \\[1ex]
+        \makebox[8em][s]{院\ \makebox[1em]{\hspace{-1em}（系）\hspace{-1em}}\ 名\ 称：} & \whu@school                       \\[1ex]
+        \makebox[8em][s]{专\ 业\ 名\ 称：}                                              & \whu@major                        \\[1ex]
+        \makebox[8em][s]{学\ 生\ 姓\ 名：}                                              & \whu@author                       \\[1ex]
+        \makebox[8em][s]{指\ 导\ 教\ 师：}                                              & \whu@advisor \quad \whu@proftitle \\[1ex]
       \end{tabular}}
     \par \vspace{6em}
     {\songti \zihao{-2} \whu@date}
   \end{center}
-    \clearpage
+  \clearpage
 }
 
 %%% ---- 论文申明页 ----- %%%
@@ -342,27 +343,43 @@
   \par\vspace*{20pt}
   \setlength{\baselineskip}{23pt}
   {\zihao{4}
-  本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
-  \par \vspace*{88pt}
-  \hspace*{0.5cm}本人签名：\uline{\hspace{3.5cm}}
-  \hspace{2cm}日期：\uline{\hspace{3.5cm}}\hfill\par}
+    本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
+    \par \vspace*{88pt}
+    \hspace*{0.5cm}本人签名：\uline{\hspace{3.5cm}}
+    \hspace{2cm}日期：\uline{\hspace{3.5cm}}\hfill\par}
 }
 
 %%% ---- 摘要 ----- %%%
+% 仿照 thuthesis 用 clist（comma-separated list）来分割关键词
+\newcommand{\whu@clist@use}[2]{%
+% #1 接受 clist，#2 接受分隔符
+\def\whu@clist@tmp{}%
+\def\whu@clist@processor##1{%
+\ifx\whu@clist@tmp\@empty
+  \def\whu@clist@tmp{#2}%
+\else
+  #2%
+\fi
+##1%
+}%
+\expandafter\comma@parse\expandafter{#1}{\whu@clist@processor}%
+}
+
 % 中文摘要
 \newenvironment{cnabstract}[1]{
   \def\whu@cnkeyword{#1}
-	\cleardoublepage
-	% \addcontentsline{toc}{chapter}{摘要}
+  \cleardoublepage
+  % \addcontentsline{toc}{chapter}{摘要}
   \begin{center}
     \heiti \zihao{-2} 摘\qquad 要
   \end{center}
   \baselineskip=23pt
   \par%
-}{
-	\vspace*{2em}
-	\par\noindent {\heiti\zihao{-4} 关键词：} \whu@cnkeyword
-	\clearpage
+}{%
+  \vspace*{2em}
+  \par\noindent {\heiti\zihao{-4} 关键词：}%
+  \whu@clist@use{\whu@cnkeyword}{；}
+  \clearpage
 }
 
 % 英文摘要
@@ -374,9 +391,10 @@
   \end{center}
   \baselineskip=23pt
   \par%
-}{
-	\vspace*{2em}
-	\par\noindent {\bfseries\zihao{-4} Key words:} \whu@enkeyword
+}{%
+  \vspace*{2em}
+  \par\noindent {\bfseries\zihao{-4} Key words: }%
+  \whu@clist@use{\whu@enkeyword}{; }
   \cleardoublepage%
 }
 
