@@ -74,7 +74,7 @@
   \newcommand\cls[1]{\textsf{#1}}
   \newcommand\fmt[1]{\textsf{#1}}
   \RequirePackage{hologo}
-  \newcommand\WhuThesis{{\sc Whu\-The\-sis}}
+  \newcommand\WhuThesis{\textsc{Whu\-The\-sis}}
   \newenvironment{notice}{\color{red}{{\heiti 注意：}}}{}
   \hypersetup{
     colorlinks=true
@@ -284,7 +284,6 @@
 %%% ---- 自定义命令 ----- %%%
 
 %%% ---- 封面 ----- %%%
-\makeatletter
 \def\stunum#1{\def\whu@stunum{#1}}                                              % 学号
 \def\whu@stunum{\@latex@error{未给出学号 \noexpand\stunum}\@ehc}
 \def\title#1{\def\whu@title{#1}}                                                % 题目
