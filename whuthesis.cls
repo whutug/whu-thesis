@@ -352,10 +352,10 @@
 % 仿照 thuthesis 用 clist（comma-separated list）来分割关键词
 \newcommand{\whu@clist@use}[2]{%
 % #1 接受 clist，#2 接受分隔符
-\def\whu@clist@tmp{}%
+\def\whu@clist@@tmp{}%
 \def\whu@clist@processor##1{%
-\ifx\whu@clist@tmp\@empty
-  \def\whu@clist@tmp{#2}%
+\ifx\whu@clist@@tmp\@empty
+  \def\whu@clist@@tmp{#2}%
 \else
   #2%
 \fi
