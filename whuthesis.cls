@@ -51,9 +51,12 @@
   \RequirePackage{emoji}
   % \setemojifont{Segoe UI Emoji}
   \providecommand{\emojitest}{如：\emoji{hot-pepper}\emoji{pear}\emoji{four}\emoji{syringe}\emoji{sweat-drops}\emoji{cow-face}\emoji{beer}。}
-\fi
-\ifxetex%
-  \providecommand{\emojitest}{\hologo{XeLaTeX} 则暂不支持。}
+  \PassOptionsToClass{punct=qjsh}{ctexbook}
+  \usepackage{luatexja-adjust}
+  \input ltj-kinsoku.tex 
+  % LuaLaTeX 下的标点挤压
+\else%
+  \providecommand{\emojitest}{\hologo{XeLaTeX} 等其他引擎则暂不支持。}
 \fi
 
 \ifdefstring{\whu@class}{paper}{
@@ -207,6 +210,9 @@
 \setlist{nosep}
 
 % 修改脚注
+\RequirePackage[perpage]{footmisc}
+% 每面更新序号
+
 \long\def\@makefnmark{%
   \hbox {{\textsuperscript{\circled{\@thefnmark}}}}}%
 
