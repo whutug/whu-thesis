@@ -147,14 +147,13 @@
     },  % 二级标题 黑体小 4 号
   subsubsection = {
       format = {\heiti \zihao{-4}}
-    }   % 三级标题 黑体小4号
+    },  % 三级标题 黑体小4号
+  tocdepth = 2,     % 目录层级数
+  secnumdepth = 3   % 标题层级数
 }
 
 %%% ---- 目录样式设置 ----- %%%
 \RequirePackage{tocloft}
-\setcounter{tocdepth}{2}        % 目录层级数
-\setcounter{secnumdepth}{3}     % 标题层级数
-
 \renewcommand{\cfttoctitlefont}{\hfill\heiti\zihao{-2}} % 目录标题 黑体小 2 号
 \renewcommand{\contentsname}{目\qquad 录\hfill}
 \renewcommand{\cftaftertoctitle}{\hfill}
@@ -235,10 +234,8 @@
 \setCJKmainfont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
 \setCJKsansfont{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
 \setCJKmonofont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\setCJKfamilyfont{zhsong}{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\setCJKfamilyfont{zhhei}{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\newcommand*{\songti}{\CJKfamily{zhsong}}
-\newcommand*{\heiti}{\CJKfamily{zhhei}}
+\newCJKfontfamily[zhsong]{\heiti}{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
+\newCJKfontfamily[zhhei]{\songti}{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
 
 \RequirePackage{unicode-math}
 \setmathfont{XITS Math}
