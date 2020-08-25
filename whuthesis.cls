@@ -53,6 +53,7 @@
   \providecommand{\emojitest}{如：\emoji{hot-pepper}\emoji{pear}\emoji{four}\emoji{syringe}\emoji{sweat-drops}\emoji{cow-face}\emoji{beer}。}
   \PassOptionsToClass{punct=qjsh}{ctexbook}
   \usepackage{luatexja-adjust}
+  \ltjsetparameter{jaxspmode={`！,postonly}}
 \else%
   \providecommand{\emojitest}{\hologo{XeLaTeX} 等其他引擎则暂不支持。}
 \fi
@@ -232,8 +233,8 @@
 \setCJKmainfont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
 \setCJKsansfont{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
 \setCJKmonofont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\newCJKfontfamily[zhsong]{\heiti}{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\newCJKfontfamily[zhhei]{\songti}{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
+\newCJKfontfamily[zhsong]{\songti}{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
+\newCJKfontfamily[zhhei]{\heiti}{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
 
 \RequirePackage{unicode-math}
 \setmathfont{XITS Math}
@@ -407,7 +408,6 @@
   \cleardoublepage
   \pagestyle{plain}
   \pagenumbering{arabic} % 重新计数页码
-  \setcounter{page}{1}
 
   \renewcommand{\baselinestretch}{1}\normalsize
   \baselineskip=23pt % 正文行距为 23 磅
