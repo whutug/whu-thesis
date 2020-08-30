@@ -366,6 +366,13 @@
 \expandafter\comma@parse\expandafter{#1}{\whu@clist@processor}%
 }
 
+\newbox\whu@kw
+\newcommand{\whu@put@kw}[2]{%
+  \setbox\whu@kw=\hbox{#1}
+  \noindent\hangindent\wd\whu@kw\hangafter1
+  \box\whu@kw#2\par
+}
+
 % 中文摘要
 \newenvironment{cnabstract}[1]{
   \def\whu@cnkeyword{#1}
@@ -378,8 +385,8 @@
   \par%
 }{%
   \vspace*{2em}
-  \par\noindent {\heiti\zihao{-4} 关键词：}%
-  \whu@clist@use{\whu@cnkeyword}{；}
+  \par\whu@put@kw{\heiti\zihao{-4} 关键词：}%
+  {\whu@clist@use{\whu@cnkeyword}{；}}
   \clearpage
 }
 
@@ -394,8 +401,8 @@
   \par%
 }{%
   \vspace*{2em}
-  \par\noindent {\bfseries\zihao{-4} Key words: }%
-  \whu@clist@use{\whu@enkeyword}{; }
+  \par\whu@put@kw{\bfseries\zihao{-4} Key words: }%
+  {\whu@clist@use{\whu@enkeyword}{; }}
   \cleardoublepage%
 }
 
