@@ -53,7 +53,6 @@
   \providecommand{\emojitest}{如：\emoji{hot-pepper}\emoji{pear}\emoji{four}\emoji{syringe}\emoji{sweat-drops}\emoji{cow-face}\emoji{beer}。}
   \PassOptionsToClass{punct=qjsh}{ctexbook}
   \usepackage{luatexja-adjust}
-  \ltjsetparameter{jaxspmode={`！,postonly}}
 \else%
   \providecommand{\emojitest}{\hologo{XeLaTeX} 等其他引擎则暂不支持。}
 \fi
