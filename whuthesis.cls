@@ -321,10 +321,10 @@
     \par \vspace{6em}
     {\centering \songti \zihao{-3}
       \begin{tabular}{cl}
-        \makebox[8em][s]{院\ \makebox[1em]{\hspace{-1em}（系）\hspace{-1em}}\ 名\ 称：} & \whu@school                       \\[1ex]
-        \makebox[8em][s]{专\ 业\ 名\ 称：}                                              & \whu@major                        \\[1ex]
-        \makebox[8em][s]{学\ 生\ 姓\ 名：}                                              & \whu@author                       \\[1ex]
-        \makebox[8em][s]{指\ 导\ 教\ 师：}                                              & \whu@advisor \quad \whu@proftitle \\[1ex]
+        \makebox[8em][s]{院\ \makebox[1em]{\llap{（}系\rlap{）}}\ 名\ 称：} & \whu@school                       \\[1ex]
+        \makebox[8em][s]{专\ 业\ 名\ 称：}                                  & \whu@major                        \\[1ex]
+        \makebox[8em][s]{学\ 生\ 姓\ 名：}                                  & \whu@author                       \\[1ex]
+        \makebox[8em][s]{指\ 导\ 教\ 师：}                                  & \whu@advisor \quad \whu@proftitle \\[1ex]
       \end{tabular}}
     \par \vspace{6em}
     {\songti \zihao{-2} \whu@date}
