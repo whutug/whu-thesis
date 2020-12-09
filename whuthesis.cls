@@ -351,20 +351,7 @@
 }
 
 %%% ---- 摘要 ----- %%%
-% 仿照 thuthesis 用 clist（comma-separated list）来分割关键词
-\newcommand{\whu@clist@use}[2]{%
-% #1 接受 clist，#2 接受分隔符
-\def\whu@clist@@tmp{}%
-\def\whu@clist@processor##1{%
-\ifx\whu@clist@@tmp\@empty
-  \def\whu@clist@@tmp{#2}%
-\else
-  #2%
-\fi
-##1%
-}%
-\expandafter\comma@parse\expandafter{#1}{\whu@clist@processor}%
-}
+% 实验性功能：使用 LaTeX3 的 clist 来分割关键词
 
 \newbox\whu@kw
 \newcommand{\whu@put@kw}[2]{%
@@ -374,8 +361,9 @@
 }
 
 % 中文摘要
+\ExplSyntaxOn
 \newenvironment{cnabstract}[1]{
-  \def\whu@cnkeyword{#1}
+  \clist_set:Nx \l_whu_cnkeyword_clist { #1 }
   \cleardoublepage
   % \addcontentsline{toc}{chapter}{摘要}
   \begin{center}
@@ -386,13 +374,13 @@
 }{%
   \vspace*{2em}
   \par\whu@put@kw{\heiti\zihao{-4} 关键词：}%
-  {\whu@clist@use{\whu@cnkeyword}{；}}
+  {\clist_use:Nn \l_whu_cnkeyword_clist { ； }}
   \clearpage
 }
 
 % 英文摘要
 \newenvironment{enabstract}[1]{
-  \def\whu@enkeyword{#1}
+  \clist_set:Nx \l_whu_enkeyword_clist { #1 }
   \clearpage
   \begin{center}
     \heiti \zihao{-2} \textbf{ABSTRACT}
@@ -401,10 +389,11 @@
   \par%
 }{%
   \vspace*{2em}
-  \par\whu@put@kw{\bfseries\zihao{-4} Key words: }%
-  {\whu@clist@use{\whu@enkeyword}{; }}
+  \par\whu@put@kw{\bfseries\zihao{-4} Key words:~ }%
+  {\clist_use:Nn \l_whu_enkeyword_clist { ;~ }}
   \cleardoublepage%
 }
+\ExplSyntaxOff
 
 %%% ---- 目录 ----- %%%
 % 生成目录
