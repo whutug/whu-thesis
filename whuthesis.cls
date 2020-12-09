@@ -51,7 +51,7 @@
   \RequirePackage{emoji}
   % \setemojifont{Segoe UI Emoji}
   \providecommand{\emojitest}{如：\emoji{hot-pepper}\emoji{pear}\emoji{four}\emoji{syringe}\emoji{sweat-drops}\emoji{cow-face}\emoji{beer}。}
-  \PassOptionsToClass{punct=qjsh}{ctexbook}
+  \PassOptionsToClass{punct=zh_CN/quanjiao}{ctexbook}
   \usepackage{luatexja-adjust}
 \else%
   \providecommand{\emojitest}{\hologo{XeLaTeX} 等其他引擎则暂不支持。}
