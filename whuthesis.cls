@@ -363,7 +363,7 @@
 % 中文摘要
 \ExplSyntaxOn
 \newenvironment{cnabstract}[1]{
-  \clist_set:Nx \l_whu_cnkeyword_clist { #1 }
+  \clist_set:Nx \l__whu_cnkeyword_clist { #1 }
   \cleardoublepage
   % \addcontentsline{toc}{chapter}{摘要}
   \begin{center}
@@ -373,14 +373,14 @@
   \par%
 }{%
   \vspace*{2em}
-  \par\whu@put@kw{\heiti\zihao{-4} 关键词：}%
-  {\clist_use:Nn \l_whu_cnkeyword_clist { ； }}
+  \par\whu@put@kw{\heiti\zihao{-4} 关键词：\mbox{}}%
+  {\clist_use:Nn \l__whu_cnkeyword_clist { ； }}
   \clearpage
 }
 
 % 英文摘要
 \newenvironment{enabstract}[1]{
-  \clist_set:Nx \l_whu_enkeyword_clist { #1 }
+  \clist_set:Nx \l__whu_enkeyword_clist { #1 }
   \clearpage
   \begin{center}
     \heiti \zihao{-2} \textbf{ABSTRACT}
@@ -390,7 +390,7 @@
 }{%
   \vspace*{2em}
   \par\whu@put@kw{\bfseries\zihao{-4} Key words:~ }%
-  {\clist_use:Nn \l_whu_enkeyword_clist { ;~ }}
+  {\clist_use:Nn \l__whu_enkeyword_clist { ;~ }}
   \cleardoublepage%
 }
 \ExplSyntaxOff
