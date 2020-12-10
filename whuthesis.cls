@@ -10,14 +10,25 @@
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{whuthesis}[2020/12/10 v0.2 Wuhan University Thesis Template]
+\ProvidesExplClass{whuthesis}{2020/12/10}{0.2}{Wuhan University Thesis Template}
+\ExplSyntaxOff
 
-\RequirePackage{iftex}
-\ifluatex\else\ifxetex\else% 
-    \ClassError{whuthesis}{%
-      ** 请使用 XeLaTeX 或 LuaLaTeX 进行编译！ **\MessageBreak%
-    }{}
-  \fi\fi
+\ExplSyntaxOn
+\msg_new:nnn { whuthesis } { 引擎不支持 }
+  {
+    WhuThesis~暂不支持~#1~引擎。\\\\
+
+    请使用~XeLaTeX~或~LuaLaTeX~进行编译！
+  }
+\sys_if_engine_xetex:F
+  {
+    \sys_if_engine_luatex:F
+      {
+        \msg_fatal:nnx { whuthesis } { 引擎不支持 }
+          { \c_sys_engine_str }
+      }
+  }
+\ExplSyntaxOff
 
 %%% ---- 文档选项 ----- %%%
 \RequirePackage{kvoptions}
@@ -48,15 +59,19 @@
 \RequirePackage{ulem}
 \hypersetup{hidelinks}
 
-\ifluatex%
-  \RequirePackage{emoji}
-  % \setemojifont{Segoe UI Emoji}
-  \providecommand{\emojitest}{如：\emoji{hot-pepper}\emoji{pear}\emoji{four}\emoji{syringe}\emoji{sweat-drops}\emoji{cow-face}\emoji{beer}。}
-  \PassOptionsToClass{punct=zh_CN/quanjiao}{ctexbook}
-  \RequirePackage{luatexja-adjust}
-\else%
-  \providecommand{\emojitest}{\hologo{XeLaTeX} 等其他引擎则暂不支持。}
-\fi
+\ExplSyntaxOn
+\sys_if_engine_luatex:TF
+  {
+    \RequirePackage{emoji}
+    % \setemojifont{Segoe UI Emoji}
+    \providecommand{\emojitest}{如：\emoji{hot-pepper}\emoji{pear}\emoji{four}\emoji{syringe}\emoji{sweat-drops}\emoji{cow-face}\emoji{beer}。}
+    \PassOptionsToClass{punct=zh_CN/quanjiao}{ctexbook}
+    \RequirePackage{luatexja-adjust}
+  }
+  {
+    \providecommand{\emojitest}{\hologo{XeLaTeX} 等其他引擎则暂不支持。}
+  }
+\ExplSyntaxOff
 
 \ifdefstring{\whu@class}{paper}{
   \newcommand\whu@heading{武汉大学本科毕业论文}
