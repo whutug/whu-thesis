@@ -2,13 +2,15 @@
 %% of Wuhan University
 %%
 %% Copyright \copyright\ 2019 Fing @ WHU
+%% Revise                2020 List @ WHU
 %% $ v0.1, 2019/03/18$
+%% $ v0.2, 2020/12/20$
 %%
 %% This project uses the MIT License, see LICENSE for more details.
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{whuthesis}[2019/03/18 v0.1 Wuhan University Thesis Template]
+\ProvidesClass{whuthesis}[2020/12/10 v0.2 Wuhan University Thesis Template]
 
 \RequirePackage{iftex}
 \ifluatex\else\ifxetex\else% 
@@ -46,13 +48,12 @@
 \RequirePackage{ulem}
 \hypersetup{hidelinks}
 
-\RequirePackage{iftex}
 \ifluatex%
   \RequirePackage{emoji}
   % \setemojifont{Segoe UI Emoji}
   \providecommand{\emojitest}{如：\emoji{hot-pepper}\emoji{pear}\emoji{four}\emoji{syringe}\emoji{sweat-drops}\emoji{cow-face}\emoji{beer}。}
   \PassOptionsToClass{punct=zh_CN/quanjiao}{ctexbook}
-  \usepackage{luatexja-adjust}
+  \RequirePackage{luatexja-adjust}
 \else%
   \providecommand{\emojitest}{\hologo{XeLaTeX} 等其他引擎则暂不支持。}
 \fi
@@ -232,8 +233,8 @@
 \setCJKmainfont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
 \setCJKsansfont{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
 \setCJKmonofont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\newCJKfontfamily[zhsong]{\songti}{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\newCJKfontfamily[zhhei]{\heiti}{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
+\newCJKfontfamily{\songti}{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
+\newCJKfontfamily{\heiti}{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
 
 \RequirePackage{unicode-math}
 \setmathfont{XITS Math}
@@ -273,12 +274,10 @@
 \renewcommand{\eqref}[1]{\textup{{\normalfont（\ref{#1}）\normalfont}}} % 公式引用使用中文括号
 
 % 清除公式上下间距
-\AtBeginDocument{
-  \setlength{\abovedisplayskip}{6pt}
-  \setlength{\belowdisplayskip}{6pt}
-  \setlength{\abovedisplayshortskip}{0pt}
-  \setlength{\belowdisplayshortskip}{0pt}
-}
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
 
 % --------------------------------------
 
