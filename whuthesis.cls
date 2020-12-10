@@ -230,14 +230,81 @@
 % 设置英文字体为 Times New Roman
 \setmainfont{Times New Roman}[Ligatures = Rare]
 
-\setCJKmainfont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\setCJKsansfont{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\setCJKmonofont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\newCJKfontfamily{\songti}{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
-\newCJKfontfamily{\heiti}{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
+\ExplSyntaxOn
+
+\tl_set:Nn \l__whu_setsimfont
+  {
+    \setCJKmainfont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
+    \setCJKsansfont{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
+    \setCJKmonofont{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
+    \newCJKfontfamily{\songti}{simsun.ttc}[AutoFakeBold=4, AutoFakeSlant=0.167]
+    \newCJKfontfamily{\heiti}{simhei.ttf}[AutoFakeBold=4, AutoFakeSlant=0.167]
+  }
+
+\tl_set:Nn \l__whu_setfandolfont
+  {
+    \setCJKmainfont { FandolSong-Regular }
+      [
+        Extension = .otf,
+        BoldFont = FandolSong-Bold,
+        AutoFakeSlant = 0.167
+      ] 
+    \setCJKsansfont { FandolHei-Regular }
+      [
+        Extension = .otf,
+        BoldFont = FandolHei-Bold,
+        AutoFakeSlant = 0.167
+      ]
+    \newCJKfontfamily{ \songti }{ FandolSong-Regular }
+      [
+        Extension = .otf,
+        BoldFont = FandolSong-Bold,
+        AutoFakeSlant = 0.167
+      ]
+    \newCJKfontfamily { \heiti } { FandolHei-Regular }
+      [
+        Extension = .otf,
+        BoldFont = FandolHei-Bold,
+        AutoFakeSlant = 0.167
+      ]
+  }
+
+
+\sys_if_platform_windows:TF
+  {
+    \tl_use:N \l__whu_setsimfont
+  }
+  {
+    \file_if_exist:nTF { /System/Library/Fonts/Menlo.ttc }
+    % \ctex_if_platform_macos:F
+      {
+        \tl_use:N \l__whu_setsimfont
+      }
+      {
+        \file_if_exist:nTF { simsun.ttc }
+          {
+            \file_if_exist:nTF { simhei.ttf } 
+              {
+                \tl_use:N \l__whu_setsimfont
+              }
+              {
+                \tl_use:N \l__whu_setfandolfont
+              }
+          }
+          {
+            \tl_use:N \l__whu_setfandolfont
+          }
+      }
+  }
+
+\ExplSyntaxOff
 
 \RequirePackage{unicode-math}
-\setmathfont{XITS Math}
+\setmathfont{XITSMath-Regular}
+[
+  Extension = .otf,
+  BoldFont = XITSMath-Bold
+]
 
 %%% ---- 数学定理样式 ----- %%%
 \newtheoremstyle{whu}
