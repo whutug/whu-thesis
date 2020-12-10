@@ -35,7 +35,7 @@
 
 [Overleaf](https://www.overleaf.com/) 是一个简洁的在线 LaTeX 编辑器。无需安装，实时共享，版本控制。该模板支持了 Overleaf 的在线编辑，可以从上面的模板链接直接创建自己的项目。
 
-使用该模板时，需要设置 `XeLaTeX` 为编译器，具体步骤请查看 [Overleaf 在线编辑](https://github.com/mtobeiyf/whu-thesis/wiki/Overleaf-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91)
+使用该模板时，需要设置 `XeLaTeX` 或 `LuaLaTeX` 为编译器，具体步骤请查看 [Overleaf 在线编辑](https://github.com/mtobeiyf/whu-thesis/wiki/Overleaf-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91)
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/5097752/55882483-319d4f00-5bd7-11e9-86ff-687106144e16.png" width="800px">
@@ -78,5 +78,7 @@
 - [TJU-thesis-template](https://github.com/liangzhenduo0608/TJU-thesis-template)
 - [xdba-thesis](https://github.com/xdlinux/xdba-thesis)
 - [NEUBachelorThesis](https://github.com/tzaiyang/NEUBachelorThesis)
+- [ThuThesis](https://github.com/tuna/thuthesis)
+- [fduthesis](https://github.com/stone-zeng/fduthesis)
 
 </details>
