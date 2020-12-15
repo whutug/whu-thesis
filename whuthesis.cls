@@ -291,7 +291,7 @@
   }
   {
     \file_if_exist:nTF { /System/Library/Fonts/Menlo.ttc }
-    % \ctex_if_platform_macos:F
+    % \ctex_if_platform_macos:TF
       {
         \tl_use:N \l__whu_setsimfont
       }
