@@ -5,7 +5,7 @@
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
 [![](https://github.com/mtobeiyf/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/mtobeiyf/whu-thesis/actions)
 
-本项目为武汉大学**本科生**毕业论文 LaTeX 模板。
+本项目为武汉大学**本科生**毕业论文 LaTeX 模板，同时支持开题报告的书写。
 
 根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)编写，力求合规，简洁，易于实现，用户友好。
 
