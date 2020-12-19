@@ -147,22 +147,27 @@
 \pagestyle{plain}
 
 %%% ---- 定义标题和段落样式 ----- %%%
-% 定义 1.5 倍行距
-\RequirePackage{zhlineskip}
-
-% 设置各个标题样式
 \ctexset{
     section = {
-        format = {\heiti \zihao{4}}
+        format = {\heiti \zihao{4}},
+        beforeskip = {0.5\baselineskip},
+        afterskip = {0.5\baselineskip},
+        fixskip = true
       },  % 一级标题 黑体 4 号
     subsection = {
-        format = {\heiti \zihao{-4}}
+        format = {\heiti \zihao{-4}},
+        beforeskip = {0.5\baselineskip},
+        afterskip = {0.5\baselineskip},
+        fixskip = true
       },  % 二级标题 黑体小 4 号
     subsubsection = {
-        format = {\heiti \zihao{-4}}
+        format = {\heiti \zihao{-4}},
+        beforeskip = {0.5\baselineskip},
+        afterskip = {0.5\baselineskip},
+        fixskip = true
       },  % 三级标题 黑体小4号
     tocdepth = 2,     % 目录层级数
-    secnumdepth = 3   % 标题层级数
+    secnumdepth = 3,  % 标题层级数
   }
 \ExplSyntaxOn
 \str_if_eq:VnF { \whu@class } { opening }
@@ -178,8 +183,9 @@
                 \arabic{chapter}
               },
             name = {,},
-            afterskip = {0.5ex},
-            beforeskip = {0.8ex}
+            beforeskip = {0.8\baselineskip},
+            afterskip = {0.5\baselineskip},
+            fixskip = true
           }  % 各章标题 黑体小 2 号
       }
   }
