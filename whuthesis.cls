@@ -47,25 +47,21 @@
 \DeclareVoidOption{design}{\whu@defkey{class=design}}
 \DeclareVoidOption{manual}{\whu@defkey{class=manual}}
 \DeclareVoidOption{opening}{\whu@defkey{class=opening}}
+\ProcessKeyvalOptions*\relax
 
 %%% ---- 载入 Class ----- %%%
-\ProcessKeyvalOptions*\relax
 \ExplSyntaxOn
 % 开题报告使用 ctexart，论文使用 ctexbook
 \str_if_eq:VnTF { \whu@class } { opening }
   {
-    \LoadClass[a4paper, zihao=-4, fontset=none, hyperref]{ctexart}
+    \LoadClass[a4paper, zihao=-4, fontset=none]{ctexart}
     \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexart}}
-    \ProcessOptions\relax
-    \ProcessKeyvalOptions*\relax
   }
   {
-    \LoadClass[a4paper, zihao=-4, fontset=none, hyperref]{ctexbook}
+    \LoadClass[a4paper, zihao=-4, fontset=none]{ctexbook}
     \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
-    \ProcessOptions\relax
-    \ProcessKeyvalOptions*\relax
-    \hypersetup{hidelinks}
   }
+\ProcessOptions\relax
 
 \str_case_e:nn { \whu@class }
   {
@@ -83,7 +79,6 @@
         \RequirePackage{hologo}
         \newcommand{\WhuThesis}{\textsc{Whu\-The\-sis}}
         \newenvironment{notice}{\color{red}{{\heiti 注意：}}}{}
-        \hypersetup{colorlinks=true} % 设置引用链接颜色
       }
       { opening }
         {
@@ -189,8 +184,6 @@
       }
   }
 \ExplSyntaxOff
-
-
 
 %%% ---- 目录样式设置 ----- %%%
 \RequirePackage{tocloft}
@@ -316,7 +309,6 @@
       ]
   }
 
-
 \sys_if_platform_windows:TF
   {
     \tl_use:N \l__whu_setsimfont
@@ -343,7 +335,6 @@
           }
       }
   }
-
 \ExplSyntaxOff
 
 \RequirePackage{unicode-math}
@@ -382,6 +373,7 @@
 \RequirePackage[sort&compress]{natbib}
 \setcitestyle{numbers,square,comma}
 \bibliographystyle{data/gbt7714-2005-whu}  % 参考文献样式
+\bibsep=0pt % 参考文献间距设为 0
 
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 自定义新命令\upcite, 使参考文献引用以上标出现
 
@@ -392,6 +384,17 @@
 \setlength{\belowdisplayskip}{6pt}
 \setlength{\abovedisplayshortskip}{0pt}
 \setlength{\belowdisplayshortskip}{0pt}
+
+% 最后引入 hyperref 包
+\RequirePackage{hyperref}
+\hypersetup{hidelinks}
+\urlstyle{rm}
+\ExplSyntaxOn
+\str_if_eq:VnT { \whu@class } { manual }
+  {
+    \hypersetup{colorlinks = true}
+  }
+\ExplSyntaxOff
 
 % --------------------------------------
 
@@ -429,12 +432,12 @@
 
     \AtEndDocument
       {
-        \vskip 2\baselineskip
+        \vspace*{2\baselineskip}
         \noindent
           指导老师意见：
           \vfill
           \hfill 指导老师（签名）：\makebox[4cm]{}\par
-          \vskip\baselineskip
+          \vspace*{\baselineskip}
           \hfill 年 \qquad 月 \qquad 日
       }
   }
@@ -489,7 +492,7 @@
     \ziju{0.5} \zihao{2} \textbf{郑重声明}
   \end{center}
   \par\vspace*{20pt}
-  \setlength{\baselineskip}{23pt}
+  \baselineskip=23pt
   {\zihao{4}
     本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
     \par \vspace*{88pt}
@@ -501,15 +504,16 @@
 %%% ---- 摘要 ----- %%%
 % 实验性功能：使用 LaTeX3 的 clist 来分割关键词
 
-\newbox\whu@kw
-\newcommand{\whu@put@kw}[2]{%
-  \setbox\whu@kw=\hbox{#1}
-  \noindent\hangindent\wd\whu@kw\hangafter1
-  \box\whu@kw#2\par
-}
+\ExplSyntaxOn
+\box_new:N \l__whu_kw_box
+\cs_set:Npn \__whu_put_kw:nn #1#2
+  {
+    \hbox_set:Nn \l__whu_kw_box {#1}
+    \noindent \hangindent \box_wd:N \l__whu_kw_box \hangafter 1
+    \box_use_drop:N \l__whu_kw_box #2 \par
+  }
 
 % 中文摘要
-\ExplSyntaxOn
 \newenvironment{cnabstract}[1]{
   \clist_set:Nx \l__whu_cnkeyword_clist { #1 }
   \cleardoublepage
@@ -520,9 +524,8 @@
   \baselineskip=23pt
   \par%
 }{%
-  \vspace*{2em}
-  \par\whu@put@kw{\heiti\zihao{-4} 关键词：\mbox{}}%
-  {\clist_use:Nn \l__whu_cnkeyword_clist { ； }}
+  \vspace*{2em} \par
+  \__whu_put_kw:nn {\heiti\zihao{-4} 关键词：\mbox{}} {\clist_use:Nn \l__whu_cnkeyword_clist { ； }}
   \clearpage
 }
 
@@ -536,9 +539,8 @@
   \baselineskip=23pt
   \par%
 }{%
-  \vspace*{2em}
-  \par\whu@put@kw{\bfseries\zihao{-4} Key words:~ }%
-  {\clist_use:Nn \l__whu_enkeyword_clist { ;~ }}
+  \vspace*{2em} \par
+  \__whu_put_kw:nn {\bfseries\zihao{-4} Key words:~ } {\clist_use:Nn \l__whu_enkeyword_clist { ;~ }}
   \cleardoublepage%
 }
 \ExplSyntaxOff
