@@ -29,7 +29,7 @@
   }
 
 %%% ---- 文档选项 ----- %%%
-\bool_new:N \g__whu_twoside_bool
+\bool_set_true:N \g__whu_twoside_bool
 
 \keys_define:nn { whu / option }
   {
@@ -511,10 +511,13 @@
         % 正文行距为 23 磅
 
         \noindent
-        毕业论文（设计）题目： \uline { \hfill \l__whu_info_title_tl \hfill } \\
-        学院： \uline { \hfill \l__whu_info_school_tl \hfill } \hfill \hfill
-        学号： \uline { \hfill \l__whu_info_student_number_tl \hfill } \hfill \hfill
-        姓名： \uline { \hfill \l__whu_info_author_tl \hfill }
+        \begin { minipage } { \textwidth }
+          \dim_set:Nn \baselineskip { 23 pt }
+          毕业论文（设计）题目： \uline { \hfill \l__whu_info_title_tl \hfill } \\
+          学院： \uline { \hfill \l__whu_info_school_tl \hfill } \hfill \hfill
+          学号： \uline { \hfill \l__whu_info_student_number_tl \hfill } \hfill \hfill
+          姓名： \uline { \hfill \l__whu_info_author_tl \hfill }
+        \end { minipage }
       }
 
     \AtEndDocument
@@ -577,7 +580,7 @@
 
     % \vspace * { 44 pt }
     \pagenumbering { gobble }
-    \noindent \hfil { \ziju { 0.5 } \zihao { 2 } \textbf { 郑重声明 } }
+    \noindent \hfil { \zihao { 2 } \textbf { 郑 \enskip 重 \enskip 声 \enskip 明 } }
     \par \skip_vertical:n { 20 pt }
     \dim_set:Nn \baselineskip { 23 pt }
     {

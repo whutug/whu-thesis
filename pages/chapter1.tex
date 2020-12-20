@@ -2,7 +2,7 @@
 
 \chapter{绪论}
 \section{模板概述}
-\WhuThesis{}（\textbf{W}u\textbf{h}an \textbf{U}niversity \LaTeX{} \textbf{Thesis} Template）是为了帮助武汉大学毕业生撰写毕业论文（设计）而编写的 \LaTeX{} 模板，现时段暂时只提供本科生毕业论文（设计）模板。
+\WhuThesis{}（\textbf{W}u\textbf{h}an \textbf{U}niversity \LaTeX{} \textbf{Thesis} Template）是为了帮助武汉大学毕业生撰写毕业论文（设计）而编写的 \LaTeX{} 模板，使用 \LaTeX3 语言，现时段暂时只提供本科生毕业论文（设计）模板。
 
 模板根据《\href{https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf}{武汉大学本科生毕业论文（设计）书写印制规范}》编写，力求合规，简洁，易于实现，用户友好。
 
@@ -24,15 +24,17 @@
 \end{enumerate}
 
 \section{模板选项}
-模板共提供了 \verb|degree| 与 \verb|class| 两类选项，其中 \verb|degree| 下有 \verb|bachelor|（默认）、\verb|master|、\verb|doctor| 三选项，\verb|class| 下有 \verb|paper|（默认）、\verb|design|、\verb|manual| 三选项，合计两类六选项。
+模板共提供了 \verb|degree| 与 \verb|class| 两类选项，其中 \verb|degree| 下有 \verb|bachelor|（默认）、\verb|master|、\verb|doctor| 三选项，\verb|class| 下有 \verb|paper|（默认）、\verb|design|、\verb|manual|、\verb|opening| 四选项，合计两类七选项。
 
 \verb|degree| 选项用于学位选择。虽然提供了 \verb|bachelor|、\verb|master|、\verb|doctor| 三个选项，但现时段只有 \verb|bachelor| 可以使用，也即只提供本科毕业论文（设计）模板。
 
-\verb|class| 选项用于文档类型。其中 \verb|paper| 与 \verb|design| 的区别只在于封面显示的是“武汉大学毕业论文”还是“武汉大学毕业设计”。此功能只是实验性功能，《印制规范》中并无相关要求。\verb|manual| 选项则只用于本手册编写，不用于论文的实际撰写过程。
+\verb|class| 选项用于文档类型。其中 \verb|paper| 与 \verb|design| 的区别只在于封面显示的是“武汉大学毕业论文”还是“武汉大学毕业设计”。此功能只是实验性功能，《印制规范》中并无相关要求。\verb|opening| 选项用于开题报告的撰写，详细说明请见 根目录下的 \verb|opening-demo.tex| 文件，不在此处介绍。\verb|manual| 选项则只用于本手册编写，不用于论文的实际撰写过程。
 
-在使用模板选项时，既可以使用 \meta{key} = \meta{value} 格式，也可以直接输入选项名。
+在使用模板选项时，必须使用 \meta{key} = \meta{value} 格式指定。
 
-另外，虽然标准文档类的选项亦可以使用，但只推荐视指导老师要求使用 \verb|oneside| 与 \verb|twoside|（默认）两选项之一。\verb|twoside| 选项启用时，各章会在奇数页（右边）开始。
+另外，标准文档类的 \verb|twoside|（默认）、\verb|oneside| 选项亦可以使用，\verb|twoside| 选项启用时，各章会在奇数页（右边）开始。\verb|draft| 选项开启时，图片与超链接不会加载，同时会显示文档边框。
+
+同时，\WhuThesis{} 也提供了一套修改文档信息的接口 \verb|\whusetup|。您可以在 \verb|\whusetup| 中指定或修改 \verb|info| 信息，即学号 \verb|info/student-number|、论文题目 \verb|info/title|、院系 \verb|info/school|、专业 \verb|info/major|、作者 \verb|info/author|、指导教师与职称 \verb|info/advisor| 及日期 \verb|\date| 等七个信息。当未给出日期信息时，默认为当前编译时间点的年月的汉数字格式，即\zhdigits{\the\year}年\zhnumber{\the\month}月。
 
 \section{格式要求}
 正文字号宋体小四，正文行间距固定为 23 点（point，pt，\app{Word} 中译作“磅”）。
@@ -66,7 +68,7 @@
 \end{notice}
 
 \section{编译}
-本模板必须使用 \hologo{XeLaTeX} 或 \hologo{LuaLaTeX} 配合 \hologo{BibTeX} 编译，否则会直接报错。一般来说，\hologo{XeLaTeX} 引擎的编译速度较快且占用资源较少，而 \hologo{LuaLaTeX} 引擎的编译结果似乎有更好的跨平台规范性。配合 \pkg{lua-visual-debug} 包，可以得到更详细的编译结果。若使用 LuaHB\TeX{} 引擎编译，配合 \pkg{emoji} 包，还可进一步使用 Emoji 等功能。\emojitest 本模板支持多个平台，结合 \app{Sublime}、\app{VS Code} 或 \app{Overleaf} 等都可以使用。编译之前请确保已经给出了学号 \verb|\stunum|、题目 \verb|\title|、院系 \verb|\school|、专业 \verb|\major|、作者 \verb|\author|、指导教师 \verb|\advisor| 及职称 \verb|\proftitle| 等七个必需信息，以及日期 \verb|\date| 一个可选信息。必需信息缺失时，模板会报错，日期信息缺失时，默认为汉数字形式的编译时间点的年月，即\zhdigits{\the\year}年\zhnumber{\the\month}月。
+本模板必须使用 \hologo{XeLaTeX} 或 \hologo{LuaLaTeX} 配合 \hologo{BibTeX} 编译，否则会直接报错。一般来说，\hologo{XeLaTeX} 引擎的编译速度较快且占用资源较少，而 \hologo{LuaLaTeX} 引擎的编译结果似乎有更好的跨平台规范性。配合 \pkg{lua-visual-debug} 包，可以得到更详细的编译结果。若使用 LuaHB\TeX{} 引擎编译，配合 \pkg{emoji} 包，还可进一步使用 Emoji 等功能。\emojitest 本模板支持多个平台，结合 \app{Sublime}、\app{VS Code} 或 \app{Overleaf} 等都可以使用。
 
 \begin{notice}
     由于 \CTeX 宏集会根据用户使用的编译方式，在底层选择不同的中文支持方式。因此不同的编译方式和中文支持方式会在一定程度上影响 \CTeX 宏集的行为，如对空格、标点的处理等。一般来说，使用 \hologo{XeLaTeX} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \hologo{LuaLaTeX} 编译时中西文间不插入空格。
@@ -108,4 +110,4 @@ $ lualatex main.tex
 $ xelatex -shell-escape main.tex 
 \end{lstlisting}
 
-如果用户使用 \app{vscode} 进行写作，在目录内的\ .vscode 文件夹内已经有配置好的 latexmk 与 \hologo{XeLaTeX}、\hologo{LuaLaTeX} 编译链，用户可直接使用。
+如果用户使用 \app{vscode} 进行写作，在目录内的 \verb|.vscode\| 文件夹内已经有配置好的 latexmk 与 \hologo{XeLaTeX}、\hologo{LuaLaTeX} 编译链，用户可直接使用。
