@@ -29,6 +29,8 @@
   }
 
 %%% ---- 文档选项 ----- %%%
+\bool_new:N \g__whu_twoside_bool
+
 \keys_define:nn { whu / option }
   {
     degree .choice:,
@@ -37,26 +39,53 @@
       { master , doctor , bachelor }
       { \tl_set_eq:NN \l__whu_degree_tl \l_keys_choice_tl },
     degree .initial:n        = bachelor,
+    % 学位，默认本科生
 
     class .choice:,
-    class .value_required:n  = true,
-    class .choices:nn        =
+    class .value_required:n = true,
+    class .choices:nn       =
       { paper , design , manual , opening }
       { \tl_set_eq:NN  \l__whu_class_tl   \l_keys_choice_tl },
-    class .initial:n         = paper
+    class .initial:n        = paper,
+    % 文档类型，默认 paper（论文）
+
+    draft         .choice:,
+    draft / true  .code:n    =
+      {
+        \bool_set_true:N \g__whu_draft_bool
+      },
+    draft / false .code:n    =
+      {
+        \bool_set_false:N \g__whu_draft_bool
+      },
+    draft         .default:n = true,
+    draft         .initial:n = false,
+    % 草稿模式，默认关闭
+
+    oneside .value_forbidden:n = true,
+    twoside .value_forbidden:n = true,
+    oneside .code:n            =
+      {
+        \bool_set_false:N \g__whu_twoside_bool
+      },
+    twoside .code:n            =
+      {
+        \bool_set_true:N  \g__whu_twoside_bool
+      }
+    % 单双页模式，默认双页
   }
-\ProcessKeysOptions{whu/option}
+\ProcessKeysOptions { whu / option }
 
 %%% ---- 载入 Class ----- %%%
 % 开题报告使用 ctexart，论文使用 ctexbook
 \tl_if_eq:NnTF \l__whu_class_tl { opening }
   {
     \LoadClass [ a4paper , zihao = -4 , fontset = none ] { ctexart }
-    \DeclareOption * { \PassOptionsToClass { \CurrentOption } { ctexart } }
+    \DeclareOption * { \PassOptionsToClass { \CurrentOption , twoside } { ctexart } }
   }
   {
     \LoadClass [ a4paper , zihao = -4 , fontset = none ] { ctexbook }
-    \DeclareOption * { \PassOptionsToClass { \CurrentOption } { ctexbook } }
+    \DeclareOption * { \PassOptionsToClass { \CurrentOption , twoside } { ctexbook } }
   }
 \ProcessOptions\relax
 
@@ -144,6 +173,15 @@
 \RequirePackage { geometry }
 \geometry
   { left = 3 cm , right = 3 cm , top = 2.5 cm , bottom = 2 cm , includefoot }
+
+\bool_if:NT \g__whu_draft_bool
+  {
+    \sys_if_engine_luatex:T
+      { \RequirePackage { lua-visual-debug } }
+    \sys_if_engine_xetex:T
+      { \geometry { showframe } }
+  }
+% 草稿模式下，显示边框
 
 \RequirePackage { fancyhdr }       % 页眉页脚宏包
 \tl_set:Nn \headrulewidth { 0 pt }  % 页眉线宽
@@ -531,16 +569,19 @@
 %%% ---- 论文申明页 ----- %%%
 \NewDocumentCommand { \makestatement } {}
   {
-    \chapter * {}
-    \skip_vertical:n { 44 pt }
+    \bool_if:NTF \g__whu_twoside_bool
+    { \cleardoublepage }
+    { \clearpage }
+
+    \mode_leave_vertical: \skip_vertical:n { 44 pt }
+
+    % \vspace * { 44 pt }
     \pagenumbering { gobble }
-    \begin { center }
-      \ziju { 0.5 } \zihao { 2 } \textbf { 郑重声明 }
-    \end { center }
+    \noindent \hfil { \ziju { 0.5 } \zihao { 2 } \textbf { 郑重声明 } }
     \par \skip_vertical:n { 20 pt }
     \dim_set:Nn \baselineskip { 23 pt }
     {
-      \zihao { 4 }
+      \zihao { 4 } 
       本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
       \par \skip_vertical:n { 88 pt }
       本人签名： \uline { \makebox [ 4 cm ] {} }
@@ -560,7 +601,7 @@
 % 中文摘要
 \NewDocumentEnvironment { cnabstract } {}
   {
-    \chapter * {摘 \qquad 要}
+    \chapter * { 摘 \qquad 要 }
     \dim_set:Nn \baselineskip { 23pt }
     \par
   }
@@ -575,10 +616,9 @@
 % 英文摘要
 \NewDocumentEnvironment { enabstract } {}
   {
-    \clearpage
-    \begin{center}
-      \heiti \zihao{-2} \textbf{ABSTRACT}
-    \end{center}
+    \@twosidefalse
+    \chapter * { \textbf { ABSTRACT } }
+    \@twosidetrue
     \dim_set:Nn \baselineskip { 23pt } \par
   }
   {
