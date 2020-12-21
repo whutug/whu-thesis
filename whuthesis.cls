@@ -230,18 +230,18 @@
       },  % 三级标题 黑体小4号
     paragraph      =
       {
-        format     = { \heiti \zihao { -4 } },
+        format     = { \heiti \zihao { -4 }    },
         number     = { （ \arabic{paragraph} ）},
-        beforeskip = { 0.5 \baselineskip    },
-        afterskip  = { 0.5 \baselineskip    },
+        beforeskip = { 0.5 \baselineskip       },
+        afterskip  = { 0.5 \baselineskip       },
         fixskip    = true
       },
     subparagraph   =
       {
-        format     = { \heiti \zihao { -4 } },
+        format     = { \heiti \zihao { -4 }            },
         number     = { \circled { \arabic{paragraph} } },
-        beforeskip = { 0.5 \baselineskip    },
-        afterskip  = { 0.5 \baselineskip    },
+        beforeskip = { 0.5 \baselineskip               },
+        afterskip  = { 0.5 \baselineskip               },
         fixskip    = true
       },
     tocdepth       = 2,  % 目录层级数
@@ -379,9 +379,9 @@
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
     \setCJKmonofont { simsun.ttc }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
-    \newCJKfontfamily { \songti } {simsun.ttc}
+    \newCJKfontfamily { \songti } { simsun.ttc }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
-    \newCJKfontfamily { \heiti } {simhei.ttf}
+    \newCJKfontfamily { \heiti }  { simhei.ttf }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
   }
 
@@ -528,7 +528,7 @@
 
 \keys_define:nn { whu }
   {
-    info  .meta:nn = { whu / info } {#1}
+    info .meta:nn = { whu / info } {#1}
   }
 
 %%% ---- 论文标题页 ----- %%%
@@ -555,6 +555,7 @@
           学号： \uline { \hfill \l__whu_info_student_number_tl \hfill } \hfill \hfill
           姓名： \uline { \hfill \l__whu_info_author_tl \hfill }
         \end { minipage }
+        \raggedbottom
       }
 
     \AtEndDocument
@@ -659,7 +660,7 @@
     \skip_vertical:N \baselineskip \par
     \__whu_put_kw:nn
       { \bfseries \zihao { -4 } Key ~ words: ~ }
-      { \clist_use:Nn \l__whu_info_enkeywords_clist { ;~ } }
+      { \clist_use:Nn \l__whu_info_enkeywords_clist { ; ~ } }
     \__whu_new_chapter_page:
   }
 
