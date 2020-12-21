@@ -4,14 +4,15 @@
 %% Copyright \copyright\ 2019 Fing @ WHU
 %% Revise                2020 List @ WHU
 %% $ v0.1, 2019/03/18$
-%% $ v0.2, 2020/12/20$
+%% $ v0.2, 2020/12/10$
+%% $ v0.3, 2020/12/21$
 %%
 %% This project uses the MIT License, see LICENSE for more details.
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass{whuthesis}{2020/12/10}{0.2}{Wuhan University Thesis Template}
+\ProvidesExplClass{whuthesis}{2020/12/21}{0.3}{Wuhan University Thesis Template}
 
 \msg_new:nnn { whuthesis } { 引擎不支持 }
   {
