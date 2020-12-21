@@ -2,21 +2,28 @@
 %%
 %% Created by Fing
 
-\documentclass[manual, twoside]{whuthesis}
-% \usepackage{lua-visual-debug}
+\documentclass[class = manual]{whuthesis}
+
+\whusetup
+  {
+    info =
+      {
+        title          = {基于 \LaTeX{} 对武汉大学毕业论文（设计）的研究},
+        student-number = {xxxxxxxxxxxxx},
+        school         = {院系名称},
+        author         = {作者姓名},
+        major          = {专业名称},
+        advisor        = {教师姓名 , 职称},
+        % date         = {},
+        % 当 date 未给出时，显示编译时的年月
+        cnkeywords     = {关键词 1, 关键词 2, 关键词 3},
+        enkeywords     = {Key1, Key2, Key3}
+      }
+  }
+
 
 \begin{document}
 %%----------- 封面部分 ----------- %%
-  \stunum{xxxxxxxxxxxxx}
-  \title{基于 \LaTeX{} 对武汉大学\\毕业论文（设计）的研究}
-  \school{院系名称}
-  \major{专业名称}
-  \author{作者姓名}
-  \advisor{教师姓名}
-  \proftitle{职称}
-  % \date{}
-  % 当 \date{} 未给出时，显示编译时的年月
-
   \maketitlepage            % 封面
   \makestatement            % 申明
 
