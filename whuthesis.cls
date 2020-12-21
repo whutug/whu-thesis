@@ -94,7 +94,6 @@
     \PassOptionsToClass { \g__whu_option_to_class_clist } { ctexbook }
     \LoadClass { ctexbook }
   }
-\ProcessOptions\relax
 
 \tl_if_eq:NnT \l__whu_class_tl { paper }
   { \tl_set:Nn \c__whu_heading_tl { 武汉大学本科毕业论文 } }
@@ -317,7 +316,7 @@
 
 \tl_set:Nn \@makefnmark
   {
-    \hbox:n { { \textsuperscript { \circled { \@thefnmark } } } }
+    \nolinebreak \hbox:n {} \hbox:n { \textsuperscript { \circled { \@thefnmark } } }
   }
 
 \RenewDocumentCommand { \@makefntext } { m }
@@ -325,7 +324,7 @@
     \noindent \hbox_to_wd:nn { 1 em } { \circled { \@thefnmark } } #1
   }
 
-\setlength { \skip\footins } { 10 mm plus 1 mm }
+\setlength { \skip \footins } { 10 mm plus 1 mm }
 \dim_set:Nn \footnotesep { 6 pt }
 \tl_set:Nn \footnotesize { \songti \zihao { 5 } }
 \tl_set:Nn \footnoterule
@@ -478,6 +477,13 @@
   }
 % --------------------------------------
 
+\cs_set:Nn \__whu_new_chapter_page:
+  {
+    \bool_if:NTF \g__whu_twoside_bool
+      { \cleardoublepage }
+      { \clearpage }
+  }
+
 %%% ---- 文档接口 ----- %%%
 \NewDocumentCommand { \whusetup } { m }
   { \keys_set:nn { whu } {#1} }
@@ -573,7 +579,7 @@
           \par \skip_vertical:n { 6 em }
           { \songti \zihao { -2 } \l__whu_info_date_tl }
         \end { center }
-        \clearpage
+        \__whu_new_chapter_page:
       }
   }
 
@@ -581,13 +587,8 @@
 %%% ---- 论文申明页 ----- %%%
 \NewDocumentCommand { \makestatement } {}
   {
-    \bool_if:NTF \g__whu_twoside_bool
-    { \cleardoublepage }
-    { \clearpage }
-
     \mode_leave_vertical: \skip_vertical:n { 44 pt }
 
-    % \vspace * { 44 pt }
     \pagenumbering { gobble }
     \noindent \hfil { \zihao { 2 } \textbf { 郑 \enskip 重 \enskip 声 \enskip 明 } }
     \par \skip_vertical:n { 20 pt }
@@ -638,7 +639,7 @@
     \__whu_put_kw:nn
       { \bfseries \zihao { -4 } Key ~ words: ~ }
       { \clist_use:Nn \l__whu_info_enkeywords_clist { ;~ } }
-    \cleardoublepage%
+    \__whu_new_chapter_page:
   }
 
 %%% ---- 目录 ----- %%%
@@ -648,9 +649,7 @@
   \pagenumbering { gobble } % 去掉目录页码
   \tableofcontents
 
-  \bool_if:NTF \g__whu_twoside_bool
-    { \cleardoublepage }
-    { \clearpage }
+  \__whu_new_chapter_page:
 
   \pagestyle { plain }
   \pagenumbering { arabic } % 重新计数页码
