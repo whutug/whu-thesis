@@ -33,7 +33,7 @@
 \bool_set_true:N \g__whu_twoside_bool
 
 \clist_set:Nn \g__whu_option_to_class_clist
-  { a4paper , zihao = -4 , fontset = none }
+  { a4paper , zihao = -4 , fontset = none , sub4section }
 
 \keys_define:nn { whu / option }
   {
@@ -82,6 +82,8 @@
     % 单双页模式
   }
 \ProcessKeysOptions { whu / option }
+
+\RequirePackage { etoolbox }
 
 %%% ---- 载入 Class ----- %%%
 % 开题报告使用 ctexart，论文使用 ctexbook
@@ -226,8 +228,24 @@
         afterskip  = { 0.5 \baselineskip    },
         fixskip    = true
       },  % 三级标题 黑体小4号
-    tocdepth       = 2,     % 目录层级数
-    secnumdepth    = 3,  % 标题层级数
+    paragraph      =
+      {
+        format     = { \heiti \zihao { -4 } },
+        number     = { （ \arabic{paragraph} ）},
+        beforeskip = { 0.5 \baselineskip    },
+        afterskip  = { 0.5 \baselineskip    },
+        fixskip    = true
+      },
+    subparagraph   =
+      {
+        format     = { \heiti \zihao { -4 } },
+        number     = { \circled { \arabic{paragraph} } },
+        beforeskip = { 0.5 \baselineskip    },
+        afterskip  = { 0.5 \baselineskip    },
+        fixskip    = true
+      },
+    tocdepth       = 2,  % 目录层级数
+    secnumdepth    = 5,  % 标题层级数
   }
 
 \tl_if_eq:NnF \l__whu_class_tl { opening }
@@ -305,7 +323,12 @@
 \RequirePackage { booktabs }                 % 做三线表的包
 \RequirePackage { makecell }
 \RequirePackage { multirow }                 % 跨行表格
-\RequirePackage { diagbox  }                  % 斜线表头
+\RequirePackage { diagbox  }                 % 斜线表头
+
+\clist_map_inline:nn { tabular , tabularx , longtable , xltabular }
+  { \AtBeginEnvironment {#1} { \zihao { 5 } } }
+% 将表格内容字体设为五号
+
 % 列表样式
 \RequirePackage { enumitem }
 \setlist { nosep }
@@ -328,7 +351,7 @@
 \dim_set:Nn \footnotesep { 6 pt }
 \tl_set:Nn \footnotesize { \songti \zihao { 5 } }
 \tl_set:Nn \footnoterule
-  { \noindent \rule [ 1 pt ] { 0.3 \columnwidth } {1 pt} }
+  { \noindent \rule [ 1 pt ] { 0.3 \columnwidth } { 1 pt } }
 
 \NewDocumentCommand { \circled } { m }
   {
@@ -336,7 +359,7 @@
       {
         \tikz [ baseline = ( char.base ) ]
           {
-            \node [ shape = circle , draw , inner ~ sep = 0 pt , minimum ~ size = 1 em ]
+            \node [ shape = circle , draw , inner ~ sep = 0 pt , minimum ~ size = \dim_eval:n { 1 \ccwd - 0.4 pt } ]
               ( char ) { #1 };
           } % 圆圈数字①
       }
@@ -426,11 +449,11 @@
 
 %%% ---- 数学定理样式 ----- %%%
 \newtheoremstyle { whu }
-  { 0 pt } { 0 pt } % 上下间距
-  { \songti }       % 正文字体
-  { 2 em }          % 缩进距离
-  { \heiti }        % 标题字体
-  { ： }{ 0 pt }    % 结束标记及间隔
+  { 0 pt } { 0 pt }          % 上下间距
+  { \songti }                % 正文字体
+  { 2 em }                   % 缩进距离
+  { \heiti }                 % 标题字体
+  { \hbox:n {} ： } { 0 pt } % 结束标记及间隔
   {}
 \theoremstyle { whu }
 \newtheorem { theorem }     { 定理 } [ section ]
@@ -441,7 +464,7 @@
 \newtheorem { example }     { 例 }   [ section ]
 \newtheorem { remark }      { 注 }   [ section ]
 
-\RenewDocumentEnvironment { proof } { O {证明} }
+\RenewDocumentEnvironment { proof } { O { 证明 } }
   { \pushQED { \qed } { \heiti #1： } }
   { \popQED }
 
@@ -656,4 +679,5 @@
   \normalsize
   \dim_set:Nn \baselineskip { 23 pt } % 正文行距为 23 磅
   \dim_set:Nn \parskip      { 0 pt  } % 段间距为 0
+  \raggedbottom
 }
