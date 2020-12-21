@@ -417,7 +417,6 @@
       }
   }
 
-
 \RequirePackage { unicode-math }
 \setmathfont { XITSMath-Regular }
   [
@@ -582,7 +581,6 @@
         \__whu_new_chapter_page:
       }
   }
-
 
 %%% ---- 论文申明页 ----- %%%
 \NewDocumentCommand { \makestatement } {}
