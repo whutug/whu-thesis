@@ -456,23 +456,24 @@
   { \hbox:n {} ： } { 0 pt } % 结束标记及间隔
   {}
 \theoremstyle { whu }
-\newtheorem { theorem }     { 定理 } [ section ]
-\newtheorem { definition }  { 定义 } [ section ]
-\newtheorem { lemma }       { 引理 } [ section ]
-\newtheorem { corollary}    { 推论 } [ section ]
-\newtheorem { proposition } { 性质 } [ section ]
-\newtheorem { example }     { 例 }   [ section ]
-\newtheorem { remark }      { 注 }   [ section ]
 
-\RenewDocumentEnvironment { proof } { O { 证明 } }
-  { \pushQED { \qed } { \heiti #1： } }
+\newtheorem { theorem     } { 定理 } [ section ]
+\newtheorem { definition  } { 定义 } [ section ]
+\newtheorem { lemma       } { 引理 } [ section ]
+\newtheorem { corollary   } { 推论 } [ section ]
+\newtheorem { proposition } { 性质 } [ section ]
+\newtheorem { example     } { 例   } [ section ]
+\newtheorem { remark      } { 注   } [ section ]
+
+\RenewDocumentEnvironment { proof } { O { 证明 } + b }
+  { \pushQED { \qed } { \heiti #1： } #2 }
   { \popQED }
 
 %%% ---- 参考文献设置 ----- %%%
 \RequirePackage [ sort & compress ] { natbib }
 \setcitestyle { numbers , square , comma }
 \bibliographystyle { data / gbt7714-2005-whu }  % 参考文献样式
-\dim_set:Nn \bibsep {0pt} % 参考文献间距设为 0
+\dim_set:Nn \bibsep { 0 pt } % 参考文献间距设为 0
 
 \NewDocumentCommand { \upcite } { m }
   { \textsuperscript { \cite {#1} } }
@@ -645,7 +646,6 @@
     \__whu_put_kw:nn
       { \heiti\zihao{-4} 关键词：\mbox{} }
       { \clist_use:Nn \l__whu_info_cnkeywords_clist { ； } }
-    \clearpage
   }
 
 % 英文摘要
