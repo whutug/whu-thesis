@@ -31,6 +31,9 @@
 %%% ---- 文档选项 ----- %%%
 \bool_set_true:N \g__whu_twoside_bool
 
+\clist_set:Nn \g__whu_option_to_class_clist
+  { a4paper , zihao = -4 , fontset = none }
+
 \keys_define:nn { whu / option }
   {
     degree .choice:,
@@ -52,7 +55,8 @@
     draft         .choice:,
     draft / true  .code:n    =
       {
-        \bool_set_true:N \g__whu_draft_bool
+        \bool_set_true:N     \g__whu_draft_bool
+        \clist_gput_right:Nn \g__whu_option_to_class_clist { draft }
       },
     draft / false .code:n    =
       {
@@ -67,12 +71,14 @@
     oneside .code:n            =
       {
         \bool_set_false:N \g__whu_twoside_bool
+        \clist_gput_right:Nn \g__whu_option_to_class_clist { oneside }
       },
     twoside .code:n            =
       {
         \bool_set_true:N  \g__whu_twoside_bool
+        \clist_gput_right:Nn \g__whu_option_to_class_clist { twoside }
       }
-    % 单双页模式，默认双页
+    % 单双页模式
   }
 \ProcessKeysOptions { whu / option }
 
@@ -80,12 +86,12 @@
 % 开题报告使用 ctexart，论文使用 ctexbook
 \tl_if_eq:NnTF \l__whu_class_tl { opening }
   {
-    \LoadClass [ a4paper , zihao = -4 , fontset = none ] { ctexart }
-    \DeclareOption * { \PassOptionsToClass { \CurrentOption , twoside } { ctexart } }
+    \PassOptionsToClass { \g__whu_option_to_class_clist } { ctexart }
+    \LoadClass { ctexart }
   }
   {
-    \LoadClass [ a4paper , zihao = -4 , fontset = none ] { ctexbook }
-    \DeclareOption * { \PassOptionsToClass { \CurrentOption , twoside } { ctexbook } }
+    \PassOptionsToClass { \g__whu_option_to_class_clist } { ctexbook }
+    \LoadClass { ctexbook }
   }
 \ProcessOptions\relax
 
@@ -505,10 +511,12 @@
           \zihao { -2 } \heiti \c__whu_heading_tl
         \end { center }
 
-        \tl_set:Nn \baselinestretch { 1 }
+        \tl_set:Nn  \baselinestretch { 1 }
         \normalsize
-        \dim_set:Nn \baselineskip { 23 pt }
+        \dim_set:Nn \baselineskip    { 23 pt }
         % 正文行距为 23 磅
+        \dim_set:Nn \parskip         { 0 pt  }
+        % 段间距为 0
 
         \noindent
         \begin { minipage } { \textwidth }
@@ -587,8 +595,8 @@
       \zihao { 4 } 
       本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
       \par \skip_vertical:n { 88 pt }
-      本人签名： \uline { \makebox [ 4 cm ] {} }
-      \hfill 日期： \uline { \makebox [ 4 cm ] {} }
+      本人签名： \uline { \hbox_to_wd:nn { 4 cm } {} }
+      \hfill 日期： \uline { \hbox_to_wd:nn { 4 cm } {} }
     }
   }
 
@@ -605,7 +613,7 @@
 \NewDocumentEnvironment { cnabstract } {}
   {
     \chapter * { 摘 \qquad 要 }
-    \dim_set:Nn \baselineskip { 23pt }
+    \dim_set:Nn \baselineskip { 23 pt }
     \par
   }
   {
@@ -622,12 +630,12 @@
     \@twosidefalse
     \chapter * { \textbf { ABSTRACT } }
     \@twosidetrue
-    \dim_set:Nn \baselineskip { 23pt } \par
+    \dim_set:Nn \baselineskip { 23 pt } \par
   }
   {
     \skip_vertical:N \baselineskip \par
     \__whu_put_kw:nn
-      { \bfseries\zihao{-4} Key words:~ }
+      { \bfseries \zihao { -4 } Key ~ words: ~ }
       { \clist_use:Nn \l__whu_info_enkeywords_clist { ;~ } }
     \cleardoublepage%
   }
@@ -639,11 +647,15 @@
   \pagenumbering { gobble } % 去掉目录页码
   \tableofcontents
 
-  \cleardoublepage
+  \bool_if:NTF \g__whu_twoside_bool
+    { \cleardoublepage }
+    { \clearpage }
+
   \pagestyle { plain }
   \pagenumbering { arabic } % 重新计数页码
 
   \tl_set:Nn \baselinestretch { 1 } 
   \normalsize
-  \dim_set:Nn \baselineskip { 23pt } % 正文行距为 23 磅
+  \dim_set:Nn \baselineskip { 23 pt } % 正文行距为 23 磅
+  \dim_set:Nn \parskip      { 0 pt  } % 段间距为 0
 }
