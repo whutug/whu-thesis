@@ -78,10 +78,28 @@
       {
         \bool_set_true:N  \g__whu_twoside_bool
         \clist_gput_right:Nn \g__whu_option_to_class_clist { twoside }
-      }
+      },
     % 单双页模式
+
+    punct .choice:,
+    punct .value_required:n = true,
+    punct .choices:nn       =
+      { quanjiao , banjiao , kaiming }
+      { \tl_set_eq:NN \l__whu_punct_tl \l_keys_choice_tl },
+    punct .initial:n        = quanjiao,
+    % 标点格式
   }
 \ProcessKeysOptions { whu / option }
+
+\sys_if_engine_luatex:TF
+  {
+    \clist_gput_right:Nn \g__whu_option_to_class_clist
+      { punct = zh_CN / \l__whu_punct_tl }
+  }
+  {
+    \clist_gput_right:Nn \g__whu_option_to_class_clist
+      { punct = \l__whu_punct_tl }
+  }
 
 \RequirePackage { etoolbox }
 
@@ -134,13 +152,6 @@
         如： \emoji { hot-pepper } \emoji { pear } \emoji { four }
         \emoji { syringe } \emoji { sweat-drops } \emoji { cow-face }
         \emoji { beer } 。
-      }
-    \tl_if_eq:NnTF \l__whu_class_tl { opening }
-      {
-        \PassOptionsToClass { punct=zh_CN/quanjiao } { ctexart }
-      }
-      {
-        \PassOptionsToClass { punct=zh_CN/quanjiao } { ctexbook }
       }
     \RequirePackage { luatexja-adjust }
   }
@@ -325,8 +336,11 @@
 \RequirePackage { multirow }                 % 跨行表格
 \RequirePackage { diagbox  }                 % 斜线表头
 
-\clist_map_inline:nn { tabular , tabularx , longtable , xltabular }
-  { \AtBeginEnvironment {#1} { \zihao { 5 } } }
+\cs_set:Nn \__whu_set_table_font:
+  {
+    \clist_map_inline:nn { tabular , tabularx , longtable , xltabular }
+      { \AtBeginEnvironment {##1} { \zihao { 5 } } }
+  }
 % 将表格内容字体设为五号
 
 % 列表样式
@@ -557,6 +571,7 @@
           姓名： \uline { \hfill \l__whu_info_author_tl \hfill }
         \end { minipage }
         \raggedbottom
+        \__whu_set_table_font:
       }
 
     \AtEndDocument
@@ -592,12 +607,11 @@
           \par \skip_vertical:n { 6 em }
           {
             \centering \songti \zihao { -3 }
-            \begin {tabular} { cl }
-              \makebox [ 8 em ] [ s ] {院 \  \makebox [ 1 em ] { \llap { （ } 系 \rlap { ） } } \  名 \  称： } &
-                \l__whu_info_school_tl \\ [ 0.5 em ]
-              \makebox [ 8 em ] [ s ] {专 \  业 \  名 \  称：} & \l__whu_info_major_tl                              \\ [ 0.5 em ]
-              \makebox [ 8 em ] [ s ] {学 \  生 \  姓 \  名：} & \l__whu_info_author_tl                             \\ [ 0.5 em ]
-              \makebox [ 8 em ] [ s ] {指 \  导 \  教 \  师：} & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
+            \begin {tabular} { p { 8 em } l }
+              院 \hfill \llap { （ } 系 \rlap { ） } \hfill  名 \hfill  称： &\l__whu_info_school_tl                              \\ [ 0.5 em ]
+              专 \hfill  业 \hfill  名 \hfill  称：                          & \l__whu_info_major_tl                              \\ [ 0.5 em ]
+              学 \hfill  生 \hfill  姓 \hfill  名：                          & \l__whu_info_author_tl                             \\ [ 0.5 em ]
+              指 \hfill  导 \hfill  教 \hfill  师：                          & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
             \end { tabular }
           }
           \par \skip_vertical:n { 6 em }
@@ -681,4 +695,5 @@
   \dim_set:Nn \baselineskip { 23 pt } % 正文行距为 23 磅
   \dim_set:Nn \parskip      { 0 pt  } % 段间距为 0
   \raggedbottom
+  \__whu_set_table_font:
 }

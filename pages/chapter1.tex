@@ -24,15 +24,15 @@
 \end{enumerate}
 
 \section{模板选项}
-模板共提供了 \verb|degree| 与 \verb|class| 两类选项，其中 \verb|degree| 下有 \verb|bachelor|（默认）、\verb|master|、\verb|doctor| 三选项，\verb|class| 下有 \verb|paper|（默认）、\verb|design|、\verb|manual|、\verb|opening| 四选项，合计两类七选项。
+模板共提供了 \verb|degree| 与 \verb|class| 两类信息选项，其中 \verb|degree| 下有 \verb|bachelor|（默认）、\verb|master|、\verb|doctor| 三选项，\verb|class| 下有 \verb|paper|（默认）、\verb|design|、\verb|manual|、\verb|opening| 四选项，合计两类七选项。
 
 \verb|degree| 选项用于学位选择。虽然提供了 \verb|bachelor|、\verb|master|、\verb|doctor| 三个选项，但现时段只有 \verb|bachelor| 可以使用，也即只提供本科毕业论文（设计）模板。
 
 \verb|class| 选项用于文档类型。其中 \verb|paper| 与 \verb|design| 的区别只在于封面显示的是“武汉大学毕业论文”还是“武汉大学毕业设计”。此功能只是实验性功能，《印制规范》中并无相关要求。\verb|opening| 选项用于开题报告的撰写，详细说明请见 根目录下的 \verb|opening-demo.tex| 文件，不在此处介绍。\verb|manual| 选项则只用于本手册编写，不用于论文的实际撰写过程。
 
-在使用模板选项时，必须使用 \meta{key} = \meta{value} 格式指定。
+文档还有其他选项，\verb|twoside|（默认）与 \verb|oneside| 控制单双面打印，\verb|twoside| 选项启用时，各章会在奇数页（右边）开始。\verb|draft| 开启草稿模式，此时图片与超链接不会加载，同时会显示文档边框。\CTeX{} 文档类的 \verb|punct| 选项可以选择 \verb|quanjiao|（全角）、\verb|banjiao|（半角） 与 \verb|kaiming|（开明）三种标点挤压风格，默认为 \verb|quanjiao|。
 
-另外，标准文档类的 \verb|twoside|（默认）、\verb|oneside| 选项亦可以使用，\verb|twoside| 选项启用时，各章会在奇数页（右边）开始。\verb|draft| 选项开启时，图片与超链接不会加载，同时会显示文档边框。
+在使用模板选项时，除 \verb|twoside|、\verb|oneside| 与 \verb|draft| 外，必须使用 \meta{key} = \meta{value} 格式指定。
 
 同时，\WhuThesis{} 也提供了一套修改文档信息的接口 \verb|\whusetup|。您可以在 \verb|\whusetup| 中指定或修改 \verb|info| 信息，即学号 \verb|info/student-number|、论文题目 \verb|info/title|、院系 \verb|info/school|、专业 \verb|info/major|、作者 \verb|info/author|、指导教师与职称 \verb|info/advisor| 及日期 \verb|info/date| 等七个信息。当未给出日期信息时，默认为当前编译时间点的年月的汉数字格式，即\zhdigits{\the\year}年\zhnumber{\the\month}月。
 
