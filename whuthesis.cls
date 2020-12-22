@@ -40,7 +40,7 @@
     degree .choice:,
     degree .value_required:n = true,
     degree .choices:nn       =
-      { master , doctor , bachelor }
+      { doctor , master , bachelor }
       { \tl_set_eq:NN \l__whu_degree_tl \l_keys_choice_tl },
     degree .initial:n        = bachelor,
     % 学位，默认本科生
@@ -49,7 +49,7 @@
     class .value_required:n = true,
     class .choices:nn       =
       { paper , design , manual , opening }
-      { \tl_set_eq:NN  \l__whu_class_tl   \l_keys_choice_tl },
+      { \tl_set_eq:NN \l__whu_class_tl  \l_keys_choice_tl },
     class .initial:n        = paper,
     % 文档类型，默认 paper（论文）
 
@@ -61,7 +61,7 @@
       },
     draft / false .code:n    =
       {
-        \bool_set_false:N \g__whu_draft_bool
+        \bool_set_false:N    \g__whu_draft_bool
       },
     draft         .default:n = true,
     draft         .initial:n = false,
@@ -71,12 +71,12 @@
     twoside .value_forbidden:n = true,
     oneside .code:n            =
       {
-        \bool_set_false:N \g__whu_twoside_bool
+        \bool_set_false:N    \g__whu_twoside_bool
         \clist_gput_right:Nn \g__whu_option_to_class_clist { oneside }
       },
     twoside .code:n            =
       {
-        \bool_set_true:N  \g__whu_twoside_bool
+        \bool_set_true:N     \g__whu_twoside_bool
         \clist_gput_right:Nn \g__whu_option_to_class_clist { twoside }
       },
     % 单双页模式
@@ -130,8 +130,8 @@
     \NewDocumentCommand { \cls } { m } { \textsf {#1} }
     \NewDocumentCommand { \fmt } { m } { \textsf {#1} }
     \RequirePackage{ hologo }
-    \NewDocumentCommand { \WhuThesis } {} { \textsc { Whu\-The\-sis } }
-    \NewDocumentEnvironment {notice} {}
+    \NewDocumentCommand { \WhuThesis } {} { \textsc { Whu \- The \- sis } }
+    \NewDocumentEnvironment { notice } {}
       { \color {red} { { \heiti 注意： } } }
       {}
   }
@@ -146,7 +146,7 @@
 \sys_if_engine_luatex:TF
   {
     \RequirePackage { emoji }
-    % \setemojifont{Segoe UI Emoji}
+    % \setemojifont { Segoe UI Emoji }
     \ProvideDocumentCommand { \emojitest } {}
       {
         如： \emoji { hot-pepper } \emoji { pear } \emoji { four }
@@ -202,7 +202,7 @@
   }
 % 草稿模式下，显示边框
 
-\RequirePackage { fancyhdr }       % 页眉页脚宏包
+\RequirePackage { fancyhdr }        % 页眉页脚宏包
 \tl_set:Nn \headrulewidth { 0 pt }  % 页眉线宽
 \tl_set:Nn \footrulewidth { 0 pt }  % 页脚线宽
 
@@ -311,7 +311,7 @@
 
 %%% ---- 图表标题 ----- %%%
 % 图表标题设置
-\RequirePackage [ labelsep=quad ] { caption } % 序号之后空一格写标题
+\RequirePackage [ labelsep = quad ] { caption } % 序号之后空一格写标题
 % 设置表格标题字体为黑体, 设置图标题字体为宋体
 \DeclareCaptionFont { heiti } { \heiti }
 \captionsetup [ table ] { textfont = heiti }
