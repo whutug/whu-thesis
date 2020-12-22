@@ -463,11 +463,11 @@
 
 %%% ---- 数学定理样式 ----- %%%
 \newtheoremstyle { whu }
-  { 0 pt } { 0 pt }          % 上下间距
-  { \songti }                % 正文字体
-  { 2 em }                   % 缩进距离
-  { \heiti }                 % 标题字体
-  { \hbox:n {} ： } { 0 pt } % 结束标记及间隔
+  { 0 pt } { 0 pt }                     % 上下间距
+  { \songti }                           % 正文字体
+  { 2 em }                              % 缩进距离
+  { \heiti }                            % 标题字体
+  { \hbox:n {} ： \hbox:n {} } { 0 pt } % 结束标记及间隔
   {}
 \theoremstyle { whu }
 
