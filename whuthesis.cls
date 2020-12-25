@@ -93,13 +93,21 @@
 
 \sys_if_engine_luatex:TF
   {
-    \clist_gput_right:Nn \g__whu_option_to_class_clist
-      { punct = zh_CN / \l__whu_punct_tl }
+    \file_if_exist:nTF { jfm-zh_CN.lua }
+      {
+        \clist_gput_right:Nn \g__whu_option_to_class_clist
+          { punct = zh_CN / \l__whu_punct_tl }
+      }
+      {
+        \clist_gput_right:Nn \g__whu_option_to_class_clist
+          { punct = \l__whu_punct_tl }
+      }
   }
   {
     \clist_gput_right:Nn \g__whu_option_to_class_clist
       { punct = \l__whu_punct_tl }
   }
+% 判断是否有 chinese-jfm，若有则使用 chinese-jfm
 
 \RequirePackage { etoolbox }
 
@@ -122,8 +130,7 @@
 \tl_if_eq:NnT \l__whu_class_tl { manual }
   {
     \tl_set:Nn \c__whu_heading_tl { 武汉大学~\LaTeX{}~模板使用手册 }
-    \NewDocumentCommand { \meta } { m }
-      { \ensuremath { \langle } \textit {#1} \ensuremath { \rangle } }
+    \RequirePackage { doc }
     \NewDocumentCommand { \pkg } { m } { \textsf {#1} }
     \NewDocumentCommand { \env } { m } { \texttt {#1} }
     \NewDocumentCommand { \app } { m } { \textsf {#1} }
@@ -243,6 +250,7 @@
       {
         format     = { \heiti \zihao { -4 }    },
         number     = { （ \arabic{paragraph} ）},
+        aftername  = { \hbox:n {}              },
         beforeskip = { 0.5 \baselineskip       },
         afterskip  = { 0.5 \baselineskip       },
         fixskip    = true
@@ -251,6 +259,7 @@
       {
         format     = { \heiti \zihao { -4 }            },
         number     = { \circled { \arabic{paragraph} } },
+        aftername  = {                                 },
         beforeskip = { 0.5 \baselineskip               },
         afterskip  = { 0.5 \baselineskip               },
         fixskip    = true
