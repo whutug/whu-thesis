@@ -179,7 +179,7 @@
 \box_new:N \l__tmpa_box
 \hbox_set:Nn \l__tmpa_box { \nobreakspace }
 \SetAlgoCaptionSeparator
-  { \hspace * { \dim_eval:n { 1em - \box_wd:N \l__tmpa_box } } } 
+  { \skip_horizontal:n { \dim_eval:n { 1 em - \box_wd:N \l__tmpa_box } } } 
 % 算法标题后会跟一个不间断空格 ~，这里将其宽度减掉
 
 \RequirePackage { tikz, pgfplots }               % 绘图
@@ -601,9 +601,9 @@
           {
             \heiti \zihao{5} \hfill
             \begin { minipage } [ t ] { 5 cm }
-              学号 \uline{ \makebox [ 3 cm ] [ c ]
-                { \l__whu_info_student_number_tl } } \\ [ 2 mm ]
-              密级 \uline{ \makebox [ 3 cm ] [ c ] {} }
+              学号 \uline{ \hbox_to_wd:nn { 3 cm }
+                { \hfill \l__whu_info_student_number_tl \hfill } } \\ [ 2 mm ]
+              密级 \uline{ \hbox_to_wd:nn { 3 cm } {} }
             \end { minipage }
           }
           \par \skip_vertical:n { 6 em }
@@ -667,16 +667,16 @@
   {
     \skip_vertical:N \baselineskip \par
     \__whu_put_kw:nn
-      { \heiti\zihao{-4} 关键词：\mbox{} }
+      { \heiti \zihao { -4 } 关键词：\hbox:n {} }
       { \clist_use:Nn \l__whu_info_cnkeywords_clist { ； } }
   }
 
 % 英文摘要
 \NewDocumentEnvironment { enabstract } {}
   {
-    \@twosidefalse
+    \bool_if:NT \g__whu_twoside_bool
+      { \@twosidefalse }
     \chapter * { \textbf { ABSTRACT } }
-    \@twosidetrue
     \dim_set:Nn \baselineskip { 23 pt } \par
   }
   {
