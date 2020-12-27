@@ -378,12 +378,12 @@
 
 \NewDocumentCommand { \circled } { m }
   {
-    \hbox_to_wd:nn { 1 em }
+    \resizebox { 1 em } { ! }
       {
         \tikz [ baseline = ( char.base ) ]
           {
-            \node [ shape = circle , draw , inner ~ sep = 0 pt , minimum ~ size = \dim_eval:n { 1 \ccwd - 0.4 pt } ]
-              ( char ) { #1 };
+            \node [ shape = circle , draw , inner ~ sep = 0 pt , minimum ~ size = 1 em ]
+              ( char ) {#1};
           } % 圆圈数字①
       }
   }
@@ -530,6 +530,12 @@
       { \clearpage }
   }
 
+\cs_set:Npn \__whu_date_parse:n #1
+  { \__whu_date_parse_aux:w #1 \q_stop }
+\cs_set:Npn \__whu_date_parse_aux:w #1 / #2 \q_stop
+  { \zhdigits {#1} 年 \zhnumber {#2} 月 }
+\cs_generate_variant:Nn \__whu_date_parse:n { V }
+
 %%% ---- 文档接口 ----- %%%
 \NewDocumentCommand { \whusetup } { m }
   { \keys_set:nn { whu } {#1} }
@@ -546,8 +552,8 @@
     cnkeywords     .clist_set:N = \l__whu_info_cnkeywords_clist,
     enkeywords     .clist_set:N = \l__whu_info_enkeywords_clist,
 
-    date .initial:n =
-      { \zhdigits { \the\year } 年 \zhnumber { \the \month } 月 }
+    date           .initial:n   =
+      { \int_use:N \c_sys_year_int / \int_use:N \c_sys_month_int }
   }
 
 \keys_define:nn { whu }
@@ -617,14 +623,15 @@
           {
             \centering \songti \zihao { -3 }
             \begin {tabular} { p { 8 em } l }
-              院 \hfill \llap { （ } 系 \rlap { ） } \hfill  名 \hfill  称： &\l__whu_info_school_tl                              \\ [ 0.5 em ]
-              专 \hfill  业 \hfill  名 \hfill  称：                          & \l__whu_info_major_tl                              \\ [ 0.5 em ]
-              学 \hfill  生 \hfill  姓 \hfill  名：                          & \l__whu_info_author_tl                             \\ [ 0.5 em ]
-              指 \hfill  导 \hfill  教 \hfill  师：                          & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
+              院 \hfill \hbox_overlap_left:n { （ } 系 \hbox_overlap_right:n { ） } \hfill 名 \hfill 称： &
+                \l__whu_info_school_tl \\ [ 0.5 em ]
+              专 \hfill 业 \hfill 名 \hfill 称： & \l__whu_info_major_tl                              \\ [ 0.5 em ]
+              学 \hfill 生 \hfill 姓 \hfill 名： & \l__whu_info_author_tl                             \\ [ 0.5 em ]
+              指 \hfill 导 \hfill 教 \hfill 师： & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
             \end { tabular }
           }
           \par \skip_vertical:n { 6 em }
-          { \songti \zihao { -2 } \l__whu_info_date_tl }
+          { \songti \zihao { -2 } \__whu_date_parse:V { \l__whu_info_date_tl }}
         \end { center }
         \__whu_new_chapter_page:
       }
