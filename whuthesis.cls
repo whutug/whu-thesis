@@ -248,20 +248,20 @@
       },  % 三级标题 黑体小4号
     paragraph      =
       {
-        format     = { \heiti \zihao { -4 }    },
-        number     = { （ \arabic{paragraph} ）},
-        aftername  = { \hbox:n {}              },
-        beforeskip = { 0.5 \baselineskip       },
-        afterskip  = { 0.5 \baselineskip       },
+        format     = { \heiti \zihao { -4 }       },
+        number     = { （ \arabic { paragraph } ）},
+        aftername  = { \hbox:n {}                 },
+        beforeskip = { 0.5 \baselineskip          },
+        afterskip  = { 0.5 \baselineskip          },
         fixskip    = true
       },
     subparagraph   =
       {
-        format     = { \heiti \zihao { -4 }            },
-        number     = { \circled { \arabic{paragraph} } },
-        aftername  = {                                 },
-        beforeskip = { 0.5 \baselineskip               },
-        afterskip  = { 0.5 \baselineskip               },
+        format     = { \heiti \zihao { -4 }                  },
+        number     = { \circled { \arabic { subparagraph } } },
+        aftername  = {                                       },
+        beforeskip = { 0.5 \baselineskip                     },
+        afterskip  = { 0.5 \baselineskip                     },
         fixskip    = true
       },
     tocdepth       = 2,  % 目录层级数
@@ -275,7 +275,7 @@
         chapter        =
           {
             format     = { \centering \heiti \zihao { -2 } },
-            number     = { \arabic{chapter}                },
+            number     = { \arabic { chapter }             },
             name       = { , },
             beforeskip = { 0.8 \baselineskip               },
             afterskip  = { 0.5 \baselineskip               },
