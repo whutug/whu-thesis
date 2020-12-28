@@ -164,7 +164,7 @@
   }
   {
     \ProvideDocumentCommand { \emojitest } {}
-      { \hologo{XeLaTeX} 等其他引擎则暂不支持。 }
+      { \hologo { XeLaTeX } 等其他引擎则暂不支持。 }
   }
 
 %%% ---- 引入宏包 ----- %%%
@@ -176,10 +176,10 @@
 \tl_set:Nn \algorithmcfname { 算法 }
 \SetAlCapSty {}
 \SetAlCapFnt { \heiti }
-\box_new:N \l__tmpa_box
-\hbox_set:Nn \l__tmpa_box { \nobreakspace }
+\box_new:N \l__whu_space_box
+\hbox_set:Nn \l__whu_space_box { \nobreakspace }
 \SetAlgoCaptionSeparator
-  { \skip_horizontal:n { \dim_eval:n { 1 em - \box_wd:N \l__tmpa_box } } } 
+  { \skip_horizontal:n { 1 em - \box_wd:N \l__whu_space_box } \hbox:n {} } 
 % 算法标题后会跟一个不间断空格 ~，这里将其宽度减掉
 
 \RequirePackage { tikz, pgfplots }               % 绘图
@@ -296,11 +296,11 @@
 \tl_set:Nn \cftsecfont           { \songti \zihao { -4 }      }
 \tl_set:Nn \cftsubsecfont        { \songti \zihao { -4 }      }
 \tl_set:Nn \cftsubsubsecfont     { \songti \zihao { -4 }      }
-\tl_set:Nn \cftsecpagefont       { \songti \zihao { 5 }       }
-\tl_set:Nn \cftsubsecpagefont    { \songti \zihao { 5 }       }
-\tl_set:Nn \cftsubsubsecpagefont { \songti \zihao { 5 }       }
-\tl_set:Nn \cftsecafterpnum      { \skip_vertical:n { 3pt }   }
-\tl_set:Nn \cftsubsecafterpnum   { \skip_vertical:n { 2pt }   }
+\tl_set:Nn \cftsecpagefont       { \songti \zihao {  5 }      }
+\tl_set:Nn \cftsubsecpagefont    { \songti \zihao {  5 }      }
+\tl_set:Nn \cftsubsubsecpagefont { \songti \zihao {  5 }      }
+\tl_set:Nn \cftsecafterpnum      { \skip_vertical:n { 3 pt }  }
+\tl_set:Nn \cftsubsecafterpnum   { \skip_vertical:n { 2 pt }  }
 
 \dim_set:Nn \cftbeforetoctitleskip { 0 pt    }
 \dim_set:Nn \cftaftertoctitleskip  { 0 pt    }
@@ -548,6 +548,7 @@
     school         .tl_set:N    = \l__whu_info_school_tl,
     major          .tl_set:N    = \l__whu_info_major_tl,
     date           .tl_set:N    = \l__whu_info_date_tl,
+    bib-file       .tl_set:N    = \l__whu_info_bib_file_tl,
     advisor        .clist_set:N = \l__whu_info_advisor_clist,
     cnkeywords     .clist_set:N = \l__whu_info_cnkeywords_clist,
     enkeywords     .clist_set:N = \l__whu_info_enkeywords_clist,
@@ -631,7 +632,7 @@
             \end { tabular }
           }
           \par \skip_vertical:n { 6 em }
-          { \songti \zihao { -2 } \__whu_date_parse:V { \l__whu_info_date_tl }}
+          { \songti \zihao { -2 } \__whu_date_parse:V { \l__whu_info_date_tl } }
         \end { center }
         \__whu_new_chapter_page:
       }
@@ -696,7 +697,7 @@
 
 %%% ---- 目录 ----- %%%
 % 生成目录
-\NewDocumentCommand {\contents} {}
+\NewDocumentCommand { \contents } {}
 {
   \pagenumbering { gobble } % 去掉目录页码
   \tableofcontents
@@ -713,3 +714,12 @@
   \raggedbottom
   \__whu_set_table_font:
 }
+
+\NewDocumentCommand { \makebibliography } {}
+  {
+    \__whu_new_chapter_page:
+    \phantomsection
+    \addcontentsline { toc } { chapter } { 参考文献 }
+
+    \bibliography { \l__whu_info_bib_file_tl }
+  }
