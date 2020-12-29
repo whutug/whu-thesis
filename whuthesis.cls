@@ -328,7 +328,7 @@
 \tl_set:Nn \tablename  { \heiti  \zihao { -4 } 表 }
 
 \RequirePackage { graphicx, subcaption }
-\graphicspath { { figures / } } % 图片文件路径
+\graphicspath { \l__whu_style_graphics_path_tl } % 图片文件路径
 
 % 使用 tabularx 创建占满宽度的表格
 \RequirePackage{ array , tabularx }
@@ -548,7 +548,6 @@
     school         .tl_set:N    = \l__whu_info_school_tl,
     major          .tl_set:N    = \l__whu_info_major_tl,
     date           .tl_set:N    = \l__whu_info_date_tl,
-    bib-file       .tl_set:N    = \l__whu_info_bib_file_tl,
     advisor        .clist_set:N = \l__whu_info_advisor_clist,
     cnkeywords     .clist_set:N = \l__whu_info_cnkeywords_clist,
     enkeywords     .clist_set:N = \l__whu_info_enkeywords_clist,
@@ -557,9 +556,16 @@
       { \int_use:N \c_sys_year_int / \int_use:N \c_sys_month_int }
   }
 
+\keys_define:nn { whu / style }
+  {
+    bib-file      .tl_set:N = \l__whu_style_bib_file_tl,
+    graphics-path .tl_set:N = \l__whu_style_graphics_path_tl
+  }
+
 \keys_define:nn { whu }
   {
-    info .meta:nn = { whu / info } {#1}
+    info  .meta:nn = { whu / info  } {#1},
+    style .meta:nn = { whu / style } {#1}
   }
 
 %%% ---- 论文标题页 ----- %%%
@@ -721,5 +727,5 @@
     \phantomsection
     \addcontentsline { toc } { chapter } { 参考文献 }
 
-    \bibliography { \l__whu_info_bib_file_tl }
+    \bibliography { \l__whu_style_bib_file_tl }
   }

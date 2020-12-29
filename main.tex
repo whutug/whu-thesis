@@ -17,9 +17,13 @@
         % date           = {2021/01},
         % 请使用 yyyy/mm 格式指定日期
         % 当 date 未给出时，显示编译时的年月
-        cnkeywords     = {关键词 1, 关键词 2, 关键词 3},
-        enkeywords     = {Key1, Key2, Key3},
-        bib-file       = {ref/refs}
+        cnkeywords     = {关键词 1 , 关键词 2 , 关键词 3},
+        enkeywords     = {Key1 , Key2 , Key3},
+      },
+    style = 
+      {
+        bib-file      = {ref/refs},
+        graphics-path = {figures/}
       }
   }
 
@@ -40,7 +44,7 @@
   \include{pages/chapter4}
 
 %%----------- 结尾部分 ----------- %%
-  \makebibliography
+  \makebibliography         % 参考文献
 
   \include{pages/thanks}    % 致谢
   \include{pages/appendix}  % 附录
