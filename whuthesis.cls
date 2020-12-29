@@ -109,8 +109,6 @@
   }
 % 判断是否有 chinese-jfm，若有则使用 chinese-jfm
 
-\RequirePackage { etoolbox }
-
 %%% ---- 载入 Class ----- %%%
 % 开题报告使用 ctexart，论文使用 ctexbook
 \tl_if_eq:NnTF \l__whu_class_tl { opening }
