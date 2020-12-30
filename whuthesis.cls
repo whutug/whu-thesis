@@ -721,9 +721,20 @@
 
 \NewDocumentCommand { \makebibliography } {}
   {
-    \__whu_new_chapter_page:
-    \phantomsection
-    \addcontentsline { toc } { chapter } { 参考文献 }
+    \tl_if_eq:NnF \l__whu_class_tl { opening }
+      {
+        \__whu_new_chapter_page:
+        \phantomsection
+        \addcontentsline { toc } { chapter } { 参考文献 }
+      }
 
     \bibliography { \l__whu_style_bib_file_tl }
   }
+
+\NewDocumentEnvironment { acknowledgements } {}
+  {
+    \chapter * { 致谢 }
+    \phantomsection
+    \addcontentsline { toc } { chapter } { 致谢 }
+  }
+  { \appendix }
