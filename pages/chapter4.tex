@@ -5,40 +5,15 @@
 \subsection{原始代码}
 朴实的代码块：
 
-使用 \env{verbatim} 环境可以得到如下原样的输出。
+使用 verbatim 环境可以得到如下原样的输出。
 \begin{verbatim}
 print("Hello world!")
 \end{verbatim}
 
-使用 \pkg{listings} 包提供的 \env{lstlisting} 环境可以对代码进行进一步的格式化。
-\begin{lstlisting}[language=Python,frame=single]
-import numpy as np
-
-a = np.zeros((2,2))
-print(a)
-\end{lstlisting}
-
-\subsection{代码高亮}
-\pkg{minted} 包所提供的 \env{minted} 环境还可以对代码进行高亮，请参考 \href{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}{Code Highlighting with minted} 进行调试。在使用 \env{minted} 环境前，请先在 \cls{whuthesis.cls} 文件中启用 \pkg{minted} 包。
-
-\begin{notice}
-  使用 \pkg{minted} 包时，需要系统拥有 \app{Python} 环境，并安装 \app{Pygments} 包，可以通过 \verb|$ pip install Pygments| 来进行安装。且需要在编译时加上 \verb|-shell-escape| 参数，否则会报错。
-\end{notice}
-
-% \usemintedstyle{vs}
-% \begin{minted}[linenos,baselinestretch=1.0,frame=lines]{cpp}
-% #include <iostream>
-% using namespace std;
-
-% int main() 
-% {
-%     cout << "Hello, World!";
-%     return 0;
-% }
-% \end{minted}
+使用 listings 包提供的 lstlisting 环境可以对代码进行进一步的格式化，minted 包所提供的 minted 环境还可以对代码进行高亮。更多定制功能请自行参照文档配置。
 
 \subsection{算法描述/伪代码}
-参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms} 与 \pkg{algorithm2e} 文档，给出一个简单的示例，见算法 \ref{alg:alg1}。
+参考 \href{https://en.wikibooks.org/wiki/LaTeX/Algorithms}{Algorithms} 与 algorithm2e 文档，给出一个简单的示例，见算法 \ref{alg:alg1}。
 
 \begin{algorithm}
   \SetAlgoLined
@@ -56,13 +31,13 @@ print(a)
 \end{algorithm}
 
 \section{绘图}
-关于使用 \LaTeX{} 绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package}。一般建议使用如 \app{Photoshop}、\app{PowerPoint} 等制图，再转换成 \fmt{PDF} 等格式插入。
+关于使用 \LaTeX{} 绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package}。一般建议使用如 Photoshop、PowerPoint 等制图，再转换成 PDF 等格式插入。
 
 \section{单位}
-单位的输入请使用 \pkg{siunitx} 包中提供的 \verb|\si| 与 \verb|\SI| 命令。在以前，\LaTeX{} 中输入角度需要使用 \verb|$^\circ$| 的奇技淫巧，现在只需要 \verb|\ang| 命令解决问题。当然 \pkg{siunitx} 包中还提供了不少其他有用的命令，有需要的可以自行阅读 \pkg{siunitx} 文档。
+单位的输入请使用 siunitx 包中提供的 \verb|\si| 与 \verb|\SI| 命令。在以前，\LaTeX{} 中输入角度需要使用 \verb|$^\circ$| 的奇技淫巧，现在只需要 \verb|\ang| 命令解决问题。当然 siunitx 包中还提供了不少其他有用的命令，有需要的可以自行阅读 siunitx 文档。
 
 \section{物理符号}
-\WhuThesis 亦使用了 \pkg{physics} 宏包，旨在让用户更加方便、简洁地使用、输入物理符号。示例如下
+physics 宏包可以让用户更加方便、简洁地使用、输入物理符号，具体也请自行阅读 physics 文档。示例如下
 \begin{equation}
   \begin{aligned}
     \int_0^\frac{\symup{\pi}}{2} \abs{\sin{x}} \dd{x} & = 2 \int_0^{\symup{\pi}} \sin{x} \dd{x} \\

@@ -11,8 +11,8 @@
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass{whuthesis}{2020/12/21}{0.3}{Wuhan University Thesis Template}
+\RequirePackage{expl3 , xparse , l3keys2e , xtemplate}
+\ProvidesExplClass{whuthesis}{2020/12/30}{0.4}{Wuhan University Thesis Template}
 
 \msg_new:nnn { whuthesis } { 引擎不支持 }
   {
@@ -48,7 +48,7 @@
     class .choice:,
     class .value_required:n = true,
     class .choices:nn       =
-      { paper , design , manual , opening }
+      { paper , design , opening }
       { \tl_set_eq:NN \l__whu_class_tl  \l_keys_choice_tl },
     class .initial:n        = paper,
     % 文档类型，默认 paper（论文）
@@ -121,25 +121,12 @@
     \LoadClass { ctexbook }
   }
 
+\sys_if_engine_luatex:T { \RequirePackage { luatexja-adjust } }
+
 \tl_if_eq:NnT \l__whu_class_tl { paper }
   { \tl_set:Nn \c__whu_heading_tl { 武汉大学本科毕业论文 } }
 \tl_if_eq:NnT \l__whu_class_tl { design }
   { \tl_set:Nn \c__whu_heading_tl { 武汉大学本科毕业设计 } }
-\tl_if_eq:NnT \l__whu_class_tl { manual }
-  {
-    \tl_set:Nn \c__whu_heading_tl { 武汉大学~\LaTeX{}~模板使用手册 }
-    \RequirePackage { doc }
-    \NewDocumentCommand { \pkg } { m } { \textsf {#1} }
-    \NewDocumentCommand { \env } { m } { \texttt {#1} }
-    \NewDocumentCommand { \app } { m } { \textsf {#1} }
-    \NewDocumentCommand { \cls } { m } { \textsf {#1} }
-    \NewDocumentCommand { \fmt } { m } { \textsf {#1} }
-    \RequirePackage{ hologo }
-    \NewDocumentCommand { \WhuThesis } {} { \textsc { Whu \- The \- sis } }
-    \NewDocumentEnvironment { notice } {}
-      { \color {red} { { \heiti 注意： } } }
-      {}
-  }
 \tl_if_eq:NnT \l__whu_class_tl { opening }
   {
     \tl_set:Nn \c__whu_heading_tl
@@ -148,28 +135,21 @@
     \RequirePackage [ numbib ] { tocbibind }
   }
 
-\sys_if_engine_luatex:TF
-  {
-    \RequirePackage { emoji }
-    % \setemojifont { Segoe UI Emoji }
-    \ProvideDocumentCommand { \emojitest } {}
-      {
-        如： \emoji { hot-pepper } \emoji { pear } \emoji { four }
-        \emoji { syringe } \emoji { sweat-drops } \emoji { cow-face }
-        \emoji { beer } 。
-      }
-    \RequirePackage { luatexja-adjust }
-  }
-  {
-    \ProvideDocumentCommand { \emojitest } {}
-      { \hologo { XeLaTeX } 等其他引擎则暂不支持。 }
-  }
-
 %%% ---- 引入宏包 ----- %%%
 \RequirePackage { amsmath , amssymb , amsthm , mathtools }
-\RequirePackage { listings }                     % 代码段
-% \RequirePackage { minted }                    
-%% 代码高亮（需要 python 安装 pygments 库）
+
+\RequirePackage { tikz, pgfplots }               % 绘图
+\pgfplotsset { compat = 1.17 }
+\RequirePackage [ normalem ] { ulem }
+
+\RequirePackage { physics }
+\RequirePackage { siunitx }
+\sisetup
+  {
+    detect-all,
+    group-digits = false
+  }
+
 \RequirePackage { algorithm2e }     % 算法代码
 \tl_set:Nn \algorithmcfname { 算法 }
 \SetAlCapSty {}
@@ -179,19 +159,6 @@
 \SetAlgoCaptionSeparator
   { \skip_horizontal:n { 1 em - \box_wd:N \l__whu_space_box } \hbox:n {} } 
 % 算法标题后会跟一个不间断空格 ~，这里将其宽度减掉
-
-\RequirePackage { tikz, pgfplots }               % 绘图
-\pgfplotsset { compat = 1.17 }
-\RequirePackage { xcolor, array }
-\RequirePackage { ulem }
-
-\RequirePackage { physics }
-\RequirePackage { siunitx }
-\sisetup
-  {
-    detect-all,
-    group-digits = false
-  }
 
 %%% ---- 定义页面样式 ----- %%%
 \RequirePackage { geometry }
@@ -218,7 +185,7 @@
     \fancyfoot [ C ]
       { \zihao { 5 } \thepage }  % 页码位于页脚居中
   }
-\pagestyle{plain}
+\pagestyle { plain }
 
 %%% ---- 定义标题和段落样式 ----- %%%
 \ctexset
@@ -317,6 +284,7 @@
   }
 
 %%% ---- 图表标题 ----- %%%
+\RequirePackage { subcaption }
 % 图表标题设置
 \RequirePackage [ labelsep = quad ] { caption } % 序号之后空一格写标题
 % 设置表格标题字体为黑体, 设置图标题字体为宋体
@@ -325,13 +293,13 @@
 \tl_set:Nn \figurename { \songti \zihao { -4 } 图 }
 \tl_set:Nn \tablename  { \heiti  \zihao { -4 } 表 }
 
-\RequirePackage { graphicx, subcaption }
+\RequirePackage { graphicx }
 \graphicspath { \l__whu_style_graphics_path_tl } % 图片文件路径
 
 % 使用 tabularx 创建占满宽度的表格
-\RequirePackage{ array , tabularx }
+\RequirePackage{ tabularx }
 \newcolumntype{ L } { X }
-\newcolumntype{ C } { > { \centering \arraybackslash  } X }
+\newcolumntype{ C } { > { \centering  \arraybackslash } X }
 \newcolumntype{ R } { > { \raggedleft \arraybackslash } X }
 
 \ProvideDocumentCommand { \tabularxcolumn } { m }
@@ -339,8 +307,7 @@
 
 \RequirePackage { longtable , xltabular }    % 做长表格的包
 \RequirePackage { booktabs }                 % 做三线表的包
-\RequirePackage { makecell }
-\RequirePackage { multirow }                 % 跨行表格
+\RequirePackage { makecell , multirow}       % 跨行表格
 \RequirePackage { diagbox  }                 % 斜线表头
 
 \cs_set:Nn \__whu_set_table_font:
@@ -515,12 +482,6 @@
 \hypersetup { hidelinks }
 \urlstyle { rm }
 
-\tl_if_eq:NnT \l__whu_class_tl { manual }
-  {
-    \hypersetup { colorlinks = true }
-  }
-% --------------------------------------
-
 \cs_set:Nn \__whu_new_chapter_page:
   {
     \bool_if:NTF \g__whu_twoside_bool
@@ -574,10 +535,11 @@
       {
         \heiti \zihao { 5 } \hfill
         \begin { minipage } [ t ] { 5 cm }
+          \dim_set:Nn \baselineskip { 23 pt }
           学号 \uline
             { \hbox_to_wd:nn { 3 cm }
                 { \hfill \l__whu_info_student_number_tl \hfill }
-            } \\ [ 2 mm ]
+            } \\
           密级 \uline { \hbox_to_wd:nn { 3 cm } {} }
         \end { minipage }
       }
