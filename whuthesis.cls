@@ -547,8 +547,8 @@
     major          .tl_set:N    = \l__whu_info_major_tl,
     date           .tl_set:N    = \l__whu_info_date_tl,
     advisor        .clist_set:N = \l__whu_info_advisor_clist,
-    cnkeywords     .clist_set:N = \l__whu_info_cnkeywords_clist,
-    enkeywords     .clist_set:N = \l__whu_info_enkeywords_clist,
+    keywords       .clist_set:N = \l__whu_info_keywords_cn_clist,
+    keywords *     .clist_set:N = \l__whu_info_keywords_en_clist,
 
     date           .initial:n   =
       { \int_use:N \c_sys_year_int / \int_use:N \c_sys_month_int }
@@ -670,7 +670,7 @@
   }
 
 % 中文摘要
-\NewDocumentEnvironment { cnabstract } {}
+\NewDocumentEnvironment { abstract } {}
   {
     \chapter * { 摘 \qquad 要 }
     \dim_set:Nn \baselineskip { 23 pt }
@@ -680,11 +680,11 @@
     \skip_vertical:N \baselineskip \par
     \__whu_put_kw:nn
       { \heiti \zihao { -4 } 关键词：\hbox:n {} }
-      { \clist_use:Nn \l__whu_info_cnkeywords_clist { ； } }
+      { \clist_use:Nn \l__whu_info_keywords_cn_clist { ； } }
   }
 
 % 英文摘要
-\NewDocumentEnvironment { enabstract } {}
+\NewDocumentEnvironment { abstract * } {}
   {
     \bool_if:NT \g__whu_twoside_bool
       { \@twosidefalse }
@@ -695,7 +695,7 @@
     \skip_vertical:N \baselineskip \par
     \__whu_put_kw:nn
       { \bfseries \zihao { -4 } Key ~ words: ~ }
-      { \clist_use:Nn \l__whu_info_enkeywords_clist { ; ~ } }
+      { \clist_use:Nn \l__whu_info_keywords_en_clist { ; ~ } }
     \__whu_new_chapter_page:
   }
 
