@@ -15,7 +15,7 @@
         major          = {专业名称},
         advisor        = {教师姓名 , 职称},
         % date           = {2021/01},
-        % 请使用 yyyy/mm 格式指定日期
+        % 请使用 year/month 格式指定日期
         % 当 date 未给出时，显示编译时的年月
         keywords     = {关键词 1 , 关键词 2 , 关键词 3},
         keywords*    = {Key1 , Key2 , Key3},
@@ -29,13 +29,8 @@
 
 
 \begin{document}
-%%----------- 封面部分 ----------- %%
-  \maketitlepage            % 封面
-  \makestatement            % 申明
-
 %%----------- 前言部分 ----------- %%
   \include{pages/abstract}  % 摘要
-  \contents                 % 目录
 
 %%----------- 主体部分 ----------- %%
   \include{pages/chapter1}

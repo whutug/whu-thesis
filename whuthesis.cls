@@ -566,7 +566,65 @@
     style .meta:nn = { whu / style } {#1}
   }
 
-%%% ---- 论文标题页 ----- %%%
+%%% ---- 论文封面 ----- %%%
+\cs_new:Nn \__whu_make_cover:
+  {
+    \pagestyle { empty }
+    \begin { center }
+      {
+        \heiti \zihao { 5 } \hfill
+        \begin { minipage } [ t ] { 5 cm }
+          学号 \uline
+            { \hbox_to_wd:nn { 3 cm }
+                { \hfill \l__whu_info_student_number_tl \hfill }
+            } \\ [ 2 mm ]
+          密级 \uline { \hbox_to_wd:nn { 3 cm } {} }
+        \end { minipage }
+      }
+      \par \skip_vertical:n { 6 em }
+      { \songti \zihao{1} \c__whu_heading_tl }
+      \par \skip_vertical:n { 6 em }
+      \begin { minipage } [c] [ 6 cm ] { \textwidth }
+        \dim_set:Nn \baselineskip { 32 pt }
+        \centering { \heiti \zihao { 2 } \l__whu_info_title_tl }
+      \end { minipage }
+      \par \skip_vertical:n { 6 em }
+      {
+        \centering \songti \zihao { -3 }
+        \begin {tabular} { p { 8 em } l }
+          院 \hfill \hbox_overlap_left:n { （ } 系 \hbox_overlap_right:n { ） } \hfill 名 \hfill 称： &
+            \l__whu_info_school_tl \\ [ 0.5 em ]
+          专 \hfill 业 \hfill 名 \hfill 称： & \l__whu_info_major_tl                              \\ [ 0.5 em ]
+          学 \hfill 生 \hfill 姓 \hfill 名： & \l__whu_info_author_tl                             \\ [ 0.5 em ]
+          指 \hfill 导 \hfill 教 \hfill 师： & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
+        \end { tabular }
+      }
+      \par \skip_vertical:n { 6 em }
+      { \songti \zihao { -2 } \__whu_date_parse:V { \l__whu_info_date_tl } }
+    \end { center }
+    \__whu_new_chapter_page:
+  }
+
+  %%% ---- 论文申明页 ----- %%%
+\cs_new:Nn \__whu_make_statesment:
+  {
+    \__whu_new_chapter_page:
+    \mode_leave_vertical: \skip_vertical:n { 44 pt }
+
+    \pagenumbering { gobble }
+    \noindent \hfil { \zihao { 2 } \textbf { 郑 \enskip 重 \enskip 声 \enskip 明 } }
+    \par \skip_vertical:n { 20 pt }
+    \dim_set:Nn \baselineskip { 23 pt }
+    {
+      \zihao { 4 } 
+      本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
+      \par \skip_vertical:n { 88 pt }
+      本人签名： \uline { \hbox_to_wd:nn { 4 cm } {} }
+      \hfill 日期： \uline { \hbox_to_wd:nn { 4 cm } {} }
+    }
+    \__whu_new_chapter_page:
+  }
+
 \tl_if_eq:NnTF \l__whu_class_tl { opening }
   {
     \AtBeginDocument
@@ -577,9 +635,9 @@
 
         \tl_set:Nn  \baselinestretch { 1 }
         \normalsize
-        \dim_set:Nn \baselineskip    { 23 pt }
+        \dim_set:Nn \baselineskip { 23 pt }
         % 正文行距为 23 磅
-        \dim_set:Nn \parskip         { 0 pt  }
+        \dim_set:Nn \parskip      {  0 pt }
         % 段间距为 0
 
         \noindent
@@ -596,81 +654,55 @@
 
     \AtEndDocument
       {
-        \skip_vertical:n { 2\baselineskip }
-          指导老师意见：
-          \vfill
-          \hfill 指导老师（签名）： \hbox_to_wd:nn { 4 cm } {} \par
-          \skip_vertical:N \baselineskip
-          \hfill 年 \qquad 月 \qquad 日
+        \skip_vertical:n { 2 \baselineskip }
+        指导老师意见：
+        \vfill
+        \hfill 指导老师（签名）： \hbox_to_wd:nn { 4 cm } {} \par
+        \skip_vertical:N \baselineskip
+        \hfill 年 \qquad 月 \qquad 日
       }
   }
   {
-    \ProvideDocumentCommand \maketitlepage {}
+    \AtBeginDocument
       {
-        \pagestyle { empty }
-        \begin { center }
-          {
-            \heiti \zihao{5} \hfill
-            \begin { minipage } [ t ] { 5 cm }
-              学号 \uline{ \hbox_to_wd:nn { 3 cm }
-                { \hfill \l__whu_info_student_number_tl \hfill } } \\ [ 2 mm ]
-              密级 \uline{ \hbox_to_wd:nn { 3 cm } {} }
-            \end { minipage }
-          }
-          \par \skip_vertical:n { 6 em }
-          { \songti \zihao{1} \c__whu_heading_tl }
-          \par \skip_vertical:n { 6 em }
-          \begin { minipage } [c] [ 6 cm ] { 14 cm }
-            \dim_set:Nn \baselineskip {32 pt}
-            \centering { \heiti \zihao { 2 } \l__whu_info_title_tl }
-          \end { minipage }
-          \par \skip_vertical:n { 6 em }
-          {
-            \centering \songti \zihao { -3 }
-            \begin {tabular} { p { 8 em } l }
-              院 \hfill \hbox_overlap_left:n { （ } 系 \hbox_overlap_right:n { ） } \hfill 名 \hfill 称： &
-                \l__whu_info_school_tl \\ [ 0.5 em ]
-              专 \hfill 业 \hfill 名 \hfill 称： & \l__whu_info_major_tl                              \\ [ 0.5 em ]
-              学 \hfill 生 \hfill 姓 \hfill 名： & \l__whu_info_author_tl                             \\ [ 0.5 em ]
-              指 \hfill 导 \hfill 教 \hfill 师： & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
-            \end { tabular }
-          }
-          \par \skip_vertical:n { 6 em }
-          { \songti \zihao { -2 } \__whu_date_parse:V { \l__whu_info_date_tl } }
-        \end { center }
-        \__whu_new_chapter_page:
+        \__whu_make_cover:
+        \__whu_make_statesment:
       }
   }
 
-%%% ---- 论文申明页 ----- %%%
-\NewDocumentCommand { \makestatement } {}
+%%% ---- 目录 ----- %%%
+% 生成目录
+\cs_new:Nn \__whu_make_contents:
   {
-    \mode_leave_vertical: \skip_vertical:n { 44 pt }
+    \__whu_new_chapter_page:
+    \pagenumbering { gobble } % 去掉目录页码
+    \tableofcontents
 
-    \pagenumbering { gobble }
-    \noindent \hfil { \zihao { 2 } \textbf { 郑 \enskip 重 \enskip 声 \enskip 明 } }
-    \par \skip_vertical:n { 20 pt }
-    \dim_set:Nn \baselineskip { 23 pt }
-    {
-      \zihao { 4 } 
-      本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
-      \par \skip_vertical:n { 88 pt }
-      本人签名： \uline { \hbox_to_wd:nn { 4 cm } {} }
-      \hfill 日期： \uline { \hbox_to_wd:nn { 4 cm } {} }
-    }
+    \__whu_new_chapter_page:
+
+    \pagestyle { plain }
+    \pagenumbering { arabic } % 重新计数页码
+
+    \tl_set:Nn \baselinestretch { 1 } 
+    \normalsize
+    \dim_set:Nn \baselineskip { 23 pt } % 正文行距为 23 磅
+    \dim_set:Nn \parskip      { 0 pt  } % 段间距为 0
+    \raggedbottom
+    \__whu_set_table_font:
   }
 
+%%%% ----- 公开命令 ----- %%%%%
 %%% ---- 摘要 ----- %%%
-\box_new:N \l__whu_kw_box
+\box_new:N \l__whu_keywords_box
 \cs_set:Npn \__whu_put_kw:nn #1#2
   {
-    \hbox_set:Nn \l__whu_kw_box {#1}
-    \noindent \hangindent \box_wd:N \l__whu_kw_box \hangafter 1
-    \box_use_drop:N \l__whu_kw_box #2 \par
+    \hbox_set:Nn \l__whu_keywords_box {#1}
+    \noindent \hangindent \box_wd:N \l__whu_keywords_box \hangafter 1
+    \box_use_drop:N \l__whu_keywords_box #2 \par
   }
 
 % 中文摘要
-\NewDocumentEnvironment { abstract } {}
+\ProvideDocumentEnvironment { abstract } {}
   {
     \chapter * { 摘 \qquad 要 }
     \dim_set:Nn \baselineskip { 23 pt }
@@ -696,28 +728,9 @@
     \__whu_put_kw:nn
       { \bfseries \zihao { -4 } Key ~ words: ~ }
       { \clist_use:Nn \l__whu_info_keywords_en_clist { ; ~ } }
-    \__whu_new_chapter_page:
+
+    \__whu_make_contents:
   }
-
-%%% ---- 目录 ----- %%%
-% 生成目录
-\NewDocumentCommand { \contents } {}
-{
-  \pagenumbering { gobble } % 去掉目录页码
-  \tableofcontents
-
-  \__whu_new_chapter_page:
-
-  \pagestyle { plain }
-  \pagenumbering { arabic } % 重新计数页码
-
-  \tl_set:Nn \baselinestretch { 1 } 
-  \normalsize
-  \dim_set:Nn \baselineskip { 23 pt } % 正文行距为 23 磅
-  \dim_set:Nn \parskip      { 0 pt  } % 段间距为 0
-  \raggedbottom
-  \__whu_set_table_font:
-}
 
 \NewDocumentCommand { \makebibliography } {}
   {
