@@ -310,7 +310,7 @@
 \RequirePackage { makecell , multirow}       % 跨行表格
 \RequirePackage { diagbox  }                 % 斜线表头
 
-\cs_set:Nn \__whu_set_table_font:
+\cs_new_protected:Nn \__whu_set_table_font:
   {
     \clist_map_inline:nn { tabular , tabularx , longtable , xltabular }
       { \AtBeginEnvironment {##1} { \zihao { 5 } } }
@@ -359,7 +359,7 @@
 \setmainfont { Times ~ New ~ Roman }
   [ Ligatures = Rare ]
 
-\cs_new:Nn \__whu_setfont_sim:
+\cs_new_protected:Nn \__whu_setfont_sim:
   {
     \setCJKmainfont { simsun.ttc } 
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
@@ -373,7 +373,7 @@
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
   }
 
-\cs_new:Nn \__whu_setfont_fandol:
+\cs_new_protected:Nn \__whu_setfont_fandol:
   {
     \setCJKmainfont { FandolSong-Regular }
       [
@@ -482,16 +482,16 @@
 \hypersetup { hidelinks }
 \urlstyle { rm }
 
-\cs_set:Nn \__whu_new_chapter_page:
+\cs_new_protected:Nn \__whu_new_chapter_page:
   {
     \bool_if:NTF \g__whu_twoside_bool
       { \cleardoublepage }
       { \clearpage }
   }
 
-\cs_set:Npn \__whu_date_parse:n #1
+\cs_new:Npn \__whu_date_parse:n #1
   { \__whu_date_parse_aux:w #1 \q_stop }
-\cs_set:Npn \__whu_date_parse_aux:w #1 / #2 \q_stop
+\cs_new:Npn \__whu_date_parse_aux:w #1 / #2 \q_stop
   { \zhdigits {#1} 年 \zhnumber {#2} 月 }
 \cs_generate_variant:Nn \__whu_date_parse:n { V }
 
@@ -528,7 +528,7 @@
   }
 
 %%% ---- 论文封面 ----- %%%
-\cs_new:Nn \__whu_make_cover:
+\cs_new_protected:Nn \__whu_make_cover:
   {
     \pagestyle { empty }
     \begin { center }
@@ -568,7 +568,7 @@
   }
 
   %%% ---- 论文申明页 ----- %%%
-\cs_new:Nn \__whu_make_statesment:
+\cs_new_protected:Nn \__whu_make_statesment:
   {
     \__whu_new_chapter_page:
     \mode_leave_vertical: \skip_vertical:n { 44 pt }
@@ -634,7 +634,7 @@
 
 %%% ---- 目录 ----- %%%
 % 生成目录
-\cs_new:Nn \__whu_make_contents:
+\cs_new_protected:Nn \__whu_make_contents:
   {
     \__whu_new_chapter_page:
     \pagenumbering { gobble } % 去掉目录页码
@@ -656,7 +656,7 @@
 %%%% ----- 公开命令 ----- %%%%%
 %%% ---- 摘要 ----- %%%
 \box_new:N \l__whu_keywords_box
-\cs_set:Npn \__whu_put_kw:nn #1#2
+\cs_new:Npn \__whu_put_kw:nn #1#2
   {
     \hbox_set:Nn \l__whu_keywords_box {#1}
     \noindent \hangindent \box_wd:N \l__whu_keywords_box \hangafter 1
