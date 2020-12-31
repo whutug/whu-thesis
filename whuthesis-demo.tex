@@ -2,34 +2,34 @@
 %%
 %% Created by Fing
 
-\documentclass[class = manual]{whuthesis}
+\documentclass{whuthesis}
 
 \whusetup
   {
-    info =
+    info               =
       {
-        title          = {基于 \LaTeX{} 对武汉大学毕业论文（设计）的研究},
+        title          = {武汉大学学位论文 \LaTeX{} 模板\\ 使用示例文档},
         student-number = {xxxxxxxxxxxxx},
         school         = {院系名称},
         author         = {作者姓名},
         major          = {专业名称},
         advisor        = {教师姓名 , 职称},
-        % date         = {},
+        % date           = {2021/01},
+        % 请使用 year/month 格式指定日期
         % 当 date 未给出时，显示编译时的年月
-        cnkeywords     = {关键词 1, 关键词 2, 关键词 3},
-        enkeywords     = {Key1, Key2, Key3}
+        keywords       = {关键词 1 , 关键词 2 , 关键词 3},
+        keywords*      = {Key1 , Key2 , Key3},
+      },
+    style              = 
+      {
+        bib-file       = {ref/refs},
+        graphics-path  = {figures/}
       }
   }
 
-
 \begin{document}
-%%----------- 封面部分 ----------- %%
-  \maketitlepage            % 封面
-  \makestatement            % 申明
-
 %%----------- 前言部分 ----------- %%
   \include{pages/abstract}  % 摘要
-  \contents                 % 目录
 
 %%----------- 主体部分 ----------- %%
   \include{pages/chapter1}
@@ -38,10 +38,7 @@
   \include{pages/chapter4}
 
 %%----------- 结尾部分 ----------- %%
-  \clearpage
-  \phantomsection
-  \addcontentsline{toc}{chapter}{参考文献}
-  \bibliography{ref/refs}   % 参考文献
+  \makebibliography         % 参考文献
 
   \include{pages/thanks}    % 致谢
   \include{pages/appendix}  % 附录

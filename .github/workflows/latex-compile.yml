@@ -24,15 +24,15 @@ jobs:
     - name: Compile TeX
       uses: xu-cheng/latex-action@v2
       with:
-        root_file: main.tex
+        root_file: whuthesis-demo.tex
         args: -xelatex -file-line-error -interaction=nonstopmode -shell-escape
         extra_system_packages: "py-pygments msttcorefonts-installer fontconfig"
-        pre_compile: "update-ms-fonts && fc-cache -f && rm -rf main.pdf"
+        pre_compile: "update-ms-fonts && fc-cache -f && rm -rf whuthesis-demo.pdf"
 
     # Upload compiled pdf to artifacts if compiled successfully
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       if: success()
       with:
-        name: main.pdf
-        path: main.pdf
+        name: whuthesis-demo.pdf
+        path: whuthesis-demo.pdf

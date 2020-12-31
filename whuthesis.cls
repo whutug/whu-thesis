@@ -11,8 +11,8 @@
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass{whuthesis}{2020/12/21}{0.3}{Wuhan University Thesis Template}
+\RequirePackage{expl3 , xparse , l3keys2e , xtemplate}
+\ProvidesExplClass{whuthesis}{2020/12/30}{0.4}{Wuhan University Thesis Template}
 
 \msg_new:nnn { whuthesis } { 引擎不支持 }
   {
@@ -33,14 +33,14 @@
 \bool_set_true:N \g__whu_twoside_bool
 
 \clist_set:Nn \g__whu_option_to_class_clist
-  { a4paper , zihao = -4 , fontset = none }
+  { a4paper , zihao = -4 , fontset = none , sub4section }
 
 \keys_define:nn { whu / option }
   {
     degree .choice:,
     degree .value_required:n = true,
     degree .choices:nn       =
-      { master , doctor , bachelor }
+      { doctor , master , bachelor }
       { \tl_set_eq:NN \l__whu_degree_tl \l_keys_choice_tl },
     degree .initial:n        = bachelor,
     % 学位，默认本科生
@@ -48,8 +48,8 @@
     class .choice:,
     class .value_required:n = true,
     class .choices:nn       =
-      { paper , design , manual , opening }
-      { \tl_set_eq:NN  \l__whu_class_tl   \l_keys_choice_tl },
+      { paper , design , opening }
+      { \tl_set_eq:NN \l__whu_class_tl  \l_keys_choice_tl },
     class .initial:n        = paper,
     % 文档类型，默认 paper（论文）
 
@@ -61,7 +61,7 @@
       },
     draft / false .code:n    =
       {
-        \bool_set_false:N \g__whu_draft_bool
+        \bool_set_false:N    \g__whu_draft_bool
       },
     draft         .default:n = true,
     draft         .initial:n = false,
@@ -71,17 +71,43 @@
     twoside .value_forbidden:n = true,
     oneside .code:n            =
       {
-        \bool_set_false:N \g__whu_twoside_bool
+        \bool_set_false:N    \g__whu_twoside_bool
         \clist_gput_right:Nn \g__whu_option_to_class_clist { oneside }
       },
     twoside .code:n            =
       {
-        \bool_set_true:N  \g__whu_twoside_bool
+        \bool_set_true:N     \g__whu_twoside_bool
         \clist_gput_right:Nn \g__whu_option_to_class_clist { twoside }
-      }
+      },
     % 单双页模式
+
+    punct .choice:,
+    punct .value_required:n = true,
+    punct .choices:nn       =
+      { quanjiao , banjiao , kaiming }
+      { \tl_set_eq:NN \l__whu_punct_tl \l_keys_choice_tl },
+    punct .initial:n        = quanjiao,
+    % 标点格式
   }
 \ProcessKeysOptions { whu / option }
+
+\sys_if_engine_luatex:TF
+  {
+    \file_if_exist:nTF { jfm-zh_CN.lua }
+      {
+        \clist_gput_right:Nn \g__whu_option_to_class_clist
+          { punct = zh_CN / \l__whu_punct_tl }
+      }
+      {
+        \clist_gput_right:Nn \g__whu_option_to_class_clist
+          { punct = \l__whu_punct_tl }
+      }
+  }
+  {
+    \clist_gput_right:Nn \g__whu_option_to_class_clist
+      { punct = \l__whu_punct_tl }
+  }
+% 判断是否有 chinese-jfm，若有则使用 chinese-jfm
 
 %%% ---- 载入 Class ----- %%%
 % 开题报告使用 ctexart，论文使用 ctexbook
@@ -94,28 +120,13 @@
     \PassOptionsToClass { \g__whu_option_to_class_clist } { ctexbook }
     \LoadClass { ctexbook }
   }
-\ProcessOptions\relax
+
+\sys_if_engine_luatex:T { \RequirePackage { luatexja-adjust } }
 
 \tl_if_eq:NnT \l__whu_class_tl { paper }
   { \tl_set:Nn \c__whu_heading_tl { 武汉大学本科毕业论文 } }
 \tl_if_eq:NnT \l__whu_class_tl { design }
   { \tl_set:Nn \c__whu_heading_tl { 武汉大学本科毕业设计 } }
-\tl_if_eq:NnT \l__whu_class_tl { manual }
-  {
-    \tl_set:Nn \c__whu_heading_tl { 武汉大学~\LaTeX{}~模板使用手册 }
-    \NewDocumentCommand { \meta } { m }
-      { \ensuremath { \langle } \textit {#1} \ensuremath { \rangle } }
-    \NewDocumentCommand { \pkg } { m } { \textsf {#1} }
-    \NewDocumentCommand { \env } { m } { \texttt {#1} }
-    \NewDocumentCommand { \app } { m } { \textsf {#1} }
-    \NewDocumentCommand { \cls } { m } { \textsf {#1} }
-    \NewDocumentCommand { \fmt } { m } { \textsf {#1} }
-    \RequirePackage{ hologo }
-    \NewDocumentCommand { \WhuThesis } {} { \textsc { Whu\-The\-sis } }
-    \NewDocumentEnvironment {notice} {}
-      { \color {red} { { \heiti 注意： } } }
-      {}
-  }
 \tl_if_eq:NnT \l__whu_class_tl { opening }
   {
     \tl_set:Nn \c__whu_heading_tl
@@ -124,49 +135,12 @@
     \RequirePackage [ numbib ] { tocbibind }
   }
 
-\sys_if_engine_luatex:TF
-  {
-    \RequirePackage { emoji }
-    % \setemojifont{Segoe UI Emoji}
-    \ProvideDocumentCommand { \emojitest } {}
-      {
-        如： \emoji { hot-pepper } \emoji { pear } \emoji { four }
-        \emoji { syringe } \emoji { sweat-drops } \emoji { cow-face }
-        \emoji { beer } 。
-      }
-    \tl_if_eq:NnTF \l__whu_class_tl { opening }
-      {
-        \PassOptionsToClass { punct=zh_CN/quanjiao } { ctexart }
-      }
-      {
-        \PassOptionsToClass { punct=zh_CN/quanjiao } { ctexbook }
-      }
-    \RequirePackage { luatexja-adjust }
-  }
-  {
-    \ProvideDocumentCommand { \emojitest } {}
-      { \hologo{XeLaTeX} 等其他引擎则暂不支持。 }
-  }
-
 %%% ---- 引入宏包 ----- %%%
 \RequirePackage { amsmath , amssymb , amsthm , mathtools }
-\RequirePackage { listings }                     % 代码段
-% \RequirePackage { minted }                    
-%% 代码高亮（需要 python 安装 pygments 库）
-\RequirePackage { algorithm2e }     % 算法代码
-\tl_set:Nn \algorithmcfname { 算法 }
-\SetAlCapSty {}
-\SetAlCapFnt { \heiti }
-\box_new:N \l__tmpa_box
-\hbox_set:Nn \l__tmpa_box { \nobreakspace }
-\SetAlgoCaptionSeparator
-  { \hspace * { \dim_eval:n { 1em - \box_wd:N \l__tmpa_box } } } 
-% 算法标题后会跟一个不间断空格 ~，这里将其宽度减掉
 
 \RequirePackage { tikz, pgfplots }               % 绘图
 \pgfplotsset { compat = 1.17 }
-\RequirePackage { xcolor, array }
-\RequirePackage { ulem }
+\RequirePackage [ normalem ] { ulem }
 
 \RequirePackage { physics }
 \RequirePackage { siunitx }
@@ -175,6 +149,16 @@
     detect-all,
     group-digits = false
   }
+
+\RequirePackage { algorithm2e }     % 算法代码
+\tl_set:Nn \algorithmcfname { 算法 }
+\SetAlCapSty {}
+\SetAlCapFnt { \heiti }
+\box_new:N \l__whu_space_box
+\hbox_set:Nn \l__whu_space_box { \nobreakspace }
+\SetAlgoCaptionSeparator
+  { \skip_horizontal:n { 1 em - \box_wd:N \l__whu_space_box } \hbox:n {} } 
+% 算法标题后会跟一个不间断空格 ~，这里将其宽度减掉
 
 %%% ---- 定义页面样式 ----- %%%
 \RequirePackage { geometry }
@@ -190,7 +174,7 @@
   }
 % 草稿模式下，显示边框
 
-\RequirePackage { fancyhdr }       % 页眉页脚宏包
+\RequirePackage { fancyhdr }        % 页眉页脚宏包
 \tl_set:Nn \headrulewidth { 0 pt }  % 页眉线宽
 \tl_set:Nn \footrulewidth { 0 pt }  % 页脚线宽
 
@@ -201,7 +185,7 @@
     \fancyfoot [ C ]
       { \zihao { 5 } \thepage }  % 页码位于页脚居中
   }
-\pagestyle{plain}
+\pagestyle { plain }
 
 %%% ---- 定义标题和段落样式 ----- %%%
 \ctexset
@@ -227,8 +211,26 @@
         afterskip  = { 0.5 \baselineskip    },
         fixskip    = true
       },  % 三级标题 黑体小4号
-    tocdepth       = 2,     % 目录层级数
-    secnumdepth    = 3,  % 标题层级数
+    paragraph      =
+      {
+        format     = { \heiti \zihao { -4 }       },
+        number     = { （ \arabic { paragraph } ）},
+        aftername  = { \hbox:n {}                 },
+        beforeskip = { 0.5 \baselineskip          },
+        afterskip  = { 0.5 \baselineskip          },
+        fixskip    = true
+      },
+    subparagraph   =
+      {
+        format     = { \heiti \zihao { -4 }                  },
+        number     = { \circled { \arabic { subparagraph } } },
+        aftername  = {                                       },
+        beforeskip = { 0.5 \baselineskip                     },
+        afterskip  = { 0.5 \baselineskip                     },
+        fixskip    = true
+      },
+    tocdepth       = 2,  % 目录层级数
+    secnumdepth    = 5,  % 标题层级数
   }
 
 \tl_if_eq:NnF \l__whu_class_tl { opening }
@@ -238,7 +240,7 @@
         chapter        =
           {
             format     = { \centering \heiti \zihao { -2 } },
-            number     = { \arabic{chapter}                },
+            number     = { \arabic { chapter }             },
             name       = { , },
             beforeskip = { 0.8 \baselineskip               },
             afterskip  = { 0.5 \baselineskip               },
@@ -259,11 +261,11 @@
 \tl_set:Nn \cftsecfont           { \songti \zihao { -4 }      }
 \tl_set:Nn \cftsubsecfont        { \songti \zihao { -4 }      }
 \tl_set:Nn \cftsubsubsecfont     { \songti \zihao { -4 }      }
-\tl_set:Nn \cftsecpagefont       { \songti \zihao { 5 }       }
-\tl_set:Nn \cftsubsecpagefont    { \songti \zihao { 5 }       }
-\tl_set:Nn \cftsubsubsecpagefont { \songti \zihao { 5 }       }
-\tl_set:Nn \cftsecafterpnum      { \skip_vertical:n { 3pt }   }
-\tl_set:Nn \cftsubsecafterpnum   { \skip_vertical:n { 2pt }   }
+\tl_set:Nn \cftsecpagefont       { \songti \zihao {  5 }      }
+\tl_set:Nn \cftsubsecpagefont    { \songti \zihao {  5 }      }
+\tl_set:Nn \cftsubsubsecpagefont { \songti \zihao {  5 }      }
+\tl_set:Nn \cftsecafterpnum      { \skip_vertical:n { 3 pt }  }
+\tl_set:Nn \cftsubsecafterpnum   { \skip_vertical:n { 2 pt }  }
 
 \dim_set:Nn \cftbeforetoctitleskip { 0 pt    }
 \dim_set:Nn \cftaftertoctitleskip  { 0 pt    }
@@ -282,21 +284,22 @@
   }
 
 %%% ---- 图表标题 ----- %%%
+\RequirePackage { subcaption }
 % 图表标题设置
-\RequirePackage [ labelsep=quad ] { caption } % 序号之后空一格写标题
+\RequirePackage [ labelsep = quad ] { caption } % 序号之后空一格写标题
 % 设置表格标题字体为黑体, 设置图标题字体为宋体
 \DeclareCaptionFont { heiti } { \heiti }
 \captionsetup [ table ] { textfont = heiti }
 \tl_set:Nn \figurename { \songti \zihao { -4 } 图 }
 \tl_set:Nn \tablename  { \heiti  \zihao { -4 } 表 }
 
-\RequirePackage { graphicx, subcaption }
-\graphicspath { { figures / } } % 图片文件路径
+\RequirePackage { graphicx }
+\graphicspath { \l__whu_style_graphics_path_tl } % 图片文件路径
 
 % 使用 tabularx 创建占满宽度的表格
-\RequirePackage{ array , tabularx }
+\RequirePackage{ tabularx }
 \newcolumntype{ L } { X }
-\newcolumntype{ C } { > { \centering \arraybackslash  } X }
+\newcolumntype{ C } { > { \centering  \arraybackslash } X }
 \newcolumntype{ R } { > { \raggedleft \arraybackslash } X }
 
 \ProvideDocumentCommand { \tabularxcolumn } { m }
@@ -304,9 +307,16 @@
 
 \RequirePackage { longtable , xltabular }    % 做长表格的包
 \RequirePackage { booktabs }                 % 做三线表的包
-\RequirePackage { makecell }
-\RequirePackage { multirow }                 % 跨行表格
-\RequirePackage { diagbox  }                  % 斜线表头
+\RequirePackage { makecell , multirow}       % 跨行表格
+\RequirePackage { diagbox  }                 % 斜线表头
+
+\cs_set:Nn \__whu_set_table_font:
+  {
+    \clist_map_inline:nn { tabular , tabularx , longtable , xltabular }
+      { \AtBeginEnvironment {##1} { \zihao { 5 } } }
+  }
+% 将表格内容字体设为五号
+
 % 列表样式
 \RequirePackage { enumitem }
 \setlist { nosep }
@@ -317,7 +327,7 @@
 
 \tl_set:Nn \@makefnmark
   {
-    \hbox:n { { \textsuperscript { \circled { \@thefnmark } } } }
+    \nolinebreak \hbox:n {} \hbox:n { \textsuperscript { \circled { \@thefnmark } } }
   }
 
 \RenewDocumentCommand { \@makefntext } { m }
@@ -325,20 +335,20 @@
     \noindent \hbox_to_wd:nn { 1 em } { \circled { \@thefnmark } } #1
   }
 
-\setlength { \skip\footins } { 10 mm plus 1 mm }
+\setlength { \skip \footins } { 10 mm plus 1 mm }
 \dim_set:Nn \footnotesep { 6 pt }
 \tl_set:Nn \footnotesize { \songti \zihao { 5 } }
 \tl_set:Nn \footnoterule
-  { \noindent \rule [ 1 pt ] { 0.3 \columnwidth } {1 pt} }
+  { \noindent \rule [ 1 pt ] { 0.3 \columnwidth } { 1 pt } }
 
 \NewDocumentCommand { \circled } { m }
   {
-    \hbox_to_wd:nn { 1 em }
+    \resizebox { 1 em } { ! }
       {
         \tikz [ baseline = ( char.base ) ]
           {
             \node [ shape = circle , draw , inner ~ sep = 0 pt , minimum ~ size = 1 em ]
-              ( char ) { #1 };
+              ( char ) {#1};
           } % 圆圈数字①
       }
   }
@@ -357,9 +367,9 @@
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
     \setCJKmonofont { simsun.ttc }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
-    \newCJKfontfamily { \songti } {simsun.ttc}
+    \newCJKfontfamily { \songti } { simsun.ttc }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
-    \newCJKfontfamily { \heiti } {simhei.ttf}
+    \newCJKfontfamily { \heiti }  { simhei.ttf }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
   }
 
@@ -418,7 +428,6 @@
       }
   }
 
-
 \RequirePackage { unicode-math }
 \setmathfont { XITSMath-Regular }
   [
@@ -428,30 +437,31 @@
 
 %%% ---- 数学定理样式 ----- %%%
 \newtheoremstyle { whu }
-  { 0 pt } { 0 pt } % 上下间距
-  { \songti }       % 正文字体
-  { 2 em }          % 缩进距离
-  { \heiti }        % 标题字体
-  { ： }{ 0 pt }    % 结束标记及间隔
+  { 0 pt } { 0 pt }                     % 上下间距
+  { \songti }                           % 正文字体
+  { 2 em }                              % 缩进距离
+  { \heiti }                            % 标题字体
+  { \hbox:n {} ： \hbox:n {} } { 0 pt } % 结束标记及间隔
   {}
 \theoremstyle { whu }
-\newtheorem { theorem }     { 定理 } [ section ]
-\newtheorem { definition }  { 定义 } [ section ]
-\newtheorem { lemma }       { 引理 } [ section ]
-\newtheorem { corollary}    { 推论 } [ section ]
-\newtheorem { proposition } { 性质 } [ section ]
-\newtheorem { example }     { 例 }   [ section ]
-\newtheorem { remark }      { 注 }   [ section ]
 
-\RenewDocumentEnvironment { proof } { O {证明} }
-  { \pushQED { \qed } { \heiti #1： } }
+\newtheorem { theorem     } { 定理 } [ section ]
+\newtheorem { definition  } { 定义 } [ section ]
+\newtheorem { lemma       } { 引理 } [ section ]
+\newtheorem { corollary   } { 推论 } [ section ]
+\newtheorem { proposition } { 性质 } [ section ]
+\newtheorem { example     } { 例   } [ section ]
+\newtheorem { remark      } { 注   } [ section ]
+
+\RenewDocumentEnvironment { proof } { O { 证明 } + b }
+  { \pushQED { \qed } { \heiti #1： } #2 }
   { \popQED }
 
 %%% ---- 参考文献设置 ----- %%%
 \RequirePackage [ sort & compress ] { natbib }
 \setcitestyle { numbers , square , comma }
 \bibliographystyle { data / gbt7714-2005-whu }  % 参考文献样式
-\dim_set:Nn \bibsep {0pt} % 参考文献间距设为 0
+\dim_set:Nn \bibsep { 0 pt } % 参考文献间距设为 0
 
 \NewDocumentCommand { \upcite } { m }
   { \textsuperscript { \cite {#1} } }
@@ -472,11 +482,18 @@
 \hypersetup { hidelinks }
 \urlstyle { rm }
 
-\tl_if_eq:NnT \l__whu_class_tl { manual }
+\cs_set:Nn \__whu_new_chapter_page:
   {
-    \hypersetup { colorlinks = true }
+    \bool_if:NTF \g__whu_twoside_bool
+      { \cleardoublepage }
+      { \clearpage }
   }
-% --------------------------------------
+
+\cs_set:Npn \__whu_date_parse:n #1
+  { \__whu_date_parse_aux:w #1 \q_stop }
+\cs_set:Npn \__whu_date_parse_aux:w #1 / #2 \q_stop
+  { \zhdigits {#1} 年 \zhnumber {#2} 月 }
+\cs_generate_variant:Nn \__whu_date_parse:n { V }
 
 %%% ---- 文档接口 ----- %%%
 \NewDocumentCommand { \whusetup } { m }
@@ -491,103 +508,71 @@
     major          .tl_set:N    = \l__whu_info_major_tl,
     date           .tl_set:N    = \l__whu_info_date_tl,
     advisor        .clist_set:N = \l__whu_info_advisor_clist,
-    cnkeywords     .clist_set:N = \l__whu_info_cnkeywords_clist,
-    enkeywords     .clist_set:N = \l__whu_info_enkeywords_clist,
+    keywords       .clist_set:N = \l__whu_info_keywords_cn_clist,
+    keywords *     .clist_set:N = \l__whu_info_keywords_en_clist,
 
-    date .initial:n =
-      { \zhdigits { \the\year } 年 \zhnumber { \the \month } 月 }
+    date           .initial:n   =
+      { \int_use:N \c_sys_year_int / \int_use:N \c_sys_month_int }
+  }
+
+\keys_define:nn { whu / style }
+  {
+    bib-file      .tl_set:N = \l__whu_style_bib_file_tl,
+    graphics-path .tl_set:N = \l__whu_style_graphics_path_tl
   }
 
 \keys_define:nn { whu }
   {
-    info  .meta:nn = { whu / info } {#1}
+    info  .meta:nn = { whu / info  } {#1},
+    style .meta:nn = { whu / style } {#1}
   }
 
-%%% ---- 论文标题页 ----- %%%
-\tl_if_eq:NnTF \l__whu_class_tl { opening }
+%%% ---- 论文封面 ----- %%%
+\cs_new:Nn \__whu_make_cover:
   {
-    \AtBeginDocument
+    \pagestyle { empty }
+    \begin { center }
       {
-        \begin { center }
-          \zihao { -2 } \heiti \c__whu_heading_tl
-        \end { center }
-
-        \tl_set:Nn  \baselinestretch { 1 }
-        \normalsize
-        \dim_set:Nn \baselineskip    { 23 pt }
-        % 正文行距为 23 磅
-        \dim_set:Nn \parskip         { 0 pt  }
-        % 段间距为 0
-
-        \noindent
-        \begin { minipage } { \textwidth }
+        \heiti \zihao { 5 } \hfill
+        \begin { minipage } [ t ] { 5 cm }
           \dim_set:Nn \baselineskip { 23 pt }
-          毕业论文（设计）题目： \uline { \hfill \l__whu_info_title_tl \hfill } \\
-          学院： \uline { \hfill \l__whu_info_school_tl \hfill } \hfill \hfill
-          学号： \uline { \hfill \l__whu_info_student_number_tl \hfill } \hfill \hfill
-          姓名： \uline { \hfill \l__whu_info_author_tl \hfill }
+          学号 \uline
+            { \hbox_to_wd:nn { 3 cm }
+                { \hfill \l__whu_info_student_number_tl \hfill }
+            } \\
+          密级 \uline { \hbox_to_wd:nn { 3 cm } {} }
         \end { minipage }
       }
-
-    \AtEndDocument
+      \par \skip_vertical:n { 6 em }
+      { \songti \zihao{1} \c__whu_heading_tl }
+      \par \skip_vertical:n { 6 em }
+      \begin { minipage } [c] [ 6 cm ] { \textwidth }
+        \dim_set:Nn \baselineskip { 32 pt }
+        \centering { \heiti \zihao { 2 } \l__whu_info_title_tl }
+      \end { minipage }
+      \par \skip_vertical:n { 6 em }
       {
-        \skip_vertical:n { 2\baselineskip }
-          指导老师意见：
-          \vfill
-          \hfill 指导老师（签名）： \hbox_to_wd:nn { 4 cm } {} \par
-          \skip_vertical:N \baselineskip
-          \hfill 年 \qquad 月 \qquad 日
+        \centering \songti \zihao { -3 }
+        \begin {tabular} { p { 8 em } l }
+          院 \hfill \hbox_overlap_left:n { （ } 系 \hbox_overlap_right:n { ） } \hfill 名 \hfill 称： &
+            \l__whu_info_school_tl \\ [ 0.5 em ]
+          专 \hfill 业 \hfill 名 \hfill 称： & \l__whu_info_major_tl                              \\ [ 0.5 em ]
+          学 \hfill 生 \hfill 姓 \hfill 名： & \l__whu_info_author_tl                             \\ [ 0.5 em ]
+          指 \hfill 导 \hfill 教 \hfill 师： & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
+        \end { tabular }
       }
-  }
-  {
-    \ProvideDocumentCommand \maketitlepage {}
-      {
-        \pagestyle { empty }
-        \begin { center }
-          {
-            \heiti \zihao{5} \hfill
-            \begin { minipage } [ t ] { 5 cm }
-              学号 \uline{ \makebox [ 3 cm ] [ c ]
-                { \l__whu_info_student_number_tl } } \\ [ 2 mm ]
-              密级 \uline{ \makebox [ 3 cm ] [ c ] {} }
-            \end { minipage }
-          }
-          \par \skip_vertical:n { 6 em }
-          { \songti \zihao{1} \c__whu_heading_tl }
-          \par \skip_vertical:n { 6 em }
-          \begin { minipage } [c] [ 6 cm ] { 14 cm }
-            \dim_set:Nn \baselineskip {32 pt}
-            \centering { \heiti \zihao { 2 } \l__whu_info_title_tl }
-          \end { minipage }
-          \par \skip_vertical:n { 6 em }
-          {
-            \centering \songti \zihao { -3 }
-            \begin {tabular} { cl }
-              \makebox [ 8 em ] [ s ] {院 \  \makebox [ 1 em ] { \llap { （ } 系 \rlap { ） } } \  名 \  称： } &
-                \l__whu_info_school_tl \\ [ 0.5 em ]
-              \makebox [ 8 em ] [ s ] {专 \  业 \  名 \  称：} & \l__whu_info_major_tl                              \\ [ 0.5 em ]
-              \makebox [ 8 em ] [ s ] {学 \  生 \  姓 \  名：} & \l__whu_info_author_tl                             \\ [ 0.5 em ]
-              \makebox [ 8 em ] [ s ] {指 \  导 \  教 \  师：} & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
-            \end { tabular }
-          }
-          \par \skip_vertical:n { 6 em }
-          { \songti \zihao { -2 } \l__whu_info_date_tl }
-        \end { center }
-        \clearpage
-      }
+      \par \skip_vertical:n { 6 em }
+      { \songti \zihao { -2 } \__whu_date_parse:V { \l__whu_info_date_tl } }
+    \end { center }
+    \__whu_new_chapter_page:
   }
 
-
-%%% ---- 论文申明页 ----- %%%
-\NewDocumentCommand { \makestatement } {}
+  %%% ---- 论文申明页 ----- %%%
+\cs_new:Nn \__whu_make_statesment:
   {
-    \bool_if:NTF \g__whu_twoside_bool
-    { \cleardoublepage }
-    { \clearpage }
-
+    \__whu_new_chapter_page:
     \mode_leave_vertical: \skip_vertical:n { 44 pt }
 
-    % \vspace * { 44 pt }
     \pagenumbering { gobble }
     \noindent \hfil { \zihao { 2 } \textbf { 郑 \enskip 重 \enskip 声 \enskip 明 } }
     \par \skip_vertical:n { 20 pt }
@@ -599,19 +584,87 @@
       本人签名： \uline { \hbox_to_wd:nn { 4 cm } {} }
       \hfill 日期： \uline { \hbox_to_wd:nn { 4 cm } {} }
     }
+    \__whu_new_chapter_page:
   }
 
+\tl_if_eq:NnTF \l__whu_class_tl { opening }
+  {
+    \AtBeginDocument
+      {
+        \begin { center }
+          \zihao { -2 } \heiti \c__whu_heading_tl
+        \end { center }
+
+        \tl_set:Nn  \baselinestretch { 1 }
+        \normalsize
+        \dim_set:Nn \baselineskip { 23 pt }
+        % 正文行距为 23 磅
+        \dim_set:Nn \parskip      {  0 pt }
+        % 段间距为 0
+
+        \noindent
+        \begin { minipage } { \textwidth }
+          \dim_set:Nn \baselineskip { 23 pt }
+          毕业论文（设计）题目： \uline { \hfill \l__whu_info_title_tl \hfill } \\
+          学院： \uline { \hfill \l__whu_info_school_tl \hfill } \hfill \hfill
+          学号： \uline { \hfill \l__whu_info_student_number_tl \hfill } \hfill \hfill
+          姓名： \uline { \hfill \l__whu_info_author_tl \hfill }
+        \end { minipage }
+        \raggedbottom
+        \__whu_set_table_font:
+      }
+
+    \AtEndDocument
+      {
+        \skip_vertical:n { 2 \baselineskip }
+        指导老师意见：
+        \vfill
+        \hfill 指导老师（签名）： \hbox_to_wd:nn { 4 cm } {} \par
+        \skip_vertical:N \baselineskip
+        \hfill 年 \qquad 月 \qquad 日
+      }
+  }
+  {
+    \AtBeginDocument
+      {
+        \__whu_make_cover:
+        \__whu_make_statesment:
+      }
+  }
+
+%%% ---- 目录 ----- %%%
+% 生成目录
+\cs_new:Nn \__whu_make_contents:
+  {
+    \__whu_new_chapter_page:
+    \pagenumbering { gobble } % 去掉目录页码
+    \tableofcontents
+
+    \__whu_new_chapter_page:
+
+    \pagestyle { plain }
+    \pagenumbering { arabic } % 重新计数页码
+
+    \tl_set:Nn \baselinestretch { 1 } 
+    \normalsize
+    \dim_set:Nn \baselineskip { 23 pt } % 正文行距为 23 磅
+    \dim_set:Nn \parskip      { 0 pt  } % 段间距为 0
+    \raggedbottom
+    \__whu_set_table_font:
+  }
+
+%%%% ----- 公开命令 ----- %%%%%
 %%% ---- 摘要 ----- %%%
-\box_new:N \l__whu_kw_box
+\box_new:N \l__whu_keywords_box
 \cs_set:Npn \__whu_put_kw:nn #1#2
   {
-    \hbox_set:Nn \l__whu_kw_box {#1}
-    \noindent \hangindent \box_wd:N \l__whu_kw_box \hangafter 1
-    \box_use_drop:N \l__whu_kw_box #2 \par
+    \hbox_set:Nn \l__whu_keywords_box {#1}
+    \noindent \hangindent \box_wd:N \l__whu_keywords_box \hangafter 1
+    \box_use_drop:N \l__whu_keywords_box #2 \par
   }
 
 % 中文摘要
-\NewDocumentEnvironment { cnabstract } {}
+\ProvideDocumentEnvironment { abstract } {}
   {
     \chapter * { 摘 \qquad 要 }
     \dim_set:Nn \baselineskip { 23 pt }
@@ -620,43 +673,43 @@
   {
     \skip_vertical:N \baselineskip \par
     \__whu_put_kw:nn
-      { \heiti\zihao{-4} 关键词：\mbox{} }
-      { \clist_use:Nn \l__whu_info_cnkeywords_clist { ； } }
-    \clearpage
+      { \heiti \zihao { -4 } 关键词：\hbox:n {} }
+      { \clist_use:Nn \l__whu_info_keywords_cn_clist { ； } }
   }
 
 % 英文摘要
-\NewDocumentEnvironment { enabstract } {}
+\NewDocumentEnvironment { abstract * } {}
   {
-    \@twosidefalse
+    \bool_if:NT \g__whu_twoside_bool
+      { \@twosidefalse }
     \chapter * { \textbf { ABSTRACT } }
-    \@twosidetrue
     \dim_set:Nn \baselineskip { 23 pt } \par
   }
   {
     \skip_vertical:N \baselineskip \par
     \__whu_put_kw:nn
       { \bfseries \zihao { -4 } Key ~ words: ~ }
-      { \clist_use:Nn \l__whu_info_enkeywords_clist { ;~ } }
-    \cleardoublepage%
+      { \clist_use:Nn \l__whu_info_keywords_en_clist { ; ~ } }
+
+    \__whu_make_contents:
   }
 
-%%% ---- 目录 ----- %%%
-% 生成目录
-\NewDocumentCommand {\contents} {}
-{
-  \pagenumbering { gobble } % 去掉目录页码
-  \tableofcontents
+\NewDocumentCommand { \makebibliography } {}
+  {
+    \tl_if_eq:NnF \l__whu_class_tl { opening }
+      {
+        \__whu_new_chapter_page:
+        \phantomsection
+        \addcontentsline { toc } { chapter } { 参考文献 }
+      }
 
-  \bool_if:NTF \g__whu_twoside_bool
-    { \cleardoublepage }
-    { \clearpage }
+    \bibliography { \l__whu_style_bib_file_tl }
+  }
 
-  \pagestyle { plain }
-  \pagenumbering { arabic } % 重新计数页码
-
-  \tl_set:Nn \baselinestretch { 1 } 
-  \normalsize
-  \dim_set:Nn \baselineskip { 23 pt } % 正文行距为 23 磅
-  \dim_set:Nn \parskip      { 0 pt  } % 段间距为 0
-}
+\NewDocumentEnvironment { acknowledgements } {}
+  {
+    \chapter * { 致谢 }
+    \phantomsection
+    \addcontentsline { toc } { chapter } { 致谢 }
+  }
+  { \appendix }
