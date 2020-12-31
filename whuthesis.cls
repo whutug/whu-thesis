@@ -359,7 +359,7 @@
 \setmainfont { Times ~ New ~ Roman }
   [ Ligatures = Rare ]
 
-\tl_set:Nn \c__whu_setsimfont
+\cs_new:Nn \__whu_setfont_sim:
   {
     \setCJKmainfont { simsun.ttc } 
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
@@ -373,7 +373,7 @@
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
   }
 
-\tl_set:Nn \c__whu_setfandolfont
+\cs_new:Nn \__whu_setfont_fandol:
   {
     \setCJKmainfont { FandolSong-Regular }
       [
@@ -403,27 +403,27 @@
 
 \sys_if_platform_windows:TF
   {
-    \tl_use:N \c__whu_setsimfont
+    \__whu_setfont_sim:
   }
   {
     \file_if_exist:nTF { /System/Library/Fonts/Menlo.ttc }
     % \ctex_if_platform_macos:TF
       {
-        \tl_use:N \c__whu_setsimfont
+        \__whu_setfont_sim:
       }
       {
         \file_if_exist:nTF { simsun.ttc }
           {
             \file_if_exist:nTF { simhei.ttf } 
               {
-                \tl_use:N \c__whu_setsimfont
+                \__whu_setfont_sim:
               }
               {
-                \tl_use:N \c__whu_setfandolfont
+                \__whu_setfont_fandol:
               }
           }
           {
-            \tl_use:N \c__whu_setfandolfont
+            \__whu_setfont_fandol:
           }
       }
   }
