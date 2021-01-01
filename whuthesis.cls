@@ -1,8 +1,8 @@
 %% This program is a LaTeX class file for bachelor thesis template
 %% of Wuhan University
 %%
-%% Copyright \copyright\ 2019 Fing @ WHU
-%% Revise                2020 List @ WHU
+%% Copyright \copyright\ 2019      Fing @ WHU
+%% Revise                2020-2021 List @ WHU
 %% $ v0.1, 2019/03/18$
 %% $ v0.2, 2020/12/10$
 %% $ v0.3, 2020/12/21$
@@ -11,7 +11,7 @@
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3 , xparse , l3keys2e , xtemplate}
+\RequirePackage{expl3 , xparse , l3keys2e}
 \ProvidesExplClass{whuthesis}{2020/12/30}{0.4}{Wuhan University Thesis Template}
 
 \msg_new:nnn { whuthesis } { 引擎不支持 }
@@ -192,23 +192,23 @@
   {
     section        =
       {
-        format     = { \heiti \zihao { 4 } },
-        beforeskip = { 0.5 \baselineskip   },
-        afterskip  = { 0.5 \baselineskip   },
+        format     = { \heiti \zihao { 4 }       },
+        beforeskip = { 0.5 \c__whu_baseline_skip },
+        afterskip  = { 0.5 \c__whu_baseline_skip },
         fixskip    = true
       },  % 一级标题 黑体 4 号
     subsection     =
       {
-        format     = { \heiti \zihao { -4 } },
-        beforeskip = { 0.5 \baselineskip    },
-        afterskip  = { 0.5 \baselineskip    },
+        format     = { \heiti \zihao { -4 }      },
+        beforeskip = { 0.5 \c__whu_baseline_skip },
+        afterskip  = { 0.5 \c__whu_baseline_skip },
         fixskip    = true
       },  % 二级标题 黑体小 4 号
     subsubsection  =
       {
-        format     = { \heiti \zihao { -4 } },
-        beforeskip = { 0.5 \baselineskip    },
-        afterskip  = { 0.5 \baselineskip    },
+        format     = { \heiti \zihao { -4 }      },
+        beforeskip = { 0.5 \c__whu_baseline_skip },
+        afterskip  = { 0.5 \c__whu_baseline_skip },
         fixskip    = true
       },  % 三级标题 黑体小4号
     paragraph      =
@@ -216,8 +216,8 @@
         format     = { \heiti \zihao { -4 }       },
         number     = { （ \arabic { paragraph } ）},
         aftername  = { \hbox:n {}                 },
-        beforeskip = { 0.5 \baselineskip          },
-        afterskip  = { 0.5 \baselineskip          },
+        beforeskip = { 0.5 \c__whu_baseline_skip  },
+        afterskip  = { 0.5 \c__whu_baseline_skip  },
         fixskip    = true
       },
     subparagraph   =
@@ -225,8 +225,8 @@
         format     = { \heiti \zihao { -4 }                  },
         number     = { \circled { \arabic { subparagraph } } },
         aftername  = {                                       },
-        beforeskip = { 0.5 \baselineskip                     },
-        afterskip  = { 0.5 \baselineskip                     },
+        beforeskip = { 0.5 \c__whu_baseline_skip             },
+        afterskip  = { 0.5 \c__whu_baseline_skip             },
         fixskip    = true
       },
     tocdepth       = 2,  % 目录层级数
@@ -241,9 +241,9 @@
           {
             format     = { \centering \heiti \zihao { -2 } },
             number     = { \arabic { chapter }             },
-            name       = { , },
-            beforeskip = { 0.8 \baselineskip               },
-            afterskip  = { 0.5 \baselineskip               },
+            name       = { ,                               },
+            beforeskip = { 0.8 \c__whu_baseline_skip       },
+            afterskip  = { 0.5 \c__whu_baseline_skip       },
             fixskip    = true
           }  % 各章标题 黑体小 2 号
       }
@@ -495,6 +495,13 @@
   { \zhdigits {#1} 年 \zhnumber {#2} 月 }
 \cs_generate_variant:Nn \__whu_date_parse:n { V }
 
+\skip_const:Nn \c__whu_baseline_skip { 23 pt }
+\cs_new_protected:Nn \__whu_set_baseline_skip:
+  {
+    \skip_set_eq:NN \baselineskip \c__whu_baseline_skip
+    \skip_zero:N    \parskip
+  }
+
 %%% ---- 文档接口 ----- %%%
 \NewDocumentCommand { \whusetup } { m }
   { \keys_set:nn { whu } {#1} }
@@ -535,7 +542,7 @@
       {
         \heiti \zihao { 5 } \hfill
         \begin { minipage } [ t ] { 5 cm }
-          \dim_set:Nn \baselineskip { 23 pt }
+          \__whu_set_baseline_skip:
           学号 \uline
             { \hbox_to_wd:nn { 3 cm }
                 { \hfill \l__whu_info_student_number_tl \hfill }
@@ -547,7 +554,7 @@
       { \songti \zihao{1} \c__whu_heading_tl }
       \par \skip_vertical:n { 6 em }
       \begin { minipage } [c] [ 6 cm ] { \textwidth }
-        \dim_set:Nn \baselineskip { 32 pt }
+        \skip_set:Nn \baselineskip { 32 pt }
         \centering { \heiti \zihao { 2 } \l__whu_info_title_tl }
       \end { minipage }
       \par \skip_vertical:n { 6 em }
@@ -576,7 +583,7 @@
     \pagenumbering { gobble }
     \noindent \hfil { \zihao { 2 } \textbf { 郑 \enskip 重 \enskip 声 \enskip 明 } }
     \par \skip_vertical:n { 20 pt }
-    \dim_set:Nn \baselineskip { 23 pt }
+    \__whu_set_baseline_skip:
     {
       \zihao { 4 } 
       本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
@@ -597,14 +604,14 @@
 
         \tl_set:Nn  \baselinestretch { 1 }
         \normalsize
-        \dim_set:Nn \baselineskip { 23 pt }
+        \__whu_set_baseline_skip:
         % 正文行距为 23 磅
         \dim_set:Nn \parskip      {  0 pt }
         % 段间距为 0
 
         \noindent
         \begin { minipage } { \textwidth }
-          \dim_set:Nn \baselineskip { 23 pt }
+          \__whu_set_baseline_skip:
           毕业论文（设计）题目： \uline { \hfill \l__whu_info_title_tl \hfill } \\
           学院： \uline { \hfill \l__whu_info_school_tl \hfill } \hfill \hfill
           学号： \uline { \hfill \l__whu_info_student_number_tl \hfill } \hfill \hfill
@@ -616,11 +623,11 @@
 
     \AtEndDocument
       {
-        \skip_vertical:n { 2 \baselineskip }
+        \skip_vertical:n { 2 \c__whu_baseline_skip }
         指导老师意见：
         \vfill
         \hfill 指导老师（签名）： \hbox_to_wd:nn { 4 cm } {} \par
-        \skip_vertical:N \baselineskip
+        \skip_vertical:N \c__whu_baseline_skip
         \hfill 年 \qquad 月 \qquad 日
       }
   }
@@ -647,8 +654,7 @@
 
     \tl_set:Nn \baselinestretch { 1 } 
     \normalsize
-    \dim_set:Nn \baselineskip { 23 pt } % 正文行距为 23 磅
-    \dim_set:Nn \parskip      { 0 pt  } % 段间距为 0
+    \__whu_set_baseline_skip:
     \raggedbottom
     \__whu_set_table_font:
   }
@@ -667,11 +673,11 @@
 \ProvideDocumentEnvironment { abstract } {}
   {
     \chapter * { 摘 \qquad 要 }
-    \dim_set:Nn \baselineskip { 23 pt }
+    \__whu_set_baseline_skip:
     \par
   }
   {
-    \skip_vertical:N \baselineskip \par
+    \skip_vertical:N \c__whu_baseline_skip \par
     \__whu_put_kw:nn
       { \heiti \zihao { -4 } 关键词：\hbox:n {} }
       { \clist_use:Nn \l__whu_info_keywords_cn_clist { ； } }
@@ -683,10 +689,11 @@
     \bool_if:NT \g__whu_twoside_bool
       { \@twosidefalse }
     \chapter * { \textbf { ABSTRACT } }
-    \dim_set:Nn \baselineskip { 23 pt } \par
+    \__whu_set_baseline_skip:
+    \par
   }
   {
-    \skip_vertical:N \baselineskip \par
+    \skip_vertical:N \c__whu_baseline_skip \par
     \__whu_put_kw:nn
       { \bfseries \zihao { -4 } Key ~ words: ~ }
       { \clist_use:Nn \l__whu_info_keywords_en_clist { ; ~ } }
