@@ -30,38 +30,44 @@
   }
 
 %%% ---- 文档选项 ----- %%%
-\bool_set_true:N \g__whu_twoside_bool
+\tl_new:N \g__whu_option_degree_tl
+\tl_new:N \g__whu_option_class_tl
 
-\clist_set:Nn \g__whu_option_to_class_clist
+\bool_new:N \g__whu_option_draft_bool
+\tl_new:N   \g__whu_option_punct_tl
+
+\bool_new:N \g__whu_option_twoside_bool
+\bool_gset_true:N \g__whu_option_twoside_bool
+
+\clist_new:N \g__whu_option_to_class_clist
+\clist_gset:Nn \g__whu_option_to_class_clist
   { a4paper , zihao = -4 , fontset = none , sub4section }
 
 \keys_define:nn { whu / option }
   {
-    degree .choice:,
     degree .value_required:n = true,
     degree .choices:nn       =
       { doctor , master , bachelor }
-      { \tl_set_eq:NN \l__whu_degree_tl \l_keys_choice_tl },
+      { \tl_gset_eq:NN \g__whu_option_degree_tl \l_keys_choice_tl },
     degree .initial:n        = bachelor,
     % 学位，默认本科生
 
-    class .choice:,
     class .value_required:n = true,
     class .choices:nn       =
-      { paper , design , opening }
-      { \tl_set_eq:NN \l__whu_class_tl  \l_keys_choice_tl },
+      { opening , academic , professional , paper , design }
+      { \tl_gset_eq:NN \g__whu_option_class_tl \l_keys_choice_tl },
     class .initial:n        = paper,
     % 文档类型，默认 paper（论文）
 
     draft         .choice:,
     draft / true  .code:n    =
       {
-        \bool_set_true:N     \g__whu_draft_bool
+        \bool_gset_true:N    \g__whu_draft_bool
         \clist_gput_right:Nn \g__whu_option_to_class_clist { draft }
       },
     draft / false .code:n    =
       {
-        \bool_set_false:N    \g__whu_draft_bool
+        \bool_gset_false:N   \g__whu_draft_bool
       },
     draft         .default:n = true,
     draft         .initial:n = false,
@@ -71,21 +77,20 @@
     twoside .value_forbidden:n = true,
     oneside .code:n            =
       {
-        \bool_set_false:N    \g__whu_twoside_bool
+        \bool_gset_false:N   \g__whu_option_twoside_bool
         \clist_gput_right:Nn \g__whu_option_to_class_clist { oneside }
       },
     twoside .code:n            =
       {
-        \bool_set_true:N     \g__whu_twoside_bool
+        \bool_gset_true:N    \g__whu_option_twoside_bool
         \clist_gput_right:Nn \g__whu_option_to_class_clist { twoside }
       },
     % 单双页模式
 
-    punct .choice:,
     punct .value_required:n = true,
     punct .choices:nn       =
       { quanjiao , banjiao , kaiming }
-      { \tl_set_eq:NN \l__whu_punct_tl \l_keys_choice_tl },
+      { \tl_gset_eq:NN \g__whu_option_punct_tl \l_keys_choice_tl },
     punct .initial:n        = quanjiao,
     % 标点格式
   }
@@ -96,22 +101,22 @@
     \file_if_exist:nTF { jfm-zh_CN.lua }
       {
         \clist_gput_right:Nn \g__whu_option_to_class_clist
-          { punct = zh_CN / \l__whu_punct_tl }
+          { punct = zh_CN / \g__whu_option_punct_tl }
       }
       {
         \clist_gput_right:Nn \g__whu_option_to_class_clist
-          { punct = \l__whu_punct_tl }
+          { punct = \g__whu_option_punct_tl }
       }
   }
   {
     \clist_gput_right:Nn \g__whu_option_to_class_clist
-      { punct = \l__whu_punct_tl }
+      { punct = \g__whu_option_punct_tl }
   }
 % 判断是否有 chinese-jfm，若有则使用 chinese-jfm
 
 %%% ---- 载入 Class ----- %%%
 % 开题报告使用 ctexart，论文使用 ctexbook
-\tl_if_eq:NnTF \l__whu_class_tl { opening }
+\tl_if_eq:NnTF \g__whu_option_class_tl { opening }
   {
     \PassOptionsToClass { \g__whu_option_to_class_clist } { ctexart }
     \LoadClass { ctexart }
@@ -123,13 +128,13 @@
 
 \sys_if_engine_luatex:T { \RequirePackage { luatexja-adjust } }
 
-\tl_if_eq:NnT \l__whu_class_tl { paper }
-  { \tl_set:Nn \c__whu_heading_tl { 武汉大学本科毕业论文 } }
-\tl_if_eq:NnT \l__whu_class_tl { design }
-  { \tl_set:Nn \c__whu_heading_tl { 武汉大学本科毕业设计 } }
-\tl_if_eq:NnT \l__whu_class_tl { opening }
+\tl_if_eq:NnT \g__whu_option_class_tl { paper }
+  { \tl_const:Nn \c__whu_heading_tl { 武汉大学本科毕业论文 } }
+\tl_if_eq:NnT \g__whu_option_class_tl { design }
+  { \tl_const:Nn \c__whu_heading_tl { 武汉大学本科毕业设计 } }
+\tl_if_eq:NnT \g__whu_option_class_tl { opening }
   {
-    \tl_set:Nn \c__whu_heading_tl
+    \tl_const:Nn \c__whu_heading_tl
       { 武汉大学本科毕业论文（设计）\\ 开　题　报　告 }
     \tl_set:Nn \refname { 论文的主要参考文献 }
     \RequirePackage [ numbib ] { tocbibind }
@@ -233,7 +238,7 @@
     secnumdepth    = 5,  % 标题层级数
   }
 
-\tl_if_eq:NnF \l__whu_class_tl { opening }
+\tl_if_eq:NnF \g__whu_option_class_tl { opening }
   {
     \ctexset
       {
@@ -273,7 +278,7 @@
 \dim_set:Nn \cftsubsecindent       { 1.85 em }
 \dim_set:Nn \cftsubsubsecindent    { 1.85 em }
 
-\tl_if_eq:NnF \l__whu_class_tl { opening }
+\tl_if_eq:NnF \g__whu_option_class_tl { opening }
   {
     \tl_set:Nn \cftchapdotsep    { \cftdotsep                }
     \tl_set:Nn \cftchapfont      { \heiti \zihao { 4 }       }
@@ -294,7 +299,9 @@
 \tl_set:Nn \tablename  { \heiti  \zihao { -4 } 表 }
 
 \RequirePackage { graphicx }
-\graphicspath { \l__whu_style_graphics_path_tl } % 图片文件路径
+\ctex_at_end_preamble:n
+  { \graphicspath { \g__whu_style_graphics_path_tl } }
+% 图片文件路径
 
 % 使用 tabularx 创建占满宽度的表格
 \RequirePackage{ tabularx }
@@ -353,87 +360,223 @@
       }
   }
 
-%%% ---- 定义字体 ----- %%%
+  %%% ---- 定义字体 ----- %%%
+\RequirePackage { unicode-math }
 
-% 设置英文字体为 Times New Roman
-\setmainfont { Times ~ New ~ Roman }
-  [ Ligatures = Rare ]
+\cs_new_protected:Npn \__whu_fontset:n #1
+  { \cs_gset_eq:Nc \__whu_set_font: { __whu_set_font_ #1 : } }
+\cs_new_protected:Npn \__whu_cjk_fontset:n #1
+  { \cs_gset_eq:Nc \__whu_set_cjk_font: { __whu_set_cjk_font_ #1 : } }
+\cs_new_protected:Npn \__whu_math_fontset:n #1
+  { \cs_gset_eq:Nc \__whu_set_math_font: { __whu_set_math_font_ #1 : } }
 
-\cs_new_protected:Nn \__whu_setfont_sim:
+\keys_define:nn { whu / style }
+  {
+    font .choices:nn =
+      { times , xits }
+      { \__whu_fontset:n { \l_keys_choice_tl } },
+    % 西文字体
+
+    cjk-font .choices:nn =
+      { windows , mac , fandol }
+      { \__whu_cjk_fontset:n { \l_keys_choice_tl } },
+    % 中文字体
+  }
+
+% XITS 字体文件名作过变动
+\fontspec_font_if_exist:nTF { XITS-Regular.otf }
+  {
+    \tl_const:Nn \c__whu_font_family_xits_tl       { XITS             }
+    \tl_const:Nn \c__whu_font_style_xits_rm_tl     { Regular          }
+    \tl_const:Nn \c__whu_font_style_xits_bf_tl     { Bold             }
+    \tl_const:Nn \c__whu_font_style_xits_it_tl     { Italic           }
+    \tl_const:Nn \c__whu_font_style_xits_bfit_tl   { BoldItalic       }
+    \tl_const:Nn \c__whu_font_name_xits_math_rm_tl { XITSMath-Regular }
+    \tl_const:Nn \c__whu_font_name_xits_math_bf_tl { XITSMath-Bold    }
+  }
+  {
+    \tl_const:Nn \c__whu_font_family_xits_tl       { xits          }
+    \tl_const:Nn \c__whu_font_style_xits_rm_tl     { regular       }
+    \tl_const:Nn \c__whu_font_style_xits_bf_tl     { bold          }
+    \tl_const:Nn \c__whu_font_style_xits_it_tl     { italic        }
+    \tl_const:Nn \c__whu_font_style_xits_bfit_tl   { bolditalic    }
+    \tl_const:Nn \c__whu_font_name_xits_math_rm_tl { xits-math     }
+    \tl_const:Nn \c__whu_font_name_xits_math_bf_tl { xits-mathbold }
+  }
+
+% 西文字体
+\cs_new_protected:Nn \__whu_set_font_times:
+  { \setmainfont { Times ~ New ~ Roman } [ Ligatures = Rare ] }
+
+% XITS 与 TG Termes 安装在 TeX 发行版下，必须使用文件名调用
+\cs_new_protected:Nn \__whu_set_font_xits:
+  {
+    \setmainfont { \c__whu_font_family_xits_tl }
+      [
+        Extension      = .otf,
+        UprightFont    = * - \c__whu_font_style_xits_rm_tl,
+        BoldFont       = * - \c__whu_font_style_xits_bf_tl,
+        ItalicFont     = * - \c__whu_font_style_xits_bf_tl,
+        BoldItalicFont = * - \c__whu_font_style_xits_bfit_tl
+      ]
+  }
+
+% 照顾 overleaf 用户，使用文件名调用
+\cs_new_protected:Nn \__whu_set_cjk_font_windows:
   {
     \setCJKmainfont { simsun.ttc } 
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
     \setCJKsansfont { simhei.ttf }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
-    \setCJKmonofont { simsun.ttc }
+    \setCJKmonofont { simfang.ttf }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
     \newCJKfontfamily { \songti } { simsun.ttc }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
-    \newCJKfontfamily { \heiti }  { simhei.ttf }
+    \newCJKfontfamily { \heiti } { simhei.ttf }
+      [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
+    \newCJKfontfamily { \fangsong } { simfang.ttf }
+      [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
+    \newCJKfontfamily { \kaishu } { simkai.ttf }
       [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
   }
 
-\cs_new_protected:Nn \__whu_setfont_fandol:
+\cs_new_protected:Nn \__whu_set_cjk_font_mac:
   {
-    \setCJKmainfont { FandolSong-Regular }
+    \setCJKmainfont { STSongti-SC }
       [
-        Extension = .otf,
-        BoldFont = FandolSong-Bold,
-        AutoFakeSlant = 0.167
+        UprightFont        = * - Light,
+        BoldFont           = * - Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = * - Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
       ] 
-    \setCJKsansfont { FandolHei-Regular }
+    \setCJKsansfont { STHeitiSC-Medium }
+      [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
+    \setCJKmonofont { STFangsong }
+      [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
+    \newCJKfontfamily { \songti } { STSongti-SC }
       [
-        Extension = .otf,
-        BoldFont = FandolHei-Bold,
+        UprightFont        = * - Light,
+        BoldFont           = * - Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = * - Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      ] 
+    \newCJKfontfamily { \heiti } { STHeitiSC-Medium }
+      [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
+    \newCJKfontfamily { \fangsong } { STFangsong }
+      [ AutoFakeBold = 4 , AutoFakeSlant = 0.167 ]
+    \newCJKfontfamily { \kaishu } { STKaitiSC }
+      [
+        UprightFont        = * - Regular,
+        BoldFont           = * - Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = * - Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      ]
+  }
+
+% fandol 字体安装在 TeX 发行版下，必须使用文件名调用
+\cs_new_protected:Nn \__whu_set_cjk_font_fandol:
+  {
+    \setCJKmainfont { FandolSong }
+      [
+        Extension          = .otf,
+        UprightFont        = * - Regular,
+        BoldFont           = * - Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = * - Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      ] 
+    \setCJKsansfont { FandolHei }
+      [
+        Extension          = .otf,
+        UprightFont        = * - Regular,
+        BoldFont           = * - Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = * - Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      ]
+    \setCJKmonofont { FandolFang-Regular }
+      [
+        Extension     = .otf,
+        AutoFakeBold  = 4,
         AutoFakeSlant = 0.167
       ]
-    \newCJKfontfamily{ \songti }{ FandolSong-Regular }
+    \newCJKfontfamily { \songti } { FandolSong }
       [
-        Extension = .otf,
-        BoldFont = FandolSong-Bold,
+        Extension          = .otf,
+        UprightFont        = * - Regular,
+        BoldFont           = * - Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = * - Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      ]
+    \newCJKfontfamily { \heiti } { FandolHei }
+      [
+        Extension          = .otf,
+        UprightFont        = * - Regular,
+        BoldFont           = * - Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = * - Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      ]
+    \newCJKfontfamily { \fangsong } { FandolFang-Regular }
+      [
+        Extension     = .otf,
+        AutoFakeBold  = 4,
         AutoFakeSlant = 0.167
       ]
-    \newCJKfontfamily { \heiti } { FandolHei-Regular }
+    \newCJKfontfamily { \kaishu } { FandolKai-Regular }
       [
-        Extension = .otf,
-        BoldFont = FandolHei-Bold,
+        Extension     = .otf,
+        AutoFakeBold  = 4,
         AutoFakeSlant = 0.167
       ]
   }
 
+% 数学字体
+\cs_new_protected:Nn \__whu_set_math_font:
+  {
+    \setmathfont { \c__whu_font_name_xits_math_rm_tl .otf }
+      [ BoldFont = \c__whu_font_name_xits_math_bf_tl .otf ]
+  }
+
+% 根据系统判断调用字体
 \sys_if_platform_windows:TF
   {
-    \__whu_setfont_sim:
+    \keys_define:nn { whu / style }
+      {
+        font     .initial:n = times,
+        cjk-font .initial:n = windows
+      }
   }
   {
-    \file_if_exist:nTF { /System/Library/Fonts/Menlo.ttc }
-    % \ctex_if_platform_macos:TF
+    % \file_if_exist:nTF { /System/Library/Fonts/Menlo.ttc }
+    \ctex_if_platform_macos:TF
       {
-        \__whu_setfont_sim:
+        \keys_define:nn { whu / style }
+          {
+            font     .initial:n = times,
+            cjk-font .initial:n = mac
+          }
       }
       {
-        \file_if_exist:nTF { simsun.ttc }
+        \keys_define:nn { whu / style }
           {
-            \file_if_exist:nTF { simhei.ttf } 
-              {
-                \__whu_setfont_sim:
-              }
-              {
-                \__whu_setfont_fandol:
-              }
-          }
-          {
-            \__whu_setfont_fandol:
+            font     .initial:n = xits,
+            cjk-font .initial:n = fandol
           }
       }
   }
 
-\RequirePackage { unicode-math }
-\setmathfont { XITSMath-Regular }
-  [
-    Extension = .otf,
-    BoldFont = XITSMath-Bold
-  ]
+% 在导言区末加载字体，不被用户配置覆盖
+\ctex_at_end_preamble:n
+  {
+    \__whu_set_font:
+    \__whu_set_cjk_font:
+    \__whu_set_math_font:
+  }
 
 %%% ---- 数学定理样式 ----- %%%
 \newtheoremstyle { whu }
@@ -461,7 +604,7 @@
 \RequirePackage [ sort & compress ] { natbib }
 \setcitestyle { numbers , square , comma }
 \bibliographystyle { data / gbt7714-2005-whu }  % 参考文献样式
-\dim_set:Nn \bibsep { 0 pt } % 参考文献间距设为 0
+\skip_set:Nn \bibsep { 0 pt } % 参考文献间距设为 0
 
 \NewDocumentCommand { \upcite } { m }
   { \textsuperscript { \cite {#1} } }
@@ -472,24 +615,27 @@
 % 公式引用使用中文括号
 
 % 清除公式上下间距
-\dim_set:Nn \abovedisplayskip      { 6 pt }
-\dim_set:Nn \belowdisplayskip      { 6 pt }
-\dim_set:Nn \abovedisplayshortskip { 0 pt }
-\dim_set:Nn \belowdisplayshortskip { 0 pt }
+\skip_set:Nn \abovedisplayskip      { 6 pt }
+\skip_set:Nn \belowdisplayskip      { 6 pt }
+\skip_set:Nn \abovedisplayshortskip { 0 pt }
+\skip_set:Nn \belowdisplayshortskip { 0 pt }
 
 % 最后引入 hyperref 包
-\RequirePackage { hyperref }
-\hypersetup { hidelinks }
-\urlstyle { rm }
+\ctex_at_end_preamble:n
+  {
+    \RequirePackage { hyperref }
+    \hypersetup { hidelinks }
+    \urlstyle { rm }
+  }
 
 \cs_new_protected:Nn \__whu_new_chapter_page:
   {
-    \bool_if:NTF \g__whu_twoside_bool
+    \bool_if:NTF \g__whu_option_twoside_bool
       { \cleardoublepage }
       { \clearpage }
   }
 
-\cs_new:Npn \__whu_date_parse:n #1
+\cs_new_protected:Npn \__whu_date_parse:n #1
   { \__whu_date_parse_aux:w #1 \q_stop }
 \cs_new:Npn \__whu_date_parse_aux:w #1 / #2 \q_stop
   { \zhdigits {#1} 年 \zhnumber {#2} 月 }
@@ -506,26 +652,39 @@
 \NewDocumentCommand { \whusetup } { m }
   { \keys_set:nn { whu } {#1} }
 
+\tl_new:N \g__whu_info_title_tl
+\tl_new:N \g__whu_info_author_tl
+\tl_new:N \g__whu_info_student_number_tl
+\tl_new:N \g__whu_info_school_tl
+\tl_new:N \g__whu_info_major_tl
+\tl_new:N \g__whu_info_date_tl
+\tl_new:N \g__whu_info_advisor_clist
+\tl_new:N \g__whu_info_keywords_cn_clist
+\tl_new:N \g__whu_info_keywords_en_clist
+
 \keys_define:nn { whu / info }
   {
-    title          .tl_set:N    = \l__whu_info_title_tl,
-    author         .tl_set:N    = \l__whu_info_author_tl,
-    student-number .tl_set:N    = \l__whu_info_student_number_tl,
-    school         .tl_set:N    = \l__whu_info_school_tl,
-    major          .tl_set:N    = \l__whu_info_major_tl,
-    date           .tl_set:N    = \l__whu_info_date_tl,
-    advisor        .clist_set:N = \l__whu_info_advisor_clist,
-    keywords       .clist_set:N = \l__whu_info_keywords_cn_clist,
-    keywords *     .clist_set:N = \l__whu_info_keywords_en_clist,
+    title          .tl_gset:N    = \g__whu_info_title_tl,
+    author         .tl_gset:N    = \g__whu_info_author_tl,
+    student-number .tl_gset:N    = \g__whu_info_student_number_tl,
+    school         .tl_gset:N    = \g__whu_info_school_tl,
+    major          .tl_gset:N    = \g__whu_info_major_tl,
+    date           .tl_gset:N    = \g__whu_info_date_tl,
+    advisor        .clist_gset:N = \g__whu_info_advisor_clist,
+    keywords       .clist_gset:N = \g__whu_info_keywords_cn_clist,
+    keywords *     .clist_gset:N = \g__whu_info_keywords_en_clist,
 
     date           .initial:n   =
       { \int_use:N \c_sys_year_int / \int_use:N \c_sys_month_int }
   }
 
+\tl_new:N \g__whu_style_bib_file_tl
+\tl_new:N \g__whu_style_graphics_path_tl
+
 \keys_define:nn { whu / style }
   {
-    bib-file      .tl_set:N = \l__whu_style_bib_file_tl,
-    graphics-path .tl_set:N = \l__whu_style_graphics_path_tl
+    bib-file      .tl_gset:N = \g__whu_style_bib_file_tl,
+    graphics-path .tl_gset:N = \g__whu_style_graphics_path_tl
   }
 
 \keys_define:nn { whu }
@@ -537,7 +696,7 @@
 %%% ---- 论文封面 ----- %%%
 \cs_new_protected:Nn \__whu_make_cover:
   {
-    \pagestyle { empty }
+    \pagenumbering { gobble }
     \begin { center }
       {
         \heiti \zihao { 5 } \hfill
@@ -545,7 +704,7 @@
           \__whu_set_baseline_skip:
           学号 \uline
             { \hbox_to_wd:nn { 3 cm }
-                { \hfill \l__whu_info_student_number_tl \hfill }
+                { \hfill \g__whu_info_student_number_tl \hfill }
             } \\
           密级 \uline { \hbox_to_wd:nn { 3 cm } {} }
         \end { minipage }
@@ -555,32 +714,31 @@
       \par \skip_vertical:n { 6 em }
       \begin { minipage } [c] [ 6 cm ] { \textwidth }
         \skip_set:Nn \baselineskip { 32 pt }
-        \centering { \heiti \zihao { 2 } \l__whu_info_title_tl }
+        \centering { \heiti \zihao { 2 } \g__whu_info_title_tl }
       \end { minipage }
       \par \skip_vertical:n { 6 em }
       {
         \centering \songti \zihao { -3 }
         \begin {tabular} { p { 8 em } l }
           院 \hfill \hbox_overlap_left:n { （ } 系 \hbox_overlap_right:n { ） } \hfill 名 \hfill 称： &
-            \l__whu_info_school_tl \\ [ 0.5 em ]
-          专 \hfill 业 \hfill 名 \hfill 称： & \l__whu_info_major_tl                              \\ [ 0.5 em ]
-          学 \hfill 生 \hfill 姓 \hfill 名： & \l__whu_info_author_tl                             \\ [ 0.5 em ]
-          指 \hfill 导 \hfill 教 \hfill 师： & \clist_use:Nn \l__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
+            \g__whu_info_school_tl \\ [ 0.5 em ]
+          专 \hfill 业 \hfill 名 \hfill 称： & \g__whu_info_major_tl                              \\ [ 0.5 em ]
+          学 \hfill 生 \hfill 姓 \hfill 名： & \g__whu_info_author_tl                             \\ [ 0.5 em ]
+          指 \hfill 导 \hfill 教 \hfill 师： & \clist_use:Nn \g__whu_info_advisor_clist { \quad } \\ [ 0.5 em ]
         \end { tabular }
       }
       \par \skip_vertical:n { 6 em }
-      { \songti \zihao { -2 } \__whu_date_parse:V { \l__whu_info_date_tl } }
+      { \songti \zihao { -2 } \__whu_date_parse:V { \g__whu_info_date_tl } }
     \end { center }
     \__whu_new_chapter_page:
   }
 
-  %%% ---- 论文申明页 ----- %%%
+%%% ---- 论文申明页 ----- %%%
 \cs_new_protected:Nn \__whu_make_statesment:
   {
     \__whu_new_chapter_page:
     \mode_leave_vertical: \skip_vertical:n { 44 pt }
 
-    \pagenumbering { gobble }
     \noindent \hfil { \zihao { 2 } \textbf { 郑 \enskip 重 \enskip 声 \enskip 明 } }
     \par \skip_vertical:n { 20 pt }
     \__whu_set_baseline_skip:
@@ -594,7 +752,7 @@
     \__whu_new_chapter_page:
   }
 
-\tl_if_eq:NnTF \l__whu_class_tl { opening }
+\tl_if_eq:NnTF \g__whu_option_class_tl { opening }
   {
     \AtBeginDocument
       {
@@ -602,20 +760,15 @@
           \zihao { -2 } \heiti \c__whu_heading_tl
         \end { center }
 
-        \tl_set:Nn  \baselinestretch { 1 }
-        \normalsize
         \__whu_set_baseline_skip:
-        % 正文行距为 23 磅
-        \dim_set:Nn \parskip      {  0 pt }
-        % 段间距为 0
 
         \noindent
         \begin { minipage } { \textwidth }
           \__whu_set_baseline_skip:
-          毕业论文（设计）题目： \uline { \hfill \l__whu_info_title_tl \hfill } \\
-          学院： \uline { \hfill \l__whu_info_school_tl \hfill } \hfill \hfill
-          学号： \uline { \hfill \l__whu_info_student_number_tl \hfill } \hfill \hfill
-          姓名： \uline { \hfill \l__whu_info_author_tl \hfill }
+          毕业论文（设计）题目： \uline { \hfill \g__whu_info_title_tl \hfill } \\
+          学院： \uline { \hfill \g__whu_info_school_tl \hfill } \hfill \hfill
+          学号： \uline { \hfill \g__whu_info_student_number_tl \hfill } \hfill \hfill
+          姓名： \uline { \hfill \g__whu_info_author_tl \hfill }
         \end { minipage }
         \raggedbottom
         \__whu_set_table_font:
@@ -644,16 +797,13 @@
 \cs_new_protected:Nn \__whu_make_contents:
   {
     \__whu_new_chapter_page:
-    \pagenumbering { gobble } % 去掉目录页码
+    % \pagenumbering { gobble } % 去掉目录页码
     \tableofcontents
 
     \__whu_new_chapter_page:
-
-    \pagestyle { plain }
     \pagenumbering { arabic } % 重新计数页码
+    \pagestyle { plain }
 
-    \tl_set:Nn \baselinestretch { 1 } 
-    \normalsize
     \__whu_set_baseline_skip:
     \raggedbottom
     \__whu_set_table_font:
@@ -673,6 +823,7 @@
 \ProvideDocumentEnvironment { abstract } {}
   {
     \chapter * { 摘 \qquad 要 }
+    % \pagenumbering { gobble }
     \__whu_set_baseline_skip:
     \par
   }
@@ -680,14 +831,12 @@
     \skip_vertical:N \c__whu_baseline_skip \par
     \__whu_put_kw:nn
       { \heiti \zihao { -4 } 关键词：\hbox:n {} }
-      { \clist_use:Nn \l__whu_info_keywords_cn_clist { ； } }
+      { \clist_use:Nn \g__whu_info_keywords_cn_clist { ； } }
   }
 
 % 英文摘要
 \NewDocumentEnvironment { abstract * } {}
   {
-    \bool_if:NT \g__whu_twoside_bool
-      { \@twosidefalse }
     \chapter * { \textbf { ABSTRACT } }
     \__whu_set_baseline_skip:
     \par
@@ -696,21 +845,21 @@
     \skip_vertical:N \c__whu_baseline_skip \par
     \__whu_put_kw:nn
       { \bfseries \zihao { -4 } Key ~ words: ~ }
-      { \clist_use:Nn \l__whu_info_keywords_en_clist { ; ~ } }
+      { \clist_use:Nn \g__whu_info_keywords_en_clist { ; ~ } }
 
     \__whu_make_contents:
   }
 
 \NewDocumentCommand { \makebibliography } {}
   {
-    \tl_if_eq:NnF \l__whu_class_tl { opening }
+    \tl_if_eq:NnF \g__whu_option_class_tl { opening }
       {
         \__whu_new_chapter_page:
         \phantomsection
         \addcontentsline { toc } { chapter } { 参考文献 }
       }
 
-    \bibliography { \l__whu_style_bib_file_tl }
+    \bibliography { \g__whu_style_bib_file_tl }
   }
 
 \NewDocumentEnvironment { acknowledgements } {}
