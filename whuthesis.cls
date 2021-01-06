@@ -647,7 +647,10 @@
   { \zhdigits {#1} 年 \zhnumber {#2} 月 }
 \cs_generate_variant:Nn \__whu_date_parse:n { V }
 
-\skip_const:Nn \c__whu_baseline_skip { 23 pt }
+\tl_if_eq:NnTF \g__whu_option_degree_tl { bachelor }
+  { \skip_const:Nn \c__whu_baseline_skip { 23 pt } }
+  { \skip_const:Nn \c__whu_baseline_skip { 20 pt } }
+% 本科行距 23 pt，硕博行距 20 pt
 \cs_new_protected:Nn \__whu_set_baseline_skip:
   {
     \skip_set_eq:NN \baselineskip \c__whu_baseline_skip
@@ -658,11 +661,18 @@
 \NewDocumentCommand { \whusetup } { m }
   { \keys_set:nn { whu } {#1} }
 
+\tl_new:N \g__whu_info_clc_tl
+\tl_new:N \g__whu_info_udc_tl
+\tl_new:N \g__whu_info_secret_level_tl
+\tl_new:N \g__whu_info_school_number_tl
 \tl_new:N \g__whu_info_title_tl
+\tl_new:N \g__whu_info_title_en_tl
 \tl_new:N \g__whu_info_author_tl
+\tl_new:N \g__whu_info_author_en_tl
 \tl_new:N \g__whu_info_student_number_tl
 \tl_new:N \g__whu_info_school_tl
 \tl_new:N \g__whu_info_major_tl
+\tl_new:N \g__whu_info_direction_tl
 \tl_new:N \g__whu_info_date_tl
 \tl_new:N \g__whu_info_advisor_clist
 \tl_new:N \g__whu_info_keywords_cn_clist
@@ -670,17 +680,25 @@
 
 \keys_define:nn { whu / info }
   {
+    clc            .tl_gset:N    = \g__whu_info_clc_tl,
+    udc            .tl_gset:N    = \g__whu_info_udc_tl,
+    secret-level   .tl_gset:N    = \g__whu_info_secret_level_tl,
+    school-number  .tl_gset:N    = \g__whu_info_school_number_tl,
     title          .tl_gset:N    = \g__whu_info_title_tl,
+    title *        .tl_gset:N    = \g__whu_info_title_en_tl,
     author         .tl_gset:N    = \g__whu_info_author_tl,
+    author *       .tl_gset:N    = \g__whu_info_author_en_tl,
     student-number .tl_gset:N    = \g__whu_info_student_number_tl,
     school         .tl_gset:N    = \g__whu_info_school_tl,
     major          .tl_gset:N    = \g__whu_info_major_tl,
+    direction      .tl_gset:N    = \g__whu_info_direction_tl,
     date           .tl_gset:N    = \g__whu_info_date_tl,
     advisor        .clist_gset:N = \g__whu_info_advisor_clist,
     keywords       .clist_gset:N = \g__whu_info_keywords_cn_clist,
     keywords *     .clist_gset:N = \g__whu_info_keywords_en_clist,
 
-    date           .initial:n   =
+    school-number  .initial:n    = { 10486 },
+    date           .initial:n    =
       { \int_use:N \c_sys_year_int / \int_use:N \c_sys_month_int }
   }
 
@@ -716,9 +734,9 @@
         \end { minipage }
       }
       \par \skip_vertical:n { 6 em }
-      { \songti \zihao{1} \c__whu_heading_tl }
+      { \songti \zihao { 1 } \c__whu_heading_tl }
       \par \skip_vertical:n { 6 em }
-      \begin { minipage } [c] [ 6 cm ] { \textwidth }
+      \begin { minipage } [ c ] [ 6 cm ] { \textwidth }
         \skip_set:Nn \baselineskip { 32 pt }
         \centering { \heiti \zihao { 2 } \g__whu_info_title_tl }
       \end { minipage }
