@@ -114,6 +114,9 @@
   }
 % 判断是否有 chinese-jfm，若有则使用 chinese-jfm
 
+\RequirePackage { etoolbox }
+% 在载入文档类之前引入 etoolbox
+
 %%% ---- 载入 Class ----- %%%
 % 开题报告使用 ctexart，论文使用 ctexbook
 \tl_if_eq:NnTF \g__whu_option_class_tl { opening }
@@ -299,7 +302,7 @@
 \tl_set:Nn \tablename  { \heiti  \zihao { -4 } 表 }
 
 \RequirePackage { graphicx }
-\ctex_at_end_preamble:n
+\AtEndPreamble
   { \graphicspath { \g__whu_style_graphics_path_tl } }
 % 图片文件路径
 
@@ -571,7 +574,7 @@
   }
 
 % 在导言区末加载字体，不被用户配置覆盖
-\ctex_at_end_preamble:n
+\AtEndPreamble
   {
     \__whu_set_font:
     \__whu_set_cjk_font:
@@ -604,6 +607,9 @@
 \RequirePackage [ sort & compress ] { natbib }
 \setcitestyle { numbers , square , comma }
 \bibliographystyle { data / gbt7714-2005-whu }  % 参考文献样式
+% \RequirePackage [ sort & compress ] { gbt7714 }
+% \bibliographystyle { gbt7714-numerical }
+% \bibliographystyle { gbt7714-author-year }
 \skip_set:Nn \bibsep { 0 pt } % 参考文献间距设为 0
 
 \NewDocumentCommand { \upcite } { m }
@@ -621,7 +627,7 @@
 \skip_set:Nn \belowdisplayshortskip { 0 pt }
 
 % 最后引入 hyperref 包
-\ctex_at_end_preamble:n
+\AtEndPreamble
   {
     \RequirePackage { hyperref }
     \hypersetup { hidelinks }
