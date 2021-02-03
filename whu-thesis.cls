@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2020/12/30}{0.4}
+\ProvidesExplClass{whu-thesis}{2020/02/04}{0.5}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whuthesis } { 引擎不支持 }
@@ -43,7 +43,6 @@
 
 \bool_new:N \g__whu_option_draft_bool
 \bool_new:N \g__whu_option_twoside_bool
-\bool_gset_true:N \g__whu_option_twoside_bool
 
 \clist_new:N \g__whu_option_to_class_clist
 \clist_gset:Nn \g__whu_option_to_class_clist
@@ -108,7 +107,6 @@
         class .initial:n = academic
       }
   }
-
 \tl_if_eq:NnT \g__whu_option_type_tl { bachelor }
   {
     \keys_define:nn { whu / option }
@@ -116,7 +114,6 @@
         class .initial:n = paper
       }
   }
-\ProcessKeysOptions { whu / option }
 
 \sys_if_engine_luatex:TF
   {
@@ -163,8 +160,10 @@
       {
         \PassOptionsToClass { \g__whu_option_to_class_clist } { ctexbook }
         \LoadClass { ctexbook }
+        \bool_gset_true:N \g__whu_option_twoside_bool
       }
   }
+\ProcessKeysOptions { whu / option }
 
 \sys_if_engine_luatex:T { \RequirePackage { luatexja-adjust } }
 
@@ -321,7 +320,7 @@
       {
         format     = { \heiti \zihao { -4 }                  },
         number     = { \circled { \arabic { subparagraph } } },
-        aftername  = {                                       },
+        aftername  = { \quad                                 },
         beforeskip = { 0.5 \c__whu_baseline_skip             },
         afterskip  = { 0.5 \c__whu_baseline_skip             },
       },
@@ -349,48 +348,50 @@
   {
     \tl_set:cn { cft #1 title font } { \hfil \heiti \zihao { -2 } }
     % 目录标题 黑体小 2 号
-    \tl_set:cn { cft after #1 title }
-      {
-        \clist_map_inline:nn { doctor , bachelor }
-          {
-            \tl_if_eq:NnT \g__whu_option_type_tl {##1}
-              { \thispagestyle { empty } }
-          }
-      }
     \clist_map_inline:nn { before , after }
       { \skip_zero:c { cft ##1 #1 title skip } }
   }
 
-\tl_set:Nn \contentsname         { 目 \qquad 录 }
-\tl_set:Nn \listfigurename       { 图片索引     }
-\tl_set:Nn \listtablename        { 表格索引     }
+\clist_map_inline:nn { doctor , bachelor }
+  {
+    \tl_if_eq:NnT \g__whu_option_type_tl {#1}
+      { \tocloftpagestyle { empty } }
+  }
 
-\tl_set:Nn \cftdot               { $ \cdot $ }
-\tl_set:Nn \cftdotsep            { 1         }
+\tl_set:Nn \contentsname   { 目 \qquad 录 }
+\tl_set:Nn \listfigurename { 图片索引     }
+\tl_set:Nn \listtablename  { 表格索引     }
+
+\tl_set:Nn \cftdot    { $ \cdot $  }
+\tl_set:Nn \cftdotsep { \c_one_int }
 % 点间距
 
-\tl_set:Nn \cftsecfont           { \songti \zihao { -4 }     }
-\tl_set:Nn \cftsubsecfont        { \songti \zihao { -4 }     }
-\tl_set:Nn \cftsubsubsecfont     { \songti \zihao { -4 }     }
-\tl_set:Nn \cftsecpagefont       { \songti \zihao {  5 }     }
-\tl_set:Nn \cftsubsecpagefont    { \songti \zihao {  5 }     }
-\tl_set:Nn \cftsubsubsecpagefont { \songti \zihao {  5 }     }
-\tl_set:Nn \cftsecafterpnum      { \skip_vertical:n { 3 pt } }
-\tl_set:Nn \cftsubsecafterpnum   { \skip_vertical:n { 2 pt } }
+\clist_map_inline:nn { sec , subsec , subsubsec }
+  {
+    \tl_set:cn { cft #1 font } { \zihao { -4 } }
 
-\dim_set:Nn \cftsecindent          { 1.85 em }
-\dim_set:Nn \cftsubsecindent       { 1.85 em }
-\dim_set:Nn \cftsubsubsecindent    { 1.85 em }
+    \tl_if_eq:NnF \g__whu_option_type_tl { doctor }
+      { \tl_set:cn  { cft #1 page font } { \zihao { 5 } } }
+
+    \dim_set:cn { cft #1 indent } { \parindent }
+  }
+
+\dim_zero:N \cftfigindent
+\dim_zero:N \cfttabindent
 
 \tl_if_eq:NnF \g__whu_option_type_tl { opening }
   {
-    \tl_set_eq:NN \cftchapdotsep \cftdotsep
+    \tl_set:Nn \cftchapdotsep { \c_one_int }
     \tl_if_eq:NnTF \g__whu_option_type_tl { doctor }
-      { \tl_set:Nn \cftchapfont { \bfseries \zihao { 4 } } }
-      { \tl_set:Nn \cftchapfont { \heiti    \zihao { 4 } } }
-
-    \tl_set:Nn \cftchappagefont  { \heiti \zihao { 5 }       }
-    \tl_set:Nn \cftchapafterpnum { \skip_vertical:n { 5 pt } }
+      {
+        \tl_set:Nn \cftchapfont { \bfseries \zihao { -4 } }
+        \tl_set:Nn \cftchappagefont { \zihao { -4 } }
+        \skip_zero:N \cftbeforechapskip
+      }
+      {
+        \tl_set:Nn \cftchapfont { \heiti \zihao { 4 } }
+        \tl_set:Nn \cftchappagefont { \zihao { 5 } }
+      }
   }
 
 %%% ---- 图表标题 ----- %%%
@@ -430,7 +431,7 @@
 % 将表格内容字体设为五号
 
 % 列表样式
-\RequirePackage { enumitem }
+\RequirePackage [ inline ] { enumitem }
 \setlist { nosep }
 
 % 修改脚注
@@ -439,18 +440,19 @@
 
 \tl_set:Nn \@makefnmark
   {
-    \nolinebreak \hbox:n {} \nolinebreak \hbox:n
-      { \textsuperscript { \circled { \@thefnmark } } }
+    \kern \c_zero_dim \textsuperscript { \circled { \@thefnmark } }
   }
 
 \RenewDocumentCommand { \@makefntext } { m }
   {
-    \noindent \hbox_to_wd:nn { 1 em } { \circled { \@thefnmark } } #1
+    \noindent \hangindent 1 em \circled { \@thefnmark } #1 \hangafter 1
   }
 
-\skip_set_eq:NN \footskip \baselineskip
+\skip_set_eq:NN \headheight \baselineskip
+\skip_set_eq:NN \footskip   \baselineskip
 
 \dim_set:Nn \footnotesep { 6 pt }
+\setlength { \skip \footins } { \skip_eval:n { 2 \baselineskip } plus 1 fill }
 \tl_set:Nn \footnotesize { \songti \zihao { 5 } }
 \tl_set:Nn \footnoterule
   { \noindent \rule [ 1 pt ] { 0.3 \columnwidth } { 1 pt } }
@@ -710,9 +712,28 @@
 \RequirePackage [ sort & compress ] { natbib }
 \skip_set:Nn \bibsep { 0 pt } % 参考文献间距设为 0
 
-\NewDocumentCommand { \upcite } { m }
-  { \textsuperscript { \cite {#1} } }
-% 自定义新命令 \upcite, 使参考文献引用以上标出现
+\cs_new_protected:Npn \__whu_set_cite_style_numerical:
+  {
+    \bool_if:NT \g__whu_style_cite_style_super_tl { \NAT@supertrue }
+    \NAT@numberstrue
+    \tl_set:Nn \NAT@open  { [ }
+    \tl_set:Nn \NAT@close { ] }
+    \tl_set:Nn \NAT@sep   { , ~ }
+  }
+
+\cs_new_protected:Npn \__whu_set_cite_style_author_year:
+  {
+    \NAT@numbersfalse
+    \tl_set:Nn \NAT@open  { （ }
+    \tl_set:Nn \NAT@close { ） }
+    \tl_set:Nn \NAT@sep   { ； }
+    \tl_set:Nn \NAT@aysep { ， }
+    \tl_set:Nn \NAT@yrsep { 、 }
+  }
+
+% \NewDocumentCommand { \upcite } { m }
+%   { \textsuperscript { \cite {#1} } }
+% % 自定义新命令 \upcite, 使参考文献引用以上标出现
 
 \RenewDocumentCommand { \eqref } { m }
   { \textup { { \normalfont （ \ref {#1} ） \normalfont } } }
@@ -826,7 +847,9 @@
 
 \tl_new:N \g__whu_style_graphics_path_tl
 \tl_new:N \g__whu_style_bib_style_tl
+\tl_new:N \g__whu_style_cite_style_tl
 
+\bool_new:N \g__whu_style_cite_style_super_tl
 \bool_new:N \g__whu_style_list_of_figures_bool
 \bool_new:N \g__whu_style_list_of_tables_bool
 
@@ -834,9 +857,16 @@
   {
     graphics-path .tl_gset:N = \g__whu_style_graphics_path_tl,
 
-    bib-style               .choices:nn =
+    bib-style .choices:nn =
       { numerical , author-year }
       { \tl_gset_eq:NN \g__whu_style_bib_style_tl \l_keys_choice_tl },
+
+    cite-style          .choice:,
+    cite-style / super  .code:n =
+      { \bool_gset_true:N  \g__whu_style_cite_style_super_tl },
+    cite-style / inline .code:n =
+      { \bool_gset_false:N \g__whu_style_cite_style_super_tl },
+    cite-style          .initial:n = super,
 
     list-of-figures         .choice:,
     list-of-figures / true  .code:n =
@@ -881,13 +911,15 @@
   {
     \tl_if_eq:NnT \g__whu_style_bib_style_tl { numerical }
       {
-        \setcitestyle { numbers , square , comma }
         \bibliographystyle { data / gbt7714-2005-whu-numerical }
+        % \bibliographystyle { gbt7714-numerical }
+        \__whu_set_cite_style_numerical:
       }
     \tl_if_eq:NnT \g__whu_style_bib_style_tl { author-year }
       {
         % TODO: gbt7714-2005-whu-author-year
         \bibliographystyle { gbt7714-author-year }
+        \__whu_set_cite_style_author_year:
       }
   }
 

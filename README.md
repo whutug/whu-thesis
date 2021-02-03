@@ -5,7 +5,9 @@
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
 [![](https://github.com/mtobeiyf/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/mtobeiyf/whu-thesis/actions)
 
-本项目为武汉大学**本科生**毕业论文 LaTeX 模板，同时支持开题报告的书写。
+本项目为武汉大学毕业论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
+
+\***硕博现有的著者—出版年的 bst 使用的是 gbt7714-author-year.bst，遵循 GB/T 7714-2015 标准，可能不完全符合研究生院的要求。**
 
 根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)编写，力求合规，简洁，易于实现，用户友好。
 
@@ -18,6 +20,7 @@
 正文样例可以参照 [whuthesis-demo](whuthesis-demo.pdf)
 
 开题报告样例可以参照 [opening-demo](opening-demo.pdf)
+
 ## 如何使用
 
 使用前请阅读[使用文档](whuthesis-doc.pdf)
@@ -34,7 +37,6 @@
 ### Overleaf 在线编译
 
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
-
 
 [Overleaf](https://www.overleaf.com/) 是一个简洁的在线 LaTeX 编辑器。无需安装，实时共享，版本控制。该模板支持了 Overleaf 的在线编辑，可以从上面的模板链接直接创建自己的项目。
 
@@ -66,7 +68,13 @@
 
 ## 后续计划
 
-支持打印模式、课程报告模式；支持硕士、博士论文模板等。欢迎提交 Pull Request。
+* 支持打印模式、课程报告模式。
+
+* 增加符合 gbt7714-2005 的著者—出版年的 bst 格式。如果可以，使用 gbt7714 重写现有的顺序编码制的 bst。
+
+* 增加 BibLaTeX 支持。
+
+欢迎提交 Pull Request。
 
 ## 致谢
 
@@ -74,14 +82,14 @@
 <details>
 <summary>其它高校的相关开源项目</summary>
 
-- [bsThesisWHU](https://github.com/csarron/bsThesisWHU)
-- [HUSTPaperTemp](https://github.com/skinaze/HUSTPaperTemp)
-- [SJTUThesis](https://github.com/sjtug/SJTUThesis)
-- [ustcthesis](https://github.com/ustctug/ustcthesis)
-- [TJU-thesis-template](https://github.com/liangzhenduo0608/TJU-thesis-template)
-- [xdba-thesis](https://github.com/xdlinux/xdba-thesis)
-- [NEUBachelorThesis](https://github.com/tzaiyang/NEUBachelorThesis)
-- [ThuThesis](https://github.com/tuna/thuthesis)
-- [fduthesis](https://github.com/stone-zeng/fduthesis)
+* [bsThesisWHU](https://github.com/csarron/bsThesisWHU)
+* [HUSTPaperTemp](https://github.com/skinaze/HUSTPaperTemp)
+* [SJTUThesis](https://github.com/sjtug/SJTUThesis)
+* [ustcthesis](https://github.com/ustctug/ustcthesis)
+* [TJU-thesis-template](https://github.com/liangzhenduo0608/TJU-thesis-template)
+* [xdba-thesis](https://github.com/xdlinux/xdba-thesis)
+* [NEUBachelorThesis](https://github.com/tzaiyang/NEUBachelorThesis)
+* [ThuThesis](https://github.com/tuna/thuthesis)
+* [fduthesis](https://github.com/stone-zeng/fduthesis)
 
 </details>
