@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2020/02/04}{0.5}
+\ProvidesExplClass{whu-thesis}{2020/02/08}{0.5}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whuthesis } { 引擎不支持 }
@@ -206,7 +206,7 @@
 %%% ---- 引入宏包 ----- %%%
 \RequirePackage { amsmath , amssymb , amsthm , mathtools }
 
-\RequirePackage { tikz, pgfplots }               % 绘图
+\RequirePackage { tikz, pgfplots } % 绘图
 \pgfplotsset { compat = 1.17 }
 \RequirePackage [ normalem ] { ulem }
 
@@ -284,7 +284,6 @@
         \fancyhead [ E C ] { \zihao { 5 } \g__whu_head_even_tl }
         \fancyfoot [ C ]   { \zihao { 5 } \thepage }
       }
-    \pagestyle { plain }
   }
 
 %%% ---- 定义标题和段落样式 ----- %%%
@@ -401,12 +400,12 @@
 % 设置表格标题字体为黑体, 设置图标题字体为宋体
 \DeclareCaptionFont { heiti } { \heiti }
 \captionsetup [ table ] { textfont = heiti }
-\tl_set:Nn \figurename { \songti \zihao { -4 } 图 }
-\tl_set:Nn \tablename  { \heiti  \zihao { -4 } 表 }
+\tl_set:Nn \figurename {        \zihao { -4 } 图 }
+\tl_set:Nn \tablename  { \heiti \zihao { -4 } 表 }
 
 \RequirePackage { graphicx }
 \AtEndPreamble
-  { \exp_args:Nx \graphicspath \g__whu_style_graphics_path_tl }
+  { \exp_args:NV \graphicspath \g__whu_style_graphics_path_tl }
 % 图片文件路径
 
 % 使用 tabularx 创建占满宽度的表格
@@ -418,10 +417,15 @@
 \ProvideDocumentCommand { \tabularxcolumn } { m }
   { m { #1 } }  % 使表格内容垂向居中
 
-\RequirePackage { longtable , xltabular }    % 做长表格的包
-\RequirePackage { booktabs }                 % 做三线表的包
-\RequirePackage { makecell , multirow }      % 跨行表格
-\RequirePackage { diagbox  }                 % 斜线表头
+\RequirePackage
+  {
+    longtable,
+    xltabular, % 长表格
+    booktabs,  % 三线表
+    makecell,
+    multirow,  % 跨行表格
+    diagbox    % 斜线表头
+  }
 
 \cs_new_protected:Npn \__whu_set_table_font:
   {
@@ -496,6 +500,7 @@
 \cs_new_protected:Npn \__whu_set_font_times:
   { \setmainfont { Times ~ New ~ Roman } [ Ligatures = Rare ] }
 
+% XITS % 字体安装在 TeX 发行版下，必须使用文件名调用
 \cs_new_protected:Npn \__whu_set_font_xits:
   {
     \setmainfont { XITS }
@@ -594,7 +599,7 @@
       }
   }
 
-% fandol 字体安装在 TeX 发行版下，必须使用文件名调用
+% fandol 同理
 \cs_new_protected:Npn \__whu_set_cjk_font_fandol:
   {
     \__whu_set_cjk_font_song:nn { FandolSong }
@@ -798,9 +803,9 @@
 \tl_new:N \g__whu_info_major_tl
 \tl_new:N \g__whu_info_direction_tl
 \tl_new:N \g__whu_info_date_tl
-\tl_new:N \g__whu_info_advisor_clist
-\tl_new:N \g__whu_info_keywords_clist
-\tl_new:N \g__whu_info_keywords_en_clist
+\clist_new:N \g__whu_info_advisor_clist
+\clist_new:N \g__whu_info_keywords_clist
+\clist_new:N \g__whu_info_keywords_en_clist
 
 \keys_define:nn { whu / info }
   {
@@ -808,11 +813,11 @@
     udc            .tl_gset:N    = \g__whu_info_udc_tl,
     secret-level   .tl_gset:N    = \g__whu_info_secret_level_tl,
     school-number  .tl_gset:N    = \g__whu_info_school_number_tl,
+    student-number .tl_gset:N    = \g__whu_info_student_number_tl,
     title          .tl_gset:N    = \g__whu_info_title_tl,
     title *        .tl_gset:N    = \g__whu_info_title_en_tl,
     author         .tl_gset:N    = \g__whu_info_author_tl,
     author *       .tl_gset:N    = \g__whu_info_author_en_tl,
-    student-number .tl_gset:N    = \g__whu_info_student_number_tl,
     school         .tl_gset:N    = \g__whu_info_school_tl,
     subject        .tl_gset:N    = \g__whu_info_subject_tl,
     major          .tl_gset:N    = \g__whu_info_major_tl,
@@ -839,9 +844,9 @@
     innovation   .tl_gset:N    = \g__whu_element_innovation_tl,
     abstract     .tl_gset:N    = \g__whu_element_abstract_tl,
     abstract *   .tl_gset:N    = \g__whu_element_abstract_en_tl,
-    thanks       .tl_gset:N    = \g__whu_element_thanks_tl,
     bibliography .tl_gset:N    = \g__whu_element_bibliography_tl,
     achievements .tl_gset:N    = \g__whu_element_achievements_tl,
+    thanks       .tl_gset:N    = \g__whu_element_thanks_tl,
     appendix     .clist_gset:N = \g__whu_element_appendix_clist,
   }
 
@@ -852,6 +857,7 @@
 \bool_new:N \g__whu_style_cite_style_super_tl
 \bool_new:N \g__whu_style_list_of_figures_bool
 \bool_new:N \g__whu_style_list_of_tables_bool
+\bool_new:N \g__whu_style_fullwidth_stop_bool
 
 \keys_define:nn { whu / style }
   {
@@ -882,7 +888,20 @@
     list-of-tables / false .code:n =
       { \bool_gset_false:N \g__whu_style_list_of_tables_bool },
     list-of-tables         .default:n = true,
-    list-of-tables         .initial:n = false
+    list-of-tables         .initial:n = false,
+
+    fullwidth-stop .choice:,
+    fullwidth-stop / true .code:n =
+      {
+        \bool_gset_true:N \g__whu_style_fullwidth_stop_bool
+        \tl_const:Nn \c__whu_fullwidth_full_stop_tl { ． }
+        \char_set_catcode_active:n { `。 }
+        \char_set_active_eq:nN { `。 } \c__whu_fullwidth_full_stop_tl
+      },
+    fullwidth-stop / false .code:n =
+      { \bool_gset_false:N \g__whu_style_fullwidth_stop_bool },
+    fullwidth-stop .default:n = true,
+    fullwidth-stop .initial:n = false
   }
 
 \clist_map_inline:nn { doctor , master }
@@ -1037,7 +1056,11 @@
               \hbox_to_wd:nn { 3 cm }
                 { \hfill \g__whu_info_student_number_tl \hfill }
             } \\
-          密级 \uline { \hbox_to_wd:nn { 3 cm } {} }
+          密级 \uline
+            {
+              \hbox_to_wd:nn { 3 cm }
+                { \hfill \g__whu_info_secret_level_tl \hfill }
+            }
         \end { minipage }
       \group_end:
       \par \skip_vertical:n { 6 em }
@@ -1098,7 +1121,7 @@
           }
       \end { minipage }
       \par \skip_vertical:n { 2 cm }
-      \includegraphics [ width = 5.5 cm ] { whu.pdf }
+      \includegraphics [ width = 5.5 cm ] { data / whu.pdf }
       \par \skip_vertical:n { 1 cm }
       { \zihao { 2 } \bfseries \c__whu_heading_tl }
       \par \skip_vertical:n { 2.5 cm }

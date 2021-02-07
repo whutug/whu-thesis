@@ -36,7 +36,7 @@
 模板使用了 unicode-math 包更改数学字体。所以在使用数学字体时，尽量使用 unicode-math 包提供的 \verb|\sym| 接口，详情请阅读 unicode-math 文档。
 
 \section{插图的使用}
-\begin{figure}[!htb]
+\begin{figure}
   \centering
   \includegraphics[width=0.3\textwidth]{whulogo.pdf}
   \caption{插图示例}
@@ -49,12 +49,18 @@
 
 如果一个图由两个或两个以上分图组成时，各分图分别以(a)、(b)、(c)...... 作为图序，并须有分图题。模板使用 subcaption 宏包来处理，比如图~\ref{fig:subfig-a} 和图~\ref{fig:subfig-b}。
 
-\begin{figure}
+\begin{figure}[h]
   \centering
-  \subcaptionbox{武汉大学校徽\label{fig:subfig-a}}
-    {\includegraphics[width=0.2\linewidth]{whulogo.pdf}}
-  \subcaptionbox{武汉大学\label{fig:subfig-b}}
-    {\includegraphics[width=0.7\linewidth]{whu.pdf}}
+  \begin{subfigure}{0.2\textwidth}
+    \includegraphics[width=\linewidth]{whulogo.pdf}
+    \caption{武汉大学校徽}
+    \label{fig:subfig-a}
+  \end{subfigure}\qquad
+  \begin{subfigure}{0.7\textwidth}
+    \includegraphics[width=\linewidth]{whu.pdf}
+    \caption{武汉大学}
+    \label{fig:subfig-b}
+  \end{subfigure}
   \caption{多个分图的示例}
   \label{fig:multi-image}
 \end{figure}
@@ -193,10 +199,7 @@
   \item 第三项
 \end{itemize}
 
-\section{数学环境的使用}
-模板简单定义了 8 种数学环境，具体见表~\ref{tab:数学环境}，使用方法如下所示。
-
-\begin{table}
+\begin{table}[b]
   \caption{模板定义的数学环境}\label{tab:数学环境}
   \begin{tabularx}{\textwidth}{CCCC}
     \toprule
@@ -208,6 +211,9 @@
     \bottomrule
   \end{tabularx}
 \end{table}
+
+\section{数学环境的使用}
+模板简单定义了 8 种数学环境，具体见表~\ref{tab:数学环境}，使用方法如下所示。
 
 \begin{theorem}
   设向量 \(\vb*{a} \neq \vb*{0}\)，那么向量 \(\vb*{b} \parallel \vb*{a}\) 的充分必要条件是：存在唯一的实数 \(\lambda\)，使 \(\vb*{b} = \lambda \vb*{a}\)。
@@ -253,7 +259,7 @@
 \end{bullshit}
 
 \section{单位}
-单位的输入请使用 siunitx 包中提供的 \verb|\si| 与 \verb|\SI| 命令,可以方便地处理希腊字母以及数字与单位之间的空白。在以前，\LaTeX{} 中输入角度需要使用 \verb|$^\circ$| 的奇技淫巧，现在只需要 \verb|\ang| 命令解决问题。当然 siunitx 包中还提供了不少其他有用的命令，有需要的可以自行阅读 siunitx 文档。
+单位的输入请使用 siunitx 包中提供的 \verb|\si| 与 \verb|\SI| 命令，可以方便地处理希腊字母以及数字与单位之间的空白。在以前，\LaTeX{} 中输入角度需要使用 \verb|$^\circ$| 的奇技淫巧，现在只需要 \verb|\ang| 命令解决问题。当然 siunitx 包中还提供了不少其他有用的命令，有需要的可以自行阅读 siunitx 文档。
 
 示例：\SI{6.4e6}{m}，\SI{9}{\micro\meter}，\si{kg.m.s^{-1}}，\ang{104;28;}。
 
@@ -261,7 +267,7 @@
 physics 宏包可以让用户更加方便、简洁地使用、输入物理符号，具体也请自行阅读 physics 文档。示例如下
 \begin{equation}
   \begin{aligned}
-    \int_0^\frac{\symup{\pi}}{2} \abs{\sin{x}} \dd{x} & = 2 \int_0^{\symup{\pi}} \sin{x} \dd{x} \\
+    \int_0^{2\symup{\pi}} \abs{\sin{x}} \dd{x} & = 2 \int_0^{\symup{\pi}} \sin{x} \dd{x} \\
                                                       & = -2 \eval{\cos{x}}_0^{\symup{\pi}}     \\
                                                       & = 4
   \end{aligned}
