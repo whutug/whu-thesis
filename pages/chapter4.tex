@@ -17,14 +17,16 @@ print("Hello world!")
 
 \begin{algorithm}
   \SetAlgoLined
-  \KwResult{Write here the result}
+  \KwData{this text}
+  \KwResult{how to write algorithm with \LaTeXe}
   initialization\;
-  \While{While condition}{
-    instructions\;
-    \eIf{condition}{
-      instructions1\;
+  \While{not at end of this document}{
+    read current\;
+    \eIf{understand}{
+      go to next section\;
+      current section becomes this one\;
     }{
-      instructions3\;
+      go back to the beginning of current section\;
     }
   }
   \caption{如何写算法}\label{alg:alg1}
@@ -32,19 +34,6 @@ print("Hello world!")
 
 \section{绘图}
 关于使用 \LaTeX{} 绘图的更多例子，请参考 \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{Pgfplots package}。一般建议使用如 Photoshop、PowerPoint 等制图，再转换成 PDF 等格式插入。
-
-\section{单位}
-单位的输入请使用 siunitx 包中提供的 \verb|\si| 与 \verb|\SI| 命令。在以前，\LaTeX{} 中输入角度需要使用 \verb|$^\circ$| 的奇技淫巧，现在只需要 \verb|\ang| 命令解决问题。当然 siunitx 包中还提供了不少其他有用的命令，有需要的可以自行阅读 siunitx 文档。
-
-\section{物理符号}
-physics 宏包可以让用户更加方便、简洁地使用、输入物理符号，具体也请自行阅读 physics 文档。示例如下
-\begin{equation}
-  \begin{aligned}
-    \int_0^\frac{\symup{\pi}}{2} \abs{\sin{x}} \dd{x} & = 2 \int_0^{\symup{\pi}} \sin{x} \dd{x} \\
-                                                      & = -2 \eval{\cos{x}}_0^{\symup{\pi}}     \\
-                                                      & = 4
-  \end{aligned}
-\end{equation}
 
 \section{写在最后}
 工具不重要，对工具的合理运用才重要。希望本模板对大家的论文写作有所帮助。
