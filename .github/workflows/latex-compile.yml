@@ -21,29 +21,36 @@ jobs:
       uses: actions/checkout@v2
 
     # Compile the LaTeX document with XeLaTeX
-    - name: Compile whuthesis
+    - name: Compile whu-thesis
       uses: xu-cheng/latex-action@v2
       with:
-        root_file: whuthesis-demo.tex
+        root_file: whu-thesis-demo.tex
         args: -xelatex -file-line-error -interaction=nonstopmode -shell-escape
-        extra_system_packages: "py-pygments msttcorefonts-installer fontconfig"
-        pre_compile: "update-ms-fonts && fc-cache -f && rm -rf whuthesis-demo.pdf"
+        extra_system_packages: "fontconfig"
+        pre_compile: "fc-cache -f && rm -rf whuthesis-demo.pdf"
 
     - name: Compile opening
       uses: xu-cheng/latex-action@v2
       with:
         root_file: opening-demo.tex
         args: -xelatex -file-line-error -interaction=nonstopmode -shell-escape
-        extra_system_packages: "py-pygments msttcorefonts-installer fontconfig"
-        pre_compile: "update-ms-fonts && fc-cache -f && rm -rf opening-demo.pdf"
+        extra_system_packages: "fontconfig"
+        pre_compile: "fc-cache -f && rm -rf opening-demo.pdf"
+
+    - name: Compile spine
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: spine-demo.tex
+        args: -lualatex -file-line-error -interaction=nonstopmode -shell-escape
+        pre_compile: "luaotfload-tool -f && rm -rf spine-demo.pdf"
 
     # Upload compiled pdf to artifacts if compiled successfully
-    - name: Upload whuthesis
+    - name: Upload whu-thesis
       uses: actions/upload-artifact@v2
       if: success()
       with:
-        name: whuthesis-demo.pdf
-        path: whuthesis-demo.pdf
+        name: whu-thesis-demo.pdf
+        path: whu-thesis-demo.pdf
 
     - name: Upload opening
       uses: actions/upload-artifact@v2
@@ -51,3 +58,10 @@ jobs:
       with:
         name: opening-demo.pdf
         path: opening-demo.pdf
+
+    - name: Upload spine
+      uses: actions/upload-artifact@v2
+      if: success()
+      with:
+        name: spine-demo.pdf
+        path: spine-demo.pdf
