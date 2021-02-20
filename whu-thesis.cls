@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2021/02/08}{0.5}
+\ProvidesExplClass{whu-thesis}{2021/02/20}{0.5a}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whuthesis } { 引擎不支持 }
@@ -52,7 +52,7 @@
   {
     type .value_required:n = true,
     type .choices:nn       =
-      { doctor , master , bachelor , opening , spine }
+      { doctor , master , bachelor , opening }
       { \tl_gset_eq:NN \g__whu_option_type_tl \l_keys_choice_tl },
     type .initial:n        = doctor,
     % 学位，默认本科生
@@ -144,24 +144,9 @@
     \LoadClass { ctexart }
   }
   {
-    \tl_if_eq:NnTF \g__whu_option_type_tl { spine }
-      {
-        \sys_if_engine_luatex:F
-          {
-            \msg_fatal:nnx { whuthesis } { 书脊引擎不支持 }
-              { \c_sys_engine_str }
-          }
-        \PassOptionsToPackage { force } { lltjp-geometry }
-        \LoadClass { ltjtarticle }
-        \RequirePackage { ctexsize }
-        \RequirePackage { luatexja-fontspec }
-        \NewDocumentCommand { \ctexset } { m } {}
-      }
-      {
-        \PassOptionsToClass { \g__whu_option_to_class_clist } { ctexbook }
-        \LoadClass { ctexbook }
-        \bool_gset_true:N \g__whu_option_twoside_bool
-      }
+    \PassOptionsToClass { \g__whu_option_to_class_clist } { ctexbook }
+    \LoadClass { ctexbook }
+    \bool_gset_true:N \g__whu_option_twoside_bool
   }
 \ProcessKeysOptions { whu / option }
 
@@ -218,6 +203,8 @@
     group-digits = false
   }
 
+\RequirePackage { shellesc }
+
 \RequirePackage { algorithm2e }     % 算法代码
 \tl_set:Nn \algorithmcfname { 算法 }
 \SetAlCapSty {}
@@ -225,7 +212,7 @@
 \box_new:N \l__whu_space_box
 \hbox_set:Nn \l__whu_space_box { \nobreakspace }
 \SetAlgoCaptionSeparator
-  { \skip_horizontal:n { 1 em - \box_wd:N \l__whu_space_box } \hbox:n {} }
+  { \hbox_to_wd:nn { 1 em - \box_wd:N \l__whu_space_box } {} }
 % 算法标题后会跟一个不间断空格 ~，这里将其宽度减掉
 
 %%% ---- 定义页面样式 ----- %%%
@@ -275,7 +262,7 @@
         \tl_gremove_all:Nn \g__whu_head_odd_tl { \\ }
         \tl_gset:Nn \g__whu_head_even_tl { 武汉大学硕士学位论文 }
       }
-    
+
     % 默认页面页眉页脚样式
     \fancypagestyle { plain }
       {
@@ -350,6 +337,7 @@
     \clist_map_inline:nn { before , after }
       { \skip_zero:c { cft ##1 #1 title skip } }
   }
+\skip_set:Nn \cftaftertoctitleskip { 0.5 \baselineskip }
 
 \clist_map_inline:nn { doctor , bachelor }
   {
@@ -516,45 +504,36 @@
 % 中文字体
 \cs_new_protected:Npn \__whu_set_cjk_font_song:nn #1#2
   {
-    \tl_if_eq:NnF \g__whu_option_type_tl { spine }
-      {
-        \setCJKmainfont {#1} [#2]
-        \newCJKfontfamily { \songti } {#1} [#2]
-      }
+    \setCJKmainfont {#1} [#2]
+    \newCJKfontfamily { \songti } {#1} [#2]
   }
 \cs_new_protected:Npn \__whu_set_cjk_font_hei:nn #1#2
   {
-    \tl_if_eq:NnF \g__whu_option_type_tl { spine }
-      {
-        \setCJKsansfont {#1} [#2]
-        \newCJKfontfamily { \heiti } {#1} [#2]
-      }
+    \setCJKsansfont {#1} [#2]
+    \newCJKfontfamily { \heiti } {#1} [#2]
   }
 \cs_new_protected:Npn \__whu_set_cjk_font_fang:nn #1#2
   {
-    \tl_if_eq:NnTF \g__whu_option_type_tl { spine }
+    \setCJKmonofont {#1} [#2]
+    \newCJKfontfamily { \fangsong } {#1} [#2]
+    \cs_new:Npn \__whu_set_spine_font:
       {
         \file_if_exist:nTF { jfm-zh_CN.lua }
           {
-            \setmainjfont {#1}
+            \exp_not:N \setmainjfont {#1}
               [
                 #2 , TateFeatures =
-                  { JFM = zh_CN / { \g__whu_option_punct_tl , vert } }
+                  {
+                    JFM = zh_CN / { \exp_not:o \g__whu_option_punct_tl , vert }
+                  }
               ]
           }
-          { \setmainjfont {#1} [#2] }
-      }
-      {
-        \setCJKmonofont {#1} [#2]
-        \newCJKfontfamily { \fangsong } {#1} [#2]
+          { \exp_not:N \setmainjfont {#1} [ #2 ] }
       }
   }
 \cs_new_protected:Npn \__whu_set_cjk_font_kai:nn #1#2
   {
-    \tl_if_eq:NnF \g__whu_option_type_tl { spine }
-      {
-        \newCJKfontfamily { \kaishu } {#1} [#2]
-      }
+    \newCJKfontfamily { \kaishu } {#1} [#2]
   }
 
 \cs_new_protected:Npn \__whu_set_cjk_font_windows:
@@ -1030,17 +1009,6 @@
     \__whu_set_table_font:
   }
 
-\cs_new_protected:Npn \__whu_make_front_matter_spine:
-  {
-    \pagestyle { empty }
-    \mode_leave_vertical: \vfil
-    \noindent \hbox_to_wd:nn { \textwidth }
-      {
-        \zihao { 4 } \g__whu_info_title_tl
-        \hfill \g__whu_info_author_tl
-      }
-  }
-
 %%%% ---- 论文封面 ---- %%%%
 \cs_new_protected:Npn \__whu_make_cover_bachelor:
   {
@@ -1164,7 +1132,7 @@
                 \g__whu_info_direction_tl \\ [ 0.5 em ]
               }
               {
-                \__whu_spread_with:nn { 专业类别 { （领 } { 域） } } { \hfill } 
+                \__whu_spread_with:nn { 专业类别 { （领 } { 域） } } { \hfill }
                 & \g__whu_info_major_tl \\ [ 0.5 em ]
               }
           }
@@ -1372,6 +1340,7 @@
     \__whu_make_achievements:
     \__whu_make_thanks:
     \__whu_make_appendix:
+    \__whu_make_spine:
   }
 
 \cs_new_protected:Npn \__whu_make_back_matter_master:
@@ -1399,8 +1368,6 @@
     \skip_vertical:N \c__whu_baseline_skip
     \hfill 年 \qquad 月 \qquad 日
   }
-
-\cs_new_protected:Npn \__whu_make_back_matter_spine: {}
 
 %%%% ---- 参考文献 ---- %%%%
 \cs_new_protected:Npn \__whu_make_bibliography:
@@ -1469,4 +1436,46 @@
         \clist_map_inline:Nn \g__whu_element_appendix_clist
           { \file_input:n {##1} }
       }
+  }
+
+%%%% ---- 书脊 ---- %%%%
+\cs_new_protected:Npn \__whu_make_spine:
+  {
+    \iow_new:N \g__whu_spine_iow
+    \iow_open:Nn \g__whu_spine_iow { spine.tex }
+    \iow_now:Nx \g__whu_spine_iow
+      {
+        \tl_to_str:n
+          {
+            \documentclass { ltjtarticle }
+            \usepackage { ctexsize }
+            \usepackage { geometry }
+            \geometry { margin = 2.5 cm , ignoreall }
+            \usepackage { luatexja-fontspec }
+            \ExplSyntaxOn
+          }
+        \__whu_set_spine_font:
+        \tl_to_str:n
+          {
+            \begin { document }
+            \pagestyle { empty } 
+            \mode_leave_vertical: \vfil
+            \noindent \hbox_to_wd:nn { \textwidth }
+          }
+        \iow_char:N \{ \iow_newline:
+        \tl_to_str:n { \zihao { 4 } } \exp_not:o \g__whu_head_odd_tl
+        \tl_to_str:n { \hfill } \exp_not:o \g__whu_info_author_tl
+        \iow_char:N \}
+        \tl_to_str:n { \end { document } }
+      }
+    \iow_close:N \g__whu_spine_iow
+    \__whu_compile_spine:
+  }
+
+\cs_new_protected:Npn \__whu_compile_spine:
+  {
+    \ShellEscape { lualatex ~ spine }
+    \sys_if_platform_windows:TF
+      { \ShellEscape { del ~ spine.tex } }
+      { \ShellEscape { rm ~ spine.tex } }
   }

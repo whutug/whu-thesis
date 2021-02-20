@@ -14,7 +14,7 @@
 
 \title{\cls{whu-thesis}\bfseries ：武汉大学毕业论文模板\thanks{\url{https://github.com/whutug/whu-thesis}}}
 \author{WHUTUG\thanks{\url{https://github.com/whutug}}}
-\date{2021/02/08 \quad v0.5}
+\date{2021/02/20 \quad v0.5a}
 
 \begin{document}
 \maketitle
@@ -110,18 +110,19 @@
 
 \begin{function}{type}
     \begin{fdusyntax}[emph={[1]type}]
-        type = (*<(doctor)|master|bachelor|opening|spine>*)
+        type = (*<(doctor)|master|bachelor|opening>*)
     \end{fdusyntax}
-    选择学位类型。五种选项分别代表博士学位论文、硕士学位论文、本科毕业论文、本科开题报告与博士论文书脊。
+    选择学位类型。四种选项分别代表博士学位论文、硕士学位论文、本科毕业论文与本科开题报告。
 \end{function}
 
-\kvopt{type}{opening} 时，whu-thesis 会加载 \pkg{ctexart} 文档类；\kvopt{type}{spine} 时，由于 \CTeX{} 宏集暂时不支持竖排，此时 whu-thesis 加载的是 \pkg{\LuaTeX-ja} 的 \cls{ltjtarticle} 文档类；其他时候 whu-thesis 则会加载 \cls{ctexbook} 文档类。
+\kvopt{type}{opening} 时，\cls{whu-thesis} 会加载 \pkg{ctexart} 文档类，其他时候 \cls{whu-thesis} 则会加载 \cls{ctexbook} 文档类。
 
 \begin{function}{class}
     \begin{fdusyntax}[emph={[1]class}]
-        class = (*<(academic)|professional|(paper)|design>*)
+        class = (*<(academic)|professional>*)
+        class = (*<(paper)|design>*)
     \end{fdusyntax}
-    选择论文类型。前二选项表示 \kvopt{type}{master} 时的学术硕士与专业硕士，影响论文封面设计。后二选项表示 \kvopt{type}{bachelor} 时的毕业论文与毕业设计，这一要求在《印制规范》中并未体现，只影响论文标题上方显示为“武汉大学本科毕业论文”还是“武汉大学本科毕业设计”。
+    选择论文类型。上二选项表示 \kvopt{type}{master} 时的学术硕士与专业硕士，影响论文封面设计。下二选项表示 \kvopt{type}{bachelor} 时的毕业论文与毕业设计，这一要求在《印制规范》中并未体现，只影响论文标题上方显示为“武汉大学本科毕业论文”还是“武汉大学本科毕业设计”。
 \end{function}
 
 \begin{function}{draft}
@@ -408,7 +409,7 @@
         \end{tabularx}
         \vspace*{10pt}
         \begin{tablenotes}
-            \item[a] \kvopt{cjk-font}{overleaf} 调用的字体与 \kvopt{cjk-font}{windows} 完全相同，区别只在于 \kvopt{cjk-font}{overleaf} 时，whu-thesis 会以文件名方式调用字体。 Overleaf 用户在使用 \kvopt{cjk-font}{overleaf} 时，需要手动在目录中上传字体。
+            \item[a] \kvopt{cjk-font}{overleaf} 调用的字体与 \kvopt{cjk-font}{windows} 完全相同，区别只在于 \kvopt{cjk-font}{overleaf} 时，\cls{whu-thesis} 会以文件名方式调用字体。 Overleaf 用户在使用 \kvopt{cjk-font}{overleaf} 时，需要手动在目录中上传字体。
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
@@ -489,6 +490,7 @@
               \item \pkg{ti\emph{k}z}、\pkg{pgfplots}，提供绘图（如圆圈数字）支持。
               \item \pkg{ulem}，提供绘制下划线功能。
               \item \pkg{siunitx}、\pkg{physics}，提供方便的单位、物理符号输入支持。
+              \item \pkg{shellesc}，用于跳出至终端执行命令（编译书脊）。\XeLaTeX{} 下与 \cs{write18} 命令效果相同，\LuaTeX{} 删除了 \cs{write18} 命令，转而使用 "os.execute()" 跳出至终端。
               \item \pkg{algorithm2e}，用于提供编写算法／伪代码的支持。
               \item \pkg{geometry}，用于调整页面尺寸。
               \item \pkg{fancyhdr}，处理页眉页脚。
