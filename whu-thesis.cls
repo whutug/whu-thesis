@@ -1442,7 +1442,7 @@
 \cs_new_protected:Npn \__whu_make_spine:
   {
     \iow_new:N \g__whu_spine_iow
-    \iow_open:Nn \g__whu_spine_iow { spine.tex }
+    \iow_open:Nn \g__whu_spine_iow { \c_sys_jobname_str - spine.tex }
     \iow_now:Nx \g__whu_spine_iow
       {
         \tl_to_str:n
@@ -1462,7 +1462,7 @@
             \mode_leave_vertical: \vfil
             \noindent \hbox_to_wd:nn { \textwidth }
           }
-        \iow_char:N \{ \iow_newline:
+        \iow_char:N \{
         \tl_to_str:n { \zihao { 4 } } \exp_not:o \g__whu_head_odd_tl
         \tl_to_str:n { \hfill } \exp_not:o \g__whu_info_author_tl
         \iow_char:N \}
@@ -1474,8 +1474,8 @@
 
 \cs_new_protected:Npn \__whu_compile_spine:
   {
-    \ShellEscape { lualatex ~ spine }
+    \ShellEscape { lualatex ~ \c_sys_jobname_str - spine }
     \sys_if_platform_windows:TF
-      { \ShellEscape { del ~ spine.tex } }
-      { \ShellEscape { rm ~ spine.tex } }
+      { \ShellEscape { del ~ \c_sys_jobname_str - spine.tex } }
+      { \ShellEscape { rm ~ \c_sys_jobname_str - spine.tex } }
   }
