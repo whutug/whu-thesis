@@ -445,7 +445,7 @@
     设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应国家标准 GB/T 7714 中的著者—出版年制和顺序编码制。\kvopt{type}{doctor} 或 \opt{doctor} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
 \end{function}
 
-武汉大学要求参考文献遵循 GB/T 7714--2005 规范，但目前 GB/T 7714 的最新版本是 GB/T 7714--2015，\pkg{gbt7714} 缺乏对 GB/T 7714--2005 的良好支持，因此最终效果可能无法完全满足格式规范的要求。
+\emph{武汉大学要求参考文献遵循 GB/T 7714--2005 规范，但目前 GB/T 7714 的最新版本是 GB/T 7714--2015，\pkg{gbt7714} 缺乏对 GB/T 7714--2005 的良好支持，因此最终效果可能无法完全满足格式规范的要求。}
 
 \begin{function}{style/cite-style}
     \begin{fdusyntax}[emph={[1]bib-style}]
@@ -490,7 +490,6 @@
               \item \pkg{ti\emph{k}z}、\pkg{pgfplots}，提供绘图（如圆圈数字）支持。
               \item \pkg{ulem}，提供绘制下划线功能。
               \item \pkg{siunitx}、\pkg{physics}，提供方便的单位、物理符号输入支持。
-              \item \pkg{shellesc}，用于跳出至终端执行命令（编译书脊）。\XeLaTeX{} 下与 \cs{write18} 命令效果相同，\LuaTeX{} 删除了 \cs{write18} 命令，转而使用 "os.execute()" 跳出至终端。
               \item \pkg{algorithm2e}，用于提供编写算法／伪代码的支持。
               \item \pkg{geometry}，用于调整页面尺寸。
               \item \pkg{fancyhdr}，处理页眉页脚。
@@ -505,12 +504,11 @@
               \item \pkg{diagbox}，用于绘制斜线表头。
               \item \pkg{enumitem}，用于删除列举环境额外的的纵向间距。
               \item \pkg{footmisc}，用于设置脚注序号每面更新。
-              \item \pkg{unicode-math}，负责处理 Unicode 编码的 OpenType 数学字体。
-              \item XITS Math 字体，一款 Times 风格的 OpenType 数学字体。
+              \item \pkg{unicode-math}，负责处理 Unicode 编码的 OpenType 数学字体。\cls{whu-thesis} 会调用 Times 风格的 XITS Math 字体。
               \item \pkg{natbib}，提供作者—年份引用格式。
               \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
           \end{itemize}
-    \item 设置 \kvopt{class}{opening} 时，\cls{whu-thesis} 会调用 \cls{ctexart} 文档类，同时会调用 \pkg{tocbibind} 宏包，对参考文献章节编号。而当 \kvopt{class}{paper} 或 \opt{design} 时，\cls{whu-thesis} 会调用 \cls{ctexbook} 文档类。
+    \item 设置 \kvopt{class}{opening} 时，\cls{whu-thesis} 会调用 \cls{ctexart} 文档类，同时会调用 \pkg{tocbibind} 宏包，对参考文献章节编号。其他时候 \cls{whu-thesis} 则会调用 \cls{ctexbook} 文档类。
     \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\scite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\scite{LuaTeX-ja} 宏包。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。
     \item \opt{draft} 选项开启时，如果使用 \LuaLaTeX{} 编译，会载入 \pkg{lua-visual-debug} 宏包。
     \item \kvopt{style/font}{xits} 时，会调用 XITS 字体。
@@ -557,8 +555,8 @@
     \bibitem{LuaTeX-ja}
     \LuaTeX-ja プロジェクトチーム.
     \newblock \textit{\LuaTeX-ja パッケージ} [EB/OL].
-    \newblock version 2021\-01\-03.0,
-    \newblock (2021-01-03)
+    \newblock version 2021\-02\-14.0,
+    \newblock (2021-02-14)
     \urlprefix\url{https://ctan.org/pkg/luatexja}
     \urlprefix\CTANurl[文档：]{macros/luatex/generic/luatexja/doc/luatexja-ja.pdf}
     

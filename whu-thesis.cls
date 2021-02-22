@@ -203,8 +203,6 @@
     group-digits = false
   }
 
-\RequirePackage { shellesc }
-
 \RequirePackage { algorithm2e }     % 算法代码
 \tl_set:Nn \algorithmcfname { 算法 }
 \SetAlCapSty {}
@@ -991,6 +989,7 @@
 
 \cs_new_protected:Npn \__whu_make_front_matter_opening:
   {
+    \pagestyle { plain }
     \begin { center }
       \zihao { -2 } \heiti \c__whu_heading_tl
     \end { center }
@@ -1459,13 +1458,10 @@
           {
             \begin { document }
             \pagestyle { empty } 
-            \mode_leave_vertical: \vfil
-            \noindent \hbox_to_wd:nn { \textwidth }
+            \mode_leave_vertical: \vfil \noindent
           }
-        \iow_char:N \{
         \tl_to_str:n { \zihao { 4 } } \exp_not:o \g__whu_head_odd_tl
         \tl_to_str:n { \hfill } \exp_not:o \g__whu_info_author_tl
-        \iow_char:N \}
         \tl_to_str:n { \end { document } }
       }
     \iow_close:N \g__whu_spine_iow
@@ -1474,8 +1470,9 @@
 
 \cs_new_protected:Npn \__whu_compile_spine:
   {
-    \ShellEscape { lualatex ~ \c_sys_jobname_str - spine }
+    \sys_shell_now:x { lualatex ~ \c_sys_jobname_str - spine }
+    \sys_shell_now:x { latexmk ~ -c ~ \c_sys_jobname_str - spine }
     \sys_if_platform_windows:TF
-      { \ShellEscape { del ~ \c_sys_jobname_str - spine.tex } }
-      { \ShellEscape { rm ~ \c_sys_jobname_str - spine.tex } }
+      { \sys_shell_now:x { del ~ \c_sys_jobname_str - spine.tex } }
+      { \sys_shell_now:x { rm ~ \c_sys_jobname_str - spine.tex } }
   }
