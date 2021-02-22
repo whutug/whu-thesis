@@ -201,7 +201,7 @@
 \RequirePackage { algorithm2e }     % 算法代码
 \tl_set:Nn \algorithmcfname { 算法 }
 \SetAlCapSty {}
-\SetAlCapFnt { \heiti }
+\SetAlCapFnt {}
 \box_new:N \l__whu_space_box
 \hbox_set:Nn \l__whu_space_box { \nobreakspace }
 \SetAlgoCaptionSeparator
@@ -379,10 +379,10 @@
 % 图表标题设置
 \RequirePackage [ labelsep = quad ] { caption } % 序号之后空一格写标题
 % 设置表格标题字体为黑体, 设置图标题字体为宋体
-\DeclareCaptionFont { heiti } { \heiti }
-\captionsetup [ table ] { textfont = heiti }
-\tl_set:Nn \figurename {        \zihao { -4 } 图 }
-\tl_set:Nn \tablename  { \heiti \zihao { -4 } 表 }
+\DeclareCaptionFont { tablecap } { \bfseries \tablecap }
+\captionsetup [ table ] { textfont = tablecap }
+\tl_set:Nn \figurename {                     \zihao { -4 } 图 }
+\tl_set:Nn \tablename  { \bfseries \tablecap \zihao { -4 } 表 }
 
 \RequirePackage { graphicx }
 \AtEndPreamble
@@ -504,6 +504,7 @@
   {
     \setCJKsansfont {#1} [#2]
     \newCJKfontfamily { \heiti } {#1} [#2]
+    \newCJKfontfamily { \tablecap } {#1} [ BoldFont = #1 ]
   }
 \cs_new_protected:Npn \__whu_set_cjk_font_fang:nn #1#2
   {
@@ -521,7 +522,7 @@
                   }
               ]
           }
-          { \exp_not:N \setmainjfont {#1} [ #2 ] }
+          { \exp_not:N \setmainjfont {#1} [#2] }
       }
   }
 \cs_new_protected:Npn \__whu_set_cjk_font_kai:nn #1#2
@@ -543,30 +544,28 @@
 
 \cs_new_protected:Npn \__whu_set_cjk_font_mac:
   {
-    \__whu_set_cjk_font_song:nn { Songti ~ SC }
+    \__whu_set_cjk_font_song:nn { Songti ~ SC ~ Light }
       {
-        UprightFont        = * ~ Light,
-        BoldFont           = * ~ Bold,
+        BoldFont           = Songti ~ SC ~ Bold,
         AutoFakeSlant      = 0.167,
-        BoldItalicFont     = * ~ Bold,
+        BoldItalicFont     = Songti ~ SC ~ Bold,
         BoldItalicFeatures = { FakeSlant = 0.167 }
       }
-    \__whu_set_cjk_font_hei:nn { Heiti ~ SC }
+    \__whu_set_cjk_font_hei:nn { Heiti ~ SC ~ Light }
       {
-        UprightFont        = * ~ Light,
-        BoldFont           = * ~ Medium,
+        BoldFont           = Heiti ~ SC ~ Medium,
         AutoFakeSlant      = 0.167,
-        BoldItalicFont     = * ~ Medium,
+        BoldItalicFont     = Heiti ~ SC ~ Medium,
         BoldItalicFeatures = { FakeSlant = 0.167 }
       }
     \__whu_set_cjk_font_fang:nn { STFangsong }
       { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
     \__whu_set_cjk_font_kai:nn { Kaiti ~ SC }
       {
-        UprightFont        = * ~ Regular,
-        BoldFont           = * ~ Bold,
+        UprightFont        = Kaiti ~ SC ~ Regular,
+        BoldFont           = Kaiti ~ SC ~ Bold,
         AutoFakeSlant      = 0.167,
-        BoldItalicFont     = * ~ Bold,
+        BoldItalicFont     = Kaiti ~ SC ~ Bold,
         BoldItalicFeatures = { FakeSlant = 0.167 }
       }
   }
@@ -574,33 +573,27 @@
 % fandol 同理
 \cs_new_protected:Npn \__whu_set_cjk_font_fandol:
   {
-    \__whu_set_cjk_font_song:nn { FandolSong }
+    \__whu_set_cjk_font_song:nn { FandolSong-Regular.otf }
       {
-        Extension          = .otf,
-        UprightFont        = * - Regular,
-        BoldFont           = * - Bold,
+        BoldFont           = FandolSong-Bold.otf,
         AutoFakeSlant      = 0.167,
-        BoldItalicFont     = * - Bold,
+        BoldItalicFont     = FandolSong-Bold.otf,
         BoldItalicFeatures = { FakeSlant = 0.167 }
       }
-    \__whu_set_cjk_font_hei:nn { FandolHei }
+    \__whu_set_cjk_font_hei:nn { FandolHei- Regular.otf }
       {
-        Extension          = .otf,
-        UprightFont        = * - Regular,
-        BoldFont           = * - Bold,
+        BoldFont           = FandolHei-Bold.otf,
         AutoFakeSlant      = 0.167,
-        BoldItalicFont     = * - Bold,
+        BoldItalicFont     = FandolHei-Bold.otf,
         BoldItalicFeatures = { FakeSlant = 0.167 }
       }
-    \__whu_set_cjk_font_fang:nn { FandolFang-Regular }
+    \__whu_set_cjk_font_fang:nn { FandolFang-Regular.otf }
       {
-        Extension     = .otf,
         AutoFakeBold  = 4,
         AutoFakeSlant = 0.167
       }
-    \__whu_set_cjk_font_kai:nn { FandolKai-Regular }
+    \__whu_set_cjk_font_kai:nn { FandolKai-Regular.otf }
       {
-        Extension     = .otf,
         AutoFakeBold  = 4,
         AutoFakeSlant = 0.167
       }
