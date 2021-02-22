@@ -11,23 +11,18 @@
 \ProvidesExplClass{whu-thesis}{2021/02/20}{0.5a}
   {Wuhan University Thesis Template}
 
-\msg_new:nnn { whuthesis } { 引擎不支持 }
+\msg_new:nnn { whu-thesis } { 引擎不支持 }
   {
-    WhuThesis ~ 暂不支持 ~ #1 ~ 引擎。\\\\
+    whu-thesis ~ 不支持 ~ #1 ~ 引擎。\\\\
 
     请使用 ~ XeLaTeX ~ 或 ~ LuaLaTeX ~ 进行编译！
-  }{}
-\msg_new:nnn { whuthesis } { 书脊引擎不支持 }
-  {
-    WhuThesis ~ 书脊暂不支持 ~ #1 ~ 引擎。\\\\
-
-    请使用 ~ LuaLaTeX ~ 进行编译！
   }
+
 \sys_if_engine_xetex:F
   {
     \sys_if_engine_luatex:F
       {
-        \msg_fatal:nnx { whuthesis } { 引擎不支持 }
+        \msg_fatal:nnx { whu-thesis } { 引擎不支持 }
           { \c_sys_engine_str }
       }
   }
