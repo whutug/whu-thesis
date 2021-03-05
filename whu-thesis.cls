@@ -7,8 +7,8 @@
 %% ----------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2021/02/20}{0.5a}
+\RequirePackage{expl3 , xparse , l3keys2e}
+\ProvidesExplClass{whu-thesis}{2021/03/05}{0.5b}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whu-thesis } { 引擎不支持 }
@@ -895,14 +895,13 @@
   {
     \tl_if_eq:NnT \g__whu_style_bib_style_tl { numerical }
       {
-        \bibliographystyle { data / gbt7714-2005-whu-numerical }
-        % \bibliographystyle { gbt7714-numerical }
+        \bibliographystyle { data / gbt7714-2005-numerical }
+        % \bibliographystyle { data / gbt7714-2005-whu-numerical }
         \__whu_set_cite_style_numerical:
       }
     \tl_if_eq:NnT \g__whu_style_bib_style_tl { author-year }
       {
-        % TODO: gbt7714-2005-whu-author-year
-        \bibliographystyle { gbt7714-author-year }
+        \bibliographystyle { data / gbt7714-2005-author-year }
         \__whu_set_cite_style_author_year:
       }
   }
