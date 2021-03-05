@@ -151,6 +151,8 @@
   {
     \tl_const:Nn \c__whu_heading_tl
       { \__whu_spread_with:nn { 博士学位论文 } { \quad } }
+    \tl_set:Nn \bibname { \zihao { 4 } \textbf { 参考文献 } }
+    \tl_set:Nn \bibliographytypesize { \zihao { 5 } }
   }
 
 \tl_if_eq:NnT \g__whu_option_type_tl { master }
@@ -165,6 +167,8 @@
         \tl_const:Nn \c__whu_heading_tl
           { \__whu_spread_with:nn { 硕士专业学位论文 } { \enskip } }
       }
+    \tl_set:Nn \bibname { \zihao { 4 } \textbf { 参考文献 } }
+    \tl_set:Nn \bibliographytypesize { \zihao { 5 } }
   }
 
 \tl_if_eq:NnT \g__whu_option_type_tl { bachelor }
@@ -179,8 +183,7 @@
   {
     \tl_const:Nn \c__whu_heading_tl
       { 武汉大学本科毕业论文（设计） \\ 开　题　报　告 }
-    \tl_set:Nn \refname { 论文的主要参考文献 }
-    \RequirePackage [ numbib ] { tocbibind }
+    \tl_set:Nn \bibname { 论文的主要参考文献 }
   }
 
 %%% ---- 引入宏包 ----- %%%
@@ -678,32 +681,6 @@
   { \pushQED { \qed } { \heiti #1： } #2 }
   { \popQED }
 
-%%% ---- 参考文献设置 ----- %%%
-\RequirePackage [ sort & compress ] { natbib }
-\skip_set:Nn \bibsep { 0 pt } % 参考文献间距设为 0
-
-\cs_new_protected:Npn \__whu_set_cite_style_numerical:
-  {
-    \bool_if:NT \g__whu_style_cite_style_super_tl { \NAT@supertrue }
-    \NAT@numberstrue
-    \tl_set:Nn \NAT@open  { [ }
-    \tl_set:Nn \NAT@close { ] }
-    \tl_set:Nn \NAT@sep   { , ~ }
-  }
-
-\cs_new_protected:Npn \__whu_set_cite_style_author_year:
-  {
-    \NAT@numbersfalse
-    \tl_set:Nn \NAT@open  { （ }
-    \tl_set:Nn \NAT@close { ） }
-    \tl_set:Nn \NAT@sep   { ； }
-    \tl_set:Nn \NAT@aysep { ， }
-    \tl_set:Nn \NAT@yrsep { 、 }
-  }
-
-% \NewDocumentCommand { \upcite } { m }
-%   { \textsuperscript { \cite {#1} } }
-% % 自定义新命令 \upcite, 使参考文献引用以上标出现
 
 \RenewDocumentCommand { \eqref } { m }
   { \textup { { \normalfont （ \ref {#1} ） \normalfont } } }
@@ -816,27 +793,42 @@
   }
 
 \tl_new:N \g__whu_style_graphics_path_tl
-\tl_new:N \g__whu_style_bib_style_tl
-\tl_new:N \g__whu_style_cite_style_tl
 
-\bool_new:N \g__whu_style_cite_style_super_tl
+\bool_new:N \g__whu_style_bib_backend_bibtex_bool
+\bool_new:N \g__whu_style_bib_style_numerical_bool
+\bool_new:N \g__whu_style_cite_style_super_bool
 \bool_new:N \g__whu_style_list_of_figures_bool
 \bool_new:N \g__whu_style_list_of_tables_bool
-\bool_new:N \g__whu_style_fullwidth_stop_bool
 
 \keys_define:nn { whu / style }
   {
+    % 图片文件路径，传给 \graphicspath
     graphics-path .tl_gset:N = \g__whu_style_graphics_path_tl,
 
-    bib-style .choices:nn =
-      { numerical , author-year }
-      { \tl_gset_eq:NN \g__whu_style_bib_style_tl \l_keys_choice_tl },
+    % 参考文献后端
+    bib-backend            .value_required:n = true,
+    bib-backend            .choice:,
+    bib-backend / bibtex   .code:n =
+      { \bool_gset_true:N  \g__whu_style_bib_backend_bibtex_bool },
+    bib-backend / biblatex .code:n =
+      { \bool_gset_false:N \g__whu_style_bib_backend_bibtex_bool },
+    bib-backend            .initial:n = bibtex,
 
+    % 参考文献样式
+    bib-style               .value_required:n = true,
+    bib-style               .choice:,
+    bib-style / numerical   .code:n =
+      { \bool_gset_true:N  \g__whu_style_bib_style_numerical_bool },
+    bib-style / author-year .code:n =
+      { \bool_gset_false:N \g__whu_style_bib_style_numerical_bool },
+
+    % 引用样式
+    cite-style          .value_required:n = true,
     cite-style          .choice:,
     cite-style / super  .code:n =
-      { \bool_gset_true:N  \g__whu_style_cite_style_super_tl },
+      { \bool_gset_true:N  \g__whu_style_cite_style_super_bool },
     cite-style / inline .code:n =
-      { \bool_gset_false:N \g__whu_style_cite_style_super_tl },
+      { \bool_gset_false:N \g__whu_style_cite_style_super_bool },
     cite-style          .initial:n = super,
 
     list-of-figures         .choice:,
@@ -855,20 +847,19 @@
     list-of-tables         .default:n = true,
     list-of-tables         .initial:n = false,
 
-    fullwidth-stop .choice:,
-    fullwidth-stop / true .code:n =
+    fullwidth-stop         .choice:,
+    fullwidth-stop / true  .code:n =
       {
-        \bool_gset_true:N \g__whu_style_fullwidth_stop_bool
         \tl_const:Nn \c__whu_fullwidth_full_stop_tl { ． }
         \char_set_catcode_active:n { `。 }
         \char_set_active_eq:nN { `。 } \c__whu_fullwidth_full_stop_tl
       },
-    fullwidth-stop / false .code:n =
-      { \bool_gset_false:N \g__whu_style_fullwidth_stop_bool },
-    fullwidth-stop .default:n = true,
-    fullwidth-stop .initial:n = false
+    fullwidth-stop / false .code:n = {},
+    fullwidth-stop         .default:n = true,
+    fullwidth-stop         .initial:n = false
   }
 
+%%% ---- 参考文献设置 ----- %%%
 \clist_map_inline:nn { doctor , master }
   {
     \tl_if_eq:NnT \g__whu_option_type_tl {#1}
@@ -893,17 +884,59 @@
 
 \AtEndPreamble
   {
-    \tl_if_eq:NnT \g__whu_style_bib_style_tl { numerical }
+    \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
+      {
+        \RequirePackage [ sort & compress ] { natbib }
+        \__whu_bibtex_setup:
+      }
+      {
+        \RequirePackage [ backend = biber ] { biblatex }
+        \__whu_biblatex_setup:
+      }
+  }
+
+\cs_new_protected:Npn \__whu_bibtex_setup:
+  {
+    \skip_zero:N \bibsep % 参考文献间距设为 0
+    \bool_if:NTF \g__whu_style_bib_style_numerical_bool
       {
         \bibliographystyle { data / gbt7714-2005-numerical }
         % \bibliographystyle { data / gbt7714-2005-whu-numerical }
-        \__whu_set_cite_style_numerical:
+        \bool_if:NT \g__whu_style_cite_style_super_bool { \NAT@supertrue }
+        \NAT@numberstrue
+        \tl_set:Nn \NAT@open  { [ }
+        \tl_set:Nn \NAT@close { ] }
+        \tl_set:Nn \NAT@sep   { , ~ }
       }
-    \tl_if_eq:NnT \g__whu_style_bib_style_tl { author-year }
       {
         \bibliographystyle { data / gbt7714-2005-author-year }
-        \__whu_set_cite_style_author_year:
+        \NAT@numbersfalse
+        \tl_set:Nn \NAT@open  { （ }
+        \tl_set:Nn \NAT@close { ） }
+        \tl_set:Nn \NAT@sep   { ； }
+        \tl_set:Nn \NAT@aysep { ， }
+        \tl_set:Nn \NAT@yrsep { 、 }
       }
+    \tl_if_eq:NnT \g__whu_option_type_tl { opening }
+      { \RequirePackage [ numbib ] { tocbibind } }
+  }
+
+\cs_new_protected:Npn \__whu_biblatex_setup:
+  {
+    \skip_zero:N \bibitemsep
+    \bool_if:NTF \g__whu_style_bib_style_numerical_bool
+      {
+        \PassOptionsToPackage { bib-style = gb7714-2015 , doi = false }
+          { biblatex }
+        \bool_if:NT \g__whu_style_cite_style_super_bool
+          { \PassOptionsToPackage { cite-style = gb7714-2015 } { biblatex } }
+      }
+      { 
+        \PassOptionsToPackage { style = gb7714-2015ay , doi = false }
+          { biblatex }
+      }
+    \tl_if_empty:NF \g__whu_element_bibliography_tl
+      { \exp_args:NV \addbibresource \g__whu_element_bibliography_tl }
   }
 
 \keys_define:nn { whu }
@@ -913,7 +946,7 @@
     style   .meta:nn = { whu / style   } {#1}
   }
 
-% 分散函数，来自 fduthesis
+% 分散函数
 \cs_new_protected:Npn \__whu_spread_with:nn #1#2
   { \tl_map_inline:xn {#1} { ##1 #2 } \unskip }
 
@@ -1360,23 +1393,20 @@
   {
     \tl_if_empty:NF \g__whu_element_bibliography_tl
       {
-        \clist_map_inline:nn { doctor , master }
+        \tl_if_eq:NnTF \g__whu_option_type_tl { opening }
           {
-            \tl_if_eq:NnT \g__whu_option_type_tl {##1}
-              {
-                \tl_set:Nn \bibname { \zihao { 4 } \textbf { 参考文献 } }
-                \tl_set:Nn \bibliographytypesize { \zihao { 5 } }
-              }
+            \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
+              { \exp_args:NV \bibliography \g__whu_element_bibliography_tl }
+              { \printbibliography [ heading = bibnumbered ] }
           }
-        \tl_if_eq:NnF \g__whu_option_type_tl { opening }
           {
             \__whu_new_chapter_page:
             \phantomsection
             \addcontentsline { toc } { chapter } { 参考文献 }
+            \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
+              { \exp_args:NV \bibliography \g__whu_element_bibliography_tl }
+              { \printbibliography }
           }
-        \exp_args:NV \bibliography \g__whu_element_bibliography_tl
-        \appendix
-        % 参考文献结束进入附录章节
       }
   }
 
@@ -1419,6 +1449,7 @@
   {
     \clist_if_empty:NF \g__whu_element_appendix_clist
       {
+        \appendix
         \clist_map_inline:Nn \g__whu_element_appendix_clist
           { \file_input:n {##1} }
       }
