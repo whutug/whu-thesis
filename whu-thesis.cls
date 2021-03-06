@@ -776,7 +776,7 @@
 \tl_new:N \g__whu_element_abstract_tl
 \tl_new:N \g__whu_element_abstract_en_tl
 \tl_new:N \g__whu_element_thanks_tl
-\tl_new:N \g__whu_element_bibliography_tl
+\clist_new:N \g__whu_element_bibliography_clist
 \clist_new:N \g__whu_element_appendix_clist
 
 \keys_define:nn { whu / element }
@@ -784,9 +784,9 @@
     innovation   .tl_gset:N    = \g__whu_element_innovation_tl,
     abstract     .tl_gset:N    = \g__whu_element_abstract_tl,
     abstract *   .tl_gset:N    = \g__whu_element_abstract_en_tl,
-    bibliography .tl_gset:N    = \g__whu_element_bibliography_tl,
     achievements .tl_gset:N    = \g__whu_element_achievements_tl,
     thanks       .tl_gset:N    = \g__whu_element_thanks_tl,
+    bibliography .clist_gset:N = \g__whu_element_bibliography_clist,
     appendix     .clist_gset:N = \g__whu_element_appendix_clist,
   }
 
@@ -933,8 +933,11 @@
 \cs_new_protected:Npn \__whu_biblatex_post_setup:
   {
     \skip_zero:N \bibitemsep % 参考文献间距设为 0
-    \tl_if_empty:NF \g__whu_element_bibliography_tl
-      { \exp_args:NV \addbibresource \g__whu_element_bibliography_tl }
+    \clist_if_empty:NF \g__whu_element_bibliography_clist
+      {
+        \clist_map_inline:Nn \g__whu_element_bibliography_clist
+          { \addbibresource {##1} }
+      }
   }
 
 \keys_define:nn { whu }
@@ -1389,12 +1392,12 @@
 %%%% ---- 参考文献 ---- %%%%
 \cs_new_protected:Npn \__whu_make_bibliography:
   {
-    \tl_if_empty:NF \g__whu_element_bibliography_tl
+    \clist_if_empty:NF \g__whu_element_bibliography_clist
       {
         \tl_if_eq:NnTF \g__whu_option_type_tl { opening }
           {
             \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
-              { \exp_args:NV \bibliography \g__whu_element_bibliography_tl }
+              { \exp_args:NV \bibliography \g__whu_element_bibliography_clist }
               { \printbibliography [ heading = bibnumbered ] }
           }
           {
@@ -1402,7 +1405,7 @@
             \phantomsection
             \addcontentsline { toc } { chapter } { 参考文献 }
             \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
-              { \exp_args:NV \bibliography \g__whu_element_bibliography_tl }
+              { \exp_args:NV \bibliography \g__whu_element_bibliography_clist }
               { \printbibliography }
           }
       }
@@ -1456,32 +1459,35 @@
 %%%% ---- 书脊 ---- %%%%
 \cs_new_protected:Npn \__whu_make_spine:
   {
-    \iow_new:N \g__whu_spine_iow
-    \iow_open:Nn \g__whu_spine_iow { \c_sys_jobname_str - spine.tex }
-    \iow_now:Nx \g__whu_spine_iow
+    \file_if_exist:nF { \c_sys_jobname_str - spine.pdf }
       {
-        \tl_to_str:n
+        \iow_new:N \g__whu_spine_iow
+        \iow_open:Nn \g__whu_spine_iow { \c_sys_jobname_str - spine.tex }
+        \iow_now:Nx \g__whu_spine_iow
           {
-            \documentclass { ltjtarticle }
-            \usepackage { ctexsize }
-            \usepackage { geometry }
-            \geometry { margin = 2.5 cm , ignoreall }
-            \usepackage { luatexja-fontspec }
-            \ExplSyntaxOn
+            \tl_to_str:n
+              {
+                \documentclass { ltjtarticle }
+                \usepackage { ctexsize }
+                \usepackage { geometry }
+                \geometry { margin = 2.5 cm , ignoreall }
+                \usepackage { luatexja-fontspec }
+                \ExplSyntaxOn
+              }
+            \__whu_set_spine_font:
+            \tl_to_str:n
+              {
+                \begin { document }
+                \pagestyle { empty } 
+                \mode_leave_vertical: \vfil \noindent
+              }
+            \tl_to_str:n { \zihao { 4 } } \exp_not:o \g__whu_head_odd_tl
+            \tl_to_str:n { \hfill } \exp_not:o \g__whu_info_author_tl
+            \tl_to_str:n { \end { document } }
           }
-        \__whu_set_spine_font:
-        \tl_to_str:n
-          {
-            \begin { document }
-            \pagestyle { empty } 
-            \mode_leave_vertical: \vfil \noindent
-          }
-        \tl_to_str:n { \zihao { 4 } } \exp_not:o \g__whu_head_odd_tl
-        \tl_to_str:n { \hfill } \exp_not:o \g__whu_info_author_tl
-        \tl_to_str:n { \end { document } }
+        \iow_close:N \g__whu_spine_iow
+        \__whu_compile_spine:
       }
-    \iow_close:N \g__whu_spine_iow
-    \__whu_compile_spine:
   }
 
 \cs_new_protected:Npn \__whu_compile_spine:
