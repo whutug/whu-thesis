@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3 , xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2021/03/05}{0.5b}
+\ProvidesExplClass{whu-thesis}{2021/03/06}{0.5c}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whu-thesis } { 引擎不支持 }
@@ -183,7 +183,7 @@
   {
     \tl_const:Nn \c__whu_heading_tl
       { 武汉大学本科毕业论文（设计） \\ 开　题　报　告 }
-    \tl_set:Nn \bibname { 论文的主要参考文献 }
+    \tl_set:Nn \bibname { 参考文献 }
   }
 
 %%% ---- 引入宏包 ----- %%%
@@ -242,7 +242,7 @@
 \tl_set:Nn \headrulewidth { \c_zero_dim }  % 页眉线宽
 \tl_set:Nn \footrulewidth { \c_zero_dim }  % 页脚线宽
 
-\AtEndPreamble
+\ctex_at_end_preamble:n
   {
     \tl_new:N \g__whu_head_odd_tl
     \tl_new:N \g__whu_head_even_tl
@@ -388,7 +388,7 @@
 \tl_set:Nn \tablename  { \bfseries \tablecap \zihao { -4 } 表 }
 
 \RequirePackage { graphicx }
-\AtEndPreamble
+\ctex_at_end_preamble:n
   { \exp_args:NV \graphicspath \g__whu_style_graphics_path_tl }
 % 图片文件路径
 
@@ -650,7 +650,7 @@
   }
 
 % 在导言区末加载字体，不被用户配置覆盖
-\AtEndPreamble
+\ctex_at_end_preamble:n
   {
     \__whu_set_font:
     \__whu_set_cjk_font:
@@ -691,7 +691,7 @@
 \skip_set:Nn \belowdisplayshortskip { 0 pt }
 
 % 最后引入 hyperref 包
-\AtEndPreamble
+\ctex_at_end_preamble:n
   {
     \RequirePackage { hyperref }
     \hypersetup { hidelinks }
@@ -880,7 +880,7 @@
       }
   }
 
-\AtEndPreamble
+\ctex_at_end_preamble:n
   {
     \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
       {
@@ -888,8 +888,9 @@
         \__whu_bibtex_setup:
       }
       {
-        \RequirePackage [ backend = biber ] { biblatex }
-        \__whu_biblatex_setup:
+        \__whu_biblatex_pre_setup:
+        \RequirePackage [ backend = biber , doi = false ] { biblatex }
+        \__whu_biblatex_post_setup:
       }
   }
 
@@ -919,20 +920,19 @@
       { \RequirePackage [ numbib ] { tocbibind } }
   }
 
-\cs_new_protected:Npn \__whu_biblatex_setup:
+\cs_new_protected:Npn \__whu_biblatex_pre_setup:
   {
-    \skip_zero:N \bibitemsep
     \bool_if:NTF \g__whu_style_bib_style_numerical_bool
       {
-        \PassOptionsToPackage { bib-style = gb7714-2015 , doi = false }
-          { biblatex }
+        \PassOptionsToPackage { bibstyle = gb7714-2015 } { biblatex }
         \bool_if:NT \g__whu_style_cite_style_super_bool
-          { \PassOptionsToPackage { cite-style = gb7714-2015 } { biblatex } }
+          { \PassOptionsToPackage { citestyle = gb7714-2015 } { biblatex } }
       }
-      { 
-        \PassOptionsToPackage { style = gb7714-2015ay , doi = false }
-          { biblatex }
-      }
+      { \PassOptionsToPackage { style = gb7714-2015ay } { biblatex } }
+  }
+\cs_new_protected:Npn \__whu_biblatex_post_setup:
+  {
+    \skip_zero:N \bibitemsep % 参考文献间距设为 0
     \tl_if_empty:NF \g__whu_element_bibliography_tl
       { \exp_args:NV \addbibresource \g__whu_element_bibliography_tl }
   }
