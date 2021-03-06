@@ -563,9 +563,8 @@
       }
     \__whu_set_cjk_font_fang:nn { STFangsong }
       { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
-    \__whu_set_cjk_font_kai:nn { Kaiti ~ SC }
+    \__whu_set_cjk_font_kai:nn { Kaiti ~ SC ~ Regular }
       {
-        UprightFont        = Kaiti ~ SC ~ Regular,
         BoldFont           = Kaiti ~ SC ~ Bold,
         AutoFakeSlant      = 0.167,
         BoldItalicFont     = Kaiti ~ SC ~ Bold,
@@ -680,7 +679,6 @@
 \RenewDocumentEnvironment { proof } { O { 证明 } + b }
   { \pushQED { \qed } { \heiti #1： } #2 }
   { \popQED }
-
 
 \RenewDocumentCommand { \eqref } { m }
   { \textup { { \normalfont （ \ref {#1} ） \normalfont } } }
