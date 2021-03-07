@@ -1,9 +1,9 @@
 # 武汉大学毕业论文 LaTeX 模板
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Last Commit](https://img.shields.io/github/last-commit/mtobeiyf/whu-thesis.svg)](https://github.com/mtobeiyf/whu-thesis/commits/)
+[![Last Commit](https://img.shields.io/github/last-commit/whutug/whu-thesis.svg)](https://github.com/mtobeiyf/whu-thesis/commits/)
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
-[![](https://github.com/mtobeiyf/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/mtobeiyf/whu-thesis/actions)
+[![](https://github.com/whutug/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/mtobeiyf/whu-thesis/actions)
 
 本项目为武汉大学毕业论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
 
@@ -17,13 +17,13 @@
   <img src="https://user-images.githubusercontent.com/5097752/55679059-f250d300-5936-11e9-8dfe-937a64a0c6bf.png" width="800px">
 </p>
 
-正文样例可以参照 [whuthesis-demo](whuthesis-demo.pdf)
+正文样例可以参照 [whuthesis-demo](whu-thesis-demo.pdf)
 
 开题报告样例可以参照 [opening-demo](opening-demo.pdf)
 
 ## 如何使用
 
-使用前请阅读[使用文档](whuthesis-doc.pdf)
+使用前请阅读[使用文档](whu-thesis-doc.pdf)
 
 推荐两种方式进行编辑和编译：
 
