@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3 , xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2021/03/06}{0.5c}
+\ProvidesExplClass{whu-thesis}{2021/03/09}{0.6}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whu-thesis } { 引擎不支持 }
@@ -184,6 +184,7 @@
     \tl_const:Nn \c__whu_heading_tl
       { 武汉大学本科毕业论文（设计） \\ 开　题　报　告 }
     \tl_set:Nn \bibname { 参考文献 }
+    \RequirePackage { needspace }
   }
 
 %%% ---- 引入宏包 ----- %%%
@@ -1382,6 +1383,7 @@
     \__whu_make_bibliography:
 
     \skip_vertical:n { 2 \c__whu_baseline_skip }
+    \needspace { 0.3 \textheight }
     指导老师意见：
     \vfill
     \hfill 指导老师（签名）： \hbox_to_wd:nn { 4 cm } {} \par

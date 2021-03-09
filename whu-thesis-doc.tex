@@ -14,7 +14,7 @@
 
 \title{\cls{whu-thesis}\bfseries ：武汉大学毕业论文模板\thanks{\url{https://github.com/whutug/whu-thesis}}}
 \author{WHUTUG\thanks{\url{https://github.com/whutug}}}
-\date{2021/03/06 \quad v0.5c}
+\date{2021/03/09 \quad v0.6}
 
 \begin{document}
 \maketitle
@@ -514,7 +514,7 @@
               \item \pkg{natbib}，提供作者—年份引用格式。
               \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
           \end{itemize}
-    \item 设置 \kvopt{class}{opening} 时，\cls{whu-thesis} 会调用 \cls{ctexart} 文档类，同时会调用 \pkg{tocbibind} 宏包，对参考文献章节编号。其他时候 \cls{whu-thesis} 则会调用 \cls{ctexbook} 文档类。
+    \item 设置 \kvopt{class}{opening} 时，\cls{whu-thesis} 会调用 \cls{ctexart} 文档类，同时会调用 \pkg{needspace}，防止在“指导教师意见”中换页。且在 \kvopt{bib-backend}{bibtex} 时调用 \pkg{tocbibind} 宏包，对参考文献章节编号。其他时候 \cls{whu-thesis} 则会调用 \cls{ctexbook} 文档类。
     \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\scite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\scite{LuaTeX-ja} 宏包。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
     \item \opt{draft} 选项开启时，如果使用 \LuaLaTeX{} 编译，会载入 \pkg{lua-visual-debug} 宏包。
     \item \kvopt{style/font}{xits} 时，会调用 XITS 字体。
