@@ -346,7 +346,7 @@
 \tl_set:Nn \listfigurename { 图片索引     }
 \tl_set:Nn \listtablename  { 表格索引     }
 
-\tl_set:Nn \cftdot    { $ \cdot $  }
+\tl_set:Nn \cftdot { \raisebox { 0.3 em } { \normalfont . } }
 \tl_set:Nn \cftdotsep { \c_one_int }
 % 点间距
 
@@ -955,11 +955,6 @@
       {
         \bibliographystyle { data / gbt7714-2005-author-year }
         \NAT@numbersfalse
-        \tl_set:Nn \NAT@open  { （ }
-        \tl_set:Nn \NAT@close { ） }
-        \tl_set:Nn \NAT@sep   { ； }
-        \tl_set:Nn \NAT@aysep { ， }
-        \tl_set:Nn \NAT@yrsep { 、 }
       }
     \tl_if_eq:NnT \g__whu_option_type_tl { opening }
       { \RequirePackage [ numbib ] { tocbibind } }

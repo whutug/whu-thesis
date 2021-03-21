@@ -4,7 +4,9 @@
 
 ## [未发布]
 
-* 增加 `termes` 与 `newtx` 的字体设置
+* 增加 `termes` 与 `newtx` 的字体设置；
+
+* 将 natbib 下的作者—年份引用的标点改为西文标点，与 biblatex 统一。
 
 ## v0.6
 
