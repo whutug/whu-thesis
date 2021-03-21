@@ -14,7 +14,7 @@
 
 \title{\cls{whu-thesis}\bfseries ：武汉大学毕业论文模板\thanks{\url{https://github.com/whutug/whu-thesis}}}
 \author{WHUTUG\thanks{\url{https://github.com/whutug}}}
-\date{2021/03/09 \quad v0.6}
+\date{2021/03/21 \quad v0.6a}
 
 \begin{document}
 \maketitle
@@ -362,7 +362,7 @@
 
 \begin{function}{style/font}
     \begin{fdusyntax}[emph={[1]font}]
-        font = times|xits
+        font = times|xits|termes|newtx
     \end{fdusyntax}
     西文字体设置，具体见表 \ref{tab:font}。
 \end{function}
@@ -373,13 +373,40 @@
         \label{tab:font}
         \begin{tabularx}{\textwidth}{CC}
             \toprule
-            \opt{times} & Times New Roman \\
+            \opt{times}  & Times New Roman      \\
             \midrule
-            \opt{xits}  & XITS            \\
+            \opt{xits}   & XITS                 \\
+            \midrule
+            \opt{termes} & TeX Gyre Termes      \\
+            \midrule
+            \opt{newtx}  & \pkg{newtxtext} 宏包 \\
             \bottomrule
         \end{tabularx}
     \end{threeparttable}
 \end{table}
+
+\begin{function}{style/math-font}
+    \begin{fdusyntax}[emph={[1]math-font}]
+        math-font = (*<(xits)|termes|newtx>*)
+    \end{fdusyntax}
+    数学字体设置，具体见表 \ref{tab:math-font}。
+\end{function}
+
+\begin{table}[!ht]
+    \begin{threeparttable}
+        \caption{\opt{style/math-font} 各选项字体配置}
+        \label{tab:math-font}
+        \begin{tabularx}{\textwidth}{CCC}
+            \toprule
+            \opt{xits} & \opt{termes}         & \opt{newtx}          \\
+            \midrule
+            XITS Math  & TeX Gyre Termes Math & \pkg{newtxmath} 宏包 \\
+            \bottomrule
+        \end{tabularx}
+    \end{threeparttable}
+\end{table}
+
+\emph{注意：\pkg{newtx} 作为传统的 Type-1 格式字体，与 OpenType 字体混用可能导致各种问题，故 \kvopt{font}{newtx} 必须与 \kvopt{math-font}{newtx} 搭配使用。该选项还处于测试阶段，使用时请谨慎。}
 
 \begin{function}{style/cjk-font}
     \begin{fdusyntax}[emph={[1]cjk-font}]
@@ -517,7 +544,7 @@
     \item 设置 \kvopt{class}{opening} 时，\cls{whu-thesis} 会调用 \cls{ctexart} 文档类，同时会调用 \pkg{needspace}，防止在“指导教师意见”中换页。且在 \kvopt{bib-backend}{bibtex} 时调用 \pkg{tocbibind} 宏包，对参考文献章节编号。其他时候 \cls{whu-thesis} 则会调用 \cls{ctexbook} 文档类。
     \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\scite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\scite{LuaTeX-ja} 宏包。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
     \item \opt{draft} 选项开启时，如果使用 \LuaLaTeX{} 编译，会载入 \pkg{lua-visual-debug} 宏包。
-    \item \kvopt{style/font}{xits} 时，会调用 XITS 字体。
+    \item \kvopt{style/font}{newtx} 时，会调用 \pkg{newtxtext} 宏包，\kvopt{style/math-font}{newtx} 时，会调用 \pkg{newtxmath} 宏包。
     \item 开启 \kvopt{style/bib-backend}{bibtex} 后，会调用 \pkg{natbib} 宏包，并依赖 \BibTeX{} 程序。参考文献样式由 \pkg{gbt7714} 宏包提供 \scite{natbib,gbt7714}。
     \item 开启 \kvopt{style/bib-backend}{biblatex} 后，会调用 \pkg{biblatex} 宏包，并依赖 \biber{} 程序。参考文献样式由 \pkg{biblatex-gb7714-2015} 宏包提供 \scite{biblatex,biblatex-gb7714-2015}。
 \end{itemize}
@@ -547,8 +574,8 @@
     \bibitem{CTeX}
     \textsc{CTEX.ORG}.
     \newblock \textit{\CTeX{} 宏集手册} [EB/OL].
-    \newblock version 2.5.5,
-    \newblock (2020-10-19)
+    \newblock version 2.5.6,
+    \newblock (2021-03-14)
     \urlprefix\url{https://ctan.org/pkg/ctex}
     \urlprefix\CTANurl[文档及源代码：]{language/chinese/ctex/ctex.pdf}
     
@@ -563,8 +590,8 @@
     \bibitem{LuaTeX-ja}
     \LuaTeX-ja プロジェクトチーム.
     \newblock \textit{\LuaTeX-ja パッケージ} [EB/OL].
-    \newblock version 2021\-02\-14.0,
-    \newblock (2021-02-14)
+    \newblock version 2021\-03\-20.0,
+    \newblock (2021-03-20)
     \urlprefix\url{https://ctan.org/pkg/luatexja}
     \urlprefix\CTANurl[文档：]{macros/luatex/generic/luatexja/doc/luatexja-ja.pdf}
     
@@ -580,8 +607,8 @@
     \bibitem{thuthesis}
     清华大学 TUNA 协会.
     \newblock \textit{\textsc{ThuThesis}：清华大学学位论文模板} [EB/OL].
-    \newblock version 7.1.0,
-    \newblock (2020-10-14)
+    \newblock version 7.2.1,
+    \newblock (2021-03-21)
     \urlprefix\url{https://ctan.org/pkg/thuthesis}
     \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/thuthesis/thuthesis.pdf}
     

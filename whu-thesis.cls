@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3 , xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2021/03/09}{0.6}
+\ProvidesExplClass{whu-thesis}{2021/03/21}{0.6a}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whu-thesis } { 引擎不支持 }
@@ -477,14 +477,15 @@
       { \__whu_fontset:n { \l_keys_choice_tl } },
     % 西文字体
 
+    math-font .choices:nn =
+      { xits , termes , newtx }
+      { \__whu_math_fontset:n { \l_keys_choice_tl } },
+    % 数学字体
+
     cjk-font .choices:nn =
       { windows , mac , fandol , overleaf }
       { \__whu_cjk_fontset:n { \l_keys_choice_tl } },
     % 中文字体
-
-    math-font .choices:nn =
-      { xits , termes , newtx }
-      { \__whu_math_fontset:n { \l_keys_choice_tl } }
   }
 
 % 西文字体
@@ -665,8 +666,8 @@
     \keys_define:nn { whu / style }
       {
         font      .initial:n = times,
+        math-font .initial:n = xits,
         cjk-font  .initial:n = windows,
-        math-font .initial:n = xits
       }
   }
   {
@@ -676,16 +677,16 @@
         \keys_define:nn { whu / style }
           {
             font      .initial:n = times,
+            math-font .initial:n = xits,
             cjk-font  .initial:n = mac,
-            math-font .initial:n = xits
           }
       }
       {
         \keys_define:nn { whu / style }
           {
             font      .initial:n = xits,
+            math-font .initial:n = xits,
             cjk-font  .initial:n = fandol,
-            math-font .initial:n = xits
           }
       }
   }
