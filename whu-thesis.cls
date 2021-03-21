@@ -459,7 +459,9 @@
   }
 
 %%% ---- 定义字体 ----- %%%
-\RequirePackage { unicode-math }
+\bool_new:N \g__whu_newtx_bool
+\msg_new:nnn { whu-thesis } { newtx }
+  { font ~ = ~ newtx ~ 必须与 ~ math-font ~ = ~ newtx ~ 搭配使用！ }
 
 \cs_new_protected:Npn \__whu_fontset:n #1
   { \cs_gset_eq:Nc \__whu_set_font: { __whu_set_font_ #1 : } }
@@ -471,7 +473,7 @@
 \keys_define:nn { whu / style }
   {
     font .choices:nn =
-      { times , xits }
+      { times , xits , termes , newtx }
       { \__whu_fontset:n { \l_keys_choice_tl } },
     % 西文字体
 
@@ -479,6 +481,10 @@
       { windows , mac , fandol , overleaf }
       { \__whu_cjk_fontset:n { \l_keys_choice_tl } },
     % 中文字体
+
+    math-font .choices:nn =
+      { xits , termes , newtx }
+      { \__whu_math_fontset:n { \l_keys_choice_tl } }
   }
 
 % 西文字体
@@ -496,6 +502,24 @@
         ItalicFont     = * - Italic,
         BoldItalicFont = * - BoldItalic
       ]
+  }
+
+\cs_new_protected:Npn \__whu_set_font_termes:
+  {
+    \setmainfont { texgyretermes }
+      [
+        Extension      = .otf,
+        UprightFont    = * - regular,
+        BoldFont       = * - bold,
+        ItalicFont     = * - italic,
+        BoldItalicFont = * - bolditalic
+      ]
+  }
+
+\cs_new_protected:Npn \__whu_set_font_newtx:
+  {
+    \RequirePackage { newtxtext }
+    \bool_gset_inverse:N \g__whu_newtx_bool
   }
 
 % 中文字体
@@ -616,10 +640,23 @@
   }
 
 % 数学字体
-\cs_new_protected:Npn \__whu_set_math_font:
+\cs_new_protected:Npn \__whu_set_math_font_xits:
   {
+    \RequirePackage { unicode-math }
     \setmathfont { XITSMath-Regular.otf }
       [ BoldFont = XITSMath-Bold.otf ]
+  }
+
+\cs_new_protected:Npn \__whu_set_math_font_termes:
+  {
+    \RequirePackage { unicode-math }
+    \setmathfont { texgyretermes-math.otf }
+  }
+
+\cs_new_protected:Npn \__whu_set_math_font_newtx:
+  {
+    \RequirePackage { newtxmath }
+    \bool_gset_inverse:N \g__whu_newtx_bool
   }
 
 % 根据系统判断调用字体
@@ -627,8 +664,9 @@
   {
     \keys_define:nn { whu / style }
       {
-        font     .initial:n = times,
-        cjk-font .initial:n = windows
+        font      .initial:n = times,
+        cjk-font  .initial:n = windows,
+        math-font .initial:n = xits
       }
   }
   {
@@ -637,15 +675,17 @@
       {
         \keys_define:nn { whu / style }
           {
-            font     .initial:n = times,
-            cjk-font .initial:n = mac
+            font      .initial:n = times,
+            cjk-font  .initial:n = mac,
+            math-font .initial:n = xits
           }
       }
       {
         \keys_define:nn { whu / style }
           {
-            font     .initial:n = xits,
-            cjk-font .initial:n = fandol
+            font      .initial:n = xits,
+            cjk-font  .initial:n = fandol,
+            math-font .initial:n = xits
           }
       }
   }
@@ -656,6 +696,10 @@
     \__whu_set_font:
     \__whu_set_cjk_font:
     \__whu_set_math_font:
+    \bool_if:NT \g__whu_newtx_bool
+      {
+        \msg_warning:nn { whu-thesis } { newtx }
+      }
   }
 
 %%% ---- 数学定理样式 ----- %%%
