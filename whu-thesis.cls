@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3 , xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2021/03/21}{0.6a}
+\ProvidesExplClass{whu-thesis}{2021/03/27}{0.6b}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whu-thesis } { 引擎不支持 }
@@ -243,7 +243,7 @@
 \tl_set:Nn \headrulewidth { \c_zero_dim }  % 页眉线宽
 \tl_set:Nn \footrulewidth { \c_zero_dim }  % 页脚线宽
 
-\ctex_at_end_preamble:n
+\AtEndPreamble
   {
     \tl_new:N \g__whu_head_odd_tl
     \tl_new:N \g__whu_head_even_tl
@@ -389,7 +389,7 @@
 \tl_set:Nn \tablename  { \bfseries \tablecap \zihao { -4 } 表 }
 
 \RequirePackage { graphicx }
-\ctex_at_end_preamble:n
+\AtEndPreamble
   { \exp_args:NV \graphicspath \g__whu_style_graphics_path_tl }
 % 图片文件路径
 
@@ -692,7 +692,7 @@
   }
 
 % 在导言区末加载字体，不被用户配置覆盖
-\ctex_at_end_preamble:n
+\AtEndPreamble
   {
     \__whu_set_font:
     \__whu_set_cjk_font:
@@ -737,7 +737,7 @@
 \skip_set:Nn \belowdisplayshortskip { 0 pt }
 
 % 最后引入 hyperref 包
-\ctex_at_end_preamble:n
+\AtEndPreamble
   {
     \RequirePackage { hyperref }
     \hypersetup { hidelinks }
@@ -926,7 +926,7 @@
       }
   }
 
-\ctex_at_end_preamble:n
+\BeforeBeginEnvironment { document }
   {
     \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
       {
