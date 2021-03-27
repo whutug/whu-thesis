@@ -132,6 +132,8 @@
 % 在载入文档类之前引入 etoolbox
 
 %%% ---- 载入 Class ----- %%%
+\PassOptionsToPackage { no-math } { fontspec }
+
 % 开题报告使用 ctexart，论文使用 ctexbook，书脊使用 ltjtarticle
 \tl_if_eq:NnTF \g__whu_option_type_tl { opening }
   {
@@ -459,9 +461,7 @@
   }
 
 %%% ---- 定义字体 ----- %%%
-\bool_new:N \g__whu_newtx_bool
-\msg_new:nnn { whu-thesis } { newtx }
-  { font ~ = ~ newtx ~ 必须与 ~ math-font ~ = ~ newtx ~ 搭配使用！ }
+\RequirePackage { unicode-math }
 
 \cs_new_protected:Npn \__whu_fontset:n #1
   { \cs_gset_eq:Nc \__whu_set_font: { __whu_set_font_ #1 : } }
@@ -473,12 +473,12 @@
 \keys_define:nn { whu / style }
   {
     font .choices:nn =
-      { times , xits , termes , newtx }
+      { times , xits , termes }
       { \__whu_fontset:n { \l_keys_choice_tl } },
     % 西文字体
 
     math-font .choices:nn =
-      { xits , termes , newtx }
+      { xits , termes }
       { \__whu_math_fontset:n { \l_keys_choice_tl } },
     % 数学字体
 
@@ -515,12 +515,6 @@
         ItalicFont     = * - italic,
         BoldItalicFont = * - bolditalic
       ]
-  }
-
-\cs_new_protected:Npn \__whu_set_font_newtx:
-  {
-    \RequirePackage { newtxtext }
-    \bool_gset_inverse:N \g__whu_newtx_bool
   }
 
 % 中文字体
@@ -643,21 +637,13 @@
 % 数学字体
 \cs_new_protected:Npn \__whu_set_math_font_xits:
   {
-    \RequirePackage { unicode-math }
     \setmathfont { XITSMath-Regular.otf }
       [ BoldFont = XITSMath-Bold.otf ]
   }
 
 \cs_new_protected:Npn \__whu_set_math_font_termes:
   {
-    \RequirePackage { unicode-math }
     \setmathfont { texgyretermes-math.otf }
-  }
-
-\cs_new_protected:Npn \__whu_set_math_font_newtx:
-  {
-    \RequirePackage { newtxmath }
-    \bool_gset_inverse:N \g__whu_newtx_bool
   }
 
 % 根据系统判断调用字体
@@ -697,10 +683,6 @@
     \__whu_set_font:
     \__whu_set_cjk_font:
     \__whu_set_math_font:
-    \bool_if:NT \g__whu_newtx_bool
-      {
-        \msg_warning:nn { whu-thesis } { newtx }
-      }
   }
 
 %%% ---- 数学定理样式 ----- %%%
