@@ -1138,7 +1138,7 @@
       \par \skip_vertical:n { 2.5 cm }
       \begin { minipage } [ t ] [ 5 cm ] { \textwidth }
         \skip_set:Nn \baselineskip { 40 pt }
-        \centering { \kaishu \zihao { 2 } \g__whu_info_title_tl }
+        \centering { \kaishu \zihao { 1 } \g__whu_info_title_tl }
       \end { minipage } \par
       \group_begin:
         \zihao { 4 }
