@@ -13,23 +13,27 @@ assignees: ''
 <!-- 若需勾选，请把 [ ] 改为 [x]
 <!-- 注意：x 两侧不要留空格，即不要写成 [x ] 或 [ x] -->
 
-- [ ] 已在 issues 中进行搜索（包括已关闭的问题）
+* [ ] 已在 issues 中进行搜索（包括已关闭的问题）
 
 ## 编译环境
 
-- 操作系统
-  - [ ] Windows 10
-  - [ ] Windows 8/8.1
-  - [ ] Windows 7
-  - [ ] 更早版本的 Windows
-  - [ ] macOS
-  - [ ] Linux（请附发行版）
+* 操作系统
+  + [ ] Windows 10
+  + [ ] Windows 8/8.1
+  + [ ] Windows 7
+  + [ ] 更早版本的 Windows
+  + [ ] macOS
+  + [ ] Linux（请附发行版）
 
-- TeX 发行版
-  - [ ] TeX Live <!-- 年份 -->
-  - [ ] MiKTeX <!-- 版本号 -->
-  - [ ] CTeX 套装 2.9.2.164
-  - [ ] 更早版本的 CTeX 套装
+* TeX 发行版
+  + [ ] TeX Live <!-- 年份 -->
+  + [ ] MiKTeX <!-- 版本号 -->
+  + [ ] CTeX 套装 2.9.2.164
+  + [ ] 更早版本的 CTeX 套装
+
+* whu-thesis 版本
+
+  <!-- 版本号 -->
 
 ## 描述问题
 
@@ -39,6 +43,7 @@ assignees: ''
     1. 描述出现的情况
     2. 给出复现步骤
     3. 给出您解决问题所进行的尝试
+
 -->
 
 ## 最小工作示例（MWE）
@@ -53,7 +58,7 @@ assignees: ''
 下面是一个范例，请提问时修改为自己的代码：
 -->
 
-```latex
+``` latex
 \documentclass{whu-thesis}
 \begin{document}
 Hello, \LaTex!
@@ -62,7 +67,7 @@ Hello, \LaTex!
 
 （用 XeLaTeX 编译后）输出
 
-```latex
+``` latex
 ! Undefined control sequence.
 l.3 Hello, \LaTex
                  !
@@ -73,8 +78,8 @@ l.3 Hello, \LaTex
 
 <!-- 请在此处填写相关链接（如果有的话） -->
 
-- TeX.SX:
-- GitHub:
+* TeX. SX:
+* GitHub:
 
 ## 我还做了这些尝试
 
