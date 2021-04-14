@@ -14,7 +14,7 @@
 
 \title{\cls{whu-thesis}\bfseries ：武汉大学毕业论文模板\thanks{\url{https://github.com/whutug/whu-thesis}}}
 \author{WHUTUG\thanks{\url{https://github.com/whutug}}}
-\date{2021/03/27 \quad v0.6b}
+\date{2021/04/15 \quad v0.6c}
 
 \begin{document}
 \maketitle
@@ -362,7 +362,7 @@
 
 \begin{function}{style/font}
     \begin{fdusyntax}[emph={[1]font}]
-        font = times|xits|termes
+        font = (*<times|xits|termes>*)
     \end{fdusyntax}
     西文字体设置，具体见表 \ref{tab:font}。
 \end{function}
@@ -406,7 +406,7 @@
 
 \begin{function}{style/cjk-font}
     \begin{fdusyntax}[emph={[1]cjk-font}]
-        cjk-font = windows|mac|fandol|overleaf
+        cjk-font = (*<windows|mac|fandol|overleaf>*)
     \end{fdusyntax}
     中文字体设置，具体见表 \ref{tab:cjk-font}。
 \end{function}
@@ -471,35 +471,35 @@
 
 \begin{function}{style/bib-style}
     \begin{fdusyntax}[emph={[1]bib-style}]
-        bib-style = author-year|numerical
+        bib-style = (*<numerical|author-year|author-year-numbered|\meta{其他样式}>*)
     \end{fdusyntax}
-    设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应国家标准 GB/T 7714--2005 中的著者—出版年制和顺序编码制。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
+    设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应国家标准 GB/T 7714--2005 中的著者—出版年制和顺序编码制。\opt{author-year-numbered} 则是在 \opt{author-year} 基础上添加了序号，此时年份仍然紧跟在作者后方，而不在最后。选择 \meta{其他样式} 时，需要保证相应的 ".bst"（\kvopt{bib-backend}{bibtex}）或 ".bbx"（\kvopt{bib-backend}{biblatex}）文件能够被读取。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
 \end{function}
 
 \begin{function}{style/cite-style}
     \begin{fdusyntax}[emph={[1]bib-style}]
-        cite-style = (*<(super)|inline>*)
+        cite-style = (*<numerical-super|numerical-inline|author-year|\meta{其他样式}>*)
     \end{fdusyntax}
-    设置引用样式，仅在 \kvopt{style/bib-style}{numerical} 时有效。分别表示上标形式与文内形式的引用样式。
+    设置引用样式，\opt{numerical-super} 与 \opt{numerical-inline} 分别表示上标形式与文内形式的引用样式，\opt{author-year} 表示著者—出版年的引用样式。\meta{其他样式} 只能在 \kvopt{bib-backend}{biblatex} 使用。
 \end{function}
 
 \begin{function}{style/list-of-figures}
     \begin{fdusyntax}[emph={[1]list-of-figures}]
-        list-of-figures = (*\TFF*)
+        list-of-figures = (*<\TFF>*)
     \end{fdusyntax}
     设置是否显示图片索引。
 \end{function}
 
 \begin{function}{style/list-of-tables}
     \begin{fdusyntax}[emph={[1]list-of-tables}]
-        list-of-tables = (*\TFF*)
+        list-of-tables = (*<\TFF>*)
     \end{fdusyntax}
     设置是否显示表格索引。
 \end{function}
 
 \begin{function}{style/fullwidth-stop}
     \begin{fdusyntax}[emph={[1]fullwidth-stop}]
-        fullwidth-stop = (*\TFF*)
+        fullwidth-stop = (*<\TFF>*)
     \end{fdusyntax}
     选择是否把全角实心句点“．”作为默认的句号形状。这种句号一般用于科技类文章，以避免与下标“$_o$”或“$_0$”混淆。
 \end{function}

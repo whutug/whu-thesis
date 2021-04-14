@@ -2,7 +2,7 @@
 
 本文档格式遵守[如何维护更新记录](https://keepachangelog.com/zh-CN/1.0.0/)。
 
-## 未发布
+## v0.6c
 
 ### 新增
 

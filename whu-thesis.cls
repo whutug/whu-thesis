@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3 , xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2021/03/27}{0.6b}
+\ProvidesExplClass{whu-thesis}{2021/04/15}{0.6c}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whu-thesis } { 引擎不支持 }
@@ -965,6 +965,8 @@
       \g__whu_style_cite_style_tl
       {
         \tl_if_eq:NnT \g__whu_style_cite_style_tl { numerical-inline }
+          { \PassOptionsToPackage { citestyle = numeric-comp  } { biblatex } }
+        \tl_if_eq:NnT \g__whu_style_cite_style_tl { numerical-super  }
           { \PassOptionsToPackage { citestyle = gb7714-2015   } { biblatex } }
         \tl_if_eq:NnT \g__whu_style_cite_style_tl { author-year }
           { \PassOptionsToPackage { citestyle = gb7714-2015ay } { biblatex } }
