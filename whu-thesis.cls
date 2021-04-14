@@ -216,19 +216,9 @@
 
 %%% ---- 定义页面样式 ----- %%%
 \RequirePackage { geometry }
-\tl_if_eq:NnTF \g__whu_option_type_tl { bachelor }
-  {
-    \geometry
-      { hmargin = 3 cm , top = 2.5 cm , bottom = 2 cm , ignoreall }
-  }
-  {
-    \tl_if_eq:NnTF \g__whu_option_type_tl { opening }
-      {
-        \geometry
-          { hmargin = 3 cm , top = 2.5 cm , bottom = 2 cm , ignoreall }
-      }
-      { \geometry { margin = 2.5 cm , ignoreall } }
-  }
+\clist_if_in:nVTF { bachelor , opening } \g__whu_option_type_tl
+  { \geometry { hmargin = 3 cm , top = 2.5 cm , bottom = 2 cm , ignoreall } }
+  { \geometry { margin = 2.5 cm , ignoreall } }
 % 本科、开题报告左右边距 3 cm，上边距 2.5 cm，下边距 2 cm
 % 硕博边距 2.5 cm。
 
@@ -819,10 +809,10 @@
   }
 
 \tl_new:N \g__whu_style_graphics_path_tl
+\tl_new:N \g__whu_style_bib_style_tl
+\tl_new:N \g__whu_style_cite_style_tl
 
 \bool_new:N \g__whu_style_bib_backend_bibtex_bool
-\bool_new:N \g__whu_style_bib_style_numerical_bool
-\bool_new:N \g__whu_style_cite_style_super_bool
 \bool_new:N \g__whu_style_list_of_figures_bool
 \bool_new:N \g__whu_style_list_of_tables_bool
 
@@ -841,21 +831,16 @@
     bib-backend            .initial:n = bibtex,
 
     % 参考文献样式
-    bib-style               .value_required:n = true,
-    bib-style               .choice:,
-    bib-style / numerical   .code:n =
-      { \bool_gset_true:N  \g__whu_style_bib_style_numerical_bool },
-    bib-style / author-year .code:n =
-      { \bool_gset_false:N \g__whu_style_bib_style_numerical_bool },
+    bib-style .value_required:n = true,
+    bib-style .choices:nn =
+      { numerical , author-year , author-year-numbered , unknown }
+      { \tl_gset_eq:NN \g__whu_style_bib_style_tl \l_keys_choice_tl },
 
     % 引用样式
-    cite-style          .value_required:n = true,
-    cite-style          .choice:,
-    cite-style / super  .code:n =
-      { \bool_gset_true:N  \g__whu_style_cite_style_super_bool },
-    cite-style / inline .code:n =
-      { \bool_gset_false:N \g__whu_style_cite_style_super_bool },
-    cite-style          .initial:n = super,
+    cite-style .value_required:n = true,
+    cite-style .choices:nn =
+      { numerical-super , numerical-inline , author-year , unknown }
+      { \tl_gset_eq:NN \g__whu_style_cite_style_tl \l_keys_choice_tl },
 
     list-of-figures         .choice:,
     list-of-figures / true  .code:n =
@@ -886,25 +871,19 @@
   }
 
 %%% ---- 参考文献设置 ----- %%%
-\clist_map_inline:nn { doctor , master }
+\clist_if_in:nVTF { doctor , master } \g__whu_option_type_tl
   {
-    \tl_if_eq:NnT \g__whu_option_type_tl {#1}
+    \keys_define:nn { whu / style }
       {
-        \keys_define:nn { whu / style }
-          {
-            bib-style .initial:n = author-year
-          }
+        bib-style  .initial:n = author-year,
+        cite-style .initial:n = author-year
       }
   }
-
-\clist_map_inline:nn { bachelor , opening }
   {
-    \tl_if_eq:NnT \g__whu_option_type_tl {#1}
+    \keys_define:nn { whu / style }
       {
-        \keys_define:nn { whu / style }
-          {
-            bib-style .initial:n = numerical
-          }
+        bib-style  .initial:n = numerical,
+        cite-style .initial:n = numerical-super
       }
   }
 
@@ -922,44 +901,87 @@
       }
   }
 
+\msg_new:nnn { whu-thesis } { cite-style 无效 }
+  {
+    bib-backend = bibtex 下，\\
+    cite-style = #1 不能与 bib-style = #2 搭配使用！\\
+    
+    请更改 bib-style 或 cite-style，或使用 biblatex！
+  }
+\cs_new_protected:Npn \__whu_invalid_cite_style:
+  {
+    \msg_warning:nnxx { whu-thesis } { cite-style 无效 }
+      { \g__whu_style_cite_style_tl }
+      { \g__whu_style_bib_style_tl }
+  }
+
 \cs_new_protected:Npn \__whu_bibtex_setup:
   {
     \skip_zero:N \bibsep % 参考文献间距设为 0
-    \bool_if:NTF \g__whu_style_bib_style_numerical_bool
+    \tl_if_eq:NnT \g__whu_style_bib_style_tl { numerical }
       {
         \bibliographystyle { data / gbt7714-2005-numerical }
         % \bibliographystyle { data / gbt7714-2005-whu-numerical }
-        \bool_if:NT \g__whu_style_cite_style_super_bool { \NAT@supertrue }
+
         \NAT@numberstrue
+        \clist_if_in:nVTF { numerical-super , numerical-inline }
+          \g__whu_style_cite_style_tl
+          {
+            \tl_if_eq:NnT \g__whu_style_cite_style_tl { numerical-super }
+              { \NAT@supertrue }
+          }
+          { \__whu_invalid_cite_style: }
         \tl_set:Nn \NAT@open  { [ }
         \tl_set:Nn \NAT@close { ] }
         \tl_set:Nn \NAT@sep   { , ~ }
       }
+
+    \clist_if_in:nVT { author-year , author-year-numbered }
+      \g__whu_style_bib_style_tl
       {
         \bibliographystyle { data / gbt7714-2005-author-year }
-        \NAT@numbersfalse
+        \tl_if_eq:NnF \g__whu_style_cite_style_tl { author-year }
+          { \__whu_invalid_cite_style: }
       }
+
     \tl_if_eq:NnT \g__whu_option_type_tl { opening }
       { \RequirePackage [ numbib ] { tocbibind } }
   }
 
 \cs_new_protected:Npn \__whu_biblatex_pre_setup:
   {
-    \bool_if:NTF \g__whu_style_bib_style_numerical_bool
+    \clist_if_in:nVTF { numerical , author-year , author-year-numbered }
+      \g__whu_style_bib_style_tl
       {
-        \PassOptionsToPackage { bibstyle = gb7714-2015 } { biblatex }
-        \bool_if:NT \g__whu_style_cite_style_super_bool
-          { \PassOptionsToPackage { citestyle = gb7714-2015 } { biblatex } }
+        \tl_if_eq:NnTF \g__whu_style_bib_style_tl { numerical }
+          { \PassOptionsToPackage { bibstyle = gb7714-2015   } { biblatex } }
+          { \PassOptionsToPackage { bibstyle = gb7714-2015ay } { biblatex } }
       }
-      { \PassOptionsToPackage { style = gb7714-2015ay } { biblatex } }
+      {
+        \PassOptionsToPackage { bibstyle = \g__whu_style_bib_style_tl }
+          { biblatex }
+      }
+    \clist_if_in:nVTF { numerical-super , numerical-inline , author-year }
+      \g__whu_style_cite_style_tl
+      {
+        \tl_if_eq:NnT \g__whu_style_cite_style_tl { numerical-inline }
+          { \PassOptionsToPackage { citestyle = gb7714-2015   } { biblatex } }
+        \tl_if_eq:NnT \g__whu_style_cite_style_tl { author-year }
+          { \PassOptionsToPackage { citestyle = gb7714-2015ay } { biblatex } }
+      }
+      {
+        \PassOptionsToPackage { citestyle = \g__whu_style_cite_style_tl }
+          { biblatex }
+      }
   }
+
 \cs_new_protected:Npn \__whu_biblatex_post_setup:
   {
     \skip_zero:N \bibitemsep % 参考文献间距设为 0
     \clist_if_empty:NF \g__whu_element_bibliography_clist
-      {
-        \clist_map_inline:Nn \g__whu_element_bibliography_clist
-          { \addbibresource {##1} }
+      { 
+        \clist_map_function:NN \g__whu_element_bibliography_clist 
+          \addbibresource
       }
   }
 
@@ -1048,6 +1070,7 @@
       学号： \uline { \hfill \g__whu_info_student_number_tl \hfill } \hfill
       \hfill 姓名： \uline { \hfill \g__whu_info_author_tl \hfill }
     \end { minipage }
+    \par \skip_vertical:n { 10 pt }
     \raggedbottom
     \__whu_set_table_font:
   }
@@ -1421,16 +1444,39 @@
         \tl_if_eq:NnTF \g__whu_option_type_tl { opening }
           {
             \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
-              { \exp_args:NV \bibliography \g__whu_element_bibliography_clist }
-              { \printbibliography [ heading = bibnumbered ] }
+              {
+                \tl_if_eq:NnT \g__whu_style_bib_style_tl
+                  { author-year-numbered }
+                  { \setcitestyle { numbers } }
+                \exp_args:NV \bibliography \g__whu_element_bibliography_clist
+              }
+              {
+                \tl_if_eq:NnTF \g__whu_style_bib_style_tl
+                  { author-year-numbered }
+                  {
+                    \printbibliography
+                      [ heading = bibnumbered , env = numerical ]
+                  }
+                  { \printbibliography [ heading = bibnumbered ] }
+              }
           }
           {
             \__whu_new_chapter_page:
             \phantomsection
             \addcontentsline { toc } { chapter } { 参考文献 }
             \bool_if:NTF \g__whu_style_bib_backend_bibtex_bool
-              { \exp_args:NV \bibliography \g__whu_element_bibliography_clist }
-              { \printbibliography }
+              {
+                \tl_if_eq:NnT \g__whu_style_bib_style_tl
+                  { author-year-numbered }
+                  { \setcitestyle { numbers } }
+                \exp_args:NV \bibliography \g__whu_element_bibliography_clist
+              }
+              {
+                \tl_if_eq:NnTF \g__whu_style_bib_style_tl
+                  { author-year-numbered }
+                  { \printbibliography [ env = numerical ] }
+                  { \printbibliography }
+              }
           }
       }
   }
@@ -1443,16 +1489,16 @@
         \chapter * { 攻博期间发表的科研成果目录 }
         \phantomsection
         \addcontentsline { toc } { chapter } { 攻博期间发表的科研成果目录 }
-        \tl_if_eq:NnTF \g__whu_style_bib_style_tl { numerical }
+        \tl_if_eq:NnTF \g__whu_style_bib_style_tl { author-year }
           {
-            \begin { enumerate } [ label = { [ } \arabic* { ] } ]
+            \begin { enumerate } [ label = {} , left = 0 pt .. 0 pt ]
               \file_input:V \g__whu_element_achievements_tl
             \end { enumerate }
           }
           {
-            \begin { description }
+            \begin { enumerate } [ label = { [ } \arabic* { ] } ]
               \file_input:V \g__whu_element_achievements_tl
-            \end { description }
+            \end { enumerate }
           }
       }
   }
@@ -1475,8 +1521,7 @@
     \clist_if_empty:NF \g__whu_element_appendix_clist
       {
         \appendix
-        \clist_map_inline:Nn \g__whu_element_appendix_clist
-          { \file_input:n {##1} }
+        \clist_map_function:NN \g__whu_element_appendix_clist \file_input:n
       }
   }
 
