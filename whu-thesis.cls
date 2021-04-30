@@ -253,12 +253,22 @@
       }
 
     % 默认页面页眉页脚样式
-    \fancypagestyle { plain }
+    \clist_if_in:nVTF { doctor , master } \g__whu_option_type_tl
       {
-        \fancyhf {}
-        \fancyhead [ O C ] { \zihao { 5 } \g__whu_head_odd_tl }
-        \fancyhead [ E C ] { \zihao { 5 } \g__whu_head_even_tl }
-        \fancyfoot [ C ]   { \zihao { 5 } \thepage }
+        \fancypagestyle { plain }
+          {
+            \fancyhf {}
+            \fancyfoot [ C ]   { \zihao { 5 } \thepage }
+            \fancyhead [ O C ] { \zihao { 5 } \g__whu_head_odd_tl }
+            \fancyhead [ E C ] { \zihao { 5 } \g__whu_head_even_tl }
+          }
+      }
+      {
+        \fancypagestyle { plain }
+          {
+            \fancyhf {}
+            \fancyfoot [ C ] { \zihao { 5 } \thepage }
+          }
       }
   }
 
