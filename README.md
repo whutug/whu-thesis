@@ -52,7 +52,7 @@
 
 ## 问题反馈
 
-如果在使用中发现问题，请按照以下步骤操作：
+如果在使用中发现 bug，请按照以下步骤操作：
 
 1. 阅读学校的[书写印制规范文件](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)，判断是否符合要求；
 2. 前往项目 [Wiki](https://github.com/mtobeiyf/whu-thesis/wiki) 查看相关说明；
@@ -60,6 +60,7 @@
 4. 在 [GitHub Issues](https://github.com/mtobeiyf/whu-thesis/issues) 中搜索该问题的关键词；
 5. 提出新的 [Issue](https://github.com/mtobeiyf/whu-thesis/issues)，并说明系统、TeX 版本、出现的问题等关键信息。
 
+如果只是使用上的问题，可以前往 [discussions](https://github.com/whutug/whu-thesis/discussions)进行讨论。
 ## 更多链接
 
 * [关于认真做好2020届本科生毕业论文（设计）答辩工作的通知](https://info.whu.edu.cn/info/1318/185710.htm)

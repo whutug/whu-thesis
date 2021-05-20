@@ -14,7 +14,7 @@
 
 \title{\cls{whu-thesis}\bfseries ：武汉大学毕业论文模板\thanks{\url{https://github.com/whutug/whu-thesis}}}
 \author{WHUTUG\thanks{\url{https://github.com/whutug}}}
-\date{2021/04/15 \quad v0.6c}
+\date{2021/05/20 \quad v0.6d}
 
 \begin{document}
 \maketitle
@@ -37,6 +37,7 @@
     \item 在 \href{https://github.com/mtobeiyf/whu-thesis/issues}{GitHub Issues 页面}中搜索该问题的关键词；
     \item 提出新的 \href{https://github.com/mtobeiyf/whu-thesis/issues}{issue}，并说明系统、发行版与版本、出现的问题等关键信息。
 \end{enumerate}
+如果是使用上的问题，可以前往 \href{https://github.com/whutug/whu-thesis/discussions}{discussions} 中讨论。
 
 \subsection*{关于本手册}
 本手册假定用户已经能处理一般的 \LaTeX{} 文档，并对 \BibTeX{} 有一定了解。如果从未接触过 \TeX{} 和 \LaTeX{}，建议先学习相关的基础知识。
@@ -467,20 +468,20 @@
     选择参考文献的支持方式。选择 "bibtex" 后，将使用 \BibTeX{} 处理文献，样式由 \pkg{natbib} 宏包负责； 选择 "biblatex" 后，将使用 biber 处理文献，样式则由 \pkg{biblatex} 宏包负责。
 \end{function}
 
-\emph{武汉大学要求参考文献遵循 GB/T 7714--2005 规范，但目前 \pkg{biblatex-gb7714} 只支持 GB/T 7714--2015，缺乏对 GB/T 7714--2005 的良好支持，所幸两者差别并不大，但最终效果可能仍无法完全满足格式规范的要求。}
+\emph{武汉大学要求参考文献遵循 GB/T 7714—2005 规范，但目前 \pkg{biblatex-gb7714} 只支持 GB/T 7714—2015，缺乏对 GB/T 7714—2005 的良好支持，所幸两者差别并不大，但最终效果可能仍无法完全满足格式规范的要求。}
 
 \begin{function}{style/bib-style}
     \begin{fdusyntax}[emph={[1]bib-style}]
         bib-style = (*<numerical|author-year|author-year-numbered|\meta{其他样式}>*)
     \end{fdusyntax}
-    设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应国家标准 GB/T 7714--2005 中的著者—出版年制和顺序编码制。\opt{author-year-numbered} 则是在 \opt{author-year} 基础上添加了序号，此时年份仍然紧跟在作者后方，而不在最后。选择 \meta{其他样式} 时，需要保证相应的 ".bst"（\kvopt{bib-backend}{bibtex}）或 ".bbx"（\kvopt{bib-backend}{biblatex}）文件能够被读取。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
+    设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应国家标准 GB/T 7714—2005 中的著者-出版年制和顺序编码制。\opt{author-year-numbered} 则是在 \opt{author-year} 基础上添加了序号，此时年份仍然紧跟在作者后方，而不在最后。选择 \meta{其他样式} 时，需要保证相应的 ".bst"（\kvopt{bib-backend}{bibtex}）或 ".bbx"（\kvopt{bib-backend}{biblatex}）文件能够被读取。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
 \end{function}
 
 \begin{function}{style/cite-style}
     \begin{fdusyntax}[emph={[1]bib-style}]
         cite-style = (*<numerical-super|numerical-inline|author-year|\meta{其他样式}>*)
     \end{fdusyntax}
-    设置引用样式，\opt{numerical-super} 与 \opt{numerical-inline} 分别表示上标形式与文内形式的引用样式，\opt{author-year} 表示著者—出版年的引用样式。\meta{其他样式} 只能在 \kvopt{bib-backend}{biblatex} 使用。
+    设置引用样式，\opt{numerical-super} 与 \opt{numerical-inline} 分别表示上标形式与文内形式的引用样式，\opt{author-year} 表示著者-出版年的引用样式。\meta{其他样式} 只能在 \kvopt{bib-backend}{biblatex} 使用。
 \end{function}
 
 \begin{function}{style/list-of-figures}
@@ -534,11 +535,11 @@
               \item \pkg{enumitem}，用于删除列举环境额外的的纵向间距。
               \item \pkg{footmisc}，用于设置脚注序号每面更新。
               \item \pkg{unicode-math}，负责处理 Unicode 编码的 OpenType 数学字体。\cls{whu-thesis} 会调用 Times 风格的 XITS Math 字体。
-              \item \pkg{natbib}，提供作者—年份引用格式。
+              \item \pkg{natbib}，提供作者-年份引用格式。
               \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
           \end{itemize}
     \item 设置 \kvopt{class}{opening} 时，\cls{whu-thesis} 会调用 \cls{ctexart} 文档类，同时会调用 \pkg{needspace}，防止在“指导教师意见”中换页。且在 \kvopt{bib-backend}{bibtex} 时调用 \pkg{tocbibind} 宏包，对参考文献章节编号。其他时候 \cls{whu-thesis} 则会调用 \cls{ctexbook} 文档类。
-    \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\scite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\scite{LuaTeX-ja} 宏包。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
+    \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\scite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\scite{LuaTeX-ja} 宏包与 \pkg{chinese-jfm}。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
     \item \opt{draft} 选项开启时，如果使用 \LuaLaTeX{} 编译，会载入 \pkg{lua-visual-debug} 宏包。
     \item 开启 \kvopt{style/bib-backend}{bibtex} 后，会调用 \pkg{natbib} 宏包，并依赖 \BibTeX{} 程序。参考文献样式由 \pkg{gbt7714} 宏包提供 \scite{natbib,gbt7714}。
     \item 开启 \kvopt{style/bib-backend}{biblatex} 后，会调用 \pkg{biblatex} 宏包，并依赖 \biber{} 程序。参考文献样式由 \pkg{biblatex-gb7714-2015} 宏包提供 \scite{biblatex,biblatex-gb7714-2015}。
@@ -562,7 +563,7 @@
     \bibitem{source3}
     \textsc{The \LaTeX3 Project}.
     \newblock \textit{The \LaTeX3 Sources} [CP/OL].
-    \newblock (2020-12-07)
+    \newblock (2021-05-11)
     \urlprefix\url{https://ctan.org/pkg/l3kernel}
     \urlprefix\CTANurl[源代码：]{macros/latex/contrib/l3kernel/source3.pdf}
     
@@ -585,8 +586,8 @@
     \bibitem{LuaTeX-ja}
     \LuaTeX-ja プロジェクトチーム.
     \newblock \textit{\LuaTeX-ja パッケージ} [EB/OL].
-    \newblock version 2021\-03\-20.0,
-    \newblock (2021-03-20)
+    \newblock version 2021\linebreak[1]0517.0,
+    \newblock (2021-05-17)
     \urlprefix\url{https://ctan.org/pkg/luatexja}
     \urlprefix\CTANurl[文档：]{macros/luatex/generic/luatexja/doc/luatexja-ja.pdf}
     
@@ -602,8 +603,8 @@
     \bibitem{thuthesis}
     清华大学 TUNA 协会.
     \newblock \textit{\textsc{ThuThesis}：清华大学学位论文模板} [EB/OL].
-    \newblock version 7.2.1,
-    \newblock (2021-03-21)
+    \newblock version 7.2.2,
+    \newblock (2021-04-03)
     \urlprefix\url{https://ctan.org/pkg/thuthesis}
     \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/thuthesis/thuthesis.pdf}
     
@@ -625,7 +626,7 @@
     
     \bibitem{gbt7714}
     李泽平（\textsc{Zeping L}）.
-    \newblock \textit{GB/T 7714--2015 \BibTeX{} Style} [EB/OL].
+    \newblock \textit{GB/T 7714—2015 \BibTeX{} Style} [EB/OL].
     \newblock version 2.1,
     \newblock (2020-12-17)
     \urlprefix\url{https://ctan.org/pkg/gbt7714}
@@ -642,8 +643,8 @@
     \bibitem{biblatex-gb7714-2015}
     胡振震.
     \newblock \textit{符合 GB/T 7714-2015 标准的 biblatex 参考文献样式} [EB/OL].
-    \newblock version 1.0w,
-    \newblock (2021-01-19)
+    \newblock version 1.0y,
+    \newblock (2021-05-06)
     \urlprefix\url{https://ctan.org/pkg/biblatex-gb7714-2015}
     \urlprefix\CTANurl[文档：]{biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf}
 \end{thebibliography}
