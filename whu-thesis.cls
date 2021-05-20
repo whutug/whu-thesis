@@ -8,7 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3 , xparse , l3keys2e}
-\ProvidesExplClass{whu-thesis}{2021/04/15}{0.6c}
+\ProvidesExplClass{whu-thesis}{2021/05/20}{0.6d}
   {Wuhan University Thesis Template}
 
 \msg_new:nnn { whu-thesis } { 引擎不支持 }
@@ -112,15 +112,8 @@
 
 \sys_if_engine_luatex:TF
   {
-    \file_if_exist:nTF { jfm-zh_CN.lua }
-      {
-        \clist_gput_right:Nn \g__whu_option_to_class_clist
-          { punct = zh_CN / \g__whu_option_punct_tl }
-      }
-      {
-        \clist_gput_right:Nn \g__whu_option_to_class_clist
-          { punct = \g__whu_option_punct_tl }
-      }
+    \clist_gput_right:Nn \g__whu_option_to_class_clist
+      { punct = zh_CN / \g__whu_option_punct_tl }
   }
   {
     \clist_gput_right:Nn \g__whu_option_to_class_clist
@@ -198,11 +191,6 @@
 
 \RequirePackage { physics }
 \RequirePackage { siunitx }
-\sisetup
-  {
-    detect-all,
-    group-digits = false
-  }
 
 \RequirePackage { algorithm2e }     % 算法代码
 \tl_set:Nn \algorithmcfname { 算法 }
