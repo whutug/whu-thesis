@@ -712,6 +712,12 @@
     \RequirePackage { hyperref }
     \hypersetup { hidelinks }
     \urlstyle { rm }
+
+    \hypersetup
+      {
+        pdftitle  = \g__whu_info_title_tl,
+        pdfauthor = \g__whu_info_author_tl
+      }
   }
 
 \cs_new_protected:Npn \__whu_new_chapter_page:
