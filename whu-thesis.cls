@@ -229,13 +229,13 @@
     \tl_new:N \g__whu_head_even_tl
     \tl_if_eq:NnT \g__whu_option_type_tl { doctor }
       {
-        \tl_gset:NV \g__whu_head_odd_tl \g__whu_info_title_tl
+        \tl_gset_eq:NN \g__whu_head_odd_tl \g__whu_info_title_tl
         \tl_gremove_all:Nn \g__whu_head_odd_tl { \\ }
         \tl_gset:Nn \g__whu_head_even_tl { 武汉大学博士学位论文 }
       }
     \tl_if_eq:NnT \g__whu_option_type_tl { master }
       {
-        \tl_gset:NV \g__whu_head_odd_tl \g__whu_info_title_tl
+        \tl_gset_eq:NN \g__whu_head_odd_tl \g__whu_info_title_tl
         \tl_gremove_all:Nn \g__whu_head_odd_tl { \\ }
         \tl_gset:Nn \g__whu_head_even_tl { 武汉大学硕士学位论文 }
       }
@@ -724,6 +724,9 @@
         pdftitle  = \g__whu_info_title_tl,
         pdfauthor = \g__whu_info_author_tl
       }
+
+    \tl_set_eq:NN \figureautorefname \figurename
+    \tl_set_eq:NN \tableautorefname  \tablename
   }
 
 \cs_new_protected:Npn \__whu_new_chapter_page:
