@@ -461,17 +461,17 @@
 \keys_define:nn { whu / style }
   {
     font .choices:nn =
-      { times , xits , termes }
+      { times , xits , termes , none }
       { \__whu_fontset:n { \l_keys_choice_tl } },
     % 西文字体
 
     math-font .choices:nn =
-      { xits , termes }
+      { xits , termes , none }
       { \__whu_math_fontset:n { \l_keys_choice_tl } },
     % 数学字体
 
     cjk-font .choices:nn =
-      { windows , mac , fandol , overleaf }
+      { windows , mac , fandol , overleaf , none }
       { \__whu_cjk_fontset:n { \l_keys_choice_tl } },
     % 中文字体
   }
@@ -504,6 +504,8 @@
         BoldItalicFont = * - bolditalic
       ]
   }
+
+\cs_new_protected:Npn \__whu_set_font_none: {}
 
 % 中文字体
 \cs_new_protected:Npn \__whu_set_cjk_font_song:nn #1#2
@@ -622,6 +624,8 @@
       { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
   }
 
+\cs_new_protected:Npn \__whu_set_cjk_font_none: {}
+
 % 数学字体
 \cs_new_protected:Npn \__whu_set_math_font_xits:
   {
@@ -633,6 +637,8 @@
   {
     \setmathfont { texgyretermes-math.otf }
   }
+
+\cs_new_protected:Npn \__whu_set_math_font_none: {}
 
 % 根据系统判断调用字体
 \sys_if_platform_windows:TF
