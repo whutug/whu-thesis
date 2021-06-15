@@ -373,10 +373,18 @@
 % 图表标题设置
 \RequirePackage [ labelsep = quad ] { caption } % 序号之后空一格写标题
 % 设置表格标题字体为黑体, 设置图标题字体为宋体
-\DeclareCaptionFont { tablecap } { \bfseries \tablecap }
-\captionsetup [ table ] { textfont = tablecap }
-\tl_set:Nn \figurename {                     \zihao { -4 } 图 }
-\tl_set:Nn \tablename  { \bfseries \tablecap \zihao { -4 } 表 }
+\DeclareCaptionFont { whutablecap  } { \heiti \addCJKfontfeatures { BoldFont = * } \bfseries \zihao { -4 } }
+\DeclareCaptionFont { whufigurecap } { \songti \zihao { -4 } }
+\captionsetup [ table ]
+  {
+    name = 表,
+    font = whutablecap
+  }
+\captionsetup [ figure ]
+  {
+    name = 图,
+    font = whufigurecap
+  }
 
 \RequirePackage { graphicx }
 \AtEndPreamble
@@ -517,7 +525,6 @@
   {
     \setCJKsansfont {#1} [#2]
     \newCJKfontfamily { \heiti } {#1} [#2]
-    \newCJKfontfamily { \tablecap } {#1} [ BoldFont = #1 ]
   }
 \cs_new_protected:Npn \__whu_set_cjk_font_fang:nn #1#2
   {
