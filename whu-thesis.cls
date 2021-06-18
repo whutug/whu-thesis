@@ -373,8 +373,10 @@
 % 图表标题设置
 \RequirePackage [ labelsep = quad ] { caption } % 序号之后空一格写标题
 % 设置表格标题字体为黑体, 设置图标题字体为宋体
-\DeclareCaptionFont { whutablecap  } { \heiti \addCJKfontfeatures { BoldFont = * } \bfseries \zihao { -4 } }
-\DeclareCaptionFont { whufigurecap } { \songti \zihao { -4 } }
+\DeclareCaptionFont { whutablecap  }
+  { \heiti \addCJKfontfeatures { BoldFont = * } \bfseries \zihao { -4 } }
+\DeclareCaptionFont { whufigurecap }
+  { \songti \zihao { -4 } }
 \captionsetup [ table ]
   {
     name = 表,
@@ -532,17 +534,13 @@
     \newCJKfontfamily { \fangsong } {#1} [#2]
     \cs_new:Npn \__whu_set_spine_font:
       {
-        \file_if_exist:nTF { jfm-zh_CN.lua }
-          {
-            \exp_not:N \setmainjfont {#1}
-              [
-                #2 , TateFeatures =
-                  {
-                    JFM = zh_CN / { \exp_not:o \g__whu_option_punct_tl , vert }
-                  }
-              ]
-          }
-          { \exp_not:N \setmainjfont {#1} [#2] }
+        \exp_not:N \setmainjfont {#1}
+          [
+            #2 , TateFeatures =
+              {
+                JFM = zh_CN / { \exp_not:o \g__whu_option_punct_tl , vert }
+              }
+          ]
       }
   }
 \cs_new_protected:Npn \__whu_set_cjk_font_kai:nn #1#2
