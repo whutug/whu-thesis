@@ -5,49 +5,56 @@ name: LaTeX Compile
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
+        os: [ubuntu-latest]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    # Compile the LaTeX document with XeLaTeX
-    - name: Compile whuthesis
-      uses: xu-cheng/latex-action@v2
-      with:
-        root_file: whuthesis-demo.tex
-        args: -xelatex -file-line-error -interaction=nonstopmode -shell-escape
-        extra_system_packages: "py-pygments msttcorefonts-installer fontconfig"
-        pre_compile: "update-ms-fonts && fc-cache -f && rm -rf whuthesis-demo.pdf"
+      # Compile the LaTeX document with XeLaTeX
+      - name: Compile whu-thesis
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: whu-thesis-demo.tex
+          args: -xelatex -file-line-error -interaction=nonstopmode -shell-escape
+          extra_system_packages: "fontconfig"
+          pre_compile: "fc-cache -f && rm -rf whuthesis-demo.pdf && rm -rf whu-thesis-demo-spine.pdf"
 
-    - name: Compile opening
-      uses: xu-cheng/latex-action@v2
-      with:
-        root_file: opening-demo.tex
-        args: -xelatex -file-line-error -interaction=nonstopmode -shell-escape
-        extra_system_packages: "py-pygments msttcorefonts-installer fontconfig"
-        pre_compile: "update-ms-fonts && fc-cache -f && rm -rf opening-demo.pdf"
+      - name: Compile opening
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: opening-demo.tex
+          args: -xelatex -file-line-error -interaction=nonstopmode -shell-escape
+          extra_system_packages: "fontconfig"
+          pre_compile: "fc-cache -f && rm -rf opening-demo.pdf"
 
-    # Upload compiled pdf to artifacts if compiled successfully
-    - name: Upload whuthesis
-      uses: actions/upload-artifact@v2
-      if: success()
-      with:
-        name: whuthesis-demo.pdf
-        path: whuthesis-demo.pdf
+      # Upload compiled pdf to artifacts if compiled successfully
+      - name: Upload whu-thesis
+        uses: actions/upload-artifact@v2
+        if: success()
+        with:
+          name: whu-thesis-demo.pdf
+          path: whu-thesis-demo.pdf
 
-    - name: Upload opening
-      uses: actions/upload-artifact@v2
-      if: success()
-      with:
-        name: opening-demo.pdf
-        path: opening-demo.pdf
+      - name: Upload opening
+        uses: actions/upload-artifact@v2
+        if: success()
+        with:
+          name: opening-demo.pdf
+          path: opening-demo.pdf
+
+      - name: Upload spine
+        uses: actions/upload-artifact@v2
+        if: success()
+        with:
+          name: whu-thesis-demo-spine.pdf
+          path: whu-thesis-demo-spine.pdf

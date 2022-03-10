@@ -1,15 +1,15 @@
 # 武汉大学毕业论文 LaTeX 模板
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Last Commit](https://img.shields.io/github/last-commit/mtobeiyf/whu-thesis.svg)](https://github.com/mtobeiyf/whu-thesis/commits/)
+[![Last Commit](https://img.shields.io/github/last-commit/whutug/whu-thesis.svg)](https://github.com/whutug/whu-thesis/commits/)
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
-[![](https://github.com/mtobeiyf/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/mtobeiyf/whu-thesis/actions)
+[![](https://github.com/whutug/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/whutug/whu-thesis/actions)
 
 本项目为武汉大学毕业论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
 
-\***硕博现有的著者—出版年的 bst 使用的是 gbt7714-author-year.bst，遵循 GB/T 7714-2015 标准，可能不完全符合研究生院的要求。**
+\***由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
 
-根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)编写，力求合规，简洁，易于实现，用户友好。
+根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1026/1100.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1026/1096.htm)编写，力求合规，简洁，易于实现，用户友好。
 
 ## 样例展示
 
@@ -17,13 +17,13 @@
   <img src="https://user-images.githubusercontent.com/5097752/55679059-f250d300-5936-11e9-8dfe-937a64a0c6bf.png" width="800px">
 </p>
 
-正文样例可以参照 [whuthesis-demo](whuthesis-demo.pdf)
+正文样例可以参照 [whu-thesis-demo](whu-thesis-demo.pdf)
 
 开题报告样例可以参照 [opening-demo](opening-demo.pdf)
 
 ## 如何使用
 
-使用前请阅读[使用文档](whuthesis-doc.pdf)
+使用前请阅读[使用文档](whu-thesis-doc.pdf)
 
 推荐两种方式进行编辑和编译：
 
@@ -52,7 +52,7 @@
 
 ## 问题反馈
 
-如果在使用中发现问题，请按照以下步骤操作：
+如果在使用中发现 bug，请按照以下步骤操作：
 
 1. 阅读学校的[书写印制规范文件](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)，判断是否符合要求；
 2. 前往项目 [Wiki](https://github.com/mtobeiyf/whu-thesis/wiki) 查看相关说明；
@@ -60,19 +60,18 @@
 4. 在 [GitHub Issues](https://github.com/mtobeiyf/whu-thesis/issues) 中搜索该问题的关键词；
 5. 提出新的 [Issue](https://github.com/mtobeiyf/whu-thesis/issues)，并说明系统、TeX 版本、出现的问题等关键信息。
 
+如果只是使用上的问题，可以前往 [discussions](https://github.com/whutug/whu-thesis/discussions) 进行讨论。
 ## 更多链接
 
-* [关于认真做好2020届本科生 毕业论文（设计）答辩工作的通知](https://info.whu.edu.cn/info/1318/185710.htm)
+* [关于认真做好2020届本科生毕业论文（设计）答辩工作的通知](https://info.whu.edu.cn/info/1318/185710.htm)
 * [武汉大学本科生毕业论文（设计）工作管理办法](http://ugs.whu.edu.cn/info/1049/1935.htm)
 * [武汉大学毕业论文（设计）智能管理系统](http://210.42.121.231/bysj/)
+* [武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1026/1100.htm)
+* [武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1026/1096.htm)
 
 ## 后续计划
 
 * 支持打印模式、课程报告模式。
-
-* 增加符合 gbt7714-2005 的著者—出版年的 bst 格式。如果可以，使用 gbt7714 重写现有的顺序编码制的 bst。
-
-* 增加 BibLaTeX 支持。
 
 欢迎提交 Pull Request。
 
