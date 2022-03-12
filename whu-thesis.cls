@@ -1156,19 +1156,19 @@
       \begin { minipage } [ c ] [ 2.5 cm ] { \textwidth }
         \fangsong \zihao { 4 } \mode_leave_vertical:
         \hbox_to_wd:nn { 2 cm } { \__whu_spread_with:nn { 分类号 } { \hfill } }
-        \uline { \hbox_to_wd:nn { 2 cm } { \hfill \g__whu_info_clc_tl \hfill } }
+        \dduline { \hbox_to_wd:nn { 2 cm } { \hfill \g__whu_info_clc_tl \hfill } }
         \hfill
         \hbox_to_wd:nn { 2 cm } { \__whu_spread_with:nn { 密级 } { \hfill } }
-        \uline
+        \dduline
           {
             \hbox_to_wd:nn { 2 cm }
               { \hfill \g__whu_info_secret_level_tl \hfill }
           } \par \skip_vertical:n { 1 em } \mode_leave_vertical:
         \hbox_to_wd:nn { 2 cm } { \__whu_spread_with:nn { UDC } { \hfill } }
-        \uline { \hbox_to_wd:nn { 2 cm } { \hfill \g__whu_info_udc_tl \hfill } }
+        \dduline { \hbox_to_wd:nn { 2 cm } { \hfill \g__whu_info_udc_tl \hfill } }
         \hfill
         \hbox_to_wd:nn { 2 cm } { \__whu_spread_with:nn { 编号 } { \hfill } }
-        \uline
+        \dduline
           {
             \hbox_to_wd:nn { 2 cm }
               { \hfill \g__whu_info_school_number_tl \hfill }
