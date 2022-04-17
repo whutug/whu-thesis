@@ -11,6 +11,7 @@
 \ProvidesExplClass{whu-thesis}{2021/05/20}{0.6d}
   {Wuhan University Thesis Template}
 
+% TODO 引擎处理修改为英文
 \msg_new:nnn { whu-thesis } { 引擎不支持 }
   {
     whu-thesis ~ 不支持 ~ #1 ~ 引擎。\\\\
@@ -95,6 +96,7 @@
   }
 \ProcessKeysOptions { whu / option }
 
+% TODO 直接改为 keys_set
 \tl_if_eq:NnT \g__whu_option_type_tl { master }
   {
     \keys_define:nn { whu / option }
@@ -119,7 +121,7 @@
     \clist_gput_right:Nn \g__whu_option_to_class_clist
       { punct = \g__whu_option_punct_tl }
   }
-% 判断是否有 chinese-jfm，若有则使用 chinese-jfm
+
 
 \sys_if_engine_xetex:T { \RequirePackage { etoolbox } }
 % 在载入文档类之前引入 etoolbox
@@ -634,8 +636,10 @@
 % 数学字体
 \cs_new_protected:Npn \__whu_set_math_font_xits:
   {
-    \setmathfont { XITSMath-Regular.otf }
-      [ BoldFont = XITSMath-Bold.otf ]
+    % \setmathfont { XITSMath-Regular.otf }
+      % [ BoldFont = XITSMath-Bold.otf ]
+    \setmathfont{STIXTwoMath-Regular.otf}
+    \setmathfont{STIXTwoMath-Regular.otf}[range={scr,bfscr},StylisticSet=01]
   }
 
 \cs_new_protected:Npn \__whu_set_math_font_termes:
