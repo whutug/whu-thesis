@@ -12,6 +12,12 @@
 
 * 添加 `none` 的字体设置。[#72]
 
+## v0.6e
+
+### Fixed
+
+- 修复`\mathcal` 和 `\mathscr` 的问题 ([#125](https://github.com/whutug/whu-thesis/issues/125))
+
 ## v0.6d
 
 ### 删除
