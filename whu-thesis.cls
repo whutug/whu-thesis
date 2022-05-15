@@ -1349,13 +1349,21 @@
 
     \bool_if:NT \g__whu_style_list_of_figures_bool
       {
-        \listoffigures
+        {%
+        \let\oldnumberline\numberline%
+        \renewcommand{\numberline}{\figurename~\oldnumberline}%
+        \listoffigures%
+        }
         \__whu_new_chapter_page:
       }
 
     \bool_if:NT \g__whu_style_list_of_tables_bool
       {
-        \listoftables
+        {%
+        \let\oldnumberline\numberline%
+        \renewcommand{\numberline}{\tablename~\oldnumberline}%
+        \listoftables%
+        }
         \__whu_new_chapter_page:
       }
   }
