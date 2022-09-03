@@ -12,6 +12,7 @@
         "-shell-escape",
         "-interaction=nonstopmode",
         "-file-line-error",
+        "-output-directory=%OUTDIR%/build",
         "%DOCFILE%.tex"
       ]
     },
@@ -24,6 +25,7 @@
         "-shell-escape",
         "-interaction=nonstopmode",
         "-file-line-error",
+        "-output-directory=%OUTDIR%/build",
         "%DOCFILE%.tex"
       ]
     },
