@@ -58,3 +58,26 @@ jobs:
         with:
           name: whu-thesis-demo-spine.pdf
           path: whu-thesis-demo-spine.pdf
+
+      # Send the built PDF to the specified email address if compiled successfully
+      - name: Send email of PDF
+        uses: dawidd6/action-send-mail@v3
+        if: success()
+        with:
+          server_address: ${{ secrets.MAILSERVER }}
+          server_port: ${{ secrets.MAILPORT }}
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          username: ${{ secrets.MAILUSERNAME }}
+          password: ${{ secrets.MAILPASSWORD }}
+          subject: ${{github.repository}} LaTeX Compile Success
+          body: Build job of ${{github.repository}} completed successfully!
+          to: ${{ secrets.EMAILTO }}
+          from: ${{github.repository}}
+          # Optional carbon copy recipients:
+          cc: ${{ secrets.CARBONCOPY }}
+          # Optional blind carbon copy recipients:
+          bcc: ${{ secrets.BLINDCARBONCOPY }}
+          content_type: text/html
+          convert_markdown: true
+          attachments: whu-thesis-demo.pdf, opening-demo.pdf, whu-thesis-demo-spine.pdf
