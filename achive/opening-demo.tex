@@ -1,0 +1,26 @@
+%% An Introduction to LaTeX Thesis Template of Wuhan University
+%%
+%% A demo of the opening report, created by WHUTUG
+
+\documentclass[type=opening]{whu-thesis}
+
+\whusetup
+  {
+    info                 =
+      {
+        title            = {武汉大学毕业论文（设计）开题报告示例},
+        student-number   = {xxxxxxxxxxxxx},
+        school           = {院系名称},
+        author           = {作者姓名}
+      },
+    element/bibliography = {ref/refs}
+  }
+
+\begin{document}
+
+\section{使用说明}
+开题报告似乎并无一个严格的格式要求，因此模板指定的格式实际上与论文的格式相同。使用方法上，开题报告模板与论文模板更为简单，只用在 \verb|\whusetup| 中指定 \verb|info/title|、\verb|info/student-number|、\verb|info/school| 与 \verb|info/author| 即可，其他与撰写普通文档方法相同。\cite{江泽民1989能源发展趋势及主要节能措施}
+
+\nocite{*}
+
+\end{document}

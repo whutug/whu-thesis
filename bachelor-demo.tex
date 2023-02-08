@@ -1,0 +1,253 @@
+% \documentclass[type = bachelor]{whu-thesis}
+% \documentclass[type = master]{whu-thesis}
+\documentclass[type = doctor]{whu-thesis}
+% \documentclass[type = master,showframe]{whu-thesis}
+% \documentclass[type = doctor,showframe]{whu-thesis}
+% \documentclass[type = bachelor,showframe]{whu-thesis}
+\whusetup{
+  info = {
+    % title      = {武汉大学本科生毕业论文 \LaTeX{} 模版},
+    % title*     = {Thesis Template for Wuhan UniversityThesis Template for Wuhan UniversityThesis Template for Wuhan UniversityThesis Template for Wuhan University},
+    department = {数学与统计学院},
+    % major      = {数学与应用数学},
+    author     = {夏大鱼羊},
+    student-id = {2021202012345},
+    supervisor = {夏大鱼羊},
+    supervisor-academic-title = {教授},
+    % master-type = professional,
+    master-type = academic,
+    doctor-cover-withsubject = false,
+    doctor-cover-info-spread = false
+    % bachelor-english-cover=false
+  }
+}
+\usepackage{zhlipsum}
+\usepackage{lipsum}
+
+
+\begin{document}
+
+
+\begin{abstract}
+  \zhlipsum[1]
+\end{abstract}
+
+\begin{abstract*}
+  \lipsum[1]
+\end{abstract*}
+
+\tableofcontents
+
+
+\begin{notation}
+  $\alpha$ & 常量 \\
+  $\beta$ & 常量 \\
+\end{notation}
+
+
+
+% 正文
+\mainmatter
+
+\chapter{测试}
+
+\section{公式测试}
+
+\begin{equation}
+  a^2 + b^2 = c^2
+\end{equation}
+
+
+
+\section{脚注测试}
+
+测试 \footnote{脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1}
+
+测试 \footnote{脚注测试2}
+
+
+
+\section{引用测试}
+
+\subsection{参考文献}
+
+测试\cite{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:5,whu-bachelor:7}
+
+测试\cite*{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:7}
+
+
+
+\section{图表测试}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width = 5cm]{whu-logo.png}
+  \caption{武汉大学校徽}
+  \label{fig:武汉大学校徽}
+\end{figure}
+
+引用~\ref{fig:武汉大学校徽}
+
+\begin{table}[ht]
+  \centering
+  \caption{简单的表格和引用 abc 123 \cite{whu-bachelor:1}}
+  \label{table:简单的表格}
+  \begin{tabular}{cc}
+    \hline
+    a & b \\\hline
+    c & d \\\hline
+    测试 & 文本 \\\hline
+  \end{tabular}
+\end{table}
+
+引用~\ref{table:简单的表格}
+
+
+\section{已定义好的一些数学定理环境}
+
+
+\begin{definition}[测度]
+  (参见文献xxx) 这是一段文字 $E = m c^2$  （中文括号）和 (西文括号)
+\end{definition}
+
+\begin{theorem}
+  这是一段文字 $E = m c^2$
+\end{theorem}
+
+
+\begin{proof}
+  这是一段文字 $E = m c^2$
+\end{proof}
+
+\begin{proof}[定理xx的证明]
+  这是一段文字 $E = m c^2$
+\end{proof}
+
+\begin{example}
+  这是一段文字 $E = m c^2$
+\end{example}
+
+\begin{property}
+  这是一段文字 $E = m c^2$
+\end{property}
+
+\begin{proposition}
+  这是一段文字 $E = m c^2$
+\end{proposition}
+
+\begin{corollary}
+  这是一段文字 $E = m c^2$
+\end{corollary}
+
+\begin{lemma}
+  这是一段文字 $E = m c^2$
+\end{lemma}
+
+\begin{axiom}
+  这是一段文字 $E = m c^2$
+\end{axiom}
+
+\begin{counterexample}
+  这是一段文字 $E = m c^2$
+\end{counterexample}
+
+\begin{conjecture}
+  这是一段文字 $E = m c^2$
+\end{conjecture}
+
+\begin{question}
+  这是一段文字 $E = m c^2$
+\end{question}
+
+\begin{claim}
+  这是一段文字 $E = m c^2$
+\end{claim}
+
+\begin{remark}
+  这是一段文字 $E = m c^2$
+\end{remark}
+
+\begin{theorem}[Cauchy]\label{thm:test}
+  这是一个定理
+  \begin{equation}\label{eq:test1}
+    \int_{0}^{1} x^2 \d x \geq 0
+  \end{equation}
+
+  \begin{equation}\label{eq:test2}
+    \int_{0}^{1} x^2 \d x \geq 0
+  \end{equation}
+\end{theorem}
+
+我想引用定理~\ref{thm:test} 和公式~\ref{eq:test2}
+
+
+定理括号测试：
+
+\begin{theorem}
+  测试
+  \begin{enumerate}
+    \item 中文（括号）没输入空格的效果
+    \item 中文 （括号） 输入空格的效果
+    \item 西文(括号)没输入空格的效果
+    \item 西文 (括号) 输入空格的效果
+  \end{enumerate}
+\end{theorem} 
+
+
+\begin{proof}
+  test
+  \[
+    \int_{0}^{1} x^2 \d x
+  \]
+\end{proof}
+
+\begin{proof}
+  test
+  \[
+    \int_{0}^{1} x^2 \d x \qedhere
+  \]
+\end{proof}
+
+
+\chapter{测试}
+
+\section{公式测试}
+
+\begin{equation}
+  a^2 + b^2 = c^2
+\end{equation}
+
+
+% 参考文献
+\nocite{*}
+\bibliography{bachelor-refs}
+
+
+\appendix
+
+\chapter{测试}
+
+\section{公式测试}
+\section{公式测试}
+
+\begin{equation}
+  a^2 + b^2 = c^2
+\end{equation}
+
+\chapter{测试}
+
+\section{公式测试}
+\subsection{编号测试}
+\subsection{编号测试}
+\subsubsection{编号测试}
+\subsubsection{编号测试}
+
+\section{公式测试}
+
+\begin{equation}\label{equation:appendix-test}
+  a^2 + b^2 = c^2
+\end{equation}
+
+公式~\eqref{equation:appendix-test}
+
+\end{document}

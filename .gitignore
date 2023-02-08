@@ -14,6 +14,7 @@
 *.cb
 *.cb2
 .*.lb
+*.hd
 
 ## Intermediate documents:
 *.dvi
@@ -284,3 +285,4 @@ TSWLatexianTemp*
 .vscode/*
 !.vscode/settings.json
 _minted*
+bachelor-demo.pdf

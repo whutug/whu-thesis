@@ -1,0 +1,33 @@
+\documentclass[type = proposal]{../../whu-thesis}
+
+\whusetup{
+  info = {
+    title      = {武汉大学本科开题报告与任务书 \LaTeX{} 模板},
+    department = {数学与统计学院},
+    student-id = {20212020123456},
+    author     = {夏大鱼羊}
+  }
+}
+
+\usepackage{zhlipsum}  % 测试假文
+
+
+\begin{document}
+
+%%% 如果「任务书」和「开题报告」都需要编译参考文献的话
+%%    不要同时编译，而是把下面的 \input 注释其中一个之后
+%%    用 bibtex 编译链进行编译。然后转存生成的 PDF（不然会被覆盖）
+%%    然后注释掉另一个，重新用 bibtex 编译链编译。
+
+%%% 「任务书」和「开题报告」的数据库分别为 refs-tasks.bib 和 refs-report.bib
+
+
+
+% 武汉大学本科毕业论文（设计）任务书
+% \input{./body/proposal-tasks.tex}
+
+% 开题报告
+\input{./body/proposal-report.tex}
+
+
+\end{document}

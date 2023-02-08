@@ -1,0 +1,695 @@
+% !TeX root = ../whu-thesis-doc.tex
+
+
+\section{模版开发要点}
+
+本模版开发主要参考的文件来自：
+
+\begin{itemize}
+  \item \href{http://210.42.121.231/bysj/}{武汉大学毕业论文（设计）智能管理系统}
+  \item \href{https://gs.whu.edu.cn/info/1026/1096.htm}{武汉大学硕士学位论文印制规定}
+  \item \href{https://gs.whu.edu.cn/info/1026/1100.htm}{武汉大学博士学位论文撰写及印制规格的规定}
+\end{itemize}
+
+此节将整理规范文件中的格式要点，主要目的：
+
+\begin{enumerate}
+  \item 方便开发者在开发 \cls{whu-thesis} 过程中不遗漏，有序地进行开发；
+  \item 用户可以通过此节内容核查格式；
+  \item 若模版开发后规范进行了修改，可以方便地与之前的版本进行对比更新。
+\end{enumerate}
+
+
+% \subsection{开题报告}
+
+% 《武汉大学本科生毕业论文（设计）工作管理办法（修订）》中提到：
+
+% \begin{description}
+%   \item[第十四条] 学生根据指导教师拟定的任务书，在查阅相关资料后遵照教师要求填 写《武汉大学本科生毕业论文（设计）开题报告》。开题工作须在下发任务书两周内 完成。学院（系）可根据情况采取多种形式组织开题报告会。
+% \end{description}
+
+% 要点：
+% \begin{itemize}
+%   \item 《武汉大学本科生毕业论文（设计）开题报告》
+% \end{itemize}
+
+
+\subsection{本科}
+
+以下来自《武汉大学本科生毕业论文（设计）书写印制规范》（下面简称本科规范）
+
+
+\subsubsection{论文题目}
+
+\begin{reference}
+  论文题目应以最恰当、最简明的词语准确概括整个论文的核心内容，避免使用不常见的缩略词、缩写字。中文题目一般不宜超过 24 个字，必要时可增加副标题。外文题目一般不宜超过 12 个实词。
+\end{reference}
+
+\begin{points}
+  \item 中文题目不超过 24 个字
+  \item 可以加副标题，但没有副标题的格式要求
+  \item 外文（不止英文）题目不超过 12 个 \emph{实词}
+\end{points}
+
+
+\subsubsection{摘要和关键词}
+
+\begin{reference}
+  摘要内容应概括地反映出本论文的主要内容，主要说明本论文的研究目的、内容、方法、成果和结论。要突出本论文的创造性成果或新见解，不要与引言相混淆。语言力求精练、准确。在摘要的下方另起一行，注明本文的关键词（3—5 个）。摘要与关键词应在同一页。英文摘要内容与中文摘要相同。最下方一行为英文关键词（Keywords 3—5 个）。
+
+  ……
+
+  摘要正文下空一行顶格打印“关键词”款项，每个关键词之间用“;”分开，最 后一个关键词不打标点符号，英文摘要应另起一页。具体示例见中、英文摘要示例。
+\end{reference}
+
+\begin{points}
+  \item 中文关键词在摘要下方另起一行，但是英文关键词是最下方一行，两者不太统一？但是本科规范中的示例两者看上去效果是相同的。黄正华老师的模版的处理是采取两者都是最下方一行。想的解决办法是开发键值（并且中英文单独控制，但也可以统一控制，比如 \opt{abstract-keywords-position}、\opt{abstract-keywords-position-zh}、\opt{abstract-keywords-position-en} ）：
+    \begin{itemize}
+      \item \opt{newline}：关键词在摘要换行后
+      \item \opt{newblankline}：关键词在摘要换行并空一行后
+      \item \opt{bottom}：关键词置于页底（\tn{vfill}）
+    \end{itemize}
+  \item 关键词效果从示例看不出来（因为没有换行）。黄正华老师模版是正文效果。计划设计键值实现正文和悬挂两种效果。
+  \item 英文摘要另起一页
+  \item 中文关键词用的是 \emph{西文的分号} 分割
+\end{points}
+
+
+\subsubsection{目录}
+
+\begin{reference}
+  论文目录是论文的提纲，也是论文各章节组成部分的小标题。目录应按照章、节、条三级标题编写，采用阿拉伯数字分级编号，要求标题层次清晰。目录中的标题要与正文中的标题一致。
+
+  ……
+
+  目录应包括章、节、条三级标题，目录和正文中的标题题序统一按照“1……、 1.1……、1.1.1……”的格式编写，目录中各章节题序中的阿拉伯数字用 Time New Roman 体。
+\end{reference}
+
+\begin{points}
+  \item 目录是三级
+  \item 目录标题和正文标题相同：也就是去掉 \tn{section} 的可选参数（打个补丁或者重定义）
+  \item “结论”不编号？
+\end{points}
+
+
+\subsubsection{正文}
+
+\begin{reference}
+  正文各章节应拟标题，每章结束后应另起一页。标题要简明扼要，不应使用标点符号。各章、节、条的层次按照“1……、1.1……、1.1.1……”标识，条以下具体款项的层次依次按照“1.1.1.1”、“(1)”、“\circledtext{1}”标识。
+\end{reference}
+
+\begin{points}
+  \item \tn{chapter} 后另起一页
+  \item 标题中不能有标点符号（能否检测来给报错？）
+  \item \tn{subsubsection} 要编号
+  \item \tn{enumerate} 的第一层和第二层改为括号和带圈数字
+\end{points}
+
+
+\subsubsection{中外文参考文献}
+
+\begin{reference}
+  毕业论文的撰写应本着严谨求实的科学态度，凡有引用他人成果之处，均应按论文中所引用的顺序列于文末，并且所有参考文献必须在正文中有引用标注。参考文献 的著录均应符合国家有关标准（按照 GB7714—2005《文后参考文献著录格式》执行）。 一篇论著在论文中多处引用时，在参考文献中只应出现一次，序号以第一次出现的位置为准。
+\end{reference}
+
+\begin{points}
+  \item 本科参考文献的格式就是国标+顺序编码制
+\end{points}
+
+
+
+\subsubsection{名词术语}
+
+\begin{reference}
+  全文应统一科技名词术语、行业通用术语以及设备、元器件的名称。有国家标准 的应采用标准中规定的术语，没有国家标准的应使用行业通用术语或名称。特定含义 的名词术语或新名词应加以说明或注释。
+\end{reference}
+
+\begin{points}
+  \item 增加“符号表”（名称可以由用户设置）
+\end{points}
+
+
+\subsubsection{字体和字号设置}
+
+\begin{longtblr}[%
+  caption = {本科模版：除封面和学术声明外的字体和字号设置}
+]{%
+  vlines, hlines,
+  width   = \textwidth,
+  colspec = {X[1,l]X[1,c]},
+  rows = {m}
+}
+  论文题目                            & 黑体2号\\
+  各章标题                            & 黑体小2号\\
+  各节的一级标题                       & 黑体4号\\
+  各节的二级标题                       & 黑体小4号\\
+  各节的三级标题                       & 黑体小4号\\
+  款项                               & 黑体小4号\\
+  正文                               & 宋体小4号\\
+  中文摘要、结论、参考文献标题           & 黑体小2号\\
+  中文摘要、结论、参考文献内容           & 宋体小4号\\
+  英文摘要标题                        & Time New Roman 大写粗体小2号\\
+  英文摘要内容                        & Time New Roman 体小4号\\
+  中文关键词标题                      & 黑体小4号\\
+  中文关键词                         & 宋体小4号\\
+  英文关键词标题                      & Time New Roman 粗体小4号\\
+  英文关键词                         & Time New Roman 小4号\\
+  目录标题                           & 黑体小2号\\
+  目录内容中章的标题                    
+  （含结论、参考文献、致谢、附录标题）   & 黑体4号\\
+  目录中其他内容                     & 宋体小4号\\
+  论文页码                          & 页面底端居中、阿拉伯数字（Time New Roman 5 号） 连续编码 \\
+  页眉与页脚                         & 宋体5号居中\\
+\end{longtblr}
+
+\begin{longtblr}[%
+  caption = {本科模版：封面的字体和字号设置}
+]{%
+  vlines, hlines,
+  width   = \textwidth,
+  colspec = {X[1,l]X[1,c]},
+  rows = {m}
+}
+  学号                        & 黑体5号\\
+  密级                        & 黑体5号\\
+  武汉大学本科生毕业论文（设计）   & 宋体1号居中\\
+  论文题目                     & 黑体2号居中\\
+  院（系）名称                  & 宋体小3号\\
+  专业名称                     & 宋体小3号\\
+  学生姓名                     & 宋体小3号\\
+  指导教师                     & 宋体小3号\\
+  年月                        & 宋体3号\\
+\end{longtblr}
+
+\begin{longtblr}[%
+  caption = {本科模版：学术声明的字体和字号设置}
+]{%
+  vlines, hlines,
+  width   = \textwidth,
+  colspec = {X[1,l]X[1,c]},
+  rows = {m}
+}
+  郑重声明    & 宋体粗体2号居中\\
+  声明内容    & 宋体4号\\
+\end{longtblr}
+
+
+\subsubsection{页面尺寸}
+
+\begin{reference}
+  页边距标准:上边距为 25mm，下边距为 20mm，左边距为 30mm，右边距为 30mm。
+\end{reference}
+
+参考黄老师模版设置：
+\begin{latexcode}
+  \RequirePackage[top=2.7truecm,bottom=2.2truecm,left=3truecm,right=3truecm,includefoot,xetex]{geometry} 
+\end{latexcode}
+
+
+\subsubsection{行距和行间距}
+
+\begin{reference}
+  段前、段后及行间距:章标题的段前为 0.8 行，段后为 0.5 行；节标题段前为 0.5行，段后 0.5 行; 标题以外的文字行距为“固定值”23 磅，字符间距为“标准”。
+\end{reference}
+
+\begin{points}
+  \item \tn{chapter}：章标题的段前为 0.8 行，段后为 0.5 行
+  \item \tn{section}：节标题段前为 0.5行，段后 0.5 行
+  \item 正文行距：“固定值”23 磅
+\end{points}
+
+
+\subsubsection{公式}
+
+\begin{reference}
+  公式应另起一行居中，统一用公式编辑器编辑。公式与编号之间不加虚线。公式 较长时应在“=”前转行或在“+、-、×、÷”运算符号处转行，等号或运算符号 应在转行后的行首，公式的编号用圆括号括起来放在公式右边行末。
+  
+  公式序号按章编排，如第 3 章第 2 个公式序号为“(3.2)”，附录中的第 n 个公式 用序号“(An)”表示。文中引用公式时，采用“见公式(3.2)”表述。具体见公式图 表示例。
+\end{reference}
+
+\begin{points}
+  \item 正文公式编号形如“(3.2)”
+  \item 附录公式编号形如“(An)”，A 表示附录的计数器的大写英文形式
+\end{points}
+
+
+\subsubsection{表格}
+
+\begin{reference}
+  每一个表格都应有表标题和表序号。表序号一般按章编排，如第 2 章第 4 个表的 序号为“表 2.4”。表标题和表序之间应空一格，表标题中不能使用标点符号，表标题 和表序号居中置于表上方(黑体小 4 号，数字和字母为 Time New Roman 粗体小 4 号)。 引用表格应在表标题的右上角加引文序号。
+  
+  表与表标题、表序号为一个整体，不得拆开排版为两页。当页空白不够排版该表整体时，可将其后文字部分提前，将表移至次页最前面。
+
+  统计表一律采用开口表格的标准格式，具体见公式图表示例。
+\end{reference}
+
+\begin{points}
+  \item 表 label 形如 |表2.4 字号设置|，表序和标题之间采用空格
+  \item 表标题字号：黑体小 4 号，数字和字母为 Time New Roman 粗体小 4 号（计划用 \tn{newfontfamily} 单独给英文配置一个字体比如 \tn{whuboldtnr}，参考知乎 \url{https://www.zhihu.com/question/463975644} ）
+  \item 引用表格应在表标题的右上角加引文序号？（暂时不懂这个的含义）
+  \item “表与表标题、表序号为一个整体，不得拆开排版为两页。”暂时理解为表标题和内容不能分成两页，即“表 xxx”在一页，内容在下一页。但是浮动体应该不会出现这种情况。个人觉得不是说不能长表格
+  \item “当页空白不够排版该表整体时，可将其后文字部分提前，将表移至次页最前面。”这不就是浮动体的 \opt{t} 选项吗？（doge）
+  \item 统计表有何不同？暂时不懂
+\end{points}
+
+
+\subsubsection{图}
+
+\begin{reference}
+  每幅插图应有图标题和图序号。图序号按章编排，如第 1 章第 4 幅插图序号为“图1.4”。图序号之后空一格写图标题，图序号和图标题居中置于图下方，用小 4 号宋体。 引用图应在图标题右上角标注引文序号。图中若有分图，分图号用(a)、(b)等置于 分图下、图标题之上。
+
+  图中的各部分中文或数字标示应置于图标题之上(有分图者置于分图序号之上)。
+
+  图与图标题、图序号为一个整体，不得拆开排版为两页。当页空白不够排版该图 整体时，可将其后文字部分提前，将图移至次页最前面。
+\end{reference}
+
+\begin{points}
+  \item 图 label 形如 |图2.4 xxx|，图序和标题之间采用空格
+  \item 图标题字号：小 4 号宋体
+  \item 子图的设置：序号为 |(a)|
+  \item “图与图标题、图序号为一个整体，不得拆开排版为两页。当页空白不够排版该图 整体时，可将其后文字部分提前，将图移至次页最前面。”：直接浮动体的 \opt{ht} 完事
+\end{points}
+
+
+\subsubsection{脚注}
+
+\begin{reference}
+  注释是对论文中特定名词或新名词的注解。注释可用页末注或篇末注的一种。选择页末注的应在注释与正文之间加细线分隔，线宽度为 1 磅，线的长度不应超过纸张的三分之一宽度。同一页类列出多个注释的，应根据注释的先后顺序编排序号。字体为宋体 5 号，注释序号以“\circledtext{1}、\circledtext{2}”等数字形式标示在被注释词条的右上角。页末或 篇末注释条目的序号应按照“\circledtext{1}、\circledtext{2}”等数字形式与被注释词条保持一致。
+\end{reference}
+
+\begin{points}
+  \item 脚注的线粗细为 1pt
+  \item 长度不超过纸张的三分之一宽度
+  \item 脚注字体为 5 号宋体
+  \item 形式为带圈数字
+\end{points}
+
+
+\subsubsection{附录}
+
+\begin{reference}
+  论文附录依次用大写字母“附录 A、附录 B、附录 C……”表示，附录内的分级 序号可采用“附 A1、附 A1.1、附 A1.1.1”等表示，图、表、公式均依此类推为“图 A1、表 A1、式(A1)”等。
+\end{reference}
+
+\begin{points}
+  \item section 层级及以下三个层级为阿拉伯数字
+  \item 图表层级和 section 一样（那如果只有 subsection 没有 subsubsection，只显示 1.1）
+  \item 公式编号改为 A1
+\end{points}
+
+
+\subsubsection{装订和印刷}
+
+\begin{reference}
+  封面 $\to$ 学术声明 $\to$ 中文摘要 $\to$ 英文摘要 $\to$ 目录 $\to$ 正文 $\to$ 参考文献 $\to$ 致谢 $\to$ 附录
+\end{reference}
+
+
+
+\subsection{硕士}
+
+以下来自《武汉大学硕士学位论文印制规定》
+
+\subsubsection{装订顺序}
+
+\begin{choices}[label = \arabic*.]
+  \item 封面
+  \item 论文英文题目
+  \item 论文原创性声明
+  \item 中文摘要
+  \item 英文摘要
+  \item 目录
+  \item 引言（绪论）
+  \item 正文
+  \item 中外文参考文献
+  \item 附录
+  \item 致谢或后记
+\end{choices}
+
+
+\subsubsection{目录}
+
+\begin{reference}
+  目录是论文的提纲，也是论文组成部分的小标题。排列顺序是：1.中文摘要；2.英文摘要；3.引言（绪论）；4.正文章节；5.参考文献；6.致谢或后记。
+\end{reference}
+
+\begin{points}
+  \item 目录本身不在目录里
+  \item 目录缩进没有要求。给用户提供键值控制。
+  \item 目录层级没有要求。给用户提供键值控制。
+  \item 样式参考示例文件
+\end{points}
+
+
+\subsubsection{页面设置}
+
+\begin{reference}
+  论文用A4纸（210×297mm）标准大小的白纸，必须双面印制，前置部分例外。
+\end{reference}
+
+\begin{points}
+  \item 前置部分单面打印，正文双面打印。（只需要在前置部分加空白页即可）
+\end{points}
+
+\begin{reference}
+  论文在印制时，纸张四周留足空白边缘，即：每页上方（天头）、下方（地脚）、左侧（订口）、右侧（切口）应分别留出25mm以上的空白边缘。
+\end{reference}
+
+\begin{points}
+  \item 页面尺寸没有直接的要求，只有 25mm 以上。参考黄老师模版设置。
+\end{points}
+
+
+\subsubsection{页眉页脚}
+
+\begin{reference}
+  页眉从中文摘要开始至论文末，偶数页码内容为：武汉大学硕士学位论文，奇数页码内容为学位论文题目。
+\end{reference}
+
+\begin{points}
+  \item 页眉奇偶不同
+  \item 从中文摘要开始有页眉
+  \item 偶数页：武汉大学硕士学位论文
+  \item 奇数页：学位论文题目
+  \item 位置应该是中间
+\end{points}
+
+\begin{reference}
+  论文的页码由引言（绪论）的首页开始，作为第1页，并为右页，一律用阿拉伯数字连续编排页码，必须统一标注在每页页脚中部。
+\end{reference}
+
+\begin{points}
+  \item 其实就是正文开始有页码（虽然规范里貌似把“引言”和“正文”分开了，但是 \LaTeX{} 里其实就是 \tn{mainmatter} 后面的内容）
+  \item 第一页为右页其实就是 \cls{book} 类的 \opt{openright} 选项
+  \item 正文页码阿拉伯数字
+  \item 正文页码在页脚中间
+\end{points}
+
+
+\subsubsection{论文题目}
+
+\begin{reference}
+  题目必须用楷体标准一号字标注于明显的位置，应是集中概括论文最重要的内容，一般不超过20个字，以有助于选定关键词和编制题录。题目不能用缩略词，首字母缩写字、字符、代号和公式等，题目语意未尽，可用副标题补充说明。外语专业的论文题目一般采用英文，英文题目不宜超过10个实词。
+\end{reference}
+
+\begin{points}
+  \item 字号为楷体1号
+\end{points}
+
+
+\begin{reference}
+  论文英文题目专用一页纸，“英文题目”用Times New Roman字体二号字，其下“研究生姓名”用Times New Roman字体四号字；外语专业应为中文题目。
+\end{reference}
+
+\begin{points}
+  \item 英文题目另起一页
+  \item 字号为Times new Roman字体二号字
+  \item “研究生姓名”用Times new Roman字体四号字
+  \item “外语专业”填写中文
+\end{points}
+
+
+\subsubsection{封面}
+
+\begin{reference}
+  论文封面的格式，请严格按“标准样本”（学术型硕士详见附件一，专业型硕士详见附件二）制作。
+\end{reference}
+
+\begin{points}
+  \item 要严格基于示例制作封面
+\end{points}
+
+
+\subsubsection{论文原创性声明}
+
+\begin{reference}
+  论文原创性声明用黑体小二号字，内容用宋体四号字。
+\end{reference}
+
+\begin{points}
+  \item 抬头黑体小二号
+  \item 内容宋体四号字
+\end{points}
+
+
+\subsubsection{摘要和关键词}
+
+\begin{reference}
+  中文摘要用黑体小二号字，内容用宋体小四号字，页码用罗马数字单独编排，并标注在每页页脚中部。
+\end{reference}
+
+\begin{points}
+  \item “中文摘要”：黑体小二号
+  \item 中文摘要内容：宋体小四号
+  \item 页码：罗马数字，页脚中间
+\end{points}
+
+\begin{reference}
+  英文摘要用加粗Times New Roman小二号字，内容用Times New Roman小四号字，页码续接中文摘要的页码。
+\end{reference}
+
+\begin{points}
+  \item “英文摘要”：加粗Times New Roman小二号（直接用本科表标题设置的那个字体）
+  \item 英文摘要内容：Times New Roman小四
+  \item 页码续接中文摘要（要注意插入空白页后还连不连续）
+\end{points}
+
+\begin{reference}
+  每篇论文必须选取3-5个中、英文关键词，排在其论文摘要的左下方，用黑体小四号字。
+\end{reference}
+
+\begin{points}
+  \item 位置左下方？那接口和本科一样就行，用户自己选择
+  \item 黑体小四（中英都是？）
+\end{points}
+
+
+\subsubsection{正文}
+
+\begin{reference}
+  正文是学位论文的核心部分，必须由另页开始，一级标题之间换页，二级标题之间空行；内容一律用宋体小四号字，字间距设置为标准字间距，行间距设置为最小值20磅，各章、节应有序号。
+\end{reference}
+
+\begin{points}
+  \item \tn{chapter} 新起一页（默认效果）
+  \item 二级标题之间空行是指 \tn{section} 之间的间距只有一个空行？
+  \item 正文字体为宋体小四
+  \item 行间距：20磅
+\end{points}
+
+
+\subsubsection{参考文献}
+
+\begin{reference}
+  参考文献用黑体四号字，内容用宋体五号字。
+\end{reference}
+
+\begin{points}
+  \item 标题黑体四号字
+  \item 内容宋体五号字
+\end{points}
+
+更多细节要看 \file{.doc} 文件的内容进行微调。
+
+
+\subsection{博士}
+
+以下来自《武汉大学博士学位论文印制规定》
+
+
+\subsubsection{装订顺序}
+
+\begin{choices}[label = \arabic*.]
+  \item 封面
+  \item 论文英文题目
+  \item 论文原创性声明
+  \item 学位论文使用授权协议书
+  \item 博士生自认为的论文创新点
+  \item 中文摘要
+  \item 英文摘要
+  \item 目录
+  \item 引言
+  \item 正文
+  \item 中外文参考文献
+  \item 攻博期间发表的与学位论文相关的科研成果目录
+  \item 后记/致谢
+\end{choices}
+
+
+\subsubsection{目录}
+
+\begin{reference}
+  目录是论文的提纲，也是论文组成部分的小标题。排列顺序是：1、中文摘要2、英文摘要3、引言4、正文章节5、中外文参考文献6、攻博期间发表的科研成果目录7、后记（可不要此项）。每项须标明页码。
+\end{reference}
+
+\begin{points}
+  \item 目录本身不在目录里
+  \item 目录缩进没有要求。给用户提供键值控制。
+  \item 目录层级没有要求。给用户提供键值控制。
+  \item 样式参考示例文件
+\end{points}
+
+
+\subsubsection{页面设置}
+
+\begin{reference}
+  论文用A4张（210×2976mm）标准大小的白纸打印；正文部分双面印制。
+\end{reference}
+
+\begin{points}
+  \item 前置部分单面打印，正文双面打印。（只需要在前置部分加空白页即可）
+\end{points}
+
+\begin{reference}
+  论文在打印时，纸张四周留足空白边缘，每页上方（天头）和左侧（订口）应分别留边25mm以上，下方（地脚）和右侧（切口）分别留边25mm以上。
+\end{reference}
+
+\begin{points}
+  \item 页面尺寸没有直接的要求，只有 25mm 以上。参考黄老师模版设置。
+\end{points}
+
+
+\subsubsection{页眉页脚}
+
+\begin{reference}
+  页眉从中文摘要开始至论文末，偶数页码内容为“武汉大学博士学位论文”，奇数页码内容为学位论文题目。
+\end{reference}
+
+\begin{points}
+  \item 页眉奇偶不同
+  \item 从中文摘要开始有页眉
+  \item 偶数页：武汉大学博士学位论文
+  \item 奇数页：学位论文题目
+  \item 位置应该是中间
+\end{points}
+
+\begin{reference}
+  论文的页码由引言（绪论）的首页开始，作为第1页，并为右页，一律用阿拉伯数字连续编排页码，必须统一标注在每页页脚中部。
+\end{reference}
+
+\begin{points}
+  \item 其实就是正文开始有页码（虽然规范里貌似把“引言”和“正文”分开了，但是 \LaTeX{} 里其实就是 \tn{mainmatter} 后面的内容）
+  \item 第一页为右页其实就是 \cls{book} 类的 \opt{openright} 选项
+  \item 正文页码阿拉伯数字
+  \item 正文页码在页脚中间
+\end{points}
+
+
+\subsubsection{论文题目}
+
+\begin{reference}
+  题目必须用楷体标准一号字标注于明显的位置，应是集中概括论文最重要的内容，一般不超过20个字，以有助于选定关键词和编制题录。题目不能用缩略词，首字母缩写字、字符、代号和公式等，题目语意未尽，可用副标题补充说明。外语专业的论文题目一般采用英文，英文题目不宜超过10个实词。
+\end{reference}
+
+\begin{points}
+  \item 字号为楷体1号
+\end{points}
+
+
+\begin{reference}
+  论文英文题目专用一页纸，“英文题目”用Times New Roman字体二号字，其下“研究生姓名”用Times New Roman字体四号字；外语专业应为中文题目。
+\end{reference}
+
+\begin{points}
+  \item 英文题目另起一页
+  \item 字号为Times new Roman字体二号字
+  \item “研究生姓名”用Times new Roman字体四号字
+  \item “外语专业”填写中文
+\end{points}
+
+
+\subsubsection{封面}
+
+\begin{reference}
+  论文封面的格式，请严格按“标准样本”（学术型硕士详见附件一，专业型硕士详见附件二）制作。
+\end{reference}
+
+\begin{points}
+  \item 要严格基于示例制作封面
+\end{points}
+
+
+\subsubsection{论文原创性声明}
+
+\begin{reference}
+  “论文原创性声明”用黑体小二号字，内容用宋体四号字
+\end{reference}
+
+\begin{points}
+  \item 抬头黑体小二号
+  \item 内容宋体四号字
+\end{points}
+
+
+\subsubsection{摘要和关键词}
+
+\begin{reference}
+  “中文摘要”用黑体小二号字，内容用宋体小四号字，页码用罗马数字单独编排，并标注在每页页脚中部。
+\end{reference}
+
+\begin{points}
+  \item “中文摘要”：黑体小二号
+  \item 中文摘要内容：宋体小四号
+  \item 页码：罗马数字，页脚中间
+\end{points}
+
+\begin{reference}
+  “英文摘要”用加粗Times New Roman小二号字，内容用Times New Roman小四号字，页码续接中文摘要的页码。
+\end{reference}
+
+\begin{points}
+  \item “英文摘要”：加粗Times New Roman小二号（直接用本科表标题设置的那个字体）
+  \item 英文摘要内容：Times New Roman小四
+  \item 页码续接中文摘要（要注意插入空白页后还连不连续）
+\end{points}
+
+\begin{reference}
+  每篇论文必须选取3-5个中、英文关键词，排在其论文摘要的左下方，用黑体小四号字。
+\end{reference}
+
+\begin{points}
+  \item 位置左下方？那接口和本科一样就行，用户自己选择
+  \item 黑体小四（中英都是？）
+\end{points}
+
+
+\subsubsection{正文}
+
+
+\begin{reference}
+  正文是学位论文的核心部分，必须另页开始，一级标题之间换页，二级标题之间空行；内容一律用宋体小四号字，字间距设置为标准字间距，行间距设置为最小值20磅，各章、节应有序号。
+\end{reference}
+
+\begin{points}
+  \item \tn{chapter} 新起一页（默认效果）
+  \item 二级标题之间空行是指 \tn{section} 之间的间距只有一个空行？
+  \item 正文字体为宋体小四
+  \item 行间距：20磅
+\end{points}
+
+
+\subsubsection{参考文献}
+
+\begin{reference}
+  参考文献用黑体四号字，内容用宋体五号字。
+\end{reference}
+
+\begin{points}
+  \item 标题黑体四号字
+  \item 内容宋体五号字
+\end{points}
+
+更多细节要看 \file{.doc} 文件的内容进行微调。
+
+
+\subsubsection{书脊}
+
+\begin{reference}
+  书脊（专指博士学位论文）。书脊上应用仿宋体四号字于上方标明论文题目，下方注明研究生姓名。
+\end{reference}
+
+\begin{points}
+  \item 字体仿宋体四号字
+  \item 可以参考 \cls{whu-thesis} 和 \cls{thuthesis} 对书脊的处理
+  \item 可以设计在加了 |-shell-escape| 才编译书脊（类似于一次编译有两种 PDF）
+\end{points}
