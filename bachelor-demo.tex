@@ -19,6 +19,10 @@
     doctor-cover-withsubject = false,
     doctor-cover-info-spread = false
     % bachelor-english-cover=false
+  },
+  style = {
+    font = xits,
+    math-font = xits,
   }
 }
 \usepackage{zhlipsum}
@@ -71,9 +75,9 @@
 
 \subsection{参考文献}
 
-测试\cite{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:5,whu-bachelor:7}
+测试%\cite{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:5,whu-bachelor:7}
 
-测试\cite*{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:7}
+测试%\cite*{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:7}
 
 
 
@@ -90,7 +94,9 @@
 
 \begin{table}[ht]
   \centering
-  \caption{简单的表格和引用 abc 123 \cite{whu-bachelor:1}}
+  \caption{%
+    简单的表格和引用 abc 123 %\cite{whu-bachelor:1}
+  }
   \label{table:简单的表格}
   \begin{tabular}{cc}
     \hline
@@ -208,6 +214,11 @@
   \]
 \end{proof}
 
+\[
+  \mathcal{L},\quad \mathscr{L}
+\]
+
+
 
 \chapter{测试}
 
@@ -219,8 +230,8 @@
 
 
 % 参考文献
-\nocite{*}
-\bibliography{bachelor-refs}
+% \nocite{*}
+% \bibliography{bachelor-refs}
 
 
 \appendix

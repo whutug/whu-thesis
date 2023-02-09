@@ -340,6 +340,8 @@
   }
   { ctexbook }
 
+\PassOptionsToPackage { no-math } { fontspec }
+
 \RequirePackage { filehook }
 
 % 消去 CJK 警告
@@ -357,7 +359,7 @@
 % 加载宏包
 \RequirePackage { etoolbox }
 \RequirePackage { geometry }
-\RequirePackage { fontspec }
+\RequirePackage [ no-math ] { fontspec }
 \RequirePackage { footmisc }
 \RequirePackage { xeCJK }
 \RequirePackage { xeCJKfntef }
@@ -369,7 +371,7 @@
 \RequirePackage { amsmath }
 \RequirePackage { amsthm }
 \RequirePackage { thmtools }
-\RequirePackage { unicode-math }
+\RequirePackage [ bold-style = ISO ] { unicode-math }
 \RequirePackage { tabularray }
 \RequirePackage { caption }
 
@@ -2530,7 +2532,181 @@
 % 超链接设置
 
 
-% 字体配置
+% 字体配置，相比v0.6e没有使用fontset=none
+\prop_const_from_keyval:Nn \c__whu_cjk_font_family_prop
+  {
+    main = zhsong,
+    sans = zhhei,
+    mono = zhfs,
+  }
+
+\cs_new_protected:Npn \__whu_font_set:nnn #1#2#3
+  {
+    \use:c { set #1 font } { #2 } [ #3 ]
+  }
+\cs_new_protected:Npn \__whu_cjk_font_set:nnn #1#2#3
+  {
+    \use:c { setCJK #1 font } { #2 } [ #3 ]
+    \exp_args:Nx \setCJKfamilyfont
+      { \prop_item:Nn \c__whu_cjk_font_family_prop {#1} }
+      {#2} [#3]
+  }
+\cs_new_protected:Npn \__whu_cjk_font_family_set:nnn #1#2#3
+  {
+    \setCJKfamilyfont {#1} {#2} [#3]
+  }
+
+\keys_define:nn { whu }
+  {
+    style  .meta:nn = { whu / style  } {#1},
+  }
+\keys_define:nn { whu / style }
+  {
+    font .choices:nn =
+      { times, xits, termes, default }
+      { \cs_gset_eq:Nc \__whu_style_font_use: { __whu_style_font_set_ \l_keys_choice_tl : } },
+    font .value_required:n = true,
+    font .initial:n = default,
+
+    math-font .choices:nn =
+      { xits, termes, default }
+      { \cs_gset_eq:Nc \__whu_style_math_font_use: { __whu_style_math_font_set_ \l_keys_choice_tl : } },
+    math-font .value_required:n = true,
+    math-font .initial:n = default,
+
+    cjk-font .choices:nn =
+      { windows, mac, fandol, overleaf, default }
+      { \cs_gset_eq:Nc \__whu_style_cjk_font_use: { __whu_style_cjk_font_set_ \l_keys_choice_tl : } },
+    cjk-font .value_required:n = true,
+    cjk-font .initial:n = default,
+  }
+
+\cs_new_protected:Npn \__whu_style_font_set_times:
+  {
+    \__whu_font_set:nnn { main } { Times ~ New ~ Roman } { }
+  }
+\cs_new_protected:Npn \__whu_style_font_set_xits:
+  {
+    \__whu_font_set:nnn { main } { XITS } 
+      {
+        Extension      = .otf,
+        UprightFont    = * - Regular,
+        BoldFont       = * - Bold,
+        ItalicFont     = * - Italic,
+        BoldItalicFont = * - BoldItalic
+      }
+  }
+\cs_new_protected:Npn \__whu_style_font_set_termes:
+  {
+    \__whu_font_set:nnn { main } { texgyretermes }
+      {
+        Extension      = .otf,
+        UprightFont    = * - regular,
+        BoldFont       = * - bold,
+        ItalicFont     = * - italic,
+        BoldItalicFont = * - bolditalic
+      }
+  }
+\cs_new_protected:Npn \__whu_style_font_set_default: { }
+
+\cs_new_protected:Npn \__whu_style_math_font_set_xits:
+  {
+    \__whu_font_set:nnn { math } { XITSMath-Regular.otf } 
+      { 
+        BoldFont     = XITSMath-Bold.otf,
+      }
+    \__whu_font_set:nnn { math } { XITSMath-Regular.otf } 
+      { 
+        range        = {cal, bfcal},
+        StylisticSet = 01
+      }
+  }
+\cs_new_protected:Npn \__whu_style_math_font_set_termes:
+  {
+    \__whu_font_set:nnn { math } { texgyretermes-math.otf } 
+      { }
+  }
+\cs_new_protected:Npn \__whu_style_math_font_set_default: { }
+
+\cs_new_protected:Npn \__whu_style_cjk_font_set_windows:
+  {
+    \__whu_cjk_font_set:nnn { main } { SimSun }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+    \__whu_cjk_font_set:nnn { sans } { SimHei }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+    \__whu_cjk_font_set:nnn { mono } { FangSong }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+    \__whu_cjk_font_family_set:nnn { zhkai } { KaiTi }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+  }
+\cs_new_protected:Npn \__whu_style_cjk_font_set_mac:
+  {
+    \__whu_cjk_font_set:nnn { main } { Songti ~ SC ~ Light }
+      {
+        BoldFont           = Songti ~ SC ~ Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = Songti ~ SC ~ Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      }
+    \__whu_cjk_font_set:nnn { sans } { Heiti ~ SC ~ Light }
+      {
+        BoldFont           = Heiti ~ SC ~ Medium,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = Heiti ~ SC ~ Medium,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      }
+    \__whu_cjk_font_set:nnn { mono } { STFangsong }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+    \__whu_cjk_font_family_set:nnn { zhkai } { Kaiti ~ SC ~ Regular }
+      {
+        BoldFont           = Kaiti ~ SC ~ Bold,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = Kaiti ~ SC ~ Bold,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      }
+  }
+\cs_new_protected:Npn \__whu_style_cjk_font_set_fandol:
+  {
+    \__whu_cjk_font_set:nnn { main } { FandolSong-Regular.otf }
+      {
+        BoldFont           = FandolSong-Bold.otf,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = FandolSong-Bold.otf,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      }
+    \__whu_cjk_font_set:nnn { sans } { FandolHei- Regular.otf }
+      {
+        BoldFont           = FandolHei-Bold.otf,
+        AutoFakeSlant      = 0.167,
+        BoldItalicFont     = FandolHei-Bold.otf,
+        BoldItalicFeatures = { FakeSlant = 0.167 }
+      }
+    \__whu_cjk_font_set:nnn { mono } { FandolFang-Regular.otf }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+    \__whu_cjk_font_family_set:nnn { zhkai } { FandolKai-Regular.otf }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+  }
+\cs_new_protected:Npn \__whu_style_cjk_font_set_overleaf:
+  {
+    \__whu_cjk_font_set:nnn { main } { simsun.ttc }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+    \__whu_cjk_font_set:nnn { sans } { simhei.ttf }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+    \__whu_cjk_font_set:nnn { mono } { simfang.ttf }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+    \__whu_cjk_font_family_set:nnn { zhkai } { simkai.ttf }
+      { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+  }
+\cs_new_protected:Npn \__whu_style_cjk_font_set_default: { }
+
+\AtEndPreamble
+  {
+    \__whu_style_font_use:
+    \__whu_style_math_font_use:
+    \__whu_style_cjk_font_use:
+  }
+
+
 % \ifcsname XeTeXglyph\endcsname
 %   \def\pkg@CompileCommand{xelatex}
 %   \usepackage{xeCJK}
