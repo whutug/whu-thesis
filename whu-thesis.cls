@@ -371,7 +371,6 @@
 \RequirePackage { amsmath }
 \RequirePackage { amsthm }
 \RequirePackage { thmtools }
-\RequirePackage [ bold-style = ISO ] { unicode-math }
 \RequirePackage { tabularray }
 \RequirePackage { caption }
 
@@ -2701,6 +2700,7 @@
 
 \AtEndPreamble
   {
+    \RequirePackage [ bold-style = ISO ] { unicode-math }
     \__whu_style_font_use:
     \__whu_style_math_font_use:
     \__whu_style_cjk_font_use:
