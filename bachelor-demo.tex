@@ -23,6 +23,8 @@
   style = {
     font = xits,
     math-font = xits,
+    cjk-font = windows,
+    cjk-fakefont = true,
   }
 }
 \usepackage{zhlipsum}
@@ -67,7 +69,7 @@
 
 测试 \footnote{脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1}
 
-测试 \footnote{脚注测试2}
+测试 \footnote[3]{脚注测试2}
 
 
 
@@ -218,6 +220,20 @@
   \mathcal{L},\quad \mathscr{L}
 \]
 
+\section{字体测试}
+字体测试：\\
+{宋体} {\heiti 黑体} {\kaishu 楷书} {\fangsong 仿宋}\\
+{\rmfamily 罗马字族} {\sffamily 无衬线字族} {\ttfamily 打字机}\\
+{\bfseries 粗体} {\itshape 意大利} {\slshape 倾斜}
+
+伪粗体测试：\\
+{\bfseries\songti 伪粗体} {\bfseries\kaishu 伪粗体} {\bfseries\heiti 伪粗体} {\bfseries\fangsong 伪粗体} {\bfseries 伪粗体}
+
+伪斜体测试：\\
+{\itshape\songti 伪斜体} {\itshape\kaishu 伪斜体} {\itshape\heiti 伪斜体} {\itshape\fangsong 伪斜体} {\itshape 伪斜体}
+
+叠加测试：\\
+{\bfseries\itshape 伪粗斜体} {\bfseries\sffamily 伪粗黑体} {\bfseries\ttfamily 伪粗仿宋} {\itshape\sffamily 伪斜黑体} {\itshape\ttfamily 伪斜仿宋}
 
 
 \chapter{测试}
