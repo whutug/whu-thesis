@@ -1435,6 +1435,7 @@
 \cs_new_protected:Npn \__whu_make_back_matter_master:
   {
     \__whu_make_bibliography:
+    \__whu_make_achievements:
     \__whu_make_appendix:
     \__whu_make_thanks:
   }
@@ -1508,10 +1509,21 @@
 \cs_new_protected:Npn \__whu_make_achievements:
   {
     \tl_if_empty:NF \g__whu_element_achievements_tl
-      {
-        \chapter * { 攻博期间发表的科研成果目录 }
-        \phantomsection
-        \addcontentsline { toc } { chapter } { 攻博期间发表的科研成果目录 }
+      { 
+        \tl_if_eq:NnT \g__whu_option_type_tl { doctor }
+          {
+            \chapter * { 攻博期间发表的科研成果目录 }
+            \phantomsection
+            \addcontentsline { toc } { chapter } { 攻博期间发表的科研成果目录 }
+          }
+        
+        \tl_if_eq:NnT \g__whu_option_type_tl { master }
+          {
+            \chapter * { 攻硕期间发表的科研成果目录 }
+            \phantomsection
+            \addcontentsline { toc } { chapter } { 攻硕期间发表的科研成果目录 }
+          }
+        
         \tl_if_eq:NnTF \g__whu_style_bib_style_tl { author-year }
           {
             \begin { enumerate } [ label = {} , left = 0 pt .. 0 pt ]
