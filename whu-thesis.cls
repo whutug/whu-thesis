@@ -336,7 +336,8 @@
   {
     UTF8,
     heading  = true,
-    \g__whu_to_ctexbook_clist
+    \g__whu_to_ctexbook_clist,
+    fontset = none
   }
   { ctexbook }
 
@@ -2531,26 +2532,29 @@
 % 超链接设置
 
 
-% 字体配置，相比v0.6e没有使用fontset=none
-% \prop_const_from_keyval:Nn \c__whu_cjk_font_family_prop
-%   {
-%     main = zhsong,
-%     sans = zhhei,
-%     mono = zhfs,
-%   }
+% 字体配置
 
-\cs_new_protected:Npn \__whu_font_set:nnn #1#2#3
+\cs_new_protected:Npn \__whu_set_cjk_main_font:nn #1#2
   {
-    \use:c { set #1 font } {#2} [#3]
+    \setCJKmainfont { #1 } [ #2 ]
+    \newCJKfontfamily [ zhsong ] \songti { #1 } [ #2 ]
   }
-\cs_new_protected:Npn \__whu_cjk_font_set:nnn #1#2#3
+\cs_new_protected:Npn \__whu_set_cjk_sans_font:nn #1#2
   {
-    \use:c { setCJK #1 font } {#2} [#3]
+    \setCJKsansfont { #1 } [ #2 ]
+    \newCJKfontfamily [ zhhei ] \heiti { #1 } [ #2 ]
   }
-\cs_new_protected:Npn \__whu_cjk_font_family_set:nnn #1#2#3
+\cs_new_protected:Npn \__whu_set_cjk_font_kaishu:nn #1#2
   {
-    \setCJKfamilyfont {#1} {#2} [#3]
+    \newCJKfontfamily [ zhkai ] \kaishu { #1 } [ #2 ]
   }
+\cs_new_protected:Npn \__whu_set_cjk_mono_font:nn #1#2
+  {
+    \setCJKmonofont { #1 } [ #2 ]
+    \newCJKfontfamily [ zhfs ] \fangsong { #1 } [ #2 ]
+  }
+
+
 
 \bool_new:N \g__whu_style_cjk_fakefont_bool
 \keys_define:nn { whu }
@@ -2572,244 +2576,262 @@
     math-font .initial:n = default,
 
     cjk-font .choices:nn =
-      { windows, mac, fandol, overleaf, default }
+      { windows, mac, fandol, overleaf, none, sourcehan }
       { \cs_gset_eq:Nc \__whu_style_cjk_font_use: { __whu_style_cjk_font_set_ \l_keys_choice_tl : } },
     cjk-font .value_required:n = true,
-    cjk-font .initial:n = default,
 
     cjk-fakefont .bool_set:N = \g__whu_style_cjk_fakefont_bool,
     cjk-fakefont .default:n = true,
     cjk-fakefont .initial:n = false,
   }
 
+\hook_gset_rule:nnnn { begindocument/before } { . } { < } { xeCJK }
+
 \cs_new_protected:Npn \__whu_style_font_set_times:
   {
-    \__whu_font_set:nnn { main } { Times ~ New ~ Roman } { }
+    \setmainfont { Times ~ New ~ Roman }
   }
 \cs_new_protected:Npn \__whu_style_font_set_xits:
   {
-    \__whu_font_set:nnn { main } { XITS } 
-      {
+    \setmainfont { XITS } 
+      [
         Extension      = .otf,
         UprightFont    = * - Regular,
         BoldFont       = * - Bold,
         ItalicFont     = * - Italic,
         BoldItalicFont = * - BoldItalic
-      }
+      ]
   }
 \cs_new_protected:Npn \__whu_style_font_set_termes:
   {
-    \__whu_font_set:nnn { main } { texgyretermes }
-      {
+    \setmainfont { texgyretermes }
+      [
         Extension      = .otf,
         UprightFont    = * - regular,
         BoldFont       = * - bold,
         ItalicFont     = * - italic,
         BoldItalicFont = * - bolditalic
-      }
+      ]
   }
 \cs_new_protected:Npn \__whu_style_font_set_default: { }
 
 \cs_new_protected:Npn \__whu_style_math_font_set_xits:
   {
-    \__whu_font_set:nnn { math } { XITSMath-Regular.otf } 
-      { 
+    \setmathfont { XITSMath-Regular.otf } 
+      [ 
         BoldFont     = XITSMath-Bold.otf,
-      }
-    \__whu_font_set:nnn { math } { XITSMath-Regular.otf } 
-      { 
+      ]
+    \setmathfont { XITSMath-Regular.otf } 
+      [
         range        = {cal, bfcal},
         StylisticSet = 01
-      }
+      ]
   }
 \cs_new_protected:Npn \__whu_style_math_font_set_termes:
   {
-    \__whu_font_set:nnn { math } { texgyretermes-math.otf } 
-      { }
+    \setmathfont { texgyretermes-math.otf }
   }
 \cs_new_protected:Npn \__whu_style_math_font_set_default: { }
 
-% 在开启伪粗/斜体的情况下,使用\songti来获得没有伪粗/斜体的宋体,其他字体类似
+% 中文字体设置
+\cs_new_protected:Npn \__whu_style_cjk_font_set_none: { }
 \cs_new_protected:Npn \__whu_style_cjk_font_set_windows:
   {
     \bool_if:NTF \g__whu_style_cjk_fakefont_bool
       {
-        \__whu_cjk_font_set:nnn { main } { SimSun }
+        \__whu_set_cjk_main_font:nn { SimSun }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_cjk_font_set:nnn { sans } { SimHei }
+        \__whu_set_cjk_sans_font:nn { SimHei }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_cjk_font_set:nnn { mono } { FangSong }
+        \__whu_set_cjk_mono_font:nn { FangSong }
+          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
+        \__whu_set_cjk_font_kaishu:nn { KaiTi }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
       }
       {
-        \__whu_cjk_font_set:nnn { main } { SimSun }
+        \__whu_set_cjk_main_font:nn { SimSun }
           { 
             BoldFont       = SimHei,
             ItalicFont     = KaiTi,
             SlantedFont    = KaiTi,
             BoldItalicFont = SimHei
           }
-        \__whu_cjk_font_set:nnn { sans } { SimHei }
+        \__whu_set_cjk_sans_font:nn { SimHei }
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-        \__whu_cjk_font_set:nnn { mono } { FangSong }
+        \__whu_set_cjk_mono_font:nn { FangSong }
+          { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
+        \__whu_set_cjk_font_kaishu:nn { KaiTi }
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
       }
-    \__whu_cjk_font_family_set:nnn { zhsong } { SimSun }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-    \__whu_cjk_font_family_set:nnn { zhhei } { SimHei }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-    \__whu_cjk_font_family_set:nnn { zhfs } { FangSong }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-    \__whu_cjk_font_family_set:nnn { zhkai } { KaiTi }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
   }
 \cs_new_protected:Npn \__whu_style_cjk_font_set_mac:
   {
     \bool_if:NTF \g__whu_style_cjk_fakefont_bool
       {
-        \__whu_cjk_font_set:nnn { main } { Songti~ SC~ Light }
+        \__whu_set_cjk_main_font:nn { Songti~ SC~ Light }
           {
             BoldFont       = Songti~ SC~ Bold,
             AutoFakeSlant  = 0.167
           }
-        \__whu_cjk_font_set:nnn { sans } { Heiti~ SC~ Light }
+        \__whu_set_cjk_sans_font:nn { Heiti~ SC~ Light }
           {
             BoldFont      = Heiti~ SC~ Medium,
             AutoFakeSlant = 0.167
           }
-        \__whu_cjk_font_set:nnn { mono } { STFangsong }
-          { AutoFakeBold = 4 , AutoFakeSlant = 0.167 }
+        \__whu_set_cjk_mono_font:nn { STFangsong }
+          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
+        \__whu_set_cjk_font_kaishu:nn { Kaiti~ SC~ Regular }
+          { 
+            BoldFont      = Kaiti~ SC~ Bold, 
+            AutoFakeSlant = 0.167
+          }
       }
       {
-        \__whu_cjk_font_set:nnn { main } { Songti~ SC~ Light }
+        \__whu_set_cjk_main_font:nn { Songti~ SC~ Light }
           {
             BoldFont       = Songti~ SC~ Bold,
             ItalicFont     = Kaiti~ SC~ Regular,
             SlantedFont    = Kaiti~ SC~ Regular,
             BoldItalicFont = Songti~ SC~ Bold
           }
-        \__whu_cjk_font_set:nnn { sans } { Heiti~ SC~ Light }
+        \__whu_set_cjk_sans_font:nn { Heiti~ SC~ Light }
           {
             BoldFont       = Heiti~ SC~ Medium,
             ItalicFont     = *,
             SlantedFont    = *,
             BoldItalicFont = Heiti~ SC~ Medium
           }
-        \__whu_cjk_font_set:nnn { mono } { STFangsong }
+        \__whu_set_cjk_mono_font:nn { STFangsong }
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-      }
-    \__whu_cjk_font_family_set:nnn { zhsong } { Songti~ SC~ Light }
-      { 
-        BoldFont       = Songti~ SC~ Bold, 
-        ItalicFont     = *, 
-        SlantedFont    = *, 
-        BoldItalicFont = Songti~ SC~ Bold
-      }
-    \__whu_cjk_font_family_set:nnn { zhhei } { Heiti~ SC~ Light }
-      { 
-        BoldFont       = Heiti~ SC~ Medium, 
-        ItalicFont     = *, 
-        SlantedFont    = *, 
-        BoldItalicFont = Heiti~ SC~ Medium
-      }
-    \__whu_cjk_font_family_set:nnn { zhfs } { STFangsong }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-    \__whu_cjk_font_family_set:nnn { zhkai } { Kaiti~ SC~ Regular }
-      { 
-        BoldFont       = Kaiti~ SC~ Bold, 
-        ItalicFont     = *, 
-        SlantedFont    = *, 
-        BoldItalicFont = Kaiti~ SC~ Bold
+        \__whu_set_cjk_font_kaishu:nn { Kaiti~ SC~ Regular }
+          { 
+            BoldFont       = Kaiti~ SC~ Bold, 
+            ItalicFont     = *, 
+            SlantedFont    = *, 
+            BoldItalicFont = Kaiti~ SC~ Bold
+          }
       }
   }
 \cs_new_protected:Npn \__whu_style_cjk_font_set_fandol:
   {
     \bool_if:NTF \g__whu_style_cjk_fakefont_bool
       {
-        \__whu_cjk_font_set:nnn { main } { FandolSong-Regular.otf }
-        {
-          BoldFont      = FandolSong-Bold.otf,
-          AutoFakeSlant = 0.167
-        }
-      \__whu_cjk_font_set:nnn { sans } { FandolHei-Regular.otf }
-        {
-          BoldFont      = FandolHei-Bold.otf,
-          AutoFakeSlant = 0.167
-        }
-      \__whu_cjk_font_set:nnn { mono } { FandolFang-Regular.otf }
-        { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
+        \__whu_set_cjk_main_font:nn { FandolSong-Regular.otf }
+          {
+            BoldFont      = FandolSong-Bold.otf,
+            AutoFakeSlant = 0.167
+          }
+        \__whu_set_cjk_sans_font:nn { FandolHei-Regular.otf }
+          {
+            BoldFont      = FandolHei-Bold.otf,
+            AutoFakeSlant = 0.167
+          }
+        \__whu_set_cjk_mono_font:nn { FandolFang-Regular.otf }
+          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
+        \__whu_set_cjk_font_kaishu:nn { FandolKai-Regular.otf }
+          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
       }
       {
-        \__whu_cjk_font_set:nnn { main } { FandolSong-Regular.otf }
+        \__whu_set_cjk_main_font:nn { FandolSong-Regular.otf }
           {
             BoldFont       = FandolSong-Bold.otf,
             ItalicFont     = FandolKai-Regular.otf,
             SlantedFont    = FandolKai-Regular.otf,
             BoldItalicFont = FandolSong-Bold.otf
           }
-        \__whu_cjk_font_set:nnn { sans } { FandolHei-Regular.otf }
+        \__whu_set_cjk_sans_font:nn { FandolHei-Regular.otf }
           {
             BoldFont       = FandolHei-Bold.otf,
             ItalicFont     = *,
             SlantedFont    = *,
             BoldItalicFont = FandolHei-Bold.otf
           }
-        \__whu_cjk_font_set:nnn { mono } { FandolFang-Regular.otf }
+        \__whu_set_cjk_mono_font:nn { FandolFang-Regular.otf }
+          { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
+        \__whu_set_cjk_font_kaishu:nn { FandolKai-Regular.otf }
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
       }
-    \__whu_cjk_font_family_set:nnn { zhsong } { FandolSong-Regular.otf }
-      { 
-        BoldFont       = FandolSong-Bold.otf,
-        ItalicFont     = *,
-        SlantedFont    = *,
-        BoldItalicFont = FandolSong-Bold.otf
-      }
-    \__whu_cjk_font_family_set:nnn { zhhei } { FandolHei-Regular.otf }
-      { 
-        BoldFont       = FandolHei-Bold.otf,
-        ItalicFont     = *,
-        SlantedFont    = *,
-        BoldItalicFont = FandolHei-Bold.otf
-      }
-    \__whu_cjk_font_family_set:nnn { zhfs } { FandolFang-Regular.otf }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-    \__whu_cjk_font_family_set:nnn { zhkai } { FandolKai-Regular.otf }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
   }
 \cs_new_protected:Npn \__whu_style_cjk_font_set_overleaf:
   {
     \bool_if:NTF \g__whu_style_cjk_fakefont_bool
       {
-        \__whu_cjk_font_set:nnn { main } { simsun.ttc }
+        \__whu_set_cjk_main_font:nn { simsun.ttc }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_cjk_font_set:nnn { sans } { simhei.ttf }
+        \__whu_set_cjk_sans_font:nn { simhei.ttf }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_cjk_font_set:nnn { mono } { simfang.ttf }
+        \__whu_set_cjk_mono_font:nn { simfang.ttf }
+          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
+        \__whu_set_cjk_font_kaishu:nn { simkai.ttf }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
       }
       {
-        \__whu_cjk_font_set:nnn { main } { simsun.ttc }
+        \__whu_set_cjk_main_font:nn { simsun.ttc }
           { 
             BoldFont       = simhei.ttf,
             ItalicFont     = simkai.ttf,
             SlantedFont    = simkai.ttf,
             BoldItalicFont = simhei.ttf
           }
-        \__whu_cjk_font_set:nnn { sans } { simhei.ttf }
+        \__whu_set_cjk_sans_font:nn { simhei.ttf }
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-        \__whu_cjk_font_set:nnn { mono } { simfang.ttf }
+        \__whu_set_cjk_mono_font:nn { simfang.ttf }
+          { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
+        \__whu_set_cjk_font_kaishu:nn { simkai.ttf }
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
       }
-    \__whu_cjk_font_family_set:nnn { zhsong } { simsun.ttc }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-    \__whu_cjk_font_family_set:nnn { zhhei } { simhei.ttf }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-    \__whu_cjk_font_family_set:nnn { zhfs } { simfang.ttf }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-    \__whu_cjk_font_family_set:nnn { zhkai } { simkai.ttf }
-      { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
   }
-\cs_new_protected:Npn \__whu_style_cjk_font_set_default: { }
+\cs_new_protected:Npn \__whu_style_cjk_font_set_sourcehan:
+  {
+    \bool_if:NTF \g__whu_style_cjk_fakefont_bool
+      {
+        \__whu_set_cjk_main_font:nn { Source~ Han~ Serif~ SC }
+          {
+            UprightFont   = *-Regular,
+            BoldFont      = *-Bold,
+            AutoFakeSlant = 0.167
+          }
+        \__whu_set_cjk_sans_font:nn { Source~ Han~ Sans~ SC }
+          {
+            UprightFont   = *-Regular,
+            BoldFont      = *-Bold,
+            AutoFakeSlant = 0.167
+          }
+        \__whu_set_cjk_font_kaishu:nn { FZKai-Z03 }
+          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
+        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 } 
+          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
+      }
+      {
+        \__whu_set_cjk_main_font:nn { Source~ Han~ Serif~ SC }
+          {
+            UprightFont    = *-Regular,
+            BoldFont       = *-Bold,
+            ItalicFont     = *-Regular,
+            BoldItalicFont = *-Bold
+          }
+        \__whu_set_cjk_sans_font:nn { Source~ Han~ Sans~ SC }
+          {
+            UprightFont    = *-Regular,
+            BoldFont       = *-Bold,
+            ItalicFont     = *-Regular,
+            BoldItalicFont = *-Bold
+          }
+        \__whu_set_cjk_font_kaishu:nn { FZKai-Z03 }
+          {
+            BoldFont       = *,
+            ItalicFont     = *,
+            BoldItalicFont = *
+          }
+        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 } 
+          {
+            BoldFont       = *,
+            ItalicFont     = *,
+            BoldItalicFont = *
+          }
+      }
+  }    
+
 
 \AtEndPreamble
   {
