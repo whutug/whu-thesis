@@ -848,7 +848,7 @@
     range        = { \subsetneqq, \supsetneqq, \checkmark} ,
   ]
 \setCJKmainfont{Source Han Serif SC}[%
-  ItalicFont     = FZKai-Z03,
+  ItalicFont     = FandolKai,
   CharacterWidth = Full]
 \setCJKsansfont{Source Han Sans SC}[%
   ItalicFont     = *,
