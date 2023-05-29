@@ -5,13 +5,13 @@
 目前在网上可搜索到的武汉大学学位论文 \LaTeX{} 模版主要有：
 
 \begin{enumerate}
-  \item 武汉大学 \href{http://aff.whu.edu.cn/huangzh/}{黄正华老师} 编写的 \href{http://aff.whu.edu.cn/huangzh/#:~:text=%E4%B8%8B%E5%88%97-,%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E6%A8%A1%E6%9D%BF,-%2C%20%E9%80%82%E7%94%A8%E4%BA%8E%20TeX}{模版} （最近更新为 2016 年）；
-  \item \href{https://github.com/imfing}{imfing} 于 2019 年首先开发了 \cls{whu-thesis}，\href{https://github.com/T0nyX1ang}{Tony Xiang} 参与小部分开发，最后 \href{https://github.com/tanukihee}{ListLee} 于2020 年 \href{https://github.com/whutug/whu-thesis/commit/d488438b7819ddf5a128081a50b118d8fd4ec1ef}{用 \LaTeX3 重构了 \cls{whu-thesis}}，但由于维护者工作原因，于 2021 年六月份后无人继续维护 \cls{whu-thesis}；
+  \item 武汉大学\href{http://aff.whu.edu.cn/huangzh/}{黄正华老师}编写的\href{http://aff.whu.edu.cn/huangzh/#:~:text=%E4%B8%8B%E5%88%97-,%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E6%A8%A1%E6%9D%BF,-%2C%20%E9%80%82%E7%94%A8%E4%BA%8E%20TeX}{模版} （最近更新为 2016 年）；
+  \item \href{https://github.com/imfing}{imfing} 于 2019 年首先开发了 \cls{whu-thesis}，\href{https://github.com/T0nyX1ang}{Tony Xiang} 参与小部分开发，最后 \href{https://github.com/tanukihee}{ListLee} 于 2020 年\href{https://github.com/whutug/whu-thesis/commit/d488438b7819ddf5a128081a50b118d8fd4ec1ef}{用 \LaTeX3 重构了 \cls{whu-thesis}}，但由于维护者工作原因，于 2021 年六月份后无人继续维护 \cls{whu-thesis}；
   \item \href{https://github.com/BenjaminHb/whu-thesis}{BenjaminHb} 针对学术硕士需求，基于 whu-tug 编写的 \href{https://github.com/whutug/whu-thesis}{\cls{whu-thesis}} （本模版2022年重构前的 v0.6d 版本）进行调整。
 \end{enumerate}
 
 但是黄老师的模版开发时间较早，部分配置可能已经过时，且并没有统一本硕博三个模版；BenjaminHb 对学术硕士的需求单独调整完全可以通过代码的调整在 \cls{whu-thesis} 中实现（比如提供键值接口）；而 \cls{whu-thesis} 在 2021 年 6 月后无人维护。
 
-随着关于 \cls{whu-thesis} 的 \href{https://github.com/whutug/whu-thesis/issues}{问题} 和 \href{https://github.com/whutug/whu-thesis/discussions}{讨论} 不断增多，模版的优化需求日渐强烈。\href{https://github.com/xkwxdyy}{xdyyxkw} 在 2022 年接手 \cls{whu-thesis} 的维护后，于 2022 年 8 月重新梳理教务处规范、已有的部分学院的需求差异，基于黄正华老师的模板、v0.6d 版本的 \cls{whu-thesis} 与 issues 和 discussions 中的问题和需求，对 \cls{whu-thesis} 进行整体重构工作。（从此之后版本号风格变成 v$x.y.z$）
+随着关于 \cls{whu-thesis} 的\href{https://github.com/whutug/whu-thesis/issues}{问题}和\href{https://github.com/whutug/whu-thesis/discussions}{讨论}不断增多，模版的优化需求日渐强烈。\href{https://github.com/xkwxdyy}{xdyyxkw} 在 2022 年接手 \cls{whu-thesis} 的维护后，于 2022 年 8 月重新梳理教务处规范、已有的部分学院的需求差异，基于黄正华老师的模板、v0.6d 版本的 \cls{whu-thesis} 与 issues 和 discussions 中的问题和需求，对 \cls{whu-thesis} 进行整体重构工作。（从此之后版本号风格变成 v$x.y.z$）
 
 本模板将借鉴前辈经验，重新设计，并使用 \LaTeX3 编写，以适应 \TeX{} 技术发展潮流；同时还将构建一套简洁的接口，方便用户使用。主要参考：复旦大学 \cls{fduthesis}、清华大学 \cls{thuthesis}、中国科学技术大学 \cls{ustcthesis}、中国科学院大学 \cls{ucasthesis} 以及上海交通大学 \cls{sjtuthesis} 等成熟的学位论文 \LaTeX{} 模版，同时也会参考 xkwxdyy 于 2022 年开发的华中师范大学学位论文模版 \cls{CCNUthesis}，并吸取模版开发过程中的教训，总结经验，努力开发一个优质的 \cls{whu-thesis}。
