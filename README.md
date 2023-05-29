@@ -9,11 +9,11 @@
 
 \***由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
 
-根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1026/1100.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1026/1096.htm)编写，力求合规，简洁，易于实现，用户友好。
+根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1026/1100.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1026/1096.htm)编写，力求合规、简洁、易于实现、用户友好。
 
 ## 样例展示
 
-<p align="center">
+<p style="align:center;">
   <img src="https://user-images.githubusercontent.com/5097752/55679059-f250d300-5936-11e9-8dfe-937a64a0c6bf.png" width="800px">
 </p>
 
@@ -42,7 +42,7 @@
 
 使用该模板时，需要设置 `XeLaTeX` 或 `LuaLaTeX` 为编译器，具体步骤请查看 [Overleaf 在线编辑](https://github.com/mtobeiyf/whu-thesis/wiki/Overleaf-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91)
 
-<p align="center">
+<p style="align:center;">
   <img src="https://user-images.githubusercontent.com/5097752/55882483-319d4f00-5bd7-11e9-86ff-687106144e16.png" width="800px">
 </p>
 
@@ -61,6 +61,7 @@
 5. 提出新的 [Issue](https://github.com/mtobeiyf/whu-thesis/issues)，并说明系统、TeX 版本、出现的问题等关键信息。
 
 如果只是使用上的问题，可以前往 [discussions](https://github.com/whutug/whu-thesis/discussions) 进行讨论。
+
 ## 更多链接
 
 * [关于认真做好2020届本科生毕业论文（设计）答辩工作的通知](https://info.whu.edu.cn/info/1318/185710.htm)
