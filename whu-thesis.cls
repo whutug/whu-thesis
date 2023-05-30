@@ -374,6 +374,7 @@
 \RequirePackage { thmtools }
 \RequirePackage { tabularray }
 \RequirePackage { caption }
+\RequirePackage {amssymb}
 
 
 \RequirePackage [ titles ] { tocloft }         % 目录修改
@@ -873,9 +874,9 @@
   {
     \clist_map_inline:nn
       {
-        { secret_level    } { 密级 },
-        { student_id      } { 学号 },
-        { toc      } { 目 \hspace{2em} 录 },
+        { secret_level } { 密级 },
+        { student_id } { 学号 },
+        { toc } { 目 \hspace{2em} 录 },
       }
       { \__whu_define_name:nn ##1 }
     \clist_map_inline:nn
@@ -1799,7 +1800,7 @@
       \fontsize{12bp}{28bp}\selectfont
       本学位论文作者愿意遵守武汉大学关于保存、使用学位论文的管理办法及规定，即：学校有权保存学位论文的印刷本和电子版，并提供文献检索与阅览服务；学校可以采用影印、缩印、数字化或其它复制手段保存论文；在以教学与科研服务为目的前提下，学校可以在校园网内公布部分或全部内容。 \par
       \textbf{一、}在本论文提交当年，同意在校园网内以及中国高等教育文献保障系统（CALIS）、高校学位论文系统提供查询及前十六页浏览服务。 \par
-      \textbf{二、}在本论文提交 $\mdlgwhtsquare$ 当年/$\mdlgwhtsquare$一年/$\mdlgwhtsquare$两年/$\mdlgwhtsquare$三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
+      \textbf{二、}在本论文提交 $\square$ 当年\!／\!$\square$一年\!／\!$\square$ 两年\!／\!$\square$ 三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
       
       \vspace*{3em}
       \begin{minipage}{0.5\textwidth}
@@ -2592,6 +2593,7 @@
 
 \hook_gset_rule:nnnn { begindocument/before } { . } { < } { xeCJK }
 
+% 西文字体设置
 \cs_new_protected:Npn \__whu_style_font_set_times:
   {
     \setmainfont { Times ~ New ~ Roman }
@@ -2620,17 +2622,18 @@
   }
 \cs_new_protected:Npn \__whu_style_font_set_default: { }
 
+% 数学字体设置
 \cs_new_protected:Npn \__whu_style_math_font_set_xits:
   {
     \setmathfont { XITSMath-Regular.otf } 
       [ 
         BoldFont     = XITSMath-Bold.otf,
       ]
-    \setmathfont { XITSMath-Regular.otf } 
-      [
-        range        = {cal, bfcal},
-        StylisticSet = 01
-      ]
+    % \setmathfont { XITSMath-Regular.otf } 
+    %   [
+    %     range        = {cal, bfcal},
+    %     StylisticSet = 01
+    %   ]
   }
 \cs_new_protected:Npn \__whu_style_math_font_set_termes:
   {
@@ -2837,10 +2840,10 @@
       }
   }    
 
-
+% 使用字体
 \AtEndPreamble
   {
-    \RequirePackage [ bold-style = ISO ] { unicode-math }
+    % \RequirePackage [ bold-style = ISO ] { unicode-math }
     \__whu_style_font_use:
     \__whu_style_math_font_use:
     \__whu_style_cjk_font_use:
