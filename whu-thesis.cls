@@ -374,7 +374,8 @@
 \RequirePackage { thmtools }
 \RequirePackage { tabularray }
 \RequirePackage { caption }
-\RequirePackage {amssymb}
+\RequirePackage { amssymb }
+\RequirePackage { bookmark }
 
 
 \RequirePackage [ titles ] { tocloft }         % 目录修改
