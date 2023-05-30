@@ -1918,6 +1918,7 @@
 % 硕士
 \cs_new:Npn \__whu_master_cover_ii:
   {
+    \pdfbookmark{英文封面}{titlepage-en}
     \begin{tikzpicture} [ remember~picture, overlay ]
       % 标题
       \__whu_master_cover_ii_title:
