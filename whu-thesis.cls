@@ -1068,7 +1068,6 @@
 % 本科
 \cs_new:Npn \__whu_bachelor_cover_i:
   {
-    \addcontentsline{toc}{chapter}{封面}
     \begin{tikzpicture} [ remember~picture, overlay ]
       % 学号和密级
       \__whu_bachelor_cover_i_topmatter:
@@ -2843,7 +2842,7 @@
 % 使用字体
 \AtEndPreamble
   {
-    % \RequirePackage [ bold-style = ISO ] { unicode-math }
+    \RequirePackage [ bold-style = ISO ] { unicode-math }
     \__whu_style_font_use:
     \__whu_style_math_font_use:
     \__whu_style_cjk_font_use:
