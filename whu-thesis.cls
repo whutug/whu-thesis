@@ -25,7 +25,7 @@
 % 简化 msg 模块的函数
 \cs_new:Npn \__whu_msg_new:nn  { \msg_new:nnn      { whu-thesis } }
 \cs_new:Npn \__whu_warning:n   { \msg_warning:nn   { whu-thesis } }
-\cs_new:Npn \__whu_warning:nn   { \msg_warning:nnn   { whu-thesis } }
+\cs_new:Npn \__whu_warning:nn  { \msg_warning:nnn  { whu-thesis } }
 \cs_new:Npn \__whu_error:n     { \msg_error:nn     { whu-thesis } }
 \cs_new:Npn \__whu_error:nn    { \msg_error:nnn    { whu-thesis } }
 \cs_new:Npn \__whu_fatal:nx    { \msg_fatal:nnx    { whu-thesis } }
@@ -382,7 +382,7 @@
 
 \AtEndPreamble
   {
-    % \RequirePackage { hyperref }
+    \RequirePackage { hyperref }
     \RequirePackage { fixdif }
   }
 
@@ -881,12 +881,12 @@
     \clist_map_inline:nn
       {
         { type } { 武汉大学本科毕业论文 } { BACHELOR’S~DEGREE~THESIS~OF~WUHAN~UNIVERSITY },
-        { department      } { {院（系）名}称 } { School (Department) },
+        { department } { {院（系）名}称 } { School (Department) },
         { major } { 专业名称 } { Major },
         { author } { 学生姓名 } { Candidate },
         { supervisor } { 指导教师 } { Supervisor },
         { keywords } { 关键词 } { Keywords },
-        { abstract      } { 摘 \hspace{2em} 要 } { ABSTRACT },
+        { abstract } { 摘 \hspace{2em} 要 } { ABSTRACT },
       }
       { \__whu_define_name:nnn ##1 }
     \keys_set:nn { whu / info }
@@ -911,15 +911,15 @@
   {
     \clist_map_inline:nn
       {
-        { secret_level    } { 密级                  },
-        { classification_number } { 分类号          },
-        { numbering } { 编号          },
-        { UDC      }      { UDC                  },
-        { major_professional           } { 专业类别{~（领域）}        },
-        { major_academic           } { 专业名称  },
-        { academic_type    } { 硕士学位论文  },
-        { professional_type    } { 硕士专业学位论文  },
-        { toc      } { 目 \qquad 录 },
+        { secret_level } { 密级 },
+        { classification_number } { 分类号 },
+        { numbering } { 编号 },
+        { UDC } { UDC },
+        { major_professional } { 专业类别{~（领域）} },
+        { major_academic } { 专业名称  },
+        { academic_type } { 硕士学位论文  },
+        { professional_type } { 硕士专业学位论文 },
+        { toc } { 目 \qquad 录 },
       }
       { \__whu_define_name:nn ##1 }
     \clist_map_inline:nn
@@ -929,7 +929,7 @@
         { supervisor } { 指导教师姓名、职称 } { Supervisor },
         { major } { 专业名称 } { Major },
         { research_area  } { 研究方向 } { Speciality },
-        { abstract      } { 摘 \hspace{2em} 要 } { ABSTRACT },
+        { abstract } { 摘 \hspace{2em} 要 } { ABSTRACT },
         { keywords } { 关键词 } { Keywords },
       }
       { \__whu_define_name:nnn ##1 }
@@ -957,13 +957,13 @@
   {
     \clist_map_inline:nn
       {
-        { secret_level    } { 密级                  },
-        { classification_number } { 分类号          },
-        { numbering } { 编号          },
-        { UDC      }       { UDC                  },
-        { subject_major    } { 学科、专业名称        },
-        { type    } { 博士学位论文  },
-        { toc      } { 目 \qquad 录 },
+        { secret_level } { 密级 },
+        { classification_number } { 分类号 },
+        { numbering } { 编号 },
+        { UDC } { UDC },
+        { subject_major } { 学科、专业名称 },
+        { type } { 博士学位论文 },
+        { toc } { 目 \qquad 录 },
       }
       { \__whu_define_name:nn ##1 }
     \clist_map_inline:nn
@@ -973,7 +973,7 @@
         { supervisor } { 指导教师姓名、职称 } { Supervisor },
         { major } { 专业名称 } { Major },
         { research_area  } { 研究方向 } { Speciality },
-        { abstract      } { 摘 \hspace{2em} 要 } { ABSTRACT },
+        { abstract } { 摘 \hspace{2em} 要 } { ABSTRACT },
         { keywords } { 关键词 } { Keywords },
       }
       { \__whu_define_name:nnn ##1 }
@@ -1067,6 +1067,7 @@
 % 本科
 \cs_new:Npn \__whu_bachelor_cover_i:
   {
+    \addcontentsline{toc}{chapter}{封面}
     \begin{tikzpicture} [ remember~picture, overlay ]
       % 学号和密级
       \__whu_bachelor_cover_i_topmatter:
@@ -1635,6 +1636,7 @@
   {
     \ctex_after_end_preamble:n
       {
+        \pdfbookmark{中文封面}{titlepage}
         \begin{titlepage}
           \int_case:Vn \g__whu_thesis_type_int  
             {
@@ -1686,7 +1688,7 @@
                   \__whu_new_blank_page:
                   \pagestyle{empty}
                   \__whu_doctor_statement:
-                  \newpage
+                  \__whu_new_blank_page:
                   \__whu_doctor_license_agreement:
                   \newpage
                   \frontmatter
@@ -1763,6 +1765,7 @@
               pagestyle = empty
             }
         }
+      \pdfbookmark{原创性声明}{doctor-statement}
       \chapter*{论文原创性声明}
       \linespread{1}
       \fontsize{14bp}{28bp}\selectfont
@@ -1790,11 +1793,12 @@
               pagestyle = empty
             }
         }
+      \pdfbookmark{使用授权协议书}{doctor-license-agreement}
       \chapter*{武汉大学学位论文使用授权协议书}
       \linespread{1}
       \fontsize{12bp}{28bp}\selectfont
       本学位论文作者愿意遵守武汉大学关于保存、使用学位论文的管理办法及规定，即：学校有权保存学位论文的印刷本和电子版，并提供文献检索与阅览服务；学校可以采用影印、缩印、数字化或其它复制手段保存论文；在以教学与科研服务为目的前提下，学校可以在校园网内公布部分或全部内容。 \par
-      \textbf{一、}在本论文提交当年，同意在校园网内以及中国高等教育文献保障系统\linebreak（CALIS）、高校学位论文系统提供查询及前十六页浏览服务。 \par
+      \textbf{一、}在本论文提交当年，同意在校园网内以及中国高等教育文献保障系统（CALIS）、高校学位论文系统提供查询及前十六页浏览服务。 \par
       \textbf{二、}在本论文提交 $\mdlgwhtsquare$ 当年/$\mdlgwhtsquare$一年/$\mdlgwhtsquare$两年/$\mdlgwhtsquare$三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
       
       \vspace*{3em}
@@ -1982,6 +1986,7 @@
 % 博士
 \cs_new:Npn \__whu_doctor_cover_ii:
   {
+    \pdfbookmark{英文封面}{titlepage-en}
     \begin{tikzpicture} [ remember~picture, overlay ]
       % 标题
       \__whu_doctor_cover_ii_title:
