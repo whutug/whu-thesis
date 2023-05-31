@@ -2581,6 +2581,7 @@
       { \cs_gset_eq:Nc \__whu_style_math_font_use: { __whu_style_math_font_set_ \l_keys_choice_tl : } },
     math-font .value_required:n = true,
     math-font .initial:n = default,
+    math-font .tl_gset:N = \g__whu_style_math_font_choice_tl,
 
     cjk-font .choices:nn =
       { windows, mac, fandol, overleaf, none, sourcehan }
@@ -2630,11 +2631,11 @@
       [ 
         BoldFont     = XITSMath-Bold.otf,
       ]
-    % \setmathfont { XITSMath-Regular.otf } 
-    %   [
-    %     range        = {cal, bfcal},
-    %     StylisticSet = 01
-    %   ]
+    \setmathfont { XITSMath-Regular.otf } 
+      [
+        range        = {cal, bfcal},
+        StylisticSet = 01
+      ]
   }
 \cs_new_protected:Npn \__whu_style_math_font_set_termes:
   {
@@ -2844,7 +2845,10 @@
 % 使用字体
 \AtEndPreamble
   {
-    \RequirePackage [ bold-style = ISO ] { unicode-math }
+    \tl_if_eq:NnF \g__whu_style_math_font_choice_tl {default}
+      {
+        \RequirePackage [ bold-style = ISO ] { unicode-math }
+      }
     \__whu_style_font_use:
     \__whu_style_math_font_use:
     \__whu_style_cjk_font_use:
