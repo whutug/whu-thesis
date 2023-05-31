@@ -1263,7 +1263,7 @@
         [ shift = { ( 0 , 0.298\textheight ) } ] current~page~text~area.center
       )
       {
-        \includegraphics[width = 5cm]{logo/whu-name.png}
+        \includegraphics[width = 5cm]{logo/whu-name.pdf}
       };
   }
 % 类型
@@ -1475,7 +1475,7 @@
         [ shift = { ( 0 , 0.285\textheight ) } ] current~page~text~area.center
       )
       {
-        \includegraphics[width = 5cm]{logo/whu-name.png}
+        \includegraphics[width = 5cm]{logo/whu-name.pdf}
       };
   }
 % 类型
@@ -1872,14 +1872,14 @@
         \end{tabular}       
       };
   }
-% 学校名和logo
+% 学校名和 logo
 \cs_new:Npn \__whu_bachelor_cover_ii_logo:
   {
     \node [anchor = south] at ([ shift = { ( 0 , 2.5em ) } ] date.north)
       {
         \zihao{-2}
         \begin{tabular}{c}
-          \includegraphics[width=4cm]{./logo/whu-logo.png} \\[3pt]
+          \includegraphics[width=4cm]{./logo/whu-logo.pdf} \\[3pt]
           \textsc{Wuhan~University}
         \end{tabular}
       };
@@ -1962,13 +1962,13 @@
         \end{tabular}       
       };
   }
-% 学校名和logo
+% 学校名和 logo
 \cs_new:Npn \__whu_master_cover_ii_logo:
   {
     \node [anchor = south] at ([ shift = { ( 0 , 2em ) } ] date.north)
       {
         \begin{tabular}{c}
-          \includegraphics[width=4cm]{./logo/whu-logo.png} \\[3pt]
+          \includegraphics[width=4cm]{./logo/whu-logo.pdf} \\[3pt]
           \zihao{-2}\l__whu_info_department_en_tl \\[3pt]
           \zihao{-2}\textsc{Wuhan~University}
         \end{tabular}
@@ -2039,7 +2039,7 @@
         \AddToHookNext { env / tabular / begin }
           { \zihao{-2} }
         \begin{tabular}{c}
-          \includegraphics[width=4cm]{./logo/whu-logo.png} \\[3pt]
+          \includegraphics[width=4cm]{./logo/whu-logo.pdf} \\[3pt]
           \l__whu_info_department_en_tl \\[3pt]
           \textsc{Wuhan~University}
         \end{tabular}
