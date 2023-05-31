@@ -2845,7 +2845,10 @@
 % 使用字体
 \AtEndPreamble
   {
-    \tl_if_eq:NnF \g__whu_style_math_font_choice_tl {default}
+    \tl_if_eq:NnTF \g__whu_style_math_font_choice_tl {default}
+      {
+        \RequirePackage{mathrsfs}
+      }
       {
         \RequirePackage [ bold-style = ISO ] { unicode-math }
       }
