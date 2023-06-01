@@ -7,9 +7,9 @@
 
 本项目为武汉大学毕业论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
 
-\***由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
+**注意：由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
 
-根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1026/1100.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1026/1096.htm)编写，力求合规、简洁、易于实现、用户友好。
+根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1022/3231.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1022/3235.htm)编写，力求合规、简洁、易于实现、用户友好。
 
 ## 样例展示
 
@@ -17,13 +17,10 @@
   <img src="https://user-images.githubusercontent.com/5097752/55679059-f250d300-5936-11e9-8dfe-937a64a0c6bf.png" width="800px">
 </p>
 
-正文样例可以参照 [whu-thesis-demo](whu-thesis-demo.pdf)
-
-开题报告样例可以参照 [opening-demo](opening-demo.pdf)
 
 ## 如何使用
 
-使用前请阅读[使用文档](whu-thesis-doc.pdf)
+**使用前请认真阅读使用说明文档 `whu-thesis-doc.pdf`**。
 
 推荐两种方式进行编辑和编译：
 
@@ -32,7 +29,7 @@
 
 ### 本地编译
 
-本地编译需要安装 TeX 发行版软件, 具体可参见 [本地安装使用指南](https://github.com/mtobeiyf/whu-thesis/wiki/%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85%E4%B8%8E%E7%BC%96%E8%AF%91)
+本地编译需要安装 TeX 发行版软件, 具体可参见[本地安装使用指南](https://github.com/mtobeiyf/whu-thesis/wiki/%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85%E4%B8%8E%E7%BC%96%E8%AF%91)。
 
 ### Overleaf 在线编译
 
@@ -40,7 +37,7 @@
 
 [Overleaf](https://www.overleaf.com/) 是一个简洁的在线 LaTeX 编辑器。无需安装，实时共享，版本控制。该模板支持了 Overleaf 的在线编辑，可以从上面的模板链接直接创建自己的项目。
 
-使用该模板时，需要设置 `XeLaTeX` 或 `LuaLaTeX` 为编译器，具体步骤请查看 [Overleaf 在线编辑](https://github.com/mtobeiyf/whu-thesis/wiki/Overleaf-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91)
+使用该模板时，需要设置 `XeLaTeX` 或 `LuaLaTeX` 为编译器，具体步骤请查看 [Overleaf 在线编辑](https://github.com/mtobeiyf/whu-thesis/wiki/Overleaf-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91)。
 
 <p style="align:center;">
   <img src="https://user-images.githubusercontent.com/5097752/55882483-319d4f00-5bd7-11e9-86ff-687106144e16.png" width="800px">
@@ -48,7 +45,7 @@
 
 ## 详细说明
 
-关于模板使用、参考文献引用等常见问题请移步 [Wiki](https://github.com/mtobeiyf/whu-thesis/wiki)
+关于模板使用、参考文献引用等常见问题请移步 [Wiki](https://github.com/mtobeiyf/whu-thesis/wiki)。
 
 ## 问题反馈
 
@@ -62,34 +59,25 @@
 
 如果只是使用上的问题，可以前往 [discussions](https://github.com/whutug/whu-thesis/discussions) 进行讨论。
 
-## 更多链接
+## 相关链接
 
-* [关于认真做好2020届本科生毕业论文（设计）答辩工作的通知](https://info.whu.edu.cn/info/1318/185710.htm)
-* [武汉大学本科生毕业论文（设计）工作管理办法](http://ugs.whu.edu.cn/info/1049/1935.htm)
+* [武汉大学关于做好 2023 届毕业论文（设计）工作的通知](https://uc.whu.edu.cn/info/1520/15421.htm)
+* [武汉大学本科生毕业论文（设计）工作管理办法（修订）](https://uc.whu.edu.cn/xs/bylw_sj_.htm)
 * [武汉大学毕业论文（设计）智能管理系统](http://210.42.121.231/bysj/)
-* [武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1026/1100.htm)
-* [武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1026/1096.htm)
+* [武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1022/3235.htm)
+* [武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1022/3231.htm)
 
-## 后续计划
-
-* 支持打印模式、课程报告模式。
-
-欢迎提交 Pull Request。
 
 ## 致谢
 
-[黄正华老师的模板](http://aff.whu.edu.cn/huangzh/)
-<details>
-<summary>其它高校的相关开源项目</summary>
-
-* [bsThesisWHU](https://github.com/csarron/bsThesisWHU)
-* [HUSTPaperTemp](https://github.com/skinaze/HUSTPaperTemp)
-* [SJTUThesis](https://github.com/sjtug/SJTUThesis)
-* [ustcthesis](https://github.com/ustctug/ustcthesis)
-* [TJU-thesis-template](https://github.com/liangzhenduo0608/TJU-thesis-template)
-* [xdba-thesis](https://github.com/xdlinux/xdba-thesis)
-* [NEUBachelorThesis](https://github.com/tzaiyang/NEUBachelorThesis)
-* [ThuThesis](https://github.com/tuna/thuthesis)
-* [fduthesis](https://github.com/stone-zeng/fduthesis)
-
-</details>
++ [黄正华老师的模板](http://aff.whu.edu.cn/huangzh/)
++ 其它高校的相关开源项目
+  * [bsThesisWHU](https://github.com/csarron/bsThesisWHU)
+  * 华中科技大学 [HUSTPaperTemp](https://github.com/skinaze/HUSTPaperTemp)
+  * 上海交通大学 [SJTUThesis](https://github.com/sjtug/SJTUThesis)
+  * 中国科学技术大学 [ustcthesis](https://github.com/ustctug/ustcthesis)
+  * 天津大学 [TJU-thesis-template](https://github.com/liangzhenduo0608/TJU-thesis-template)
+  * 西安电子科技大学 [xdba-thesis](https://github.com/xdlinux/xdba-thesis)
+  * 东北大学 [NEUBachelorThesis](https://github.com/tzaiyang/NEUBachelorThesis)
+  * 清华大学 [ThuThesis](https://github.com/tuna/thuthesis)
+  * 复旦大学 [fduthesis](https://github.com/stone-zeng/fduthesis)
