@@ -1,6 +1,6 @@
 % \documentclass[type = bachelor]{whu-thesis}
 % \documentclass[type = master]{whu-thesis}
-\documentclass[type = doctor]{whu-thesis}
+\documentclass[type = master]{whu-thesis}
 % \documentclass[type = master,showframe]{whu-thesis}
 % \documentclass[type = doctor,showframe]{whu-thesis}
 % \documentclass[type = bachelor,showframe]{whu-thesis}
@@ -21,16 +21,14 @@
     % bachelor-english-cover=false
   },
   style = {
-    font = xits,
-    math-font = xits,
+    font = default,
+    math-font = default,
     cjk-font = windows,
     cjk-fakefont = true,
   }
 }
 \usepackage{zhlipsum}
 \usepackage{lipsum}
-
-
 \begin{document}
 
 
@@ -48,6 +46,7 @@
 \begin{notation}
   $\alpha$ & 常量 \\
   $\beta$ & 常量 \\
+  $\gamma$ & 变量 \\
 \end{notation}
 
 
@@ -57,20 +56,81 @@
 
 \chapter{测试}
 
-\section{公式测试}
+\section{文字测试}
+
+这是武汉大学学位论文模版，欢迎使用。
+
+This is Wuhan University thesis template, welcome to use!
+
+\section{公式}
+
+\subsection{算符、希腊字母}
+
+\[\sum\prod\int\iint\alpha\beta\gamma\xi\zeta\eta\epsilon\varepsilon\theta\vartheta
+  \phi\varphi\psi\]
+
+
+\subsection{%
+  \texorpdfstring{\texttt{\char`\\mathcal}}{\textbackslash mathcal}、
+  \texorpdfstring{\texttt{\char`\\mathscr}}{\textbackslash mathscr} 和
+  \texorpdfstring{\texttt{\char`\\mathbb}}{\textbackslash mathbb} 字母表}
+
+\begin{itemize}
+  \item \verb|\mathcal|: $\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+  \item \verb|\mathscr|: $\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+  \item \verb|\mathbb|: $\mathbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+\end{itemize}
+
+
+\subsection{（不）带编号单行公式}
 
 \begin{equation}
-  a^2 + b^2 = c^2
+  a^2 + b^2 = c^2.
 \end{equation}
 
+\[ a^2 + b^2 = c^2.\]
 
+\subsection{（不）带编号多行公式}
+
+\begin{align}
+  \text{sum} & = 1 + 2 + \cdots + n \\
+             & = \frac12 n(n+1).
+\end{align}
+
+\begin{align*}
+  \text{sum} & = 1 + 2 + \cdots + n \\
+             & = \frac12 n(n+1).
+\end{align*}
+
+\subsection{矩阵}
+
+\[\begin{pmatrix}
+  a_{11} & a_{22} & a_{33} \\
+  a_{21} & a_{22} & a_{23} \\
+  a_{31} & a_{32} & a_{33} \\
+\end{pmatrix} \quad
+\begin{vmatrix}
+  a_{11} & a_{22} & a_{33} \\
+  a_{21} & a_{22} & a_{23} \\
+  a_{31} & a_{32} & a_{33} \\
+\end{vmatrix} \quad
+\begin{bmatrix}
+  a_{11} & a_{22} & a_{33} \\
+  a_{21} & a_{22} & a_{23} \\
+  a_{31} & a_{32} & a_{33} \\
+\end{bmatrix} \quad
+\begin{Bmatrix}
+  a_{11} & a_{22} & a_{33} \\
+  a_{21} & a_{22} & a_{23} \\
+  a_{31} & a_{32} & a_{33} \\
+\end{Bmatrix}\]
 
 \section{脚注测试}
 
-测试 \footnote{脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1脚注测试1}
+测试 \footnote{眼看他起朱楼，眼看他宴宾客，眼看他楼塌了。这青苔碧瓦堆，俺曾睡风流觉，将五十年兴亡看饱。
+金粉未消亡，闻得六朝香，满天涯烟草断人肠。怕催花信紧，风风雨雨，误了春光。}
 
-测试 \footnote[3]{脚注测试2}
-
+测试 \footnote[3]{君不见，左纳言，右纳史，朝承恩，暮赐死。行路难，不在水，不在山，只在人情反覆间！}
 
 
 \section{引用测试}
@@ -87,12 +147,12 @@
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width = 5cm]{whu-logo.png}
+  \includegraphics[width = 5cm]{whu-logo.pdf}
   \caption{武汉大学校徽}
   \label{fig:武汉大学校徽}
 \end{figure}
 
-引用~\ref{fig:武汉大学校徽}
+引用图~\ref{fig:武汉大学校徽}
 
 \begin{table}[ht]
   \centering
@@ -102,13 +162,13 @@
   \label{table:简单的表格}
   \begin{tabular}{cc}
     \hline
-    a & b \\\hline
-    c & d \\\hline
-    测试 & 文本 \\\hline
+    a & b \\ \hline
+    c & d \\ \hline
+    测试 & 文本 \\ \hline
   \end{tabular}
 \end{table}
 
-引用~\ref{table:简单的表格}
+引用表~\ref{table:简单的表格}
 
 
 \section{已定义好的一些数学定理环境}
@@ -175,18 +235,16 @@
   这是一段文字 $E = m c^2$
 \end{remark}
 
-\begin{theorem}[Cauchy]\label{thm:test}
-  这是一个定理
+\begin{theorem}[Banach-Steinhaus]\label{thm:test}
+  设 $E$ 是 Banach 空间, $F$ 是赋范空间, $(u_i)_{i\in I}$ 是一族从 $E$ 到 $F$ 的有界线性算子,
+  即 $(u_i)_{i\in I}\subset \mathcal{B}(E,F)$. 若对每一点 $x\in E$, 有
+  $\sup_{i\in I} \|u_i(x)\|<\infty$, 则
   \begin{equation}\label{eq:test1}
-    \int_{0}^{1} x^2 \d x \geq 0
-  \end{equation}
-
-  \begin{equation}\label{eq:test2}
-    \int_{0}^{1} x^2 \d x \geq 0
+    \sup_{i\in I} \|u_i\| < \infty.
   \end{equation}
 \end{theorem}
 
-我想引用定理~\ref{thm:test} 和公式~\ref{eq:test2}
+我想引用定理~\ref{thm:test} 和公式~\ref{eq:test1}
 
 
 定理括号测试：
@@ -216,9 +274,6 @@
   \]
 \end{proof}
 
-\[
-  \mathcal{L},\quad \mathscr{L}
-\]
 
 \section{字体测试}
 字体测试：\\
@@ -234,15 +289,6 @@
 
 叠加测试：\\
 {\bfseries\itshape 伪粗斜体} {\bfseries\sffamily 伪粗黑体} {\bfseries\ttfamily 伪粗仿宋} {\itshape\sffamily 伪斜黑体} {\itshape\ttfamily 伪斜仿宋}
-
-
-\chapter{测试}
-
-\section{公式测试}
-
-\begin{equation}
-  a^2 + b^2 = c^2
-\end{equation}
 
 
 % 参考文献
