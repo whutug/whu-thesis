@@ -286,3 +286,4 @@ TSWLatexianTemp*
 .vscode/*
 !.vscode/settings.json
 _minted*
+*.pdf
