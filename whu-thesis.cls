@@ -1,5 +1,5 @@
 %%
-%%  Copyright (C) 2019--2022 WHUTUG <https://github.com/whutug>
+%%  Copyright (C) 2019--2023 WHUTUG <https://github.com/whutug>
 %% 
 %%  This work may be distributed and/or modified under the
 %%  conditions of the LaTeX Project Public License, either
@@ -17,10 +17,9 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
-\GetIdInfo $Id: whu-thesis.cls 0.0.1 2022-08-09 12:00:00Z Kangwei Xia <kangweixia_xdyy@163.com> $
+\ProvidesExplClass {whu-thesis} {2023-06-11} {v0.0.1}
   {Thesis template for Wuhan University}
-\ProvidesExplClass{\ExplFileName}
-  {\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
+
 
 % 简化 msg 模块的函数
 \cs_new:Npn \__whu_msg_new:nn  { \msg_new:nnn      { whu-thesis } }
