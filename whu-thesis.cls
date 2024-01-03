@@ -2563,6 +2563,7 @@
 
 
 \bool_new:N \g__whu_style_cjk_fakefont_bool
+\tl_new:N \g__whu_style_math_font_choice_tl
 \keys_define:nn { whu }
   {
     style  .meta:nn = { whu / style  } {#1},
@@ -2577,15 +2578,18 @@
 
     math-font .choices:nn =
       { xits, termes, default }
-      { \cs_gset_eq:Nc \__whu_style_math_font_use: { __whu_style_math_font_set_ \l_keys_choice_tl : } },
+      { 
+        \cs_gset_eq:Nc \__whu_style_math_font_use: { __whu_style_math_font_set_ \l_keys_choice_tl : }
+        \tl_gset_eq:NN \g__whu_style_math_font_choice_tl \l_keys_choice_tl
+      },
     math-font .value_required:n = true,
     math-font .initial:n = default,
-    math-font .tl_gset:N = \g__whu_style_math_font_choice_tl,
 
     cjk-font .choices:nn =
       { windows, mac, fandol, overleaf, none, sourcehan }
       { \cs_gset_eq:Nc \__whu_style_cjk_font_use: { __whu_style_cjk_font_set_ \l_keys_choice_tl : } },
     cjk-font .value_required:n = true,
+    cjk-font .initial:n = none,
 
     cjk-fakefont .bool_set:N = \g__whu_style_cjk_fakefont_bool,
     cjk-fakefont .default:n = true,
@@ -2847,6 +2851,12 @@
     \tl_if_eq:NnTF \g__whu_style_math_font_choice_tl {default}
       {
         \RequirePackage{mathrsfs}
+        \DeclareFontFamily{U}{rsfs}{\skewchar\font127 }
+        \DeclareFontShape{U}{rsfs}{m}{n}{
+          <5-6> rsfs5
+          <6-8> rsfs7
+          <8-> rsfs10
+        }{}
       }
       {
         \RequirePackage [ bold-style = ISO ] { unicode-math }
