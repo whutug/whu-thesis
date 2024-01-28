@@ -11,19 +11,15 @@
 \ProvidesExplClass{whu-thesis}{2021/05/20}{0.6d}
   {Wuhan University Thesis Template}
 
-% TODO 引擎处理修改为英文
-\msg_new:nnn { whu-thesis } { 引擎不支持 }
-  {
-    whu-thesis ~ 不支持 ~ #1 ~ 引擎。\\\\
-
-    请使用 ~ XeLaTeX ~ 或 ~ LuaLaTeX ~ 进行编译！
-  }
+% 将编译命令限制为 XeLaTeX 和 LuaLaTeX
+\msg_new:nnn { whu-thesis } { EngineNotSupported }
+  { whu-thesis~does~not~support~#1,~please~use~XeLaTeX~or~LuaLaTeX~instead. }
 
 \sys_if_engine_xetex:F
   {
     \sys_if_engine_luatex:F
       {
-        \msg_fatal:nnx { whu-thesis } { 引擎不支持 }
+        \msg_fatal:nnx { whu-thesis } { EngineNotSupported }
           { \c_sys_engine_str }
       }
   }
