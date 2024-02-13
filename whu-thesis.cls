@@ -1996,29 +1996,31 @@
         \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl \int_use:N\l__whu_info_year_int
       };
   }
-% 计算机学院、网络安全学院英文封面
+% 计算机学院、网络安全学院英文封面，依据为计算机学院于
+% 2023-05-10 发布的链接文件 https://cs.whu.edu.cn/info/1140/4335.htm
 \cs_new:Npn \__whu_master_cs_cover_ii:
   {
     \begin{tikzpicture}[ remember~picture, overlay, align=center ]
-      \node at ([shift = {(0,-1.94cm)}]current~page~text~area.north)
-        { \zihao{2} Master~Dissertation~of~Wuhan~University };
-      \node at ([shift = {(0,5cm)}]current~page~text~area.center)
+      \node at ([shift = {(0,-4.16cm)}]current~page~text~area.north)
         { 
           \begin{minipage}{\textwidth}
             \zihao{2} \centering \linespread{1.2}\selectfont
             \l__whu_info_title_en_tl
           \end{minipage}
         };
-      \node at ([shift={(0,-.25cm)}]current~page~text~area.center)
+      \node at ([shift={(0,1.35cm)}]current~page~text~area.center)
         { \zihao{4} By \\ \l__whu_info_author_en_tl };
-      \node at ([shift={(0,-3.42cm)}]current~page~text~area.center)
-        { \zihao{4} \textit{Supervised~by} \\
+      \node at ([shift={(0,-2.75cm)}]current~page~text~area.center)
+        { \zihao{4} Supervised~by \\
           \l__whu_info_supervisor_academic_title_en_tl .\c_space_tl 
           \l__whu_info_supervisor_en_tl };
-      \node [anchor=south] at ([shift={(0,2.85cm)}]current~page~text~area.south)
-        { \zihao{4} \l__whu_info_department_en_tl \\ Wuhan~University \\ 
+      \node [anchor=south] at ([shift={(0,1.45cm)}]current~page~text~area.south)
+        { \zihao{4} Wuhan~University \\ 
           \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl 
           \int_use:N \l__whu_info_year_int };
+      % 用于对比测试
+      % \node at (current~page.center)
+      %   { \includegraphics[width = \paperwidth, height = \paperheight]{./reference/b.pdf} };
     \end{tikzpicture}
   }
 
