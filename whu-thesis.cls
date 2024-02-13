@@ -845,6 +845,10 @@
     abstract-keywords-type* .choices:nn =  
       { newline, blankline, vfill }
       { \str_set:Nx \l__whu_abstract_keywords_en_type_str { \l_keys_choice_tl } },
+    cover-en-type .choice:,
+    cover-en-type .choices:nn = { normal, cs }
+      { \tl_set_eq:NN \l__whu_cover_en_type_tl \l_keys_choice_tl },
+    cover-en-type .initial:n = normal,
   }
 \AtEndPreamble
   {
@@ -1918,16 +1922,25 @@
 \cs_new:Npn \__whu_master_cover_ii:
   {
     \pdfbookmark{英文封面}{titlepage-en}
-    \begin{tikzpicture} [ remember~picture, overlay ]
-      % 标题
-      \__whu_master_cover_ii_title:
-      % 个人信息
-      \__whu_master_cover_ii_information:
-      % 时间
-      \__whu_master_cover_ii_date_en:
-      % 学校名和logo
-      \__whu_master_cover_ii_logo:
-    \end{tikzpicture}
+    \tl_if_eq:NnTF \l__whu_cover_en_type_tl { normal }
+      {
+        \begin{tikzpicture} [ remember~picture, overlay ]
+          % 标题
+          \__whu_master_cover_ii_title:
+          % 个人信息
+          \__whu_master_cover_ii_information:
+          % 时间
+          \__whu_master_cover_ii_date_en:
+          % 学校名和logo
+          \__whu_master_cover_ii_logo:
+        \end{tikzpicture}
+      }
+      {
+        \tl_if_eq:NnT \l__whu_cover_en_type_tl { cs }
+          {
+            \__whu_master_cs_cover_ii:
+          }
+      }
   }
 % 标题
 \cs_new:Npn \__whu_master_cover_ii_title:
@@ -1982,6 +1995,31 @@
         \zihao{-2}
         \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl \int_use:N\l__whu_info_year_int
       };
+  }
+% 计算机学院、网络安全学院英文封面
+\cs_new:Npn \__whu_master_cs_cover_ii:
+  {
+    \begin{tikzpicture}[ remember~picture, overlay, align=center ]
+      \node at ([shift = {(0,-1.94cm)}]current~page~text~area.north)
+        { \zihao{2} Master~Dissertation~of~Wuhan~University };
+      \node at ([shift = {(0,5cm)}]current~page~text~area.center)
+        { 
+          \begin{minipage}{\textwidth}
+            \zihao{2} \centering \linespread{1.2}\selectfont
+            \l__whu_info_title_en_tl
+          \end{minipage}
+        };
+      \node at ([shift={(0,-.25cm)}]current~page~text~area.center)
+        { \zihao{4} By \\ \l__whu_info_author_en_tl };
+      \node at ([shift={(0,-3.42cm)}]current~page~text~area.center)
+        { \zihao{4} \textit{Supervised~by} \\
+          \l__whu_info_supervisor_academic_title_en_tl .\c_space_tl 
+          \l__whu_info_supervisor_en_tl };
+      \node [anchor=south] at ([shift={(0,2.85cm)}]current~page~text~area.south)
+        { \zihao{4} \l__whu_info_department_en_tl \\ Wuhan~University \\ 
+          \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl 
+          \int_use:N \l__whu_info_year_int };
+    \end{tikzpicture}
   }
 
 % 博士
