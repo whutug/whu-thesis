@@ -5,7 +5,7 @@
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
 [![](https://github.com/whutug/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/whutug/whu-thesis/actions)
 
-本项目为武汉大学毕业论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
+本项目为武汉大学本科毕业论文 LaTeX 模板，基于WHUTUG的模板[ 武汉大学毕业论文 LaTeX 模版](https://github.com/whutug/whu-thesis) 进行了修改以符合计算机学院2024的格式要求
 
 \***由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
 
