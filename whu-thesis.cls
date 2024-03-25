@@ -1313,7 +1313,7 @@
     \hfill
     \hbox_to_wd:nn { 7cm }
     {
-    日期：{ \hbox_to_wd:nn { 4.5 cm } {\hbox_to_wd:nn { 1.5cm }{} 年月日 \hbox_to_wd:nn { 0.5cm }{}} }
+    日期：{ \hbox_to_wd:nn { 4.9 cm } {\hbox_to_wd:nn { 1.7cm }{} 年月日 \hbox_to_wd:nn { 0.4cm }{}} }
     }
     \hbox_to_wd:nn { 3cm } 
     {  }
@@ -1346,7 +1346,7 @@
     \hfill
     \hbox_to_wd:nn { 7cm }
     {
-    日期：{ \hbox_to_wd:nn { 4.5 cm } {\hbox_to_wd:nn { 1.5cm }{} 年月日 \hbox_to_wd:nn { 0.5cm }{}} }
+    日期：{ \hbox_to_wd:nn { 4.9 cm } {\hbox_to_wd:nn { 1.7cm }{} 年月日 \hbox_to_wd:nn { 0.4cm }{}} }
     }
     \hbox_to_wd:nn { 3cm } 
     {  }
