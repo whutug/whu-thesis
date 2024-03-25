@@ -9,7 +9,7 @@
 
 \***由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
 
-根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1022/3231.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1022/3235.htm)编写，力求合规，简洁，易于实现，用户友好。
+根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/whutug/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1022/3231.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1022/3235.htm)编写，力求合规，简洁，易于实现，用户友好。
 
 ## 样例展示
 
