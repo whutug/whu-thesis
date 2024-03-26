@@ -1868,8 +1868,8 @@
         \tl_put_left:Nn \l__whu_info_supervisor_en_tl
           { \l__whu_info_supervisor_academic_title_en_tl .~ }
         \begin{tabular}{r@{\hspace{.5em}}l}
-          \c__whu_name_department_en_tl : & \textsc{ \l__whu_info_department_en_tl } \\
-          \c__whu_name_major_en_tl : & \textsc{ \l__whu_info_major_en_tl } \\
+          \c__whu_name_department_en_tl : & \l__whu_info_department_en_tl \\
+          \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl\\
           \c__whu_name_author_en_tl : & \textsc{ \l__whu_info_author_en_tl } \\
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
         \end{tabular}       
@@ -1967,10 +1967,10 @@
           { \zihao{4} }
         \begin{tabular}{r@{\hspace{.5em}}l}
           \c__whu_name_author_en_tl : & \textsc{ \l__whu_info_author_en_tl } \\
-          \c__whu_name_student_id_en_tl : & \textsc{ \l__whu_info_student_id_tl } \\
+          \c__whu_name_student_id_en_tl : & \l__whu_info_student_id_tl \\
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
-          \c__whu_name_major_en_tl : & \textsc{ \l__whu_info_major_en_tl } \\
-          \c__whu_name_research_area_en_tl : & \textsc{ \l__whu_info_research_area_en_tl }
+          \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl \\
+          \c__whu_name_research_area_en_tl : & \l__whu_info_research_area_en_tl
         \end{tabular}       
       };
   }
@@ -2065,8 +2065,8 @@
         \begin{tabular}{r@{\hspace{.5em}}l}
           \c__whu_name_author_en_tl : & \textsc{ \l__whu_info_author_en_tl } \\
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
-          \c__whu_name_major_en_tl : & \textsc{ \l__whu_info_major_en_tl } \\
-          \c__whu_name_research_area_en_tl : & \textsc{ \l__whu_info_research_area_en_tl }
+          \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl \\
+          \c__whu_name_research_area_en_tl : & \l__whu_info_research_area_en_tl
         \end{tabular}       
       };
   }
