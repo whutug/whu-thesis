@@ -3313,17 +3313,25 @@
     % 硕士
     {3}
       {
-        \RequirePackage [ sort & compress ] { gbt7714 }
-        \citestyle { super }
-        \bibliographystyle { whu-bachelor }
-        \__whu_master_redefine_thebibliography:
+        % \RequirePackage
+        %   [
+        %     backend      = biber,
+        %     bibstyle     = gb7714-2015,
+        %     sorting      = nty,
+        %     gbalign      = right,
+        %     citestyle    = gb7714-CCNU,
+        %     gbnamefmt    = givenahead,
+        %     gbpunctin    = false
+        %   ]{biblatex}
+        % \DefineBibliographyStrings{english}{in={}}
+        % \DefineBibliographyStrings{english}{incn={}}
       }
     % 博士
     {4}
       {
-        \RequirePackage [ sort & compress ] { gbt7714 }
-        \citestyle { super }
-        \bibliographystyle { whu-bachelor }
-        \__whu_doctor_redefine_thebibliography:
+        % \RequirePackage [ sort & compress ] { gbt7714 }
+        % \citestyle { super }
+        % \bibliographystyle { whu-bachelor }
+        % \__whu_doctor_redefine_thebibliography:
       }
   }
