@@ -321,7 +321,7 @@
             format     = { \centering \heiti \zihao { -2 } },
             number     = { \arabic { chapter }             },
             name       = { ,                               },
-            beforeskip = { 0.8 \c__whu_baseline_skip       },
+            beforeskip = { -20pt                           },
             afterskip  = { 0.5 \c__whu_baseline_skip       },
           }  % 各章标题 黑体小 2 号
       }
