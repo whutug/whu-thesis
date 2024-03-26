@@ -1,0 +1,87 @@
+name: 🐞 提交一个问题
+description: 来帮助我们一起完善 WHU-Thesis 吧！
+title: "[Bug]: 在这里概括你的问题"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你抽出宝贵的时间来提交这个问题！
+  - type: dropdown
+    id: os
+    attributes:
+      label: 操作系统或平台
+      description: 你使用的操作系统或平台是什么？
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Overleaf
+    validations:
+      required: false
+  - type: input
+    id: software
+    attributes:
+      label: LaTeX 发行版以及发行年份
+      placeholder: TexLive 2021
+    validations:
+      required: false
+  - type: dropdown
+    id: templates
+    attributes:
+      label: whu-thesis 模板
+      description: 你遇到问题的模板有哪些？
+      multiple: true
+      options:
+        - 博士学位论文模板
+        - 硕士学位论文模板
+        - 本科学位论文模板
+        - 开题报告模板
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么？ 
+      description: 请描述你遇到的问题。
+      placeholder: _清晰而简明地描述我所遇到的问题。_
+    validations:
+      required: true
+  - type: textarea
+    id: what-is-expected
+    attributes:
+      label: 你期望的结果 
+      description: 提供一下你期望的结果。
+      placeholder: _简述我期望得到的正确结果。_
+    validations:
+      required: false
+  - type: textarea
+    id: step-to-reproduce
+    attributes:
+      label: 问题复现的步骤
+      description: 我们如何才能帮你复现这个问题?
+      placeholder: |
+        1. 打开 '...'
+        2. 点击 '...'
+        3. 移动到 '...'
+        4. 就能看见这个问题 '...'
+    validations:
+      required: true
+  - type: textarea
+    id: MRE
+    attributes:
+      label: 最小可复现用例或者截图
+      description: 如果问题比较复杂，请考虑提供一个能够供我们编译的、可复现的示例。
+      placeholder: |
+      
+        _（首选）提供一个“[最小可复现用例](https://en.wikipedia.org/wiki/Minimal_working_example)”，
+        请注意删除任何可能泄漏的重要信息，我们将不会对其中的信息泄漏问题负责。_
+
+        _（备选，但不推荐）请提供关键信息的截图来描述问题。注意请尽可能地截全。_
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志信息
+      description: 请复制并粘贴任何相关的日志输出。这将被自动格式化为代码，所以不需要“`”符号。
+      render: shell
+
