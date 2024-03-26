@@ -2247,29 +2247,19 @@
 
 
 % 摘要和关键词
-\tl_new:N \g__whu_abstract_zh_content_tl
-\tl_new:N \g__whu_abstract_en_content_tl
+\iow_new:N \g__whu_abstract_zh_iow
+\iow_new:N \g__whu_abstract_en_iow
 \NewDocumentEnvironment { abstract } { +b }
   {
-    \iow_now:cx { @auxout }
-      {
-        \token_to_str:N \ExplSyntaxOn
-        ^^J
-        \exp_not:N \tl_gset:Nn \exp_not:N \g__whu_abstract_zh_content_tl {#1}
-        ^^J
-        \token_to_str:N \ExplSyntaxOff
-      }
+    \iow_open:Nn \g__whu_abstract_zh_iow { \jobname-zh.abstract }
+    \iow_now:Nn \g__whu_abstract_zh_iow {#1}
+    \iow_close:N \g__whu_abstract_zh_iow
   }{}
 \NewDocumentEnvironment { abstract* } { +b }
   {
-    \iow_now:cx { @auxout }
-      {
-        \token_to_str:N \ExplSyntaxOn
-        ^^J
-        \exp_not:N \tl_gset:Nn \exp_not:N \g__whu_abstract_en_content_tl {#1}
-        ^^J
-        \token_to_str:N \ExplSyntaxOff
-      }
+    \iow_open:Nn \g__whu_abstract_en_iow { \jobname-en.abstract }
+    \iow_now:Nn \g__whu_abstract_en_iow {#1}
+    \iow_close:N \g__whu_abstract_en_iow
   }{}
 \cs_new:Npn \__whu_bachelor_abstract_output:
   {
@@ -2284,7 +2274,10 @@
         }
       \chapter{ \c__whu_name_abstract_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_zh_content_tl
+      \file_if_exist:nT { \jobname-zh.abstract }
+        {
+          \file_input:n { \jobname-zh.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\heiti \c__whu_name_keywords_tl ：}
     \clist_use:Nn \l__whu_info_keywords_clist {；}
@@ -2305,7 +2298,11 @@
         }
       \chapter{ \c__whu_name_abstract_en_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_en_content_tl
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { \jobname-en.abstract }
+        {
+          \file_input:n { \jobname-en.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\textbf { \c__whu_name_keywords_en_tl :} ~}
       \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
@@ -2344,7 +2341,10 @@
         }
       \chapter{ \c__whu_name_abstract_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_zh_content_tl
+      \file_if_exist:nT { \jobname-zh.abstract }
+        {
+          \file_input:n { \jobname-zh.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\heiti \c__whu_name_keywords_tl ：}
     \clist_use:Nn \l__whu_info_keywords_clist {；}
@@ -2365,7 +2365,11 @@
         }
       \chapter{ \c__whu_name_abstract_en_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_en_content_tl
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { \jobname-en.abstract }
+        {
+          \file_input:n { \jobname-en.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\textbf { \c__whu_name_keywords_en_tl :} ~}
       \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
@@ -2386,7 +2390,10 @@
         }
       \chapter{ \c__whu_name_abstract_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_zh_content_tl
+      \file_if_exist:nT { \jobname-zh.abstract }
+        {
+          \file_input:n { \jobname-zh.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\heiti \c__whu_name_keywords_tl ：}
     \clist_use:Nn \l__whu_info_keywords_clist {；}
@@ -2407,7 +2414,11 @@
         }
       \chapter{ \c__whu_name_abstract_en_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_en_content_tl
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { \jobname-en.abstract }
+        {
+          \file_input:n { \jobname-en.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\textbf { \c__whu_name_keywords_en_tl :} ~}
       \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
