@@ -218,7 +218,7 @@
 % 草稿模式下，显示边框
 
 \RequirePackage { fancyhdr }        % 页眉页脚宏包
-\tl_set:Nn \headrulewidth { 1pt }  % 页眉线宽
+\tl_set:Nn \headrulewidth { 0.5pt }  % 页眉线宽
 \tl_set:Nn \footrulewidth { \c_zero_dim }  % 页脚线宽
 
 \AtEndPreamble
