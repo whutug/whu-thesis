@@ -1,5 +1,5 @@
 %%
-%%  Copyright (C) 2019--2023 WHUTUG <https://github.com/whutug>
+%%  Copyright (C) 2019--2024 WHUTUG <https://github.com/whutug>
 %% 
 %%  This work may be distributed and/or modified under the
 %%  conditions of the LaTeX Project Public License, either
@@ -17,7 +17,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
-\ProvidesExplClass {whu-thesis} {2023-06-11} {v0.0.1}
+\ProvidesExplClass {whu-thesis} {2024-03-27} {v0.0.1}
   {Thesis template for Wuhan University}
 
 
@@ -1874,8 +1874,8 @@
         \tl_put_left:Nn \l__whu_info_supervisor_en_tl
           { \l__whu_info_supervisor_academic_title_en_tl .~ }
         \begin{tabular}{r@{\hspace{.5em}}l}
-          \c__whu_name_department_en_tl : & \textsc{ \l__whu_info_department_en_tl } \\
-          \c__whu_name_major_en_tl : & \textsc{ \l__whu_info_major_en_tl } \\
+          \c__whu_name_department_en_tl : & \l__whu_info_department_en_tl \\
+          \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl\\
           \c__whu_name_author_en_tl : & \textsc{ \l__whu_info_author_en_tl } \\
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
         \end{tabular}       
@@ -1973,10 +1973,10 @@
           { \zihao{4} }
         \begin{tabular}{r@{\hspace{.5em}}l}
           \c__whu_name_author_en_tl : & \textsc{ \l__whu_info_author_en_tl } \\
-          \c__whu_name_student_id_en_tl : & \textsc{ \l__whu_info_student_id_tl } \\
+          \c__whu_name_student_id_en_tl : & \l__whu_info_student_id_tl \\
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
-          \c__whu_name_major_en_tl : & \textsc{ \l__whu_info_major_en_tl } \\
-          \c__whu_name_research_area_en_tl : & \textsc{ \l__whu_info_research_area_en_tl }
+          \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl \\
+          \c__whu_name_research_area_en_tl : & \l__whu_info_research_area_en_tl
         \end{tabular}       
       };
   }
@@ -2071,8 +2071,8 @@
         \begin{tabular}{r@{\hspace{.5em}}l}
           \c__whu_name_author_en_tl : & \textsc{ \l__whu_info_author_en_tl } \\
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
-          \c__whu_name_major_en_tl : & \textsc{ \l__whu_info_major_en_tl } \\
-          \c__whu_name_research_area_en_tl : & \textsc{ \l__whu_info_research_area_en_tl }
+          \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl \\
+          \c__whu_name_research_area_en_tl : & \l__whu_info_research_area_en_tl
         \end{tabular}       
       };
   }
@@ -2253,29 +2253,19 @@
 
 
 % 摘要和关键词
-\tl_new:N \g__whu_abstract_zh_content_tl
-\tl_new:N \g__whu_abstract_en_content_tl
+\iow_new:N \g__whu_abstract_zh_iow
+\iow_new:N \g__whu_abstract_en_iow
 \NewDocumentEnvironment { abstract } { +b }
   {
-    \iow_now:cx { @auxout }
-      {
-        \token_to_str:N \ExplSyntaxOn
-        ^^J
-        \exp_not:N \tl_gset:Nn \exp_not:N \g__whu_abstract_zh_content_tl {#1}
-        ^^J
-        \token_to_str:N \ExplSyntaxOff
-      }
+    \iow_open:Nn \g__whu_abstract_zh_iow { \jobname-zh.abstract }
+    \iow_now:Nn \g__whu_abstract_zh_iow {#1}
+    \iow_close:N \g__whu_abstract_zh_iow
   }{}
 \NewDocumentEnvironment { abstract* } { +b }
   {
-    \iow_now:cx { @auxout }
-      {
-        \token_to_str:N \ExplSyntaxOn
-        ^^J
-        \exp_not:N \tl_gset:Nn \exp_not:N \g__whu_abstract_en_content_tl {#1}
-        ^^J
-        \token_to_str:N \ExplSyntaxOff
-      }
+    \iow_open:Nn \g__whu_abstract_en_iow { \jobname-en.abstract }
+    \iow_now:Nn \g__whu_abstract_en_iow {#1}
+    \iow_close:N \g__whu_abstract_en_iow
   }{}
 \cs_new:Npn \__whu_bachelor_abstract_output:
   {
@@ -2290,7 +2280,10 @@
         }
       \chapter{ \c__whu_name_abstract_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_zh_content_tl
+      \file_if_exist:nT { \jobname-zh.abstract }
+        {
+          \file_input:n { \jobname-zh.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\heiti \c__whu_name_keywords_tl ：}
     \clist_use:Nn \l__whu_info_keywords_clist {；}
@@ -2311,7 +2304,11 @@
         }
       \chapter{ \c__whu_name_abstract_en_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_en_content_tl
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { \jobname-en.abstract }
+        {
+          \file_input:n { \jobname-en.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\textbf { \c__whu_name_keywords_en_tl :} ~}
       \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
@@ -2350,7 +2347,10 @@
         }
       \chapter{ \c__whu_name_abstract_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_zh_content_tl
+      \file_if_exist:nT { \jobname-zh.abstract }
+        {
+          \file_input:n { \jobname-zh.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\heiti \c__whu_name_keywords_tl ：}
     \clist_use:Nn \l__whu_info_keywords_clist {；}
@@ -2371,7 +2371,11 @@
         }
       \chapter{ \c__whu_name_abstract_en_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_en_content_tl
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { \jobname-en.abstract }
+        {
+          \file_input:n { \jobname-en.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\textbf { \c__whu_name_keywords_en_tl :} ~}
       \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
@@ -2392,7 +2396,10 @@
         }
       \chapter{ \c__whu_name_abstract_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_zh_content_tl
+      \file_if_exist:nT { \jobname-zh.abstract }
+        {
+          \file_input:n { \jobname-zh.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\heiti \c__whu_name_keywords_tl ：}
     \clist_use:Nn \l__whu_info_keywords_clist {；}
@@ -2413,7 +2420,11 @@
         }
       \chapter{ \c__whu_name_abstract_en_tl }
       \zihao{-4} \pagestyle{empty}
-      \g__whu_abstract_en_content_tl
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { \jobname-en.abstract }
+        {
+          \file_input:n { \jobname-en.abstract }
+        }
       \__whu_abstract_keywords_zh_vsep_set:
       {\textbf { \c__whu_name_keywords_en_tl :} ~}
       \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
@@ -3308,17 +3319,25 @@
     % 硕士
     {3}
       {
-        \RequirePackage [ sort & compress ] { gbt7714 }
-        \citestyle { super }
-        \bibliographystyle { whu-bachelor }
-        \__whu_master_redefine_thebibliography:
+        % \RequirePackage
+        %   [
+        %     backend      = biber,
+        %     bibstyle     = gb7714-2015,
+        %     sorting      = nty,
+        %     gbalign      = right,
+        %     citestyle    = gb7714-CCNU,
+        %     gbnamefmt    = givenahead,
+        %     gbpunctin    = false
+        %   ]{biblatex}
+        % \DefineBibliographyStrings{english}{in={}}
+        % \DefineBibliographyStrings{english}{incn={}}
       }
     % 博士
     {4}
       {
-        \RequirePackage [ sort & compress ] { gbt7714 }
-        \citestyle { super }
-        \bibliographystyle { whu-bachelor }
-        \__whu_doctor_redefine_thebibliography:
+        % \RequirePackage [ sort & compress ] { gbt7714 }
+        % \citestyle { super }
+        % \bibliographystyle { whu-bachelor }
+        % \__whu_doctor_redefine_thebibliography:
       }
   }
