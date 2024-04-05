@@ -849,6 +849,9 @@
     cover-en-type .choices:nn = { normal, cs }
       { \tl_set_eq:NN \l__whu_cover_en_type_tl \l_keys_choice_tl },
     cover-en-type .initial:n = normal,
+    classification-number .tl_set:N = \l__whu_info_classification_number_tl,
+    secret-level .tl_set:N = \l__whu_info_secret_level_tl,
+    UDC .tl_set:N = \l__whu_info_UDC_tl,
   }
 \AtEndPreamble
   {
@@ -863,7 +866,10 @@
     day = \c_sys_day_int,
     abstract-keywords-type = blankline,
     keywords = {\LaTeX{}, 毕业论文, 模版, 武汉大学},
-    keywords* = {\LaTeX{}, Thesis, Template, Wuhan~University}
+    keywords* = {\LaTeX{}, Thesis, Template, Wuhan~University},
+    classification-number = \c_empty_tl,
+    secret-level = \c_empty_tl,
+    UDC = \c_empty_tl,
   }
 % 只定义中文
 \cs_new_protected:Npn \__whu_define_name:nn #1#2
@@ -1242,12 +1248,12 @@
         \begin{minipage}{\textwidth}
           \zihao{4} \fangsong
           \begin{tabular}{c@{\hspace*{6pt}}c}
-            \__whu_spread_box:nn {3.2em} { \c__whu_name_classification_number_tl } & \CJKunderline*{ \hspace*{4.5em} } \\[7pt]
-            \__whu_spread_box:nn {3.2em} { \c__whu_name_UDC_tl } & \CJKunderline*{ \hspace*{4.5em} } 
+            \__whu_spread_box:nn {3.2em} { \c__whu_name_classification_number_tl } & \CJKunderline*{ \makebox[4.5em]{\l__whu_info_classification_number_tl } } \\[7pt]
+            \__whu_spread_box:nn {3.2em} { \c__whu_name_UDC_tl } & \CJKunderline*{ \makebox[4.5em]{\l__whu_info_UDC_tl} } 
           \end{tabular}
           \hfill
           \begin{tabular}{c@{\hspace*{8pt}}c}
-            \__whu_spread_box:nn {2.5em} { \c__whu_name_secret_level_tl } & \CJKunderline*{ \hspace*{4.7em} } \\[7pt]
+            \__whu_spread_box:nn {2.5em} { \c__whu_name_secret_level_tl } & \CJKunderline*{ \makebox[4.7em]{ \l__whu_info_secret_level_tl } } \\[7pt]
             \__whu_spread_box:nn {2.5em} { \c__whu_name_numbering_tl } 
               &
               % 因为是局部的计算，要放在单元格内才有效
