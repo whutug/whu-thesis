@@ -824,7 +824,7 @@
     major          .tl_gset:N    = \g__whu_info_major_tl,
     direction      .tl_gset:N    = \g__whu_info_direction_tl,
     date           .tl_gset:N    = \g__whu_info_date_tl,
-    advisor-name   .tl_gset:N    = \g__whu_info_advisor_name,
+    advisor-name   .tl_gset:N    = \g__whu_info_advisor_name_tl,
     advisor        .clist_gset:N = \g__whu_info_advisor_clist,
     keywords       .clist_gset:N = \g__whu_info_keywords_clist,
     keywords *     .clist_gset:N = \g__whu_info_keywords_en_clist,
@@ -1179,7 +1179,7 @@
             [ 0.5 em ]
           \__whu_spread_with:nn{ 学院 }{ \hfill } & \__whu_spread_with:nn{\g__whu_info_school_tl}{ \hfill } \\ 
             [ 0.5 em ]
-          \__whu_spread_with:nn { 指导教师 } { \hfill } & \__whu_spread_with:nn{\g__whu_info_advisor_name} { \hfill }\\ 
+          \__whu_spread_with:nn { 指导教师 } { \hfill } & \__whu_spread_with:nn{\g__whu_info_advisor_name_tl} { \hfill }\\ 
             [ 0.5 em ]
         \end { tabular }
       \group_end:
