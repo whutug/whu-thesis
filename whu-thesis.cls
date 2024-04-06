@@ -309,7 +309,7 @@
         beforeskip = { 0.5 \c__whu_baseline_skip             },
         afterskip  = { 0.5 \c__whu_baseline_skip             },
       },
-    tocdepth       = 3,  % 目录层级数
+    tocdepth       = 2,  % 目录层级数
     secnumdepth    = 5,  % 标题层级数
   }
 \tl_if_eq:NnF \g__whu_option_type_tl { opening }
