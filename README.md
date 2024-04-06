@@ -5,7 +5,11 @@
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
 [![](https://github.com/whutug/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/whutug/whu-thesis/actions)
 
-本项目为武汉大学毕业论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
+本项目为武汉大学本科毕业论文 LaTeX 模板，基于WHUTUG的模板[ 武汉大学毕业论文 LaTeX 模版](https://github.com/whutug/whu-thesis) 进行了修改以符合计算机学院2024的格式要求
+
+已更新Overleaf模板：[whu-thesis-2024 - Overleaf, Online LaTeX Editor](https://www.overleaf.com/latex/templates/whu-thesis-2024/hrpdvmjnvzwx)
+
+**注意, Overleaf 模板中目前需手动将导师参数头advisor改为advisor-name **
 
 \***由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
 
@@ -14,8 +18,9 @@
 ## 样例展示
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/5097752/55679059-f250d300-5936-11e9-8dfe-937a64a0c6bf.png" width="800px">
+  <img src="https://github.com/cylqqqcyl/whu-thesis-2024/assets/72800166/686923ee-f3ab-4bd6-b5be-c528674b6599" width="800px">
 </p>
+
 
 正文样例可以参照 [whu-thesis-demo](whu-thesis-demo.pdf)
 
@@ -36,15 +41,16 @@
 
 ### Overleaf 在线编译
 
-[![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
+[![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/whu-thesis-2024/hrpdvmjnvzwx)
 
 [Overleaf](https://www.overleaf.com/) 是一个简洁的在线 LaTeX 编辑器。无需安装，实时共享，版本控制。该模板支持了 Overleaf 的在线编辑，可以从上面的模板链接直接创建自己的项目。
 
 使用该模板时，需要设置 `XeLaTeX` 或 `LuaLaTeX` 为编译器，具体步骤请查看 [Overleaf 在线编辑](https://github.com/whutug/whu-thesis/wiki/Overleaf-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91)
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/5097752/55882483-319d4f00-5bd7-11e9-86ff-687106144e16.png" width="800px">
+  <img src="https://github.com/cylqqqcyl/whu-thesis-2024/assets/72800166/160ec4e2-0377-4296-a9fb-3847379dbade" width="800px">
 </p>
+
 
 ## 详细说明
 
@@ -64,11 +70,8 @@
 
 ## 更多链接
 
-* [关于认真做好2020届本科生毕业论文（设计）答辩工作的通知](https://info.whu.edu.cn/info/1318/185710.htm)
-* [武汉大学本科生毕业论文（设计）工作管理办法](http://ugs.whu.edu.cn/info/1049/1935.htm)
-* [武汉大学毕业论文（设计）智能管理系统](http://210.42.121.231/bysj/)
-* [武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1026/1100.htm)
-* [武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1026/1096.htm)
+* [关于认真做好2024届本科生毕业论文（设计）答辩工作的通知](https://uc.whu.edu.cn/info/1517/17059.htm)
+* 
 
 ## 后续计划
 
