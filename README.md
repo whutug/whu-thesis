@@ -5,12 +5,6 @@
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
 [![](https://github.com/whutug/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/whutug/whu-thesis/actions)
 
-本项目为武汉大学本科毕业论文 LaTeX 模板，基于WHUTUG的模板[ 武汉大学毕业论文 LaTeX 模版](https://github.com/whutug/whu-thesis) 进行了修改以符合计算机学院2024的格式要求
-
-已更新Overleaf模板：[whu-thesis-2024 - Overleaf, Online LaTeX Editor](https://www.overleaf.com/latex/templates/whu-thesis-2024/hrpdvmjnvzwx)
-
-**注意, Overleaf 模板中目前需手动将导师参数头advisor改为advisor-name **
-
 \***由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
 
 根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/whutug/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1022/3231.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1022/3235.htm)编写，力求合规，简洁，易于实现，用户友好。
@@ -71,7 +65,7 @@
 ## 更多链接
 
 * [关于认真做好2024届本科生毕业论文（设计）答辩工作的通知](https://uc.whu.edu.cn/info/1517/17059.htm)
-* 
+
 
 ## 后续计划
 
