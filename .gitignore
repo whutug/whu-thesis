@@ -289,3 +289,6 @@ _minted*
 *.pdf
 
 reference/
+
+# local font files
+*.otf
