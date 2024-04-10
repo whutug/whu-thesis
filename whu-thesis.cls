@@ -3035,7 +3035,6 @@
 
 
 % 定理类环境
-% 定理类环境
 
 % 去掉.号，但只能通过新定义 style 的方式进行
 \declaretheoremstyle
@@ -3139,205 +3138,196 @@
     \popQED \endtrivlist \@endpefalse
   }
 
+% 删除章标题中的 \quad
+\cs_new_protected:Npn \__whu_sanitize_chapter_title:n #1
+  {
+    \tl_clear:N \l__whu_tmpa_tl
+    \tl_set:No \l__whu_tmpa_tl {#1}
+    \tl_remove_all:Nn \l__whu_tmpa_tl { \quad }
+  }
+% 手动生成章的标题，用于摘要、参考文献等。
+\cs_new_protected:Npn \__whu_chapter:n #1
+  {
+    \__whu_sanitize_chapter_title:n {#1}
+    \group_begin:
+      \ctexset { chapter / numbering = false }
+      \chapter [ \l__whu_tmpa_tl ] {#1}
+    \group_end:
+    \__whu_chapter_header:n {#1}
+  }
+\cs_generate_variant:Nn \__whu_chapter:n { V }
+\cs_new_protected:Npn \__whu_chapter_header:n #1
+  {
+    \bool_if:NTF \g__whu_twoside_bool
+      { \markboth {#1} {#1} }
+      { \markboth { \hfill #1 \hfill } { } }
+  }
 
-% 参考文献
-\cs_new:Npn \__whu_proposal_redefine_thebibliography:
+% 封装 LaTeX 的钩子管理机制。本模板中的字体加载命令位于
+% begindocument/before 钩子中，需确保在 xeCJK 之前执行。
+\cs_new_protected:Npn \__whu_gadd_ltxhook:nn #1#2
+  { \hook_gput_code:nnn {#1} { . } {#2} }
+\hook_gset_rule:nnnn { begindocument/before } { . } { < } { xeCJK }
+
+
+%---------------------
+% 参考文献 bibliography
+%---------------------
+
+\tl_new:N \l__whu_bib_backend_tl        % 参考文献后端
+\tl_new:N \l__whu_bib_style_tl          % 参考文献格式，接受其它值
+\tl_new:N \l__whu_bib_gb_style_tl       % 参考文献格式（国标），接受 numerical 和 author-year 两个值
+\tl_new:N \l__whu_cite_style_tl         % 参考文献引用格式
+\clist_new:N \l__whu_bib_resource_clist % 参考文献 database
+
+\keys_define:nn { whu / style }
   {
-    \RenewDocumentEnvironment { thebibliography } { m }
+    bib-backend .choice:,
+    bib-backend .value_required:n = true,
+    bib-backend / bibtex   .code:n =
+      { \tl_set:Nn \l__whu_bib_backend_tl { bibtex } },
+    bib-backend / biblatex .code:n =
       {
-        \list{\@biblabel{\@arabic\c@enumiv}}
-            {\settowidth\labelwidth{\@biblabel{##1}}
-              \leftmargin\labelwidth
-              \advance\leftmargin\labelsep
-              \@openbib@code
-              \usecounter{enumiv}
-              \let\p@enumiv\@empty
-              \renewcommand\theenumiv{\@arabic\c@enumiv}}
-        \sloppy
-        \clubpenalty4000
-        \@clubpenalty \clubpenalty
-        \widowpenalty4000
-        \sfcode`\.\@m
-      }
+        \tl_set:Nn \l__whu_bib_backend_tl { biblatex }
+        \NewDocumentCommand \addbibresource { m }
+          { \clist_gput_right:Nn \l__whu_bib_resource_clist {#1} }
+      },
+    bib-style .choice:,
+    bib-style .value_required:n = true,
+    bib-style / numerical    .code:n =
       {
-        \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}
-        \endlist
-      }
+        \tl_set:Nn  \l__whu_bib_gb_style_tl { numerical  }
+        \tl_clear:N \l__whu_bib_style_tl
+      },
+    bib-style / author-year .code:n =
+      {
+        \tl_set:Nn  \l__whu_bib_gb_style_tl { author-year }
+        \tl_clear:N \l__whu_bib_style_tl
+      },
+    bib-style / unknown     .code:n =
+      {
+        \tl_set_eq:NN \l__whu_bib_style_tl \l_keys_value_tl
+        \tl_clear:N   \l__whu_bib_gb_style_tl
+      },
+    cite-style .tl_set:N = \l__whu_cite_style_tl,
+    bib-resource .clist_set:N = \l__whu_bib_resource_clist
   }
-\cs_new:Npn \__whu_bachelor_redefine_thebibliography:
+
+% bib-backend = bibtex，此时分两种情况：
+%   Case 1. bib-style = numerical or author-year，则调用 gbt7714 宏包，此宏包内部调用 natbib 宏包
+%   Case 2. otherwise，直接调用 natbib
+\ctex_at_end_preamble:n
   {
-    \RenewDocumentEnvironment { thebibliography } { m }
+    \tl_if_eq:NnT \l__whu_bib_backend_tl { bibtex }
       {
-        \keys_set:nn { ctex } { chapter/numbering = false }
-        \chapter{\bibname}
-        \list{\@biblabel{\@arabic\c@enumiv}}
-            {\settowidth\labelwidth{\@biblabel{##1}}
-              \leftmargin\labelwidth
-              \advance\leftmargin\labelsep
-              \@openbib@code
-              \usecounter{enumiv}
-              \let\p@enumiv\@empty
-              \renewcommand\theenumiv{\@arabic\c@enumiv}}
-        \sloppy
-        \clubpenalty4000
-        \@clubpenalty \clubpenalty
-        \widowpenalty4000
-        \sfcode`\.\@m
-      }
-      {
-        \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}
-        \endlist
-      }
-    \NewCommandCopy { \oldbachelorcite } { \cite }
-    \RenewDocumentCommand { \cite } { s o m }
-      {
-        \IfBooleanTF {##1}
+        \tl_if_empty:NTF \l__whu_bib_style_tl
           {
-            \citestyle { numbers }
+            \RequirePackage [ sort & compress ] { gbt7714 }
+            \exp_args:No \bibliographystyle
+              { gbt7714- \l__whu_bib_gb_style_tl }
           }
           {
-            \citestyle { super }
+            \RequirePackage [ sort & compress ] { natbib }
+            \exp_args:No \bibliographystyle
+              { \l__whu_bib_style_tl }
           }
-        \IfNoValueTF {##2}
-          { \oldbachelorcite {##3} }
-          { \oldbachelorcite [##2] {##3} }
-      }
-  }
-\cs_new:Npn \__whu_master_redefine_thebibliography:
-  {
-    \RenewDocumentEnvironment { thebibliography } { m }
-      {
-        \keys_set:nn { ctex } 
-          {
-            chapter = 
-              {
-                numbering = false,
-                format = \sffamily\centering\zihao{4}
-              }
-          }
-        \chapter{\bibname}
-        \zihao{5}
-        \list{\@biblabel{\@arabic\c@enumiv}}
-            {\settowidth\labelwidth{\@biblabel{##1}}
-              \leftmargin\labelwidth
-              \advance\leftmargin\labelsep
-              \@openbib@code
-              \usecounter{enumiv}
-              \let\p@enumiv\@empty
-              \renewcommand\theenumiv{\@arabic\c@enumiv}}
-        \sloppy
-        \clubpenalty4000
-        \@clubpenalty \clubpenalty
-        \widowpenalty4000
-        \sfcode`\.\@m
-      }
-      {
-        \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}
-        \endlist
-      }
-    \NewCommandCopy { \oldbachelorcite } { \cite }
-    \RenewDocumentCommand { \cite } { s o m }
-      {
-        \IfBooleanTF {##1}
-          {
-            \citestyle { numbers }
-          }
-          {
-            \citestyle { super }
-          }
-        \IfNoValueTF {##2}
-          { \oldbachelorcite {##3} }
-          { \oldbachelorcite [##2] {##3} }
-      }
-  }
-\cs_new:Npn \__whu_doctor_redefine_thebibliography:
-  {
-    \RenewDocumentEnvironment { thebibliography } { m }
-      {
-        \keys_set:nn { ctex } 
-          {
-            chapter = 
-              {
-                numbering = false,
-                format = \sffamily\centering\zihao{4}
-              }
-          }
-        \chapter{\bibname}
-        \zihao{5}
-        \list{\@biblabel{\@arabic\c@enumiv}}
-            {\settowidth\labelwidth{\@biblabel{##1}}
-              \leftmargin\labelwidth
-              \advance\leftmargin\labelsep
-              \@openbib@code
-              \usecounter{enumiv}
-              \let\p@enumiv\@empty
-              \renewcommand\theenumiv{\@arabic\c@enumiv}}
-        \sloppy
-        \clubpenalty4000
-        \@clubpenalty \clubpenalty
-        \widowpenalty4000
-        \sfcode`\.\@m
-      }
-      {
-        \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}
-        \endlist
-      }
-    \NewCommandCopy { \oldbachelorcite } { \cite }
-    \RenewDocumentCommand { \cite } { s o m }
-      {
-        \IfBooleanTF {##1}
-          {
-            \citestyle { numbers }
-          }
-          {
-            \citestyle { super }
-          }
-        \IfNoValueTF {##2}
-          { \oldbachelorcite {##3} }
-          { \oldbachelorcite [##2] {##3} }
+        \__whu_bibtex_setup:
       }
   }
 
-\int_case:Vn \g__whu_thesis_type_int  
+% bib-backend = biblatex，调用 biblatex 宏包
+% biblatex 会写入 begindocument/before 钩子，因此需在其之前通过
+% env/document/begin 钩子载入 biblatex 宏包。注意这个
+% 钩子仅适用于 \begin{document} 的写法，对于 \document 命令本身无效。
+\__whu_gadd_ltxhook:nn { env/document/begin }
   {
-    % 开题报告
-    {1} 
-      { 
-        \RequirePackage [ sort & compress ] { gbt7714 }
-        \citestyle { super }
-        \bibliographystyle { whu-bachelor }
-        \__whu_proposal_redefine_thebibliography: 
-      }
-    % 本科
-    {2}
+    \tl_if_eq:NnT \l__whu_bib_backend_tl { biblatex }
       {
-        \RequirePackage [ sort & compress ] { gbt7714 }
-        \citestyle { super }
-        \bibliographystyle { whu-bachelor }
-        \__whu_bachelor_redefine_thebibliography:
+        \__whu_biblatex_pre_setup:
+        \RequirePackage { biblatex }
+        \__whu_biblatex_post_setup:
       }
-    % 硕士
-    {3}
+  }
+
+% bibtex 相关设置
+\cs_new_protected:Npn \__whu_bibtex_setup:
+  {
+    \tl_if_eq:VnTF \l__whu_bib_gb_style_tl { numerical }
       {
-        % \RequirePackage
-        %   [
-        %     backend      = biber,
-        %     bibstyle     = gb7714-2015,
-        %     sorting      = nty,
-        %     gbalign      = right,
-        %     citestyle    = gb7714-CCNU,
-        %     gbnamefmt    = givenahead,
-        %     gbpunctin    = false
-        %   ]{biblatex}
-        % \DefineBibliographyStrings{english}{in={}}
-        % \DefineBibliographyStrings{english}{incn={}}
+        \exp_args:NNx \DeclareRobustCommand \parencite
+          { \exp_args:No \exp_not:o { \cs:w cite ~ \cs_end: } }
+        \exp_args:Nc \ctex_patch_cmd:Nnn { parencite ~ }
+          { \begingroup }
+          { \begingroup \bibstyle@numbers }
       }
-    % 博士
-    {4}
+      { \cs_set_eq:NN \parencite \cite }
+    % 设置引用格式
+    \tl_if_empty:NF \l__whu_cite_style_tl
+      { \exp_args:NV \citestyle \l__whu_cite_style_tl }
+    % 使用 \textendash 作为数字间的连接号
+    \ctex_patch_cmd:Nnn \NAT@citexnum
+      { - \NAT@penalty }
+      { \textendash \NAT@penalty }
+    \cs_set:Npn \bibsection { \__whu_chapter:V \bibname }
+    % 让 bibtex 的接口与 biblatex 保持一致
+    \NewDocumentCommand \printbibliography { o }
       {
-        % \RequirePackage [ sort & compress ] { gbt7714 }
-        % \citestyle { super }
-        % \bibliographystyle { whu-bachelor }
-        % \__whu_doctor_redefine_thebibliography:
+        \exp_args:NV \bibliography \l__whu_bib_resource_clist
+        \IfValueT {##1}
+          { \__whu_warning:nn { invalid-option-in-bibtex } {##1} }
+      }
+  }
+\__whu_msg_new:nn { invalid-option-in-bibtex }
+  { Option(s)~ "#1"~ are~ invalid~ in~ BibTeX. }
+% biblatex 相关设置
+\cs_new_protected:Npn \__whu_biblatex_pre_setup:
+  {
+    \cs_undefine:N \addbibresource
+    \clist_new:N \l__whu_biblatex_options_clist
+    \clist_put_right:Nn \l__whu_biblatex_options_clist { hyperref = manual }
+    \clist_put_right:Nx \l__whu_biblatex_options_clist % 参考文献样式
+      {
+        style =
+        \tl_if_empty:NTF \l__whu_bib_style_tl
+          {
+            \str_if_eq:VnTF \l__whu_bib_gb_style_tl { numerical }
+              { gb7714-2015 } { gb7714-2015ay }
+          }
+          { \l__whu_bib_style_tl }
+      }
+    \tl_if_empty:NF \l__whu_cite_style_tl % 引用样式
+      {
+        \clist_put_right:Nx \l__whu_biblatex_options_clist
+          { citestyle = \l__whu_cite_style_tl }
+      }
+    \exp_args:NV \PassOptionsToPackage \l__whu_biblatex_options_clist
+      { biblatex }
+  }
+\cs_new_protected:Npn \__whu_biblatex_post_setup:
+  {
+    \clist_map_function:NN \l__whu_bib_resource_clist \addbibresource
+    \__whu_biblatex_allow_url_break:
+    \__whu_biblatex_use_en_dash:
+    \defbibheading { bibliography } [ \bibname ] { \__whu_chapter:n {##1} }
+  }
+% biblatex 下允许 URL 在字母、数字和一些特殊符号处断行
+\cs_new:Npn \__whu_biblatex_allow_url_break:
+  {
+    \int_set_eq:NN \c@biburlucpenalty  \c_one_int
+    \int_set_eq:NN \c@biburlnumpenalty \c_one_int
+    \int_set_eq:NN \c@biburllcpenalty  \c_one_int
+  }
+% 使用 \textendash 作为数字间的连接符
+\cs_new:Npn \__whu_biblatex_use_en_dash:
+  {
+    \DefineBibliographyExtras { english }
+      {
+        \cs_set_nopar:Npn \bibrangedash
+          { \textendash \penalty \hyphenpenalty }
+      }
+    \DefineBibliographyExtras { russian }
+      {
+        \cs_set_nopar:Npn \bibrangedash
+          { \textendash \penalty \hyphenpenalty }
       }
   }
