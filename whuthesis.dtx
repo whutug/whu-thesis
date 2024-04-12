@@ -12,6 +12,13 @@
 % \date{2024年4月7日}
 % \maketitle
 % \tableofcontents
+%
+% \newgeometry{
+%   left   = 1.65 in,
+%   right  = 0.80 in,
+%   top    = 1.25 in,
+%   bottom = 1.00 in
+% }
 % 
 % \section{概述}
 % \cls{whu-thesis}（\textbf{W}u\textbf{h}an \textbf{U}niversity \LaTeX{} \textbf{Thesis} Template）是为了帮助武汉大学毕业生撰写毕业论文（设计）而编写的 \LaTeX{} 模板，内部使用 \LaTeX3 语言，以适应 \TeX{} 技术发展潮流。
@@ -302,6 +309,20 @@
 %   \end{whusyntax}
 %   硕士学位的类型。两个值分别对应学术型硕士和专业型硕士。此键值影响中文封面。
 % \end{function}
+%
+% \begin{function}{info/cover-en-type}
+%   \begin{whusyntax}[emph={[1]cover-en-type}]
+%     cover-en-type = (*<(normal)|cs>*)
+%   \end{whusyntax}
+%   设置英文封面的样式。计算机学院和网络安全学院请选择 \opt{cs}。
+% \end{function}
+% 
+% \begin{function}{info/doctor-cover-withsubject}
+%   \begin{whusyntax}[emph={[1]doctor-cover-withsubject}]
+%     doctor-cover-withsubject = (*\TTF*)
+%   \end{whusyntax}
+%   博士封面的个人信息是否包含学科。
+% \end{function}
 % 
 %
 % \subsubsection{论文样式}
@@ -346,10 +367,11 @@
 % \end{function}
 % 
 % \begin{table}[!ht]
+%   \centering
 %   \begin{threeparttable}
 %     \caption{\opt{style/math-font} 各选项字体配置}
 %     \label{tab:math-font}
-%     \begin{tabularx}{\textwidth}{CC}
+%     \begin{tabular}{w{c}{2cm}w{c}{5cm}}
 %       \toprule
 %         \opt{default} & Computer Modern      \\
 %       \midrule
@@ -359,10 +381,10 @@
 %       \midrule
 %         \opt{mtpro}   & MathTime Professional II\tnote{a} \\
 %       \bottomrule
-%     \end{tabularx}
-  %   \begin{tablenotes}
-  %     \item[a] MathTime Professional II (mtpro2) 为付费字体，如需使用，请前往其\href{https://www.pctex.com/mtpro2.html}{官方网址}购买并安装。
-  %   \end{tablenotes}
+%     \end{tabular}
+%   \begin{tablenotes}
+%     \item[a] MathTime Professional II (mtpro2) 为付费字体，如需使用，请前往其\href{https://www.pctex.com/mtpro2.html}{官方网址}购买并安装。
+%   \end{tablenotes}
 %   \end{threeparttable}
 % \end{table}
 % 
@@ -410,47 +432,363 @@
 %   \begin{whusyntax}[emph={[1]bib-backend}]
 %     bib-backend = (*<(bibtex)|biblatex>*)
 %   \end{whusyntax}
-%   选择参考文献的支持方式。选择 "bibtex" 后，将使用 \BibTeX{} 处理文献，样式由 \pkg{natbib} 宏包负责； 选择 "biblatex" 后，将使用 biber 处理文献，样式则由 \pkg{biblatex} 宏包负责。
+%   选择参考文献的支持方式。选择 "bibtex" 后，将使用 \BibTeX{} 处理文献，样式由 \pkg{natbib} 宏包和 \pkg{gbt7714} 宏包负责；选择 "biblatex" 后，将使用 biber 处理文献，样式则由 \pkg{biblatex} 宏包负责。
 % \end{function}
 % 
-% \emph{武汉大学要求参考文献遵循 GB/T 7714—2005 规范，但目前 \pkg{biblatex-gb7714} 只支持 GB/T 7714—2015，缺乏对 GB/T 7714—2005 的良好支持，所幸两者差别并不大，但最终效果可能仍无法完全满足格式规范的要求。}
 % 
 % \begin{function}{style/bib-style}
-%     \begin{whusyntax}[emph={[1]bib-style}]
-%         bib-style = (*<numerical|author-year|author-year-numbered|\meta{其他样式}>*)
-%     \end{whusyntax}
-%     设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应国家标准 GB/T 7714—2005 中的著者-出版年制和顺序编码制。\opt{author-year-numbered} 则是在 \opt{author-year} 基础上添加了序号，此时年份仍然紧跟在作者后方，而不在最后。选择 \meta{其他样式} 时，需要保证相应的 ".bst"（\kvopt{bib-backend}{bibtex}）或 ".bbx"（\kvopt{bib-backend}{biblatex}）文件能够被读取。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
+%   \begin{whusyntax}[emph={[1]bib-style}]
+%     bib-style = (*<numerical|author-year|\meta{其他样式}>*)
+%   \end{whusyntax}
+%   设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应国家标准 GB/T 7714—2015 中的著者-出版年制和顺序编码制。选择 \meta{其他样式} 时，需要保证相应的 ".bst"（\kvopt{bib-backend}{bibtex}）或 ".bbx"（\kvopt{bib-backend}{biblatex}）文件能够被读取。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
 % \end{function}
 % 
 % \begin{function}{style/cite-style}
-%     \begin{whusyntax}[emph={[1]bib-style}]
-%         cite-style = (*<numerical-super|numerical-inline|author-year|\meta{其他样式}>*)
-%     \end{whusyntax}
-%     设置引用样式，\opt{numerical-super} 与 \opt{numerical-inline} 分别表示上标形式与文内形式的引用样式，\opt{author-year} 表示著者-出版年的引用样式。\meta{其他样式} 只能在 \kvopt{bib-backend}{biblatex} 使用。
+%   \begin{whusyntax}[emph={[1]cite-style}]
+%     cite-style = (*\marg{引用样式}*)
+%   \end{whusyntax}
+%   选择引用格式。默认为空，即与参考文献样式（著者—出版年制或顺序
+%   编码制）保持一致。如果手动填写，需保证相应的 \file{.cbx} 格式文件
+%   能被调用。该选项在 \kvopt{bib-backend}{bibtex} 时无效。
 % \end{function}
-% 
-% \begin{function}{style/list-of-figures}
-%     \begin{whusyntax}[emph={[1]list-of-figures}]
-%         list-of-figures = (*<\TFF>*)
-%     \end{whusyntax}
-%     设置是否显示图片索引。
-% \end{function}
-% 
-% \begin{function}{style/list-of-tables}
-%     \begin{whusyntax}[emph={[1]list-of-tables}]
-%         list-of-tables = (*<\TFF>*)
-%     \end{whusyntax}
-%     设置是否显示表格索引。
+%
+% \begin{function}{style/bib-resource}
+%   \begin{whusyntax}[emph={[1]bib-resource}]
+%     bib-resource = (*\marg{文件}*)
+%   \end{whusyntax}
+%   参考文献数据源。可以是单个文件，也可以是用英文逗号隔开的一组文件。
+%   如果 \kvopt{bib-backend}{biblatex}，则必须明确给出 \file{.bib}
+%   后缀名。
 % \end{function}
 % 
 % \begin{function}{style/fullwidth-stop}
-%     \begin{whusyntax}[emph={[1]fullwidth-stop}]
-%         fullwidth-stop = (*<\TFF>*)
-%     \end{whusyntax}
-%     选择是否把全角实心句点“．”作为默认的句号形状。这种句号一般用于科技类文章，以避免与下标“$_o$”或“$_0$”混淆。
+%   \begin{whusyntax}[emph={[1]fullwidth-stop}]
+%     fullwidth-stop = (*<\TFF>*)
+%   \end{whusyntax}
+%   选择是否把全角实心句点“．”作为默认的句号形状。这种句号一般用于科技类文章，以避免与下标“$_o$”或“$_0$”混淆。
 % \end{function}
 % 
-% 选择 \kvopt{style/fullwidth-stop}{true} 后，只有\emph{显式的}“。”会被替换为“．”，如果您用宏保存了一些含有“。”的文字，那么在使用宏时，其中的“。”不会被替换为“．”。
+% 选择 \kvopt{fullwidth-stop}{catcode} 或 \opt{mapping} 后，都会实现上述效果。
+% 有所不同的是，在选择 \opt{catcode} 后，只有\emph{显式的}\FSID 会被替换
+% 为\FSFW；但在选择 \opt{mapping} 后，\emph{所有的}\FSID 都会被替换。例如，
+% 如果您用宏保存了一些含有\FSID 的文字，那么在选择 \opt{catcode} 时，其中
+% 的\FSID 不会将被替换为\FSFW。
+%
+% 如果您在选择 \kvopt{fullwidth-stop}{mapping} 后仍需要临时显示\FSID，
+% 可以按如下方法操作：
+% \begin{latexexample}[moretexcs={\CJKfontspec},emph={[1]Mapping}]
+%   % 请使用 XeTeX 编译
+%   % 外侧的花括号表示分组
+%   这是一个句号{\CJKfontspec{(*\meta{字体名}*)}[Mapping=full-stop]。}
+% \end{latexexample}
+%
+%
+% \begin{function}{style/footnote-style}
+%^^A 这里奇怪的东西是用来控制对齐的。whusyntax 会吃掉开头的几个
+%^^A 空格，因此这里用 . 来占位。
+%   \begin{whusyntax}[emph={[1]footnote-style}]
+%     footnote-style = (*<plain|\\
+%       ......\mbox{}~~~~~~~~~~~~~~~~~libertinus|libertinus*|libertinus-sans|\\
+%       ......\mbox{}~~~~~~~~~~~~~~~~~pifont|pifont*|pifont-sans|pifont-sans*|\\
+%       ......\mbox{}~~~~~~~~~~~~~~~~~xits|xits-sans|xits-sans*>*)
+%   \end{whusyntax}
+%   设置脚注编号样式。西文字体设置会影响其默认取值（见
+%   表~\ref{tab:footnote-font}）。因此，要使得该选项生效，需将其
+%   放置在 \opt{font} 选项之后。带有 |sans| 的为相应的无衬线字体
+%   版本；带有 |*| 的为阴文样式（即黑底白字）。
+% \end{function}
+%
+% \begin{table}[ht]
+%   \caption{西文字体与脚注编号样式默认值的对应关系}
+%   \label{tab:footnote-font}
+%   \centering
+%   \small
+%   \begin{tabular}{ccccc}
+%     \toprule
+%       \textbf{西文字体设置} &
+%         |libertinus| & |lm|     & |palatino| & |times| \\
+%     \midrule
+%       \textbf{脚注编号样式默认值} &
+%         |libertinus| & |pifont| & |pifont|   & |xits|  \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+%
+% \subsection{正文编写}
+%
+% \begin{quotation}
+%   喬孟符（吉）博學多能，以樂府稱。嘗云：「作樂府亦有法，
+%   曰\CJKunderdot{鳳頭、豬肚、豹尾}六字是也。」大概起要美麗，中要浩蕩，
+%   結要響亮。尤貴在首尾貫穿，意思清新。苟能若是，斯可以言樂府矣。
+% \end{quotation}
+% \hfill ^^^^2e3a陶宗儀《南村輟耕錄·作今樂府法》 ^^A ^^^^2e3a = 破折号
+%
+% \subsubsection{凤头}
+%
+% \begin{function}{\frontmatter}
+%   声明前置部分开始。
+% \end{function}
+%
+% 在本模板中，前置部分包含目录、中英文摘要以及符号表等。
+% 前置部分的页码采用小写罗马字母，并且与正文分开计数。
+%
+% \begin{function}{\tableofcontents,\listoffigures,\listoftables}
+%   生成目录。为了生成完整、正确的目录，您至少需要编译\emph{两次}。对于图表
+%   较多的论文，也可以使用 \cs{listoffigures} 和 \cs{listoftables} 生成单独的
+%   插图、表格目录。
+% \end{function}
+%
+%^^A TODO: \DescribeEnv{abstract}
+%^^A TODO: \DescribeEnv{abstract*}
+% \begin{function}{abstract}
+%   \begin{whusyntax}[emph={[2]abstract}]
+%     \begin{abstract}
+%       (*\meta{中文摘要}*)
+%     \end{abstract}
+%   \end{whusyntax}
+% \end{function}
+% \begin{function}{abstract*}
+%   \begin{whusyntax}[emph={[2]abstract*}]
+%     \begin{abstract*}
+%       (*\meta{英文摘要}*)
+%     \end{abstract*}
+%   \end{whusyntax}
+%   摘要。中文模板中，不带星号和带星号的版本分别用来输入中文摘要
+%   和英文摘要；英文模板中没有带星号的版本，您只需输入英文摘要。
+% \end{function}
+%
+%^^A TODO: \DescribeEnv{notation}
+% \begin{function}{notation}
+%   \begin{whusyntax}[emph={[2]notation}]
+%     \begin{notation}(*\oarg{列格式说明}*)
+%       (*\meta{符号 1}*)  &  (*\meta{说明}*)  \\
+%       (*\meta{符号 2}*)  &  (*\meta{说明}*)  \\
+%       (*\phantom{\meta{符号 $n$}}*)  (*$\vdots$*)
+%       (*\meta{符号\ \kern-0.1em$n$}*)  &  (*\meta{说明}*)
+%     \end{notation}
+%   \end{whusyntax}
+%   符号表。可选参数 \meta{列格式说明}与 \LaTeX{} 中标准表格的列格
+%   式说明语法一致，默认值为“|lp{7.5cm}|”，即第一列宽度自动调整，
+%   第二列限宽 \qty{7.5}{cm}，两列均为左对齐。
+% \end{function}
+%
+% \subsubsection{猪肚}
+%
+% \begin{function}{\mainmatter}
+%   声明主体部分开始。
+% \end{function}
+%
+% 主体部分是论文的核心，您可以分章节撰写。如有需求，也可以采用
+% 多文件编译的方式。主体部分的页码采用阿拉伯数字。
+%
+% \begin{function}{\footnote}
+%   \begin{whusyntax}[deletetexcs={\footnote},morekeywords={\footnote}]
+%     \footnote(*\marg{脚注文字}*)
+%   \end{whusyntax}
+%   插入脚注。脚注编号样式可利用 \opt{style/footnote-style} 选项控制，
+%   具体见 \ref{subsubsec:论文格式}~小节。
+% \end{function}
+%
+% \begin{function}{\caption}
+%   \begin{whusyntax}[deletetexcs={\caption},morekeywords={\caption}]
+%     \caption(*\marg{图表标题}*)
+%     \caption(*\oarg{短标题}\marg{长标题}*)
+%   \end{whusyntax}
+%   插入图表标题。可选参数 \meta{短标题} 用于图表目录。在
+%   \meta{长标题} 中，您可以进行长达多段的叙述；但 \meta{短标题}
+%   和单独的 \meta{图表标题} 中则不允许分段。
+%   \cite{刘海洋2013latex入门}
+% \end{function}
+%
+% 按照排版惯例，建议您将表格的标题放置在绘制表格的命令之前，
+% 而将图片的标题放置在绘图或插图的命令之后。另需注意，
+% \tn{caption} 命令必须放置在浮动体环境（如 \env{table} 和
+% \env{figure}）中。
+%
+% \paragraph{参考文献引用}
+%
+% \begin{function}[updated=2021-09-20]{\cite}
+%   \begin{whusyntax}[deletetexcs={\cite},morekeywords={\cite}]
+%     \cite(*\marg{文献标签}*)
+%     \cite(*\oarg{页码}\marg{文献标签}*)
+%   \end{whusyntax}
+%   插入所引用的文献。可选参数 \meta{页码} 可用来标注引文的页码。在不同的
+%   参考文献样式中，引用的样式也不尽相同。根据需要，模板还提供了更多的命令
+%   用来标记引用。顺序编码制和著者—出版年制下的各种引用方式见
+%   表~\ref{tab:citation-numerical} 和表~\ref{tab:citation-author-year}。
+% \end{function}
+%
+%^^A+
+% \NewDocumentCommand\verbcite{O{cite}om}{^^A
+%   \IfNoValueTF{#2}{^^A
+%     \texttt{\textbackslash#1\{#3\}}^^A
+%   }{^^A
+%     \texttt{\textbackslash#1[#2]\{#3\}}^^A
+%   }}
+%^^A-
+%
+% \begin{table}[ht]
+%   \caption{顺序编码制下的引用样式} \label{tab:citation-numerical}
+%   \centering
+%   \small
+%   \begin{tabularx}{\textwidth}{cCll}
+%     \toprule
+%       \textbf{引用方式} &
+%       \textbf{排版效果} &
+%       \textbf{\kvopt{bib-backend}{bibtex}} &
+%       \textbf{\kvopt{bib-backend}{biblatex}} \\
+%     \midrule
+%     单篇文献 &
+%       引文\cite{texbook} &
+%       \verbcite{texbook} &
+%       同左 \\
+%     多篇文献 &
+%       引文\cite{texbook,companion} &
+%       \verbcite{texbook,companion} &
+%       同左 \\
+%     标注页码 &
+%       引文\cite[126--137]{texbook} &
+%       \verbcite[cite][126--137]{texbook} &
+%       同左 \\
+%     标注作者 &
+%       \citet{texbook}指出 &
+%       \verbcite[citet]{texbook} &
+%       \verbcite[authornumcite]{texbook} \\
+%     标注作者、页码 &
+%       \citet[42]{texbook}指出 &
+%       \verbcite[citet][42]{texbook} &
+%       \verbcite[authornumcite][42]{texbook} \\
+%     非上标 &
+%       引文{\citestyle{numbers}\cite{texbook}} &
+%       \verbcite[parencite]{texbook} &
+%       同左 \\
+%     \bottomrule
+%   \end{tabularx}
+% \end{table}
+%
+% \begin{table}[ht]
+%   \caption{著者—出版年制下的引用样式} \label{tab:citation-author-year}
+%   \centering
+%   \small
+%   \def\!{\kern-1.5pt}
+%   \begin{tabularx}{\textwidth}{cCll}
+%     \toprule
+%       \textbf{引用方式} &
+%       \textbf{排版效果} &
+%       \textbf{\kvopt{bib-backend}{bibtex}} &
+%       \textbf{\kvopt{bib-backend}{biblatex}} \\
+%     \midrule
+%     单篇文献 &
+%       (\citeauthor{texbook}\!, \citeyear{texbook}\!) &
+%       \verbcite[citep]{texbook} &
+%       \verbcite{texbook} \\
+%     多篇文献 &
+%       (\citeauthor{texbook}\!, \citeyear{texbook}\!;
+%         \citeauthor{companion}\!, \citeyear{companion}\!) &
+%       \verbcite[citep]{texbook,companion} &
+%       \verbcite{texbook,companion} \\
+%     标注页码 &
+%       (\citeauthor{texbook}\!, \citeyear{texbook}\!)^^A
+%         \textsuperscript{126--137} &
+%       \verbcite[citep][126--137]{texbook} &
+%       \verbcite[cite][126--137]{texbook} \\
+%     标注作者 &
+%       \citeauthor{texbook}(\citeyear{texbook}\!) &
+%       \verbcite[citet]{texbook} &
+%       同左 \\
+%     标注作者、页码 &
+%       \citeauthor{texbook}(\citeyear{texbook}\!)\textsuperscript{42} &
+%       \verbcite[citet][42]{texbook} &
+%       同左 \\
+%     \bottomrule
+%   \end{tabularx}
+% \end{table}
+%
+% \paragraph{定理类环境}
+%
+%^^A TODO: \DescribeEnv{proof}
+% \begin{function}{axiom,corollary,definition,example,lemma,
+%   proof,theorem}
+%   \begin{whusyntax}[emph={[2]proof}]
+%     \begin{proof}(*\oarg{小标题}*)
+%       (*\meta{证明过程}*)
+%     \end{proof}
+%   \end{whusyntax}
+%   一系列预定义的数学环境。具体含义见表~\ref{tab:theorem}。
+% \end{function}
+%
+% \begin{table}[ht]
+%   \caption{预定义的数学环境} \label{tab:theorem}
+%   \centering
+%   \small
+%   \begin{tabular}{*{8}{c}}
+%     \toprule
+%       \textbf{名称} &
+%         \env{axiom} & \env{corollary} & \env{definition} & \env{example} &
+%         \env{lemma} & \env{proof}     & \env{theorem} \\
+%     \midrule
+%       \textbf{含义} &
+%         公理 & 推论 & 定义 & 例 &
+%         引理 & 证明 & 定理 \\
+%     \bottomrule
+%       \textbf{名称} &
+%       \env{problem} & \env{property} & \env{proposition} &
+%       \env{counterexample} & \env{conjecture} & \env{claim} & \env{remark} \\
+%     \midrule
+%       \textbf{含义} &
+%       问题 & 性质 & 命题 & 反例 & 猜想 & 断言 & 注 \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% 证明环境（\env{proof}）的最后会添加证毕符号“$\QED$”。要确保
+% 该符号在正确的位置显示，您需要按照 \ref{subsec:编译方式}~节
+% 中的有关说明编译\emph{两次}。
+%
+% \begin{function}{\whunewtheorem}
+%   \begin{whusyntax}[deletetexcs={\whunewtheorem},
+%       morekeywords={\whunewtheorem,\whunewtheorem*}]
+%     \whunewtheorem(*\oarg{选项}\marg{环境名}\marg{标题}*)
+%     \whunewtheorem*(*\oarg{选项}\marg{环境名}\marg{标题}*)
+%     \begin(*\marg{环境名}\oarg{小标题}*)
+%       (*\meta{内容}*)
+%     \end(*\marg{环境名}*)
+%   \end{whusyntax}
+%   声明新的定理类环境（数学环境），带星号的版本表示不进行编号。
+%   声明后，即可同预定义的数学环境一样使用。
+% \end{function}
+%
+%
+% \subsubsection{豹尾}
+%
+% \begin{function}{\backmatter}
+%   声明后置部分开始。
+% \end{function}
+%
+% 后置部分包含参考文献、声明页等。
+%
+% \begin{function}{\printbibliography}
+%   \begin{whusyntax}[morekeywords={\printbibliography}]
+%     \printbibliography(*\oarg{选项}*)
+%   \end{whusyntax}
+%   打印参考文献列表。如果 \kvopt{bib-backend}{bibtex}，则 \meta{选项}
+%   无效，相当于 \tn{bibliography} \texttt{\marg{文献数据库}}，其中的
+%   \meta{文献数据库} 可利用 \opt{style/bib-resource} 选项指定，具体见
+%   \ref{subsubsec:论文格式}~小节；而如果 \kvopt{bib-backend}{biblatex}，
+%   则该命令由 \pkg{biblatex} 宏包直接提供，可用选项请参阅其文档
+%   \cite{biblatex}。
+% \end{function}
+%
+% \begin{function}{acknowledgements}
+%   \begin{whusyntax}[emph={[2]acknowledgements}]
+%     \begin{acknowledgements}
+%       (*\meta{致谢内容}*)
+%     \end{acknowledgements}
+%   \end{whusyntax}
+%   致谢。
+% \end{function}
+%
 % 
 % \section{宏包依赖}
 % 使用不同编译方式、指定不同选项，会导致宏包依赖情况有所不同。
@@ -493,103 +831,116 @@
 % 这里只列出了本模板直接调用的宏包。这些宏包自身的调用情况，此处不再具体展开。如有需要，请参阅相关文档。
 % 
 % \begin{thebibliography}{99}
-%     \newcommand\urlprefix{\newline\hspace*{\fill}}
-%     \let\OldUrl=\url
-%     \renewcommand\url[2][]{{\small\textit{#1}~\OldUrl{#2}}}
-%     \newcommand\CTANurl[2][]{{\small\textit{#1}~\href{http://mirror.ctan.org/#2}{\ttfamily CTAN://#2}}}
+%   \newcommand\urlprefix{\newline\hspace*{\fill}}
+%   \let\OldUrl=\url
+%   \renewcommand\url[2][]{{\small\textit{#1}~\OldUrl{#2}}}
+%   \newcommand\CTANurl[2][]{{\small\textit{#1}~\href{http://mirror.ctan.org/#2}{\ttfamily CTAN://#2}}}
+%   \bibitem[Knuth(1986)]{texbook}
+%   \textsc{Knuth D E}.
+%   \newblock \textit{The \TeX book: Computers \& Typesetting, volume A} [M].
+%   \newblock Boston: Addison--Wesley Publishing Company, 1986
+%   \urlprefix \CTANurl[源代码^^A
+%     \footnote{此代码只可作为学习之用。未经 Knuth 本人同意，您不应当编译此文档。}：]^^A
+%     {systems/knuth/dist/tex/texbook.tex}
+%
+%   \bibitem[Mittelbach et~al.(2004)]{companion}
+%   \textsc{Mittelbach F} and \textsc{Goossens M}.
+%   \newblock \textit{The \LaTeX{} Companion} [M].
+%   \newblock 2nd ed.
+%   \newblock Boston: Addison--Wesley Publishing Company, 2004
 %     
-%     \bibitem{source2e}
-%     \textsc{Braams J}, \textsc{Carlisle D}, \textsc{Jeffrey A}, et al.
-%     \newblock \textit{The \LaTeXe{} Sources} [CP/OL].
-%     \newblock (2020-10-01)
-%     \urlprefix\url{https://ctan.org/pkg/latex}
-%     \urlprefix\CTANurl[源代码：]{macros/latex/base/source2e.pdf}
-%     
-%     \bibitem{source3}
-%     \textsc{The \LaTeX3 Project}.
-%     \newblock \textit{The \LaTeX3 Sources} [CP/OL].
-%     \newblock (2021-05-11)
-%     \urlprefix\url{https://ctan.org/pkg/l3kernel}
-%     \urlprefix\CTANurl[源代码：]{macros/latex/contrib/l3kernel/source3.pdf}
-%     
-%     \bibitem{CTeX}
-%     \textsc{CTEX.ORG}.
-%     \newblock \textit{\CTeX{} 宏集手册} [EB/OL].
-%     \newblock version 2.5.6,
-%     \newblock (2021-03-14)
-%     \urlprefix\url{https://ctan.org/pkg/ctex}
-%     \urlprefix\CTANurl[文档及源代码：]{language/chinese/ctex/ctex.pdf}
-%     
-%     \bibitem{xeCJK}
-%     \textsc{CTEX.ORG}.
-%     \newblock \textit{\pkg{xeCJK} 宏包} [EB/OL].
-%     \newblock version 3.8.6,
-%     \newblock (2020-10-19)
-%     \urlprefix\url{https://ctan.org/pkg/xecjk}
-%     \urlprefix\CTANurl[文档及源代码：]{macros/xetex/latex/xecjk/xeCJK.pdf}
-%     
-%     \bibitem{LuaTeX-ja}
-%     \LuaTeX-ja プロジェクトチーム.
-%     \newblock \textit{\LuaTeX-ja パッケージ} [EB/OL].
-%     \newblock version 2021\linebreak[1]0517.0,
-%     \newblock (2021-05-17)
-%     \urlprefix\url{https://ctan.org/pkg/luatexja}
-%     \urlprefix\CTANurl[文档：]{macros/luatex/generic/luatexja/doc/luatexja-ja.pdf}
-%     
-%     \bibitem{lshort-zh-cn}
-%     \textsc{Oetiker T}, \textsc{Partl H}, \textsc{Hyna I}, et al.
-%     \newblock \textit{一份（不太）简短的 \LaTeXe{} 介绍: 或 112 分钟了解 \LaTeXe{}} [EB/OL].
-%     \newblock \CTeX{} 开发小组, 译.
-%     \newblock 原版版本 version 6.2, 中文版本 version 6.02,
-%     \newblock (2020-08-03)
-%     \urlprefix\url{https://ctan.org/pkg/lshort-zh-cn}
-%     \urlprefix\CTANurl[文档：]{info/lshort/chinese/lshort-zh-cn.pdf}
-%     
-%     \bibitem{thuthesis}
-%     清华大学 TUNA 协会.
-%     \newblock \textit{\textsc{ThuThesis}：清华大学学位论文模板} [EB/OL].
-%     \newblock version 7.2.2,
-%     \newblock (2021-04-03)
-%     \urlprefix\url{https://ctan.org/pkg/thuthesis}
-%     \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/thuthesis/thuthesis.pdf}
-%     
-%     \bibitem{fduthesis}
-%     曾祥东.
-%     \newblock \textit{fduthesis: 复旦大学论文模板} [EB/OL].
-%     \newblock version 0.7e,
-%     \newblock (2020/08/30)
-%     \urlprefix\url{https://ctan.org/pkg/fduthesis}
-%     \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/fduthesis/fduthesis-code.pdf}
-%     
-%     \bibitem{natbib}
-%     \textsc{Daly P W}.
-%     \newblock \textit{Natural Sciences Citations and References} [EB/OL].
-%     \newblock version 8.31b,
-%     \newblock (2010-09-13)
-%     \urlprefix\url{https://ctan.org/pkg/natbib}
-%     \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/natbib/natbib.pdf}
-%     
-%     \bibitem{gbt7714}
-%     李泽平（\textsc{Zeping L}）.
-%     \newblock \textit{GB/T 7714—2015 \BibTeX{} Style} [EB/OL].
-%     \newblock version 2.1,
-%     \newblock (2020-12-17)
-%     \urlprefix\url{https://ctan.org/pkg/gbt7714}
-%     \urlprefix\CTANurl[文档：]{biblio/bibtex/contrib/gbt7714/gbt7714.pdf}
-%     
-%     \bibitem{biblatex}
-%     \textsc{Lehman P}, \textsc{Kime P}, \textsc{Boruvka A}, et al.
-%     \newblock \textit{The \pkg{biblatex} Package} [EB/OL].
-%     \newblock version 3.16,
-%     \newblock (2020-12-31)
-%     \urlprefix\url{https://ctan.org/pkg/biblatex}
-%     \urlprefix\CTANurl[文档：]{macros/latex/contrib/biblatex/doc/biblatex.pdf}
-%     
-%     \bibitem{biblatex-gb7714-2015}
-%     胡振震.
-%     \newblock \textit{符合 GB/T 7714-2015 标准的 biblatex 参考文献样式} [EB/OL].
-%     \newblock version 1.0y,
-%     \newblock (2021-05-06)
-%     \urlprefix\url{https://ctan.org/pkg/biblatex-gb7714-2015}
-%     \urlprefix\CTANurl[文档：]{biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf}
+%   \bibitem{source2e}
+%   \textsc{Braams J}, \textsc{Carlisle D}, \textsc{Jeffrey A}, et al.
+%   \newblock \textit{The \LaTeXe{} Sources} [CP/OL].
+%   \newblock (2020-10-01)
+%   \urlprefix\url{https://ctan.org/pkg/latex}
+%   \urlprefix\CTANurl[源代码：]{macros/latex/base/source2e.pdf}
+%   
+%   \bibitem{source3}
+%   \textsc{The \LaTeX3 Project}.
+%   \newblock \textit{The \LaTeX3 Sources} [CP/OL].
+%   \newblock (2021-05-11)
+%   \urlprefix\url{https://ctan.org/pkg/l3kernel}
+%   \urlprefix\CTANurl[源代码：]{macros/latex/contrib/l3kernel/source3.pdf}
+%   
+%   \bibitem{CTeX}
+%   \textsc{CTEX.ORG}.
+%   \newblock \textit{\CTeX{} 宏集手册} [EB/OL].
+%   \newblock version 2.5.6,
+%   \newblock (2021-03-14)
+%   \urlprefix\url{https://ctan.org/pkg/ctex}
+%   \urlprefix\CTANurl[文档及源代码：]{language/chinese/ctex/ctex.pdf}
+%   
+%   \bibitem{xeCJK}
+%   \textsc{CTEX.ORG}.
+%   \newblock \textit{\pkg{xeCJK} 宏包} [EB/OL].
+%   \newblock version 3.8.6,
+%   \newblock (2020-10-19)
+%   \urlprefix\url{https://ctan.org/pkg/xecjk}
+%   \urlprefix\CTANurl[文档及源代码：]{macros/xetex/latex/xecjk/xeCJK.pdf}
+%   
+%   \bibitem{LuaTeX-ja}
+%   \LuaTeX-ja プロジェクトチーム.
+%   \newblock \textit{\LuaTeX-ja パッケージ} [EB/OL].
+%   \newblock version 2021\linebreak[1]0517.0,
+%   \newblock (2021-05-17)
+%   \urlprefix\url{https://ctan.org/pkg/luatexja}
+%   \urlprefix\CTANurl[文档：]{macros/luatex/generic/luatexja/doc/luatexja-ja.pdf}
+%   
+%   \bibitem{lshort-zh-cn}
+%   \textsc{Oetiker T}, \textsc{Partl H}, \textsc{Hyna I}, et al.
+%   \newblock \textit{一份（不太）简短的 \LaTeXe{} 介绍: 或 112 分钟了解 \LaTeXe{}} [EB/OL].
+%   \newblock \CTeX{} 开发小组, 译.
+%   \newblock 原版版本 version 6.2, 中文版本 version 6.02,
+%   \newblock (2020-08-03)
+%   \urlprefix\url{https://ctan.org/pkg/lshort-zh-cn}
+%   \urlprefix\CTANurl[文档：]{info/lshort/chinese/lshort-zh-cn.pdf}
+%   
+%   \bibitem{thuthesis}
+%   清华大学 TUNA 协会.
+%   \newblock \textit{\textsc{ThuThesis}：清华大学学位论文模板} [EB/OL].
+%   \newblock version 7.2.2,
+%   \newblock (2021-04-03)
+%   \urlprefix\url{https://ctan.org/pkg/thuthesis}
+%   \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/thuthesis/thuthesis.pdf}
+%   
+%   \bibitem{fduthesis}
+%   曾祥东.
+%   \newblock \textit{fduthesis: 复旦大学论文模板} [EB/OL].
+%   \newblock version 0.7e,
+%   \newblock (2020/08/30)
+%   \urlprefix\url{https://ctan.org/pkg/fduthesis}
+%   \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/fduthesis/fduthesis-code.pdf}
+%   
+%   \bibitem{natbib}
+%   \textsc{Daly P W}.
+%   \newblock \textit{Natural Sciences Citations and References} [EB/OL].
+%   \newblock version 8.31b,
+%   \newblock (2010-09-13)
+%   \urlprefix\url{https://ctan.org/pkg/natbib}
+%   \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/natbib/natbib.pdf}
+%   
+%   \bibitem{gbt7714}
+%   李泽平（\textsc{Zeping L}）.
+%   \newblock \textit{GB/T 7714—2015 \BibTeX{} Style} [EB/OL].
+%   \newblock version 2.1,
+%   \newblock (2020-12-17)
+%   \urlprefix\url{https://ctan.org/pkg/gbt7714}
+%   \urlprefix\CTANurl[文档：]{biblio/bibtex/contrib/gbt7714/gbt7714.pdf}
+%   
+%   \bibitem{biblatex}
+%   \textsc{Lehman P}, \textsc{Kime P}, \textsc{Boruvka A}, et al.
+%   \newblock \textit{The \pkg{biblatex} Package} [EB/OL].
+%   \newblock version 3.16,
+%   \newblock (2020-12-31)
+%   \urlprefix\url{https://ctan.org/pkg/biblatex}
+%   \urlprefix\CTANurl[文档：]{macros/latex/contrib/biblatex/doc/biblatex.pdf}
+%   
+%   \bibitem{biblatex-gb7714-2015}
+%   胡振震.
+%   \newblock \textit{符合 GB/T 7714-2015 标准的 biblatex 参考文献样式} [EB/OL].
+%   \newblock version 1.0y,
+%   \newblock (2021-05-06)
+%   \urlprefix\url{https://ctan.org/pkg/biblatex-gb7714-2015}
+%   \urlprefix\CTANurl[文档：]{biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf}
 % \end{thebibliography}
