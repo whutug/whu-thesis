@@ -2444,7 +2444,10 @@
     {2} { \__whu_bachelor_set_appendix: }
   }
 
+%------
 % 脚注
+%------
+
 \cs_new_protected:Npn \__whu_define_fn_style:nn #1#2
   { \tl_const:cn { c__whu_fn_style_ #1 _tl } {#2} }
 \cs_new:Npn \__whu_symbol:n #1 { \tex_char:D #1 \scan_stop: }
@@ -2582,10 +2585,6 @@
 % 修改脚注的横线长度
 \cs_set:Npn \footnoterule
   {\kern-3\p@ \hrule \@width 2in \@height 1pt \kern 2.6\p@ }
-
-
-
-% 超链接设置
 
 
 % 字体配置 (font configuration)
@@ -2983,10 +2982,11 @@
 \AddToHook { env / tabular / begin }
   { \zihao{5} }
 
-
+%----------
 % 定理类环境
+%----------
 
-% 去掉.号，但只能通过新定义 style 的方式进行
+% 去掉 . 号，但只能通过新定义 style 的方式进行
 \declaretheoremstyle
   [
     headpunct     = {},
@@ -2998,10 +2998,10 @@
   {
     \declaretheorem
       [
-        style = whustyle,
-        name =  \clist_item:nn {#1} {1} ,
+        style   = whustyle,
+        name    = \clist_item:nn {#1} {1} ,
         refname = \clist_item:nn {#1} {2} ,
-        within = \clist_item:nn {#1} {3} ,
+        within  = \clist_item:nn {#1} {3} ,
       ]
       { \clist_item:nn {#1} {4} }
   }
@@ -3036,10 +3036,6 @@
   }
   \__whu_declare_theorem_with_counter_within:n
 
-% \clist_map_function:nN
-%   {
-
-%   }\__whu_declare_theorem_with_counter_sibling:n
 
 \NewDocumentCommand { \whunewtheorem } { s O{} m m }
   {
@@ -3049,23 +3045,23 @@
         \declaretheorem
           [
             style = whustyle,
-            name =  #3 ,
-            refname = #3 ,
+            name =  #4 ,
+            refname = #4 ,
             numbered = no,
             #2
           ]
-          { #4 }
+          { #3 }
       }
       {
         % 无*
         \declaretheorem
           [
             style = whustyle,
-            name =  #3 ,
-            refname = #3 ,
+            name =  #4 ,
+            refname = #4 ,
             #2
           ]
-          { #4 }
+          { #3 }
       }
   }
 
@@ -3280,4 +3276,42 @@
         \cs_set_nopar:Npn \bibrangedash
           { \textendash \penalty \hyphenpenalty }
       }
+  }
+
+
+\keys_define:nn { whu / style }
+  {
+    fullwidth-stop .choice:,
+    fullwidth-stop .value_required:n = true,
+    fullwidth-stop / catcode .code:n =
+      { \__whu_set_fullwidth_stop_catcode: },
+    fullwidth-stop / mapping .code:n =
+      {
+        \sys_if_engine_xetex:TF
+          {
+            \clist_gset:Nn \g__xeCJK_default_features_clist
+              { Mapping = fullwidth-stop }
+          }
+          {
+            \sys_if_engine_luatex:T
+              {
+                \__whu_warning:n { mapping-not-available }
+                \__whu_set_fullwidth_stop_catcode:
+              }
+          }
+      },
+    fullwidth-stop / false .code:n = { }
+  }
+\__whu_msg_new:nn { mapping-not-available }
+  {
+    Option~ "fullwidth-stop = mapping"~ is~ not~ available~ in~ LuaTeX. \\
+    "fullwidth-stop = catcode"~ will~ be~ set~ instead.
+  }
+\cs_new:Npn \__whu_set_fullwidth_stop_catcode:
+  {
+    \char_set_active_eq:NN ^^^^3002 \c__whu_fwid_full_stop_tl
+    \char_set_catcode_active:N ^^^^3002
+    \clist_map_inline:nn
+      { \c__whu_orig_decl_text_tl, \c__whu_auth_decl_text_tl }
+      { \tl_set_rescan:Nno ##1 { } {##1} }
   }
