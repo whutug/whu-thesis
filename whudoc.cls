@@ -9,6 +9,7 @@
 \RequirePackage[heading, sub3section, fontset=none]{ctex}
 \RequirePackage[sort&compress]{gbt7714}
 \RequirePackage{
+  array,
   caption,
   geometry,
   graphicx,
@@ -21,7 +22,8 @@
   xcolor,
   xcolor-material,
   xunicode,
-  zref-base
+  zref-base,
+  xeCJKfntef
 }
 \def\macro@code{%
   \topsep \MacrocodeTopsep
@@ -1001,4 +1003,10 @@
 \newcolumntype{R}{>{\raggedleftarraybackslash}X}
 \ProvideDocumentCommand{\tabularxcolumn}{m}{m{#1}}
 \geometry{left=4cm}
+
+% 全角标点放在引号中，需要改成半角式，否则间距过大，不好看
+\def\FSID{“{\xeCJKsetup{PunctStyle=banjiao}。}”} % U+3002
+\def\FSFW{“{\xeCJKsetup{PunctStyle=banjiao}．}”} % U+FF0E
+\def\COFW{“{\xeCJKsetup{PunctStyle=banjiao}：}”} % U+FF1A
+\def\SCFW{“{\xeCJKsetup{PunctStyle=banjiao}；}”} % U+FF1B
 \endinput
