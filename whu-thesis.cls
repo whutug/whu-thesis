@@ -356,34 +356,31 @@
 % 加载 ctexbook 文类
 \LoadClass { ctexbook }
 
-% 加载宏包
+% 加载宏包 (listed in alphabetical order)
+\RequirePackage { amsmath }
+\RequirePackage { amssymb }
+\RequirePackage { amsthm }
+\RequirePackage [numbered] { bookmark }
+\RequirePackage { caption }
+\RequirePackage { enumitem }
 \RequirePackage { etoolbox }
-\RequirePackage { geometry }
+\RequirePackage { fancyhdr }
+\RequirePackage { fixdif }
 \RequirePackage [ no-math ] { fontspec }
 \RequirePackage { footmisc }
+\RequirePackage { geometry }
+\RequirePackage { graphicx }
+\RequirePackage { tabularray }
+\RequirePackage { thmtools }
+\RequirePackage { tikzpagenodes }
+\RequirePackage [ titles ] { tocloft }
+\RequirePackage { varwidth }
 \RequirePackage { xeCJK }
 \RequirePackage { xeCJKfntef }
-\RequirePackage { fancyhdr }
-\RequirePackage { enumitem }
-\RequirePackage { tikzpagenodes }
-\RequirePackage { graphicx }
-\RequirePackage { varwidth }
-\RequirePackage { amsmath }
-\RequirePackage { amsthm }
-\RequirePackage { thmtools }
-\RequirePackage { tabularray }
-\RequirePackage { caption }
-\RequirePackage [numbered] { bookmark }
-
-
-\RequirePackage [ titles ] { tocloft }         % 目录修改
-
-
 
 \AtEndPreamble
   {
     \RequirePackage { hyperref }
-    \RequirePackage { fixdif }
   }
 
 
@@ -2587,7 +2584,9 @@
   {\kern-3\p@ \hrule \@width 2in \@height 1pt \kern 2.6\p@ }
 
 
+%-----------------------------
 % 字体配置 (font configuration)
+%-----------------------------
 
 \cs_new_protected:Npn \__whu_set_cjk_main_font:nn #1#2
   {
@@ -2617,8 +2616,10 @@
   { \__whu_set_cjk_mono_font:nn {#1} { \l__whu_cjk_font_options_tl } }
 \cs_new_protected:Npx \__whu_set_cjk_font_kaishu:n #1
   { \__whu_set_cjk_font_kaishu:nn {#1} { \l__whu_cjk_font_options_tl } }
+
 \bool_new:N \g__whu_style_cjk_fakefont_bool
 \tl_new:N \g__whu_style_math_font_choice_tl
+
 \keys_define:nn { whu }
   {
     style  .meta:nn = { whu / style  } {#1},
@@ -2632,7 +2633,7 @@
     font .initial:n = default,
 
     math-font .choices:nn =
-      { xits, termes, mtpro, default }
+      { xits, termes, default }
       { 
         \cs_gset_eq:Nc \__whu_style_math_font_use: { __whu_style_math_font_set_ \l_keys_choice_tl : }
         \tl_gset_eq:NN \g__whu_style_math_font_choice_tl \l_keys_choice_tl
@@ -2701,10 +2702,6 @@
 \cs_new_protected:Npn \__whu_style_math_font_set_termes:
   {
     \setmathfont { texgyretermes-math.otf }
-  }
-\cs_new_protected:Npn \__whu_style_math_font_set_mtpro:
-  {
-    \RequirePackage[amsbb,mtpscr]{mtpro2}
   }
 \cs_new_protected:Npn \__whu_style_math_font_set_default: { }
 
@@ -2902,14 +2899,8 @@
         }{}
       }
       {
-        \tl_if_eq:NnF \g__whu_style_math_font_choice_tl {mtpro}
-          {
-            \RequirePackage [ bold-style = ISO ] { unicode-math }
-          }
+        \RequirePackage [ bold-style = ISO ] { unicode-math }
       }
-    % 如果使用 mtpro2 数学字体宏包，则不能加载 amssymb
-    \tl_if_eq:NnF \g__whu_style_math_font_choice_tl { mtpro }
-      { \RequirePackage{amssymb} }
     \__whu_style_font_use:
     \__whu_style_math_font_use:
     \__whu_style_cjk_font_use:
