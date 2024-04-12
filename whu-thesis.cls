@@ -340,10 +340,17 @@
   }
   { ctexbook }
 
-\PassOptionsToPackage { no-math } { fontspec }
+% 给预加载的宏包传递选项
+\clist_map_inline:nn
+  {
+    { no-math  } { fontspec },
+    { numbered } { bookmark },
+    { titles   } { tocloft  },
+    { perpage  } { footmisc }
+  }
+  { \PassOptionsToPackage #1 }
 
 \RequirePackage { filehook }
-
 % 消去 CJK 警告
 \AtEndOfPackageFile* { fontspec }
   { \msg_redirect_name:nnn { fontspec } { no-script } { none } }
@@ -360,20 +367,20 @@
 \RequirePackage { amsmath }
 \RequirePackage { amssymb }
 \RequirePackage { amsthm }
-\RequirePackage [numbered] { bookmark }
+\RequirePackage { bookmark }
 \RequirePackage { caption }
 \RequirePackage { enumitem }
 \RequirePackage { etoolbox }
 \RequirePackage { fancyhdr }
 \RequirePackage { fixdif }
-\RequirePackage [ no-math ] { fontspec }
 \RequirePackage { footmisc }
+\RequirePackage { fontspec }
 \RequirePackage { geometry }
 \RequirePackage { graphicx }
 \RequirePackage { tabularray }
 \RequirePackage { thmtools }
 \RequirePackage { tikzpagenodes }
-\RequirePackage [ titles ] { tocloft }
+\RequirePackage { tocloft }
 \RequirePackage { varwidth }
 \RequirePackage { xeCJK }
 \RequirePackage { xeCJKfntef }
