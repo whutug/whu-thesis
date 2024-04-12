@@ -248,7 +248,7 @@
     \group_end:
   }
 
-% 处理文类的选项
+% 处理文档类的选项
 \keys_define:nn { whu / option }
   {
     type .choice:,
@@ -373,7 +373,6 @@
 \RequirePackage { thmtools }
 \RequirePackage { tabularray }
 \RequirePackage { caption }
-\RequirePackage { amssymb }
 \RequirePackage [numbered] { bookmark }
 
 
@@ -811,47 +810,42 @@
   }
 \keys_define:nn { whu / info }
   {
-    title .tl_set:N = \l__whu_info_title_tl,
-    title* .tl_set:N = \l__whu_info_title_en_tl,
-    department .tl_set:N = \l__whu_info_department_tl,
-    department* .tl_set:N = \l__whu_info_department_en_tl,
-    student-id .tl_set:N = \l__whu_info_student_id_tl,
-    author .tl_set:N = \l__whu_info_author_tl,
-    author* .tl_set:N = \l__whu_info_author_en_tl,
-    major .tl_set:N = \l__whu_info_major_tl,
-    major* .tl_set:N = \l__whu_info_major_en_tl,
-    supervisor .tl_set:N = \l__whu_info_supervisor_tl,
-    supervisor* .tl_set:N = \l__whu_info_supervisor_en_tl,
-    supervisor-academic-title .tl_set:N = \l__whu_info_supervisor_academic_title_tl,
-    supervisor-academic-title* .tl_set:N = \l__whu_info_supervisor_academic_title_en_tl,
-    year .int_set:N = \l__whu_info_year_int,
-    month .int_set:N = \l__whu_info_month_int,
-    day .int_set:N = \l__whu_info_day_int,
-    master-type .choices:nn =
-      { academic, professional }
-      { \str_set:NV \l__whu_master_type_str \l_keys_choice_tl },
-    research-area .tl_set:N = \l__whu_info_research_area_tl,
-    research-area* .tl_set:N = \l__whu_info_research_area_en_tl,
+    title           .tl_set:N = \l__whu_info_title_tl,
+    title*          .tl_set:N = \l__whu_info_title_en_tl,
+    department      .tl_set:N = \l__whu_info_department_tl,
+    department*     .tl_set:N = \l__whu_info_department_en_tl,
+    student-id      .tl_set:N = \l__whu_info_student_id_tl,
+    author          .tl_set:N = \l__whu_info_author_tl,
+    author*         .tl_set:N = \l__whu_info_author_en_tl,
+    major           .tl_set:N = \l__whu_info_major_tl,
+    major*          .tl_set:N = \l__whu_info_major_en_tl,
+    supervisor      .tl_set:N = \l__whu_info_supervisor_tl,
+    supervisor*     .tl_set:N = \l__whu_info_supervisor_en_tl,
+    academic-title  .tl_set:N = \l__whu_info_supervisor_academic_title_tl,
+    academic-title* .tl_set:N = \l__whu_info_supervisor_academic_title_en_tl,
+    research-area   .tl_set:N = \l__whu_info_research_area_tl,
+    research-area*  .tl_set:N = \l__whu_info_research_area_en_tl,
+    clc             .tl_set:N = \l__whu_info_clc_tl,
+    secret-level    .tl_set:N = \l__whu_info_secret_level_tl,
+    udc             .tl_set:N = \l__whu_info_udc_tl,
+    year           .int_set:N = \l__whu_info_year_int,
+    month          .int_set:N = \l__whu_info_month_int,
+    day            .int_set:N = \l__whu_info_day_int,
+    keywords     .clist_set:N = \l__whu_info_keywords_clist,
+    keywords*    .clist_set:N = \l__whu_info_keywords_en_clist,
+    master-type   .choices:nn = { academic, professional }
+                                { \str_set:NV \l__whu_master_type_str \l_keys_choice_tl },
+    abstract-keywords-type .choices:nn = { newline, blankline, vfill }
+                                         { \str_set:Nx \l__whu_abstract_keywords_zh_type_str { \l_keys_choice_tl } },
+    abstract-keywords-type* .choices:nn = { newline, blankline, vfill }
+                                          { \str_set:Nx \l__whu_abstract_keywords_en_type_str { \l_keys_choice_tl } },
+    cover-en-type .choice:,
+    cover-en-type .choices:nn = { normal, cs }
+                                { \tl_set_eq:NN \l__whu_cover_en_type_tl \l_keys_choice_tl },
+    cover-en-type .initial:n = normal,
     doctor-cover-withsubject .bool_gset:N = \g__whu_doctor_cover_with_subject_bool,
     doctor-cover-info-spread .bool_gset:N = \g__whu_doctor_cover_info_spread_bool,
     supervisor-name-title-separator .tl_set:N = \l__whu_info_supervisor_name_title_separator_tl,
-    % 本科生是否显示英文封面（教务处规范中没有，黄老师模版中有）
-    bachelor-english-cover .bool_set:N = \l__whu_bachelor_english_cover_bool,
-    keywords    .clist_set:N = \l__whu_info_keywords_clist,
-    keywords*   .clist_set:N = \l__whu_info_keywords_en_clist,
-    abstract-keywords-type .choices:nn =  
-      { newline, blankline, vfill }
-      { \str_set:Nx \l__whu_abstract_keywords_zh_type_str { \l_keys_choice_tl } },
-    abstract-keywords-type* .choices:nn =  
-      { newline, blankline, vfill }
-      { \str_set:Nx \l__whu_abstract_keywords_en_type_str { \l_keys_choice_tl } },
-    cover-en-type .choice:,
-    cover-en-type .choices:nn = { normal, cs }
-      { \tl_set_eq:NN \l__whu_cover_en_type_tl \l_keys_choice_tl },
-    cover-en-type .initial:n = normal,
-    classification-number .tl_set:N = \l__whu_info_classification_number_tl,
-    secret-level .tl_set:N = \l__whu_info_secret_level_tl,
-    UDC .tl_set:N = \l__whu_info_UDC_tl,
   }
 \AtEndPreamble
   {
@@ -867,9 +861,9 @@
     abstract-keywords-type = blankline,
     keywords = {\LaTeX{}, 毕业论文, 模版, 武汉大学},
     keywords* = {\LaTeX{}, Thesis, Template, Wuhan~University},
-    classification-number = \c_empty_tl,
+    clc = \c_empty_tl,
     secret-level = \c_empty_tl,
-    UDC = \c_empty_tl,
+    udc = \c_empty_tl,
   }
 % 只定义中文
 \cs_new_protected:Npn \__whu_define_name:nn #1#2
@@ -912,10 +906,9 @@
         author*    = {XIA~Dayuyang},
         supervisor  = {夏大鱼羊},
         supervisor* = {XIA~Kangwei},
-        supervisor-academic-title = {教授},
-        supervisor-academic-title* = {Prof},
+        academic-title = {教授},
+        academic-title* = {Prof},
         supervisor-name-title-separator = \qquad,
-        bachelor-english-cover = true
       }
   }
 \cs_new:Npn \__whu_master_info_initial:
@@ -923,9 +916,9 @@
     \clist_map_inline:nn
       {
         { secret_level } { 密级 },
-        { classification_number } { 分类号 },
+        { clc } { 分类号 },
         { numbering } { 编号 },
-        { UDC } { UDC },
+        { udc } { UDC },
         { major_professional } { 专业类别{~（领域）} },
         { major_academic } { 专业名称  },
         { academic_type } { 硕士学位论文  },
@@ -947,9 +940,9 @@
     \keys_set:nn { whu / info }
       {
         title         = {武汉大学硕士学位论文 \LaTeX{} 模版},
-        title*     = {A~\LaTeX{}~Thesis~Template~for~Wuhan~University},
+        title*        = {A~\LaTeX{}~Thesis~Template~for~Wuhan~University},
         department    = {数学与统计学院},
-        department*    = {School~of~Mathematics~and~Statistics},
+        department*   = {School~of~Mathematics~and~Statistics},
         major         = {基础数学},
         major*        = {Pure~Mathematics},
         research-area = {函数空间上的算子理论},
@@ -958,8 +951,8 @@
         author*       = {XIA~Kangwei},
         supervisor    = {夏大鱼羊},
         supervisor*   = {XIA~Dayuyang},
-        supervisor-academic-title = {教授},
-        supervisor-academic-title* = {Prof},
+        academic-title = {教授},
+        academic-title* = {Prof},
         master-type   = professional,
         supervisor-name-title-separator = \kern0.5em
       }
@@ -969,9 +962,9 @@
     \clist_map_inline:nn
       {
         { secret_level } { 密级 },
-        { classification_number } { 分类号 },
+        { clc } { 分类号 },
         { numbering } { 编号 },
-        { UDC } { UDC },
+        { udc } { UDC },
         { subject_major } { 学科、专业名称 },
         { type } { 博士学位论文 },
         { toc } { 目 \qquad 录 },
@@ -1002,8 +995,8 @@
         author*       = {XIA~Kangwei},
         supervisor    = {夏大鱼羊},
         supervisor*   = {XIA~Dayuyang},
-        supervisor-academic-title = {教授},
-        supervisor-academic-title* = {Prof},
+        academic-title = {教授},
+        academic-title* = {Prof},
         doctor-cover-withsubject = true,
         doctor-cover-info-spread = true,
         supervisor-name-title-separator = \qquad
@@ -1248,8 +1241,8 @@
         \begin{minipage}{\textwidth}
           \zihao{4} \fangsong
           \begin{tabular}{c@{\hspace*{6pt}}c}
-            \__whu_spread_box:nn {3.2em} { \c__whu_name_classification_number_tl } & \CJKunderline*{ \makebox[4.5em]{\l__whu_info_classification_number_tl } } \\[7pt]
-            \__whu_spread_box:nn {3.2em} { \c__whu_name_UDC_tl } & \CJKunderline*{ \makebox[4.5em]{\l__whu_info_UDC_tl} } 
+            \__whu_spread_box:nn {3.2em} { \c__whu_name_clc_tl } & \CJKunderline*{ \makebox[4.5em]{\l__whu_info_clc_tl } } \\[7pt]
+            \__whu_spread_box:nn {3.2em} { \c__whu_name_udc_tl } & \CJKunderline*{ \makebox[4.5em]{\l__whu_info_udc_tl} } 
           \end{tabular}
           \hfill
           \begin{tabular}{c@{\hspace*{8pt}}c}
@@ -1460,8 +1453,8 @@
         \begin{minipage}{\textwidth}
           \zihao{4} \fangsong
           \begin{tabular}{c@{\hspace*{6pt}}c}
-            \__whu_spread_box:nn {3.2em} { \c__whu_name_classification_number_tl } & \CJKunderline*{ \hspace*{4.5em} } \\[7pt]
-            \__whu_spread_box:nn {3.2em} { \c__whu_name_UDC_tl } & \CJKunderline*{ \hspace*{4.5em} } 
+            \__whu_spread_box:nn {3.2em} { \c__whu_name_clc_tl } & \CJKunderline*{ \hspace*{4.5em} } \\[7pt]
+            \__whu_spread_box:nn {3.2em} { \c__whu_name_udc_tl } & \CJKunderline*{ \hspace*{4.5em} } 
           \end{tabular}
           \hfill
           \begin{tabular}{c@{\hspace*{8pt}}c}
@@ -2595,30 +2588,36 @@
 % 超链接设置
 
 
-% 字体配置
+% 字体配置 (font configuration)
 
 \cs_new_protected:Npn \__whu_set_cjk_main_font:nn #1#2
   {
-    \setCJKmainfont { #1 } [ #2 ]
-    \newCJKfontfamily [ zhsong ] \songti { #1 } [ #2 ]
+    \setCJKmainfont{#1}[#2]
+    \newCJKfontfamily [zhsong] \songti {#1} [#2]
   }
 \cs_new_protected:Npn \__whu_set_cjk_sans_font:nn #1#2
   {
-    \setCJKsansfont { #1 } [ #2 ]
-    \newCJKfontfamily [ zhhei ] \heiti { #1 } [ #2 ]
-  }
-\cs_new_protected:Npn \__whu_set_cjk_font_kaishu:nn #1#2
-  {
-    \newCJKfontfamily [ zhkai ] \kaishu { #1 } [ #2 ]
+    \setCJKsansfont{#1}[#2]
+    \newCJKfontfamily [zhhei] \heiti {#1} [#2]
   }
 \cs_new_protected:Npn \__whu_set_cjk_mono_font:nn #1#2
   {
-    \setCJKmonofont { #1 } [ #2 ]
-    \newCJKfontfamily [ zhfs ] \fangsong { #1 } [ #2 ]
+    \setCJKmonofont{#1}[#2]
+    \newCJKfontfamily [zhfs] \fangsong {#1} [#2]
   }
-
-
-
+\cs_new_protected:Npn \__whu_set_cjk_font_kaishu:nn #1#2
+  {
+    \newCJKfontfamily [zhkai] \kaishu {#1} [#2]
+  }
+\tl_const:Nn \l__whu_cjk_font_options_tl { UprightFont = *, ItalicFont = *, AutoFakeBold }
+\cs_new_protected:Npx \__whu_set_cjk_main_font:n #1
+  { \__whu_set_cjk_main_font:nn {#1} { \l__whu_cjk_font_options_tl } }
+\cs_new_protected:Npx \__whu_set_cjk_sans_font:n #1
+  { \__whu_set_cjk_sans_font:nn {#1} { \l__whu_cjk_font_options_tl } }
+\cs_new_protected:Npx \__whu_set_cjk_mono_font:n #1
+  { \__whu_set_cjk_mono_font:nn {#1} { \l__whu_cjk_font_options_tl } }
+\cs_new_protected:Npx \__whu_set_cjk_font_kaishu:n #1
+  { \__whu_set_cjk_font_kaishu:nn {#1} { \l__whu_cjk_font_options_tl } }
 \bool_new:N \g__whu_style_cjk_fakefont_bool
 \tl_new:N \g__whu_style_math_font_choice_tl
 \keys_define:nn { whu }
@@ -2634,7 +2633,7 @@
     font .initial:n = default,
 
     math-font .choices:nn =
-      { xits, termes, default }
+      { xits, termes, mtpro, default }
       { 
         \cs_gset_eq:Nc \__whu_style_math_font_use: { __whu_style_math_font_set_ \l_keys_choice_tl : }
         \tl_gset_eq:NN \g__whu_style_math_font_choice_tl \l_keys_choice_tl
@@ -2643,7 +2642,7 @@
     math-font .initial:n = default,
 
     cjk-font .choices:nn =
-      { windows, mac, fandol, overleaf, none, sourcehan }
+      { windows, mac, fandol, sourcehan, founder, none }
       { \cs_gset_eq:Nc \__whu_style_cjk_font_use: { __whu_style_cjk_font_set_ \l_keys_choice_tl : } },
     cjk-font .value_required:n = true,
     cjk-font .initial:n = none,
@@ -2651,11 +2650,14 @@
     cjk-fakefont .bool_set:N = \g__whu_style_cjk_fakefont_bool,
     cjk-fakefont .default:n = true,
     cjk-fakefont .initial:n = false,
+    % 本科生是否显示英文封面（教务处规范中没有，黄老师模版中有）
+    bachelor-encover .bool_set:N = \l__whu_bachelor_english_cover_bool,
+    bachelor-encover .default:n = true
   }
 
 \hook_gset_rule:nnnn { begindocument/before } { . } { < } { xeCJK }
 
-% 西文字体设置
+% 西文字体设置 (english font setting)
 \cs_new_protected:Npn \__whu_style_font_set_times:
   {
     \setmainfont { Times ~ New ~ Roman }
@@ -2665,10 +2667,10 @@
     \setmainfont { XITS } 
       [
         Extension      = .otf,
-        UprightFont    = * - Regular,
-        BoldFont       = * - Bold,
-        ItalicFont     = * - Italic,
-        BoldItalicFont = * - BoldItalic
+        UprightFont    = *-Regular,
+        BoldFont       = *-Bold,
+        ItalicFont     = *-Italic,
+        BoldItalicFont = *-BoldItalic
       ]
   }
 \cs_new_protected:Npn \__whu_style_font_set_termes:
@@ -2676,15 +2678,15 @@
     \setmainfont { texgyretermes }
       [
         Extension      = .otf,
-        UprightFont    = * - regular,
-        BoldFont       = * - bold,
-        ItalicFont     = * - italic,
-        BoldItalicFont = * - bolditalic
+        UprightFont    = *-regular,
+        BoldFont       = *-bold,
+        ItalicFont     = *-italic,
+        BoldItalicFont = *-bolditalic
       ]
   }
 \cs_new_protected:Npn \__whu_style_font_set_default: { }
 
-% 数学字体设置
+% 数学字体设置 (math font setting)
 \cs_new_protected:Npn \__whu_style_math_font_set_xits:
   {
     \setmathfont { XITSMath-Regular.otf } 
@@ -2701,9 +2703,14 @@
   {
     \setmathfont { texgyretermes-math.otf }
   }
+\cs_new_protected:Npn \__whu_style_math_font_set_mtpro:
+  {
+    \RequirePackage[amsbb,mtpscr]{mtpro2}
+  }
 \cs_new_protected:Npn \__whu_style_math_font_set_default: { }
 
-% 中文字体设置
+
+% 中文字体设置 (chinese font setting)
 \cs_new_protected:Npn \__whu_style_cjk_font_set_none: { }
 \cs_new_protected:Npn \__whu_style_cjk_font_set_windows:
   {
@@ -2822,35 +2829,15 @@
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
       }
   }
-\cs_new_protected:Npn \__whu_style_cjk_font_set_overleaf:
+
+\cs_new_protected:Npn \__whu_style_cjk_font_set_founder:
   {
-    \bool_if:NTF \g__whu_style_cjk_fakefont_bool
-      {
-        \__whu_set_cjk_main_font:nn { simsun.ttc }
-          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_set_cjk_sans_font:nn { simhei.ttf }
-          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_set_cjk_mono_font:nn { simfang.ttf }
-          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_set_cjk_font_kaishu:nn { simkai.ttf }
-          { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-      }
-      {
-        \__whu_set_cjk_main_font:nn { simsun.ttc }
-          { 
-            BoldFont       = simhei.ttf,
-            ItalicFont     = simkai.ttf,
-            SlantedFont    = simkai.ttf,
-            BoldItalicFont = simhei.ttf
-          }
-        \__whu_set_cjk_sans_font:nn { simhei.ttf }
-          { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-        \__whu_set_cjk_mono_font:nn { simfang.ttf }
-          { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-        \__whu_set_cjk_font_kaishu:nn { simkai.ttf }
-          { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
-      }
+    \__whu_set_cjk_main_font:nn  { FZShuSong-Z01  } { BoldFont = FZHei-B01, ItalicFont = FZKai-Z03 }
+    \__whu_set_cjk_sans_font:n   { FZHei-B01      }
+    \__whu_set_cjk_mono_font:n   { FZFangSong-Z02 }
+    \__whu_set_cjk_font_kaishu:n { FZKai-Z03      }
   }
+
 \cs_new_protected:Npn \__whu_style_cjk_font_set_sourcehan:
   {
     \bool_if:NTF \g__whu_style_cjk_fakefont_bool
@@ -2902,7 +2889,7 @@
       }
   }    
 
-% 使用字体
+% 使用字体 (use font)
 \AtEndPreamble
   {
     \tl_if_eq:NnTF \g__whu_style_math_font_choice_tl {default}
@@ -2916,55 +2903,18 @@
         }{}
       }
       {
-        \RequirePackage [ bold-style = ISO ] { unicode-math }
+        \tl_if_eq:NnF \g__whu_style_math_font_choice_tl {mtpro}
+          {
+            \RequirePackage [ bold-style = ISO ] { unicode-math }
+          }
       }
+    % 如果使用 mtpro2 数学字体宏包，则不能加载 amssymb
+    \tl_if_eq:NnF \g__whu_style_math_font_choice_tl { mtpro }
+      { \RequirePackage{amssymb} }
     \__whu_style_font_use:
     \__whu_style_math_font_use:
     \__whu_style_cjk_font_use:
   }
-
-
-% \ifcsname XeTeXglyph\endcsname
-%   \def\pkg@CompileCommand{xelatex}
-%   \usepackage{xeCJK}
-%   \DeclareRobustCommand\setzhmainfont  {\setCJKmainfont}
-%   \DeclareRobustCommand\setzhsansfont  {\setCJKsansfont}
-%   \DeclareRobustCommand\setzhmonofont  {\setCJKmonofont}
-%   \DeclareRobustCommand\newzhfontfamily{\newCJKfontfamily}
-%   \DeclareRobustCommand\zhfontspec     {\CJKfontspec}
-% \else
-%   \ifcsname luadef\endcsname
-%     \def\pkg@CompileCommand{lualatex}
-%     \usepackage{luatexja,luatexja-fontspec}
-%     \DeclareRobustCommand\setzhmainfont  {\setjmainfont}
-%     \DeclareRobustCommand\setzhsansfont  {\setjsansfont}
-%     \DeclareRobustCommand\setzhmonofont  {\setjmonofont}
-%     \DeclareRobustCommand\newzhfontfamily{\newjfontfamily}
-%     \DeclareRobustCommand\zhfontspec     {\jfontspec}
-%   \else
-%     \errmessage{FUCK!!! Why are you using pdflatex? Such a idiot!}
-%   \fi
-% \fi
-% \IfFileExists{C:/Windows/Fonts/SimFang.ttf}
-%   {
-%     \newfontfamily  \enFangSong{SimFang.ttf}
-%     \newzhfontfamily\zhFangSong{SimFang.ttf}
-%     \DeclareRobustCommand\fangsong{\enFangSong\zhFangSong}
-%     \DeclareTextFontCommand\textfangsong{\fangsong}
-%   }
-%   {\IfFileExists{/System/Library/Fonts/Times.ttc}
-%     {
-%       \newfontfamily  \enFangSong{STFangsong}
-%       \newzhfontfamily\zhFangSong{STFangsong}
-%       \DeclareRobustCommand\fangsong{\enFangSong\zhFangSong}
-%       \DeclareTextFontCommand\textfangsong{\fangsong}
-%       \setzhmainfont{STSong}
-%     }
-%     {\message{There is no such font!}
-%       \DeclareRobustCommand\fangsong{\ttfamily}
-%       \DeclareRobustCommand\textfangsong{\texttt}
-%     }
-%   }
 
 
 % 符号表
