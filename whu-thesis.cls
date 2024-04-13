@@ -1464,11 +1464,10 @@
       {
         \chapter * { 摘 \qquad 要 }
         \phantomsection
-        \clist_map_inline:nn { doctor , master }
-          {
-            \tl_if_eq:NnT \g__whu_option_type_tl {##1}
-              { \addcontentsline { toc } { chapter } { 摘 \qquad 要 } }
-          }
+        \tl_if_eq:NnT \g__whu_option_type_tl { bachelor }
+          { \addcontentsline { toc } { chapter } { 摘要 } }
+        \clist_if_in:nVT { master, doctor } \g__whu_option_type_tl
+          { \addcontentsline { toc } { chapter } { 摘 \qquad 要 } }
         \tl_if_eq:NnT \g__whu_option_type_tl { bachelor }
           { \thispagestyle { frontmatter } }
         \__whu_set_baseline_skip:
@@ -1485,11 +1484,7 @@
       {
         \chapter * { \textbf { ABSTRACT } }
         \phantomsection
-        \clist_map_inline:nn { doctor , master }
-          {
-            \tl_if_eq:NnT \g__whu_option_type_tl {##1}
-              { \addcontentsline { toc } { chapter } { ABSTRACT } }
-          }
+        \addcontentsline { toc } { chapter } { ABSTRACT }
         \tl_if_eq:NnT \g__whu_option_type_tl { bachelor }
           { \thispagestyle { frontmatter } }
         \__whu_set_baseline_skip:
