@@ -15,6 +15,34 @@
 %% 
 %%  The Current Maintainer of this work is Kangwei Xia <kangweixia_xdyy@163.com>.
 %%
+
+% 整个 cls 文件的大致结构：
+% 1.  处理文档类选项和宏包选项
+% 2.  加载文档类和宏包
+% 3.  页面尺寸
+% 4.  章节标题与列表
+% 5.  页眉页脚
+% 6.  键值 whu/info
+% 7.  本科任务书个人信息
+% 8.  本科开题报告个人信息
+% 9.  本科任务书落款
+% 10. 中文封面 (chinese cover)
+% 11. 原创性声明
+% 12. 使用授权协议书
+% 13. 英文封面 (english cover)
+% 14. 目录 (toc)
+% 15. 摘要和关键词 (abstract and keywords)
+% 16. 附录 (appendix)
+% 17. 脚注 (footnotes)
+% 18. 字体配置 (font configuration)
+% 19. 符号表
+% 20. 图表设置
+% 21. 定理类环境 (theorem-like environments)
+% 21. 参考文献 (bibliography)
+% 22. fullwidth-stop
+
+
+
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplClass {whu-thesis} {2024-03-27} {v0.0.1}
@@ -360,10 +388,14 @@
     \defaultCJKfontfeatures { Script  = CJK }   
   }
 
-% 加载 ctexbook 文类
+%----------------------------------------
+% 加载 ctexbook 文类 (load ctexbook class)
+%----------------------------------------
 \LoadClass { ctexbook }
 
-% 加载宏包 (listed in alphabetical order)
+%-------------------------------------------------------
+% 加载宏包 (load packages) [listed in alphabetical order]
+%-------------------------------------------------------
 \RequirePackage { amsmath }
 \RequirePackage { amssymb }
 \RequirePackage { amsthm }
@@ -395,7 +427,9 @@
 \graphicspath{{figures/}{logo/}}
 
 
-% 页面尺寸设置
+%--------------------------------
+% 页面尺寸设置 (paper size setting)
+%--------------------------------
 
 % 统一都是 A4 纸大小
 \geometry{paper = a4paper}
@@ -2980,9 +3014,9 @@
 \AddToHook { env / tabular / begin }
   { \zihao{5} }
 
-%----------
-% 定理类环境
-%----------
+%-------------------------------------
+% 定理类环境 (theorem-like environments)
+%-------------------------------------
 
 % 去掉 . 号，但只能通过新定义 style 的方式进行
 \declaretheoremstyle
@@ -3115,7 +3149,7 @@
 
 
 %---------------------
-% 参考文献 bibliography
+% 参考文献 (bibliography)
 %---------------------
 
 \tl_new:N \l__whu_bib_backend_tl        % 参考文献后端
