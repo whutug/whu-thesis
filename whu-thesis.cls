@@ -1463,7 +1463,6 @@
     \tl_if_empty:NF \g__whu_element_abstract_tl
       {
         \chapter * { 摘 \qquad 要 }
-        \addcontentsline{toc}{chapter}{摘要}
         \phantomsection
         \clist_map_inline:nn { doctor , master }
           {
@@ -1485,7 +1484,6 @@
     \tl_if_empty:NF \g__whu_element_abstract_en_tl
       {
         \chapter * { \textbf { ABSTRACT } }
-        \addcontentsline{toc}{chapter}{ABSTRACT}
         \phantomsection
         \clist_map_inline:nn { doctor , master }
           {
