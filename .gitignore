@@ -283,3 +283,5 @@ TSWLatexianTemp*
 # editor
 .vscode
 _minted*
+
+*.otf
