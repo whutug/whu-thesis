@@ -47,7 +47,7 @@
       { doctor , master , bachelor , opening }
       { \tl_gset_eq:NN \g__whu_option_type_tl \l_keys_choice_tl },
     type .initial:n        = doctor,
-    % 学位，默认本科生
+    % 学位，默认博士生
 
     class .value_required:n = true,
     class .choices:nn       =
@@ -825,7 +825,7 @@
     direction      .tl_gset:N    = \g__whu_info_direction_tl,
     date           .tl_gset:N    = \g__whu_info_date_tl,
     advisor-name   .tl_gset:N    = \g__whu_info_advisor_name_tl,
-    advisor        .clist_gset:N = \g__whu_info_advisor_clist,
+    advisor-title   .tl_gset:N    = \g__whu_info_advisor_title_tl,
     keywords       .clist_gset:N = \g__whu_info_keywords_clist,
     keywords *     .clist_gset:N = \g__whu_info_keywords_en_clist,
 
@@ -833,6 +833,10 @@
     date           .initial:n    =
       { \int_use:N \c_sys_year_int / \int_use:N \c_sys_month_int }
   }
+
+% concantenate advisor-name and advisor-title into advisor
+\tl_set:Nn \l_tmpa_tl { \g__whu_info_advisor_name_tl, \g__whu_info_advisor_title_tl }
+\clist_set:NV \g__whu_info_advisor_clist \l_tmpa_tl
 
 \tl_new:N \g__whu_element_innovation_tl
 \tl_new:N \g__whu_element_abstract_tl
