@@ -1044,7 +1044,7 @@
 
 %%% ---- 论文前言 ----- %%%
 % 前言包括中英文封面、郑重声明、摘要与目录
-\AtBeginDocument
+\AddToHook { begindocument / end}
   {
     \use:c { __whu_make_front_matter_ \g__whu_option_type_tl : }
   }
