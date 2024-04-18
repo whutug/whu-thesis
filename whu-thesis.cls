@@ -437,10 +437,10 @@
   {
     \geometry
       {
-        left       = 30mm,
-        right      = 30mm,
-        top        = 25mm,
-        bottom     = 20mm,
+        left       = 31.8mm,
+        right      = 31.8mm,
+        top        = 25.4mm,
+        bottom     = 25.4mm,
         headheight = 3mm,
         headsep    = 2mm,
         footskip   = 6mm
@@ -1388,7 +1388,8 @@
                     }
                   \newpage
                   \pagestyle{empty}
-                  \__whu_bachelor_statement:
+                  \__whu_bachelor_originality_statement:
+                  \__whu_bachelor_copyright:
                   \newpage
                   \frontmatter
                   \pagestyle{empty}
@@ -1440,30 +1441,49 @@
   }
 %endregion 中文封面
 
-
-%tag 学术声明
-\cs_new:Npn \__whu_bachelor_statement:
+%tag 本科原创性声明
+\cs_new_protected:Npn \__whu_bachelor_originality_statement:
   {
+    \noindent
+    \begin{tikzpicture}[remember~picture,overlay]
+      \node[inner~sep=0pt] at (current~page.center)
+        {\includegraphics[width=\paperwidth]{bachelor-statement.pdf}};
+    \end{tikzpicture}
+    \begin{minipage}[b][0.8cm]{\textwidth}
+      \centering \zihao{-2} \heiti 原创性声明
+    \end{minipage}
+    \skip_vertical:n { 1.3cm }
     \group_begin:
-      \keys_set:nn { ctex }
-        {
-          chapter =
-            {
-              format = \bfseries\zihao{2}\centering,
-              afterskip = 8ex,
-              pagestyle = empty
-            }
-        }
-      \chapter*{\__whu_spread_box_with_separator:nn { \c_space_tl } {郑重声明}}
-      \zihao{4}
-      本人呈交的学位论文，是在导师的指导下，独立进行研究工作所取得的成果，所有数据、图片资料真实可靠。尽我所知，除文中已经注明引用的内容外，本学位论文的研究成果不包含他人享有著作权的内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确的方式标明。本学位论文的知识产权归属于培养单位。
-      
-      \vspace*{8em}
-      \par \hspace*{1em}
-      本人签名：\underline{\hspace*{7em}} \hspace*{4em}
-      日期：\underline{\hspace*{7.5em}}
+      \zihao{-4}
+      本人郑重声明：所呈交的论文（设计），是本人在指导教师的指导下，严格按照学校和学院有关规定完成的。除文中已经标明引用的内容外，本论文（设计）不包含任何其他个人或集体已发表及撰写的研究成果。对本论文（设计）做出贡献的个人和集体，均已在文中以明确方式标明。本人承诺在论文（设计）工作过程中没有伪造数据等行为。若在本论文（设计）中有侵犯任何方面知识产权的行为，由本人承担相应的法律责任。
+      \skip_vertical:n { 1.61cm }
+      \noindent
+      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{作者签名}： \makebox[5.285cm][r]{指导教师签名：} \hfil \par
+      \noindent
+      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{日期}： \hspace{1.28cm}
+        \__whu_spread_box:nn{2.5cm}{年月日}
     \group_end:
   }
+%tag 本科版权使用授权书
+\cs_new_protected:Npn \__whu_bachelor_copyright:
+  {
+    \skip_vertical:n { 2.3cm }
+    \begin{center}
+      \heiti \zihao{-2} 版权使用授权书
+    \end{center}\par
+    \skip_vertical:n { 1.16cm }
+    \group_begin:
+      \zihao{-4}
+      本人完全了解武汉大学有权保留并向有关部门或机构送交本论文（设计）的复印件和电子版，允许本论文（设计）被查阅和借阅。本人授权武汉大学将本论文的全部或部分内容编入有关数据进行检索和传播，可以采用影印、缩印或扫描等复制手段保存和汇编本论文（设计）。
+      \skip_vertical:n { 2.1cm }
+      \noindent
+      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{作者签名}： \makebox[5.285cm][r]{指导教师签名：} \hfil \par
+      \noindent
+      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{日期}： \hspace{1.28cm}
+        \__whu_spread_box:nn{2.5cm}{年月日}
+    \group_end:
+  }
+
 \fp_const:Nn \c__whu_master_statement_line_spread_fp
   { \dim_ratio:nn { 28 bp } { 14 bp } / 1.2 }
 \cs_new:Npn \__whu_master_statement:
