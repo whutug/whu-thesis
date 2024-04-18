@@ -918,10 +918,10 @@
       { \__whu_define_name:nn ##1 }
     \clist_map_inline:nn
       {
-        { type } { 武汉大学本科毕业论文 } { BACHELOR’S~DEGREE~THESIS~OF~WUHAN~UNIVERSITY },
-        { department } { {院（系）名}称 } { School (Department) },
-        { major } { 专业名称 } { Major },
-        { author } { 学生姓名 } { Candidate },
+        { type } { 本科毕业论文（设计） } { BACHELOR’S~DEGREE~THESIS~OF~WUHAN~UNIVERSITY },
+        { department } { 学院 } { School (Department) },
+        { major } { 专业 } { Major },
+        { author } { 姓名 } { Candidate },
         { supervisor } { 指导教师 } { Supervisor },
         { keywords } { 关键词 } { Keywords },
         { abstract } { 摘 \hspace{2em} 要 } { ABSTRACT },
@@ -1102,145 +1102,91 @@
 %region 本科
 \cs_new:Npn \__whu_bachelor_cover_i:
   {
-    \begin{tikzpicture} [ remember~picture, overlay ]
-      % 学号和密级
-      \__whu_bachelor_cover_i_topmatter:
-      % 类型
-      \__whu_bachelor_cover_i_type:
-      % 标题
-      \__whu_bachelor_cover_i_title:
-      % 个人信息
-      \__whu_bachelor_cover_i_information:
-      % 时间
-      \__whu_bachelor_cover_i_date_zh:
-    \end{tikzpicture}
+    \newgeometry { hmargin = 2.445 cm , vmargin = 2.54cm }
+    % logo and type
+    \__whu_bachelor_cover_i_logo_and_type:
+    % 论文标题
+    \__whu_bachelor_cover_i_title:
+    % 个人信息
+    \__whu_bachelor_cover_i_information:
+    % 时间
+    \__whu_bachelor_cover_i_date_zh:
+    \restoregeometry
   }
 
-%tag 学号和密级
-\cs_new:Npn \__whu_bachelor_cover_i_topmatter:
+
+%tag logo-and-type
+\cs_new:Npn \__whu_bachelor_cover_i_logo_and_type:
   {
-    \node[anchor = north~east] ( topmatter ) at 
-      (
-        [ shift = { ( 0 , 0 ) } ] current~page~text~area.north~east
-      )
-      {
-        \begin{varwidth}{0.38\textwidth}
-          \sffamily \zihao{5}
-          \begin{tabular}{c}
-            学号~\CJKunderline*{ \__whu_bachelor_cover_i_topmatter_student_id: }\\
-            密级~\CJKunderline*{ \__whu_bachelor_cover_i_topmatter_secret_level: }
-          \end{tabular}
-        \end{varwidth}
-      };
-  }
-\cs_new:Npn \__whu_bachelor_cover_i_topmatter_student_id:
-  {
-    \normalfont 
-    \tl_if_blank:VTF \l__whu_info_student_id_tl
-      { \hspace*{8em} }
-      { \c_space_tl \l__whu_info_student_id_tl \c_space_tl }
-  }
-\cs_new:Npn \__whu_bachelor_cover_i_topmatter_secret_level:
-  {
-    \normalfont 
-    \tl_if_blank:VTF \l__whu_info_student_id_tl
-      { \hspace*{8em} }
-      { \hphantom{ \c_space_tl \l__whu_info_student_id_tl \c_space_tl } }
-  }
-%tag 类型
-\cs_new:Npn \__whu_bachelor_cover_i_type:
-  {
-    \node[] ( type ) at 
-      (
-        [ shift = { ( 0.8em, 0.296\textheight ) } ] current~page.center
-      )
-      {
-        \zihao{1}
-        \c__whu_name_type_tl
-      };
+    \skip_vertical:n { 2.01 cm }\setlength{\fboxsep}{0pt}
+    \noindent
+    \begin{minipage}[t][3.85cm]{\textwidth}
+      \centering
+      \includegraphics[ width = 5.5cm ]{ logo/whu-name.pdf }
+      \skip_vertical:n { 0.46 cm }
+      \zihao{2} \bfseries \c__whu_name_type_tl
+    \end{minipage}\par
   }
 
-%tag 标题
+%tag 论文标题
 \cs_new:Npn \__whu_bachelor_cover_i_title:
   {
-    \node[] ( titlecontent ) at 
-      (
-        [ shift = { ( 1em, 0.086 \textheight ) } ] current~page~text~area.center
-      ) 
-      {
-        \begin{minipage}{\textwidth}
-          \begin{center}
-            \sffamily 
-            \linespread{1}\fontsize{22bp}{32bp}\selectfont
-            \l__whu_info_title_tl
-          \end{center}
-        \end{minipage}
-      };
+    \skip_vertical:n { 2.62cm }
+    \noindent
+    \begin{minipage}[t][5.01cm]{\textwidth}
+      \skip_vertical:n { 0.5cm }
+      \centering \zihao{1} \kaishu
+      \l__whu_info_title_tl
+    \end{minipage}\par
   }
 %tag 个人信息
 \cs_new:Npn \__whu_bachelor_cover_i_information:
   {
-    \node[] (information) at
-      (
-        [shift = {(2.8em, -0.216\textheight)}]
-        current~page.center
-      )
+    \clist_set:Nx \l__whu_tmpa_clist
       {
-        \tl_put_right:NV \l__whu_info_supervisor_tl \l__whu_info_supervisor_name_title_separator_tl
-        \tl_put_right:NV \l__whu_info_supervisor_tl \l__whu_info_supervisor_academic_title_tl
-        \begin{minipage} [ c ] { \textwidth }
-          \centering \zihao {-3}
-          \clist_set:Nx \l__whu_tmpa_clist
-            {
-              % \c__whu_name_department_tl,
-              % \c__whu_name_major_tl,
-              % \c__whu_name_author_tl,
-              % \c__whu_name_supervisor_tl,
-              \__whu_spread_box_with_separator:nn { \c_space_tl } { \c__whu_name_department_tl },
-              \__whu_spread_box_with_separator:nn { \c_space_tl } {\c__whu_name_major_tl},
-              \__whu_spread_box_with_separator:nn { \c_space_tl } {\c__whu_name_author_tl},
-              \__whu_spread_box_with_separator:nn { \c_space_tl } {\c__whu_name_supervisor_tl},
-            }
-          \clist_set:Nx \l__whu_tmpb_clist
-            {
-              \l__whu_info_department_tl ,
-              \l__whu_info_major_tl      ,
-              \l__whu_info_author_tl     ,
-              \l__whu_info_supervisor_tl,
-            }
-          % 获得个人信息的内容最大宽度
-          \__whu_get_max_text_width:NN 
-            \l__whu_tmpa_dim \l__whu_tmpa_clist
-          \__whu_get_max_text_width:NN 
-            \l__whu_tmpb_dim \l__whu_tmpb_clist
-          \bool_until_do:nn
-            { \clist_if_empty_p:N \l__whu_tmpa_clist }
-            {
-              \clist_pop:NN \l__whu_tmpa_clist \l__whu_tmpa_tl
-              \clist_pop:NN \l__whu_tmpb_clist \l__whu_tmpb_tl
-              % \__whu_spread_box_with_separator:nn { \c_space_tl } { \l__whu_tmpa_tl }
-              \makebox [ \l__whu_tmpa_dim ] [l] { \l__whu_tmpa_tl }
-              \hspace* {1.5em}：
-              \makebox [ \l__whu_tmpb_dim ] [l] { \l__whu_tmpb_tl }
-              \skip_vertical:n { 0.4ex }
-            }
-        \end{minipage}
-      };
+        \c__whu_name_author_tl,
+        \c__whu_name_student_id_tl,
+        \c__whu_name_major_tl,
+        \c__whu_name_department_tl,
+        \c__whu_name_supervisor_tl
+      }
+    \clist_set:Nx \l__whu_tmpb_clist
+      {
+        \l__whu_info_author_tl,
+        \l__whu_info_student_id_tl,
+        \l__whu_info_major_tl,
+        \l__whu_info_department_tl,
+        \l__whu_info_supervisor_tl
+      }
+    \noindent
+    \begin{minipage}[t][4.5cm]{\textwidth}
+      \zihao{4}
+      \skip_vertical:n { 0.26cm }
+      \bool_until_do:nn
+        { \clist_if_empty_p:N \l__whu_tmpa_clist }
+        {
+          \clist_pop:NN \l__whu_tmpa_clist \l__whu_tmpa_tl
+          \clist_pop:NN \l__whu_tmpb_clist \l__whu_tmpb_tl
+          \hspace*{3.65cm}
+          \__whu_spread_box:nn { 4em } { \l__whu_tmpa_tl }
+          \skip_horizontal:n { 0.25cm } ：
+          \makebox[6.91cm][c]{ \l__whu_tmpb_tl }
+          \skip_vertical:n { 0.158cm }
+        }
+    \end{minipage}\par
   }
 %tag 时间
 \cs_new:Npn \__whu_bachelor_cover_i_date_zh:
   {
-    \node[] ( date-zh ) at 
-      (
-        [ shift = { ( 2.3em, 0.124 \textheight ) } ] current~page~text~area.south
-      )
-      {
-        \zihao{3}
-        \zhdigits { \int_use:N \l__whu_info_year_int }
-        \, 年 \,
-        \zhnumber { \int_use:N \l__whu_info_month_int }
-        \, 月
-      };
+    \skip_vertical:n { 4.85cm }
+    \noindent
+    \begin{minipage}[c][0.83cm]{\textwidth}
+      \centering \zihao{4}
+      \zhdigits { \int_use:N \l__whu_info_year_int }
+      \, 年 \,
+      \zhnumber { \int_use:N \l__whu_info_month_int }
+      \, 月
+    \end{minipage}
   }
 %endregion 本科
 
