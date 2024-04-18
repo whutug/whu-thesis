@@ -1901,23 +1901,20 @@
     \keys_set:nn { ctex }
       { contentsname   = \c__whu_name_toc_tl }
     % 格式（用这个方法不会有 hyperref 的警告）
-    \renewcommand{\cftchapfont}{\heiti \zihao{4}}
+    \renewcommand{\cftchapfont}{\bfseries \zihao{-4}}
     \renewcommand{\cftsecfont}{\normalfont \zihao{-4}}
     \renewcommand{\cftsubsecfont}{\normalfont \zihao{-4}}
+    \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
     % 缩进
     \dim_set:Nn \cftchapindent { 0em }
-    \dim_set:Nn \cftsecindent  { 0em }
-    \dim_set:Nn \cftsubsecindent { 0em }
+    \dim_set:Nn \cftsecindent  { 1em }
+    \dim_set:Nn \cftsubsecindent { 3em }
     % 计数器宽度
     \dim_set:Nn \cftchapnumwidth { 1.5em }
     \dim_set:Nn \cftsecnumwidth { 2.5em }
     \dim_set:Nn \cftsubsecnumwidth { 1.5em }
-    % chapter前的额外垂直间距
-    \dim_set:Nn \cftbeforechapskip { 0.5\baselineskip }
-    % section前的额外垂直间距
-    \dim_set:Nn \cftbeforesecskip { 0.4\baselineskip }
-    % subsection前的额外垂直间距
-    \dim_set:Nn \cftbeforesubsecskip { 0pt }
+    % 垂直间距
+    \setlength{\cftbeforechapskip}{0pt}
   }
 %tag 硕士
 \cs_new:Npn \__whu_master_set_tocline:
