@@ -1445,10 +1445,6 @@
 \cs_new_protected:Npn \__whu_bachelor_originality_statement:
   {
     \noindent
-    \begin{tikzpicture}[remember~picture,overlay]
-      \node[inner~sep=0pt] at (current~page.center)
-        {\includegraphics[width=\paperwidth]{bachelor-statement.pdf}};
-    \end{tikzpicture}
     \begin{minipage}[b][0.8cm]{\textwidth}
       \centering \zihao{-2} \heiti 原创性声明
     \end{minipage}
