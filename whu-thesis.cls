@@ -1248,9 +1248,6 @@
 \cs_new:Npn \__whu_master_cover_i:
   {
     \newgeometry { hmargin = 2.445 cm , vmargin = 2.54cm }
-    \noindent\begin{tikzpicture} [ remember~picture, overlay ]
-      \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth]{master-cover-2024.pdf}};
-    \end{tikzpicture}
     % 顶部四项
     \__whu_master_cover_i_topmatter:
     % logo 和 type
