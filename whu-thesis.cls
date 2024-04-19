@@ -1991,6 +1991,7 @@
           % 本科
           {2} 
             {
+              \pagestyle{empty}
               \__whu_bachelor_cover_i:
               \bool_if:NT \l__whu_bachelor_english_cover_bool
                 {
@@ -1998,7 +1999,6 @@
                   \__whu_bachelor_cover_ii:
                 }
               \newpage
-              \pagestyle{empty}
               \__whu_bachelor_originality_statement:
               \__whu_bachelor_copyright:
               \newpage
