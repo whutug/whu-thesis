@@ -72,6 +72,7 @@
 %tag 定义全局变量
 \clist_new:N \g__whu_to_ctexbook_clist   % 储存通过文档类选项传递给 ctexbook 的选项
 \int_new:N \g__whu_thesis_type_int   % 论文类型：本、硕、博
+\tl_new:N \g__whu_thesis_type_tl
 \tl_new:N \g__whu_thesis_class_tl % 学术学位、专业学位
 \bool_new:N \g__whu_draft_bool
 \bool_new:N \g__whu_twoside_bool
@@ -264,7 +265,10 @@
     type .value_required:n = true,
     type .choices:nn =
       { proposal, bachelor, master, doctor }
-      { \int_gset_eq:NN \g__whu_thesis_type_int \l_keys_choice_int },
+      {
+        \int_gset_eq:NN \g__whu_thesis_type_int \l_keys_choice_int
+        \tl_gset_eq:NN \g__whu_thesis_type_tl \l_keys_choice_tl
+      },
     type .initial:n = bachelor,
     class .choice:,
     class .value_required:n = true,
@@ -552,6 +556,7 @@
             beforeskip   = 0.8 \baselineskip,
             afterskip    = 0.5 \baselineskip,
             fixskip      = true,
+            pagestyle    = bachelor-mainmatter
           },
         section = 
           {
@@ -758,14 +763,24 @@
 %endregion
 
 
-%region 页眉页脚
-\cs_new:Npn \__whu_proposal_set_pagestyle:
+%region 页眉页脚样式
+%tag 本科
+\fancypagestyle { bachelor-frontmatter }
   {
-    \pagestyle { empty } 
+    \fancyhf { }
+    \fancyfoot[C] { \zihao{5} \Roman{page} }
+    \renewcommand \headrulewidth { 0pt } 
+  }
+\fancypagestyle { bachelor-mainmatter }
+  {
+    \fancyhf { }
+    \fancyfoot[C] { \zihao{5} \arabic{page} }
+    \fancyhead[C] { \zihao{5} 武汉大学本科毕业论文（设计）}
+    \renewcommand \headrulewidth { 0.5pt } 
+    \setlength{\headheight}{13pt}
   }
 \cs_new:Npn \__whu_bachelor_set_pagestyle:
   {
-    % \pagestyle { empty } 
     \fancypagestyle { plain }
       {
         \fancyhf { }
@@ -776,7 +791,6 @@
   }
 \cs_new:Npn \__whu_master_set_pagestyle:
   {
-    % \pagestyle { empty } 
     \fancypagestyle { plain }
       {
         \fancyhf { }
@@ -798,20 +812,21 @@
       }
     \pagestyle { plain }
   }
-
+\AddToHook{ cmd / mainmatter / after }
+  { \exp_args:No \pagestyle { \g__whu_thesis_type_tl - mainmatter } }
 % \AddToHook { env / document / before }
   % {
-    \int_case:Vn \g__whu_thesis_type_int  
-      {
-        % 开题报告
-        {1} { \__whu_proposal_set_pagestyle: }
-        % 本科
-        {2} { \__whu_bachelor_set_pagestyle: }
-        % 硕士
-        {3} { \__whu_master_set_pagestyle: }
-        % 博士
-        {4} { \__whu_doctor_set_pagestyle: }
-      }
+    % \int_case:Vn \g__whu_thesis_type_int  
+    %   {
+    %     % 开题报告
+    %     {1} { \__whu_proposal_set_pagestyle: }
+    %     % 本科
+    %     {2} { \__whu_bachelor_set_pagestyle: }
+    %     % 硕士
+    %     {3} { \__whu_master_set_pagestyle: }
+    %     % 博士
+    %     {4} { \__whu_doctor_set_pagestyle: }
+    %   }
   % }
 %endregion
 
@@ -1805,10 +1820,11 @@
           chapter =
             {
               numbering = false,
+              pagestyle = bachelor-frontmatter
             }
         }
       \chapter{ \c__whu_name_abstract_tl }
-      \zihao{-4} \pagestyle{empty}
+      \zihao{-4}
       \file_if_exist:nT { pages/abstract.tex }
         {
           \file_input:n { pages/abstract.tex }
@@ -1828,6 +1844,7 @@
             {
               numbering = false,
               format    = \normalfont\bfseries\centering\zihao{-2},
+              pagestyle = bachelor-frontmatter
             }
         }
       \chapter{ \c__whu_name_abstract_en_tl }
@@ -1986,7 +2003,7 @@
               \__whu_bachelor_copyright:
               \newpage
               \frontmatter
-              \pagenumbering{Roman}
+              \pagestyle{ bachelor-frontmatter }
               \__whu_bachelor_abstract_output:
               \newpage
               \__whu_bachelor_abstract_en_output:
@@ -2162,16 +2179,10 @@
 \RenewDocumentCommand \tableofcontents { }
   {
     \group_begin:
-    \int_case:VnT \g__whu_thesis_type_int  
-      {
-        % 硕士
-        {3} {}
-        % 博士
-        {4} {}
-      }
-      {
-        \keys_set:nn { ctex }
-          { chapter / format+ = \centering }
+    \keys_set:nn { ctex }
+      { 
+        chapter / format += \centering,
+        chapter / pagestyle = bachelor-frontmatter
       }
     \__whu_old_tableofcontents:
     \group_end:
@@ -2697,7 +2708,10 @@
   {
     \group_begin:
       \keys_set:nn { ctex }
-        { chapter / numbering = false }
+        {
+          chapter / numbering = false,
+          chapter / pagestyle = bachelor-frontmatter
+        }
       \int_case:VnT \g__whu_thesis_type_int  
         {
           % 硕士
