@@ -779,55 +779,42 @@
     \renewcommand \headrulewidth { 0.5pt } 
     \setlength{\headheight}{13pt}
   }
-\cs_new:Npn \__whu_bachelor_set_pagestyle:
+%tag 硕士
+% 页眉从中文摘要开始至论文末，偶数页码内容为：武汉大学硕士学位论文，奇数页码内容为学位论文题目。
+% 摘要页码用罗马数字单独编排，并标注在每页页脚中部，英文摘要页码续接中文摘要的页码。
+\fancypagestyle { master-frontmatter }
   {
-    \fancypagestyle { plain }
-      {
-        \fancyhf { }
-        \renewcommand \headrulewidth { 0pt } 
-        \fancyfoot[C] { \zihao{5} \thepage }
-      }
-    \pagestyle { plain }
+    \fancyhf { }
+    \fancyhead [CE] { 武汉大学硕士学位论文 }
+    \fancyhead [CO] { \l__whu_info_title_tl }
+    \fancyfoot [C]  { \zihao{5} \Roman{page} }
   }
-\cs_new:Npn \__whu_master_set_pagestyle:
+\fancypagestyle { master-mainmatter  }
   {
-    \fancypagestyle { plain }
-      {
-        \fancyhf { }
-        \fancyhead [ CE ] { 武汉大学硕士学位论文 }
-        \fancyhead [ CO ] { \l__whu_info_title_tl }
-        \fancyfoot [ C ] { \zihao{5} \thepage }
-      }
-    \pagestyle { plain }
+    \fancyhf { }
+    \fancyhead [CE] { 武汉大学硕士学位论文 }
+    \fancyhead [CO] { \l__whu_info_title_tl }
+    \fancyfoot [C]  { \zihao{5} \arabic{page} }
   }
-\cs_new:Npn \__whu_doctor_set_pagestyle:
+%tag 博士
+% 页眉从中文摘要开始至论文末，偶数页码内容为“武汉大学博士学位论文”，奇数页码内容为学位论文题目。
+\fancypagestyle { doctor-frontmatter }
   {
-    % \pagestyle { empty } 
-    \fancypagestyle { plain }
-      {
-        \fancyhf { }
-        \fancyhead [ CE ] { 武汉大学博士学位论文 }
-        \fancyhead [ CO ] { \l__whu_info_title_tl }
-        \fancyfoot [ C ] { \zihao{5} \thepage }
-      }
-    \pagestyle { plain }
+    \fancyhf { }
+    \fancyhead [CE] { 武汉大学博士学位论文 }
+    \fancyhead [CO] { \l__whu_info_title_tl }
+    \fancyfoot [C]  { \zihao{5} \Roman{page} }
   }
+\fancypagestyle { doctor-mainmatter  }
+  {
+    \fancyhf { }
+    \fancyhead [CE] { 武汉大学博士学位论文 }
+    \fancyhead [CO] { \l__whu_info_title_tl }
+    \fancyfoot [C]  { \zihao{5} \arabic{page} }
+  }
+%tag 给-\mainmatter-添加钩子
 \AddToHook{ cmd / mainmatter / after }
   { \exp_args:No \pagestyle { \g__whu_thesis_type_tl - mainmatter } }
-% \AddToHook { env / document / before }
-  % {
-    % \int_case:Vn \g__whu_thesis_type_int  
-    %   {
-    %     % 开题报告
-    %     {1} { \__whu_proposal_set_pagestyle: }
-    %     % 本科
-    %     {2} { \__whu_bachelor_set_pagestyle: }
-    %     % 硕士
-    %     {3} { \__whu_master_set_pagestyle: }
-    %     % 博士
-    %     {4} { \__whu_doctor_set_pagestyle: }
-    %   }
-  % }
 %endregion
 
 
@@ -1797,20 +1784,6 @@
 
 
 %region 摘要和关键词
-\iow_new:N \g__whu_abstract_zh_iow
-\iow_new:N \g__whu_abstract_en_iow
-\NewDocumentEnvironment { abstract } { +b }
-  {
-    \iow_open:Nn \g__whu_abstract_zh_iow { pages/abstract.tex }
-    \iow_now:Nn \g__whu_abstract_zh_iow {#1}
-    \iow_close:N \g__whu_abstract_zh_iow
-  }{}
-\NewDocumentEnvironment { abstract* } { +b }
-  {
-    \iow_open:Nn \g__whu_abstract_en_iow { pages/enabstract.tex }
-    \iow_now:Nn \g__whu_abstract_en_iow {#1}
-    \iow_close:N \g__whu_abstract_en_iow
-  }{}
 %tag 本科
 \cs_new:Npn \__whu_bachelor_abstract_output:
   {
@@ -1887,8 +1860,8 @@
           chapter =
             {
               numbering = false,
-              format+ = \centering
-              % pagestyle = empty
+              format+ = \centering,
+              pagestyle = master-frontmatter
             }
         }
       \chapter{ \c__whu_name_abstract_tl }
@@ -1912,11 +1885,11 @@
             {
               numbering = false,
               format    = \normalfont\bfseries\centering\zihao{-2},
-              % pagestyle = empty
+              pagestyle = master-frontmatter
             }
         }
       \chapter{ \c__whu_name_abstract_en_tl }
-      \zihao{-4} \pagestyle{empty}
+      \zihao{-4}
       % \g__whu_abstract_en_content_tl
       \file_if_exist:nT { pages/enabstract.tex }
         {
@@ -1937,12 +1910,12 @@
           chapter =
             {
               numbering = false,
-              format+ = \centering
-              % pagestyle = empty
+              format+ = \centering,
+              pagestyle = doctor-frontmatter
             }
         }
       \chapter{ \c__whu_name_abstract_tl }
-      \zihao{-4} \pagestyle{empty}
+      \zihao{-4}
       \file_if_exist:nT { pages/abstract.tex }
         {
           \file_input:n { pages/abstract.tex }
@@ -1962,12 +1935,11 @@
             {
               numbering = false,
               format    = \normalfont\bfseries\centering\zihao{-2},
-              % pagestyle = empty
+              pagestyle = doctor-frontmatter
             }
         }
       \chapter{ \c__whu_name_abstract_en_tl }
-      \zihao{-4} \pagestyle{empty}
-      % \g__whu_abstract_en_content_tl
+      \zihao{-4}
       \file_if_exist:nT { pages/enabstract.tex }
         {
           \file_input:n { pages/enabstract.tex }
@@ -2012,15 +1984,15 @@
           % 硕士
           {3} 
             {
+              \pagestyle{empty}
               \__whu_master_cover_i:
               \__whu_new_blank_page:
-              \thispagestyle{empty}
               \__whu_master_cover_ii:
               \__whu_new_blank_page:
-              \pagestyle{empty}
               \__whu_master_statement:
               \newpage
               \frontmatter
+              \pagestyle{ master-frontmatter }
               \__whu_master_abstract_output:
               \newpage
               \__whu_master_abstract_en_output:
@@ -2029,17 +2001,17 @@
           % 博士
           {4} 
             {
+              \pagestyle{empty}
               \__whu_doctor_cover_i:
               \__whu_new_blank_page:
-              \thispagestyle{empty}
               \__whu_doctor_cover_ii:
               \__whu_new_blank_page:
-              \pagestyle{empty}
               \__whu_doctor_statement:
               \__whu_new_blank_page:
               \__whu_doctor_license_agreement:
               \newpage
               \frontmatter
+              \pagestyle{ doctor-frontmatter }
               \__whu_doctor_abstract_output:
               \newpage
               \__whu_doctor_abstract_en_output:
@@ -2174,7 +2146,7 @@
     % 博士
     {4} { \__whu_doctor_set_tocline: }
   }
-
+%tag 重定义目录
 \cs_set_eq:NN \__whu_old_tableofcontents: \tableofcontents
 \RenewDocumentCommand \tableofcontents { }
   {
@@ -2182,7 +2154,7 @@
     \keys_set:nn { ctex }
       { 
         chapter / format += \centering,
-        chapter / pagestyle = bachelor-frontmatter
+        chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
       }
     \__whu_old_tableofcontents:
     \group_end:
@@ -2723,19 +2695,9 @@
     \group_begin:
       \keys_set:nn { ctex }
         {
+          chapter / format   += \centering,
           chapter / numbering = false,
-          chapter / pagestyle = bachelor-frontmatter
-        }
-      \int_case:VnT \g__whu_thesis_type_int  
-        {
-          % 硕士
-          {3} {}
-          % 博士
-          {4} {}
-        }
-        {
-          \keys_set:nn { ctex }
-            { chapter / format+ = \centering }
+          chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
         }
       \chapter { #1 }
     \group_end:
