@@ -545,33 +545,37 @@
         secnumdepth = 3,
         chapter = 
           {
-            format      = \zihao{-2}\sffamily\centering,
-            number      = \arabic{chapter},
-            name        = {},
-            beforeskip  = 0.8 \baselineskip,
-            afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            format       = \zihao{-2}\sffamily\centering,
+            number       = \arabic{chapter},
+            numberformat = \rmfamily,
+            name         = {},
+            beforeskip   = 0.8 \baselineskip,
+            afterskip    = 0.5 \baselineskip,
+            fixskip      = true,
           },
         section = 
           {
-            format      = \zihao{4}\sffamily,
-            beforeskip  = 0.5 \baselineskip,
-            afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            format       = \zihao{4}\sffamily,
+            numberformat = \rmfamily,
+            beforeskip   = 0.5 \baselineskip,
+            afterskip    = 0.5 \baselineskip,
+            fixskip      = true,
           },
         subsection = 
           {
-            format      = \zihao{-4}\sffamily,
-            beforeskip  = 0.5 \baselineskip,
-            afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            format       = \zihao{-4}\sffamily,
+            numberformat = \rmfamily,
+            beforeskip   = 0.5 \baselineskip,
+            afterskip    = 0.5 \baselineskip,
+            fixskip      = true,
           },
         subsubsection = 
           {
-            format      = \zihao{-4}\sffamily,
-            beforeskip  = 0.5 \baselineskip,
-            afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            format       = \zihao{-4}\sffamily,
+            numberformat = \rmfamily,
+            beforeskip   = 0.5 \baselineskip,
+            afterskip    = 0.5 \baselineskip,
+            fixskip      = true,
           },
     }
   }
@@ -1367,202 +1371,7 @@
 % 一个是“博士学位论文”，一个是“硕士学位论文”
 \cs_set_eq:NN \__whu_doctor_cover_i: \__whu_master_cover_i:
 %endregion 博士
-
-%tag 输出封面、声明信息
-\int_compare:nNnF { \g__whu_thesis_type_int } = {1}
-  {
-    \ctex_after_end_preamble:n
-      {
-        \pdfbookmark{中文封面}{titlepage}
-        \begin{titlepage}
-          \int_case:Vn \g__whu_thesis_type_int  
-            {
-              % 本科
-              {2} 
-                {
-                  \__whu_bachelor_cover_i:
-                  \bool_if:NT \l__whu_bachelor_english_cover_bool
-                    {
-                      \newpage
-                      \__whu_bachelor_cover_ii:
-                    }
-                  \newpage
-                  \pagestyle{empty}
-                  \__whu_bachelor_originality_statement:
-                  \__whu_bachelor_copyright:
-                  \newpage
-                  \frontmatter
-                  \pagestyle{empty}
-                  \__whu_bachelor_abstract_output:
-                  \newpage
-                  \pagestyle{empty}
-                  \__whu_bachelor_abstract_en_output:
-                  \newpage
-                }
-              % 硕士
-              {3} 
-                {
-                  \__whu_master_cover_i:
-                  \__whu_new_blank_page:
-                  \thispagestyle{empty}
-                  \__whu_master_cover_ii:
-                  \__whu_new_blank_page:
-                  \pagestyle{empty}
-                  \__whu_master_statement:
-                  \newpage
-                  \frontmatter
-                  \__whu_master_abstract_output:
-                  \newpage
-                  \__whu_master_abstract_en_output:
-                  \newpage
-                }
-              % 博士
-              {4} 
-                {
-                  \__whu_doctor_cover_i:
-                  \__whu_new_blank_page:
-                  \thispagestyle{empty}
-                  \__whu_doctor_cover_ii:
-                  \__whu_new_blank_page:
-                  \pagestyle{empty}
-                  \__whu_doctor_statement:
-                  \__whu_new_blank_page:
-                  \__whu_doctor_license_agreement:
-                  \newpage
-                  \frontmatter
-                  \__whu_doctor_abstract_output:
-                  \newpage
-                  \__whu_doctor_abstract_en_output:
-                  \newpage
-                }
-            }
-        \end{titlepage}
-      }
-  }
 %endregion 中文封面
-
-%tag 本科原创性声明
-\cs_new_protected:Npn \__whu_bachelor_originality_statement:
-  {
-    \noindent
-    \begin{minipage}[b][0.8cm]{\textwidth}
-      \centering \zihao{-2} \heiti 原创性声明
-    \end{minipage}
-    \skip_vertical:n { 1.3cm }
-    \group_begin:
-      \zihao{-4}
-      本人郑重声明：所呈交的论文（设计），是本人在指导教师的指导下，严格按照学校和学院有关规定完成的。除文中已经标明引用的内容外，本论文（设计）不包含任何其他个人或集体已发表及撰写的研究成果。对本论文（设计）做出贡献的个人和集体，均已在文中以明确方式标明。本人承诺在论文（设计）工作过程中没有伪造数据等行为。若在本论文（设计）中有侵犯任何方面知识产权的行为，由本人承担相应的法律责任。
-      \skip_vertical:n { 1.61cm }
-      \noindent
-      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{作者签名}： \makebox[5.285cm][r]{指导教师签名：} \hfil \par
-      \noindent
-      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{日期}： \hspace{1.28cm}
-        \__whu_spread_box:nn{2.5cm}{年月日}
-    \group_end:
-  }
-%tag 本科版权使用授权书
-\cs_new_protected:Npn \__whu_bachelor_copyright:
-  {
-    \skip_vertical:n { 2.3cm }
-    \begin{center}
-      \heiti \zihao{-2} 版权使用授权书
-    \end{center}\par
-    \skip_vertical:n { 1.16cm }
-    \group_begin:
-      \zihao{-4}
-      本人完全了解武汉大学有权保留并向有关部门或机构送交本论文（设计）的复印件和电子版，允许本论文（设计）被查阅和借阅。本人授权武汉大学将本论文的全部或部分内容编入有关数据进行检索和传播，可以采用影印、缩印或扫描等复制手段保存和汇编本论文（设计）。
-      \skip_vertical:n { 2.1cm }
-      \noindent
-      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{作者签名}： \makebox[5.285cm][r]{指导教师签名：} \hfil \par
-      \noindent
-      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{日期}： \hspace{1.28cm}
-        \__whu_spread_box:nn{2.5cm}{年月日}
-    \group_end:
-  }
-
-\fp_const:Nn \c__whu_master_statement_line_spread_fp
-  { \dim_ratio:nn { 28 bp } { 14 bp } / 1.2 }
-\cs_new:Npn \__whu_master_statement:
-  {
-    \group_begin:
-      \keys_set:nn { ctex }
-        {
-          chapter =
-            {
-              format = \sffamily\zihao{-2}\centering,
-              afterskip = 8ex,
-              pagestyle = empty
-            }
-        }
-      \chapter*{论文原创性声明}
-      \linespread{1}
-      \fontsize{14bp}{28bp}\selectfont
-      本人郑重声明：所呈交的学位论文，是本人在导师指导下，独立进行研究工作所取得的研究成果。除文中已经标明引用的内容外，本论文不包含任何其他个人或集体已经发表或撰写过的研究成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
-      
-      \vspace*{3em}
-      \begin{flushright}
-        学位论文作者（签名）：\hspace*{4em}\mbox{}\\[12pt]
-        年 \qquad 月 \qquad 日
-      \end{flushright}
-    \group_end:
-  }
-\cs_new:Npn \__whu_doctor_statement:
-  {
-    \group_begin:
-      \keys_set:nn { ctex }
-        {
-          chapter =
-            {
-              format = \sffamily\zihao{-2}\centering,
-              afterskip = 8ex,
-              pagestyle = empty
-            }
-        }
-      \pdfbookmark{原创性声明}{doctor-statement}
-      \chapter*{论文原创性声明}
-      \linespread{1}
-      \fontsize{14bp}{28bp}\selectfont
-      本人郑重声明：所呈交的学位论文，是本人在导师指导下，独立进行研究工作所取得的研究成果。除文中已经标明引用的内容外，本论文不包含任何其他个人或集体已发表或撰写的研究成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
-      
-      \vspace*{3em}
-      \begin{flushright}
-        学位论文作者（签名）：\hspace*{4em}\mbox{}\\[12pt]
-        年 \qquad 月 \qquad 日
-      \end{flushright}
-    \group_end:
-  }
-
-%tag 武汉大学学位论文使用授权协议书
-\cs_new:Npn \__whu_doctor_license_agreement:
-  {
-    \group_begin:
-      \keys_set:nn { ctex }
-        {
-          chapter =
-            {
-              format = \sffamily\zihao{4}\centering,
-              beforeskip = 2ex,
-              afterskip = 8ex,
-              pagestyle = empty
-            }
-        }
-      \pdfbookmark{使用授权协议书}{doctor-license-agreement}
-      \chapter*{武汉大学学位论文使用授权协议书}
-      \linespread{1}
-      \fontsize{12bp}{28bp}\selectfont
-      本学位论文作者愿意遵守武汉大学关于保存、使用学位论文的管理办法及规定，即：学校有权保存学位论文的印刷本和电子版，并提供文献检索与阅览服务；学校可以采用影印、缩印、数字化或其它复制手段保存论文；在以教学与科研服务为目的前提下，学校可以在校园网内公布部分或全部内容。 \par
-      \textbf{一、}在本论文提交当年，同意在校园网内以及中国高等教育文献保障系统（CALIS）、高校学位论文系统提供查询及前十六页浏览服务。 \par
-      \textbf{二、}在本论文提交 $\square$ 当年\!／\!$\square$一年\!／\!$\square$ 两年\!／\!$\square$ 三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
-      
-      \vspace*{3em}
-      \begin{minipage}{0.5\textwidth}
-        论文作者（签名）：\CJKunderline*{\hfill}\\[12pt]
-        学号：\CJKunderline*{\hfill}\\[12pt]
-        学院：\CJKunderline*{\hfill}\\[12pt]
-      \end{minipage} \par 
-      \hfill 日期：\hspace{3em} 年 \qquad 月 \qquad 日
-    \group_end:
-  }
 
 %region 英文封面
 %region 本科
@@ -1848,6 +1657,381 @@
 %endregion 博士
 %endregion 英文封面
 
+%tag 本科原创性声明
+\cs_new_protected:Npn \__whu_bachelor_originality_statement:
+  {
+    \noindent
+    \begin{minipage}[b][0.8cm]{\textwidth}
+      \centering \zihao{-2} \heiti 原创性声明
+    \end{minipage}
+    \skip_vertical:n { 1.3cm }
+    \group_begin:
+      \zihao{-4}
+      本人郑重声明：所呈交的论文（设计），是本人在指导教师的指导下，严格按照学校和学院有关规定完成的。除文中已经标明引用的内容外，本论文（设计）不包含任何其他个人或集体已发表及撰写的研究成果。对本论文（设计）做出贡献的个人和集体，均已在文中以明确方式标明。本人承诺在论文（设计）工作过程中没有伪造数据等行为。若在本论文（设计）中有侵犯任何方面知识产权的行为，由本人承担相应的法律责任。
+      \skip_vertical:n { 1.61cm }
+      \noindent
+      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{作者签名}： \makebox[5.285cm][r]{指导教师签名：} \hfil \par
+      \noindent
+      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{日期}： \hspace{1.28cm}
+        \__whu_spread_box:nn{2.5cm}{年月日}
+    \group_end:
+  }
+%tag 本科版权使用授权书
+\cs_new_protected:Npn \__whu_bachelor_copyright:
+  {
+    \skip_vertical:n { 2.3cm }
+    \begin{center}
+      \heiti \zihao{-2} 版权使用授权书
+    \end{center}\par
+    \skip_vertical:n { 1.16cm }
+    \group_begin:
+      \zihao{-4}
+      本人完全了解武汉大学有权保留并向有关部门或机构送交本论文（设计）的复印件和电子版，允许本论文（设计）被查阅和借阅。本人授权武汉大学将本论文的全部或部分内容编入有关数据进行检索和传播，可以采用影印、缩印或扫描等复制手段保存和汇编本论文（设计）。
+      \skip_vertical:n { 2.1cm }
+      \noindent
+      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{作者签名}： \makebox[5.285cm][r]{指导教师签名：} \hfil \par
+      \noindent
+      \hspace*{4.653cm} \__whu_spread_box:nn{4em}{日期}： \hspace{1.28cm}
+        \__whu_spread_box:nn{2.5cm}{年月日}
+    \group_end:
+  }
+
+\fp_const:Nn \c__whu_master_statement_line_spread_fp
+  { \dim_ratio:nn { 28 bp } { 14 bp } / 1.2 }
+\cs_new:Npn \__whu_master_statement:
+  {
+    \group_begin:
+      \keys_set:nn { ctex }
+        {
+          chapter =
+            {
+              format = \sffamily\zihao{-2}\centering,
+              afterskip = 8ex,
+              pagestyle = empty
+            }
+        }
+      \chapter*{论文原创性声明}
+      \linespread{1}
+      \fontsize{14bp}{28bp}\selectfont
+      本人郑重声明：所呈交的学位论文，是本人在导师指导下，独立进行研究工作所取得的研究成果。除文中已经标明引用的内容外，本论文不包含任何其他个人或集体已经发表或撰写过的研究成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
+      
+      \vspace*{3em}
+      \begin{flushright}
+        学位论文作者（签名）：\hspace*{4em}\mbox{}\\[12pt]
+        年 \qquad 月 \qquad 日
+      \end{flushright}
+    \group_end:
+  }
+\cs_new:Npn \__whu_doctor_statement:
+  {
+    \group_begin:
+      \keys_set:nn { ctex }
+        {
+          chapter =
+            {
+              format = \sffamily\zihao{-2}\centering,
+              afterskip = 8ex,
+              pagestyle = empty
+            }
+        }
+      \pdfbookmark{原创性声明}{doctor-statement}
+      \chapter*{论文原创性声明}
+      \linespread{1}
+      \fontsize{14bp}{28bp}\selectfont
+      本人郑重声明：所呈交的学位论文，是本人在导师指导下，独立进行研究工作所取得的研究成果。除文中已经标明引用的内容外，本论文不包含任何其他个人或集体已发表或撰写的研究成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
+      
+      \vspace*{3em}
+      \begin{flushright}
+        学位论文作者（签名）：\hspace*{4em}\mbox{}\\[12pt]
+        年 \qquad 月 \qquad 日
+      \end{flushright}
+    \group_end:
+  }
+
+%tag 武汉大学学位论文使用授权协议书
+\cs_new:Npn \__whu_doctor_license_agreement:
+  {
+    \group_begin:
+      \keys_set:nn { ctex }
+        {
+          chapter =
+            {
+              format = \sffamily\zihao{4}\centering,
+              beforeskip = 2ex,
+              afterskip = 8ex,
+              pagestyle = empty
+            }
+        }
+      \pdfbookmark{使用授权协议书}{doctor-license-agreement}
+      \chapter*{武汉大学学位论文使用授权协议书}
+      \linespread{1}
+      \fontsize{12bp}{28bp}\selectfont
+      本学位论文作者愿意遵守武汉大学关于保存、使用学位论文的管理办法及规定，即：学校有权保存学位论文的印刷本和电子版，并提供文献检索与阅览服务；学校可以采用影印、缩印、数字化或其它复制手段保存论文；在以教学与科研服务为目的前提下，学校可以在校园网内公布部分或全部内容。 \par
+      \textbf{一、}在本论文提交当年，同意在校园网内以及中国高等教育文献保障系统（CALIS）、高校学位论文系统提供查询及前十六页浏览服务。 \par
+      \textbf{二、}在本论文提交 $\square$ 当年\!／\!$\square$一年\!／\!$\square$ 两年\!／\!$\square$ 三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
+      
+      \vspace*{3em}
+      \begin{minipage}{0.5\textwidth}
+        论文作者（签名）：\CJKunderline*{\hfill}\\[12pt]
+        学号：\CJKunderline*{\hfill}\\[12pt]
+        学院：\CJKunderline*{\hfill}\\[12pt]
+      \end{minipage} \par 
+      \hfill 日期：\hspace{3em} 年 \qquad 月 \qquad 日
+    \group_end:
+  }
+
+
+%region 摘要和关键词
+\iow_new:N \g__whu_abstract_zh_iow
+\iow_new:N \g__whu_abstract_en_iow
+\NewDocumentEnvironment { abstract } { +b }
+  {
+    \iow_open:Nn \g__whu_abstract_zh_iow { pages/abstract.tex }
+    \iow_now:Nn \g__whu_abstract_zh_iow {#1}
+    \iow_close:N \g__whu_abstract_zh_iow
+  }{}
+\NewDocumentEnvironment { abstract* } { +b }
+  {
+    \iow_open:Nn \g__whu_abstract_en_iow { pages/enabstract.tex }
+    \iow_now:Nn \g__whu_abstract_en_iow {#1}
+    \iow_close:N \g__whu_abstract_en_iow
+  }{}
+%tag 本科
+\cs_new:Npn \__whu_bachelor_abstract_output:
+  {
+    \group_begin:
+      \keys_set:nn { ctex } 
+        {
+          chapter =
+            {
+              numbering = false,
+            }
+        }
+      \chapter{ \c__whu_name_abstract_tl }
+      \zihao{-4} \pagestyle{empty}
+      \file_if_exist:nT { pages/abstract.tex }
+        {
+          \file_input:n { pages/abstract.tex }
+        }
+      \__whu_abstract_keywords_zh_vsep_set:
+      {\bfseries \c__whu_name_keywords_tl ：}
+    \clist_use:Nn \l__whu_info_keywords_clist {；}
+    \newpage
+    \group_end:
+  }
+\cs_new:Npn \__whu_bachelor_abstract_en_output:
+  {
+    \group_begin:
+      \keys_set:nn { ctex } 
+        {
+          chapter =
+            {
+              numbering = false,
+              format    = \normalfont\bfseries\centering\zihao{-2},
+            }
+        }
+      \chapter{ \c__whu_name_abstract_en_tl }
+      \zihao{-4}
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { pages/abstract.tex }
+        {
+          \file_input:n { pages/enabstract.tex }
+        }
+      \__whu_abstract_keywords_zh_vsep_set:
+      {\textbf { \c__whu_name_keywords_en_tl :} ~}
+      \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
+      \newpage
+    \group_end:
+  }
+\cs_new:Npn \__whu_abstract_keywords_zh_vsep_set:
+  {
+    \str_case:Vn \l__whu_abstract_keywords_zh_type_str
+      {
+        { newline } { \par \noindent }
+        { blankline } { \par \vspace*{ .5\baselineskip } \noindent }
+        { vfill } { \par \vfill \noindent }
+      }
+  }
+\cs_new:Npn \__whu_abstract_keywords_en_vsep_set:
+  {
+    \str_case:Vn \l__whu_abstract_keywords_en_type_str
+      {
+        { newline } { \par \noindent}
+        { blankline } { \par \vspace*{ .5\baselineskip } \noindent }
+        { vfill } { \vfill }
+      }
+  }
+%tag 硕士
+\cs_new:Npn \__whu_master_abstract_output:
+  {
+    \group_begin:
+      \keys_set:nn { ctex } 
+        {
+          chapter =
+            {
+              numbering = false,
+              format+ = \centering
+              % pagestyle = empty
+            }
+        }
+      \chapter{ \c__whu_name_abstract_tl }
+      \zihao{-4} \pagestyle{empty}
+      \file_if_exist:nT { pages/abstract.tex }
+        {
+          \file_input:n { pages/abstract.tex }
+        }
+      \__whu_abstract_keywords_zh_vsep_set:
+      {\heiti \c__whu_name_keywords_tl ：}
+    \clist_use:Nn \l__whu_info_keywords_clist {；}
+    \newpage
+    \group_end:
+  }
+\cs_new:Npn \__whu_master_abstract_en_output:
+  {
+    \group_begin:
+      \keys_set:nn { ctex } 
+        {
+          chapter =
+            {
+              numbering = false,
+              format    = \normalfont\bfseries\centering\zihao{-2},
+              % pagestyle = empty
+            }
+        }
+      \chapter{ \c__whu_name_abstract_en_tl }
+      \zihao{-4} \pagestyle{empty}
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { pages/enabstract.tex }
+        {
+          \file_input:n { pages/enabstract.tex }
+        }
+      \__whu_abstract_keywords_zh_vsep_set:
+      {\textbf { \c__whu_name_keywords_en_tl :} ~}
+      \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
+      \newpage
+    \group_end:
+  }
+%tag 博士
+\cs_new:Npn \__whu_doctor_abstract_output:
+  {
+    \group_begin:
+      \keys_set:nn { ctex } 
+        {
+          chapter =
+            {
+              numbering = false,
+              format+ = \centering
+              % pagestyle = empty
+            }
+        }
+      \chapter{ \c__whu_name_abstract_tl }
+      \zihao{-4} \pagestyle{empty}
+      \file_if_exist:nT { pages/abstract.tex }
+        {
+          \file_input:n { pages/abstract.tex }
+        }
+      \__whu_abstract_keywords_zh_vsep_set:
+      {\heiti \c__whu_name_keywords_tl ：}
+    \clist_use:Nn \l__whu_info_keywords_clist {；}
+    \newpage
+    \group_end:
+  }
+\cs_new:Npn \__whu_doctor_abstract_en_output:
+  {
+    \group_begin:
+      \keys_set:nn { ctex } 
+        {
+          chapter =
+            {
+              numbering = false,
+              format    = \normalfont\bfseries\centering\zihao{-2},
+              % pagestyle = empty
+            }
+        }
+      \chapter{ \c__whu_name_abstract_en_tl }
+      \zihao{-4} \pagestyle{empty}
+      % \g__whu_abstract_en_content_tl
+      \file_if_exist:nT { pages/enabstract.tex }
+        {
+          \file_input:n { pages/enabstract.tex }
+        }
+      \__whu_abstract_keywords_zh_vsep_set:
+      {\textbf { \c__whu_name_keywords_en_tl :} ~}
+      \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
+      \newpage
+    \group_end:
+  }
+%endregion
+
+%tag 输出封面、声明、摘要
+\int_compare:nNnF { \g__whu_thesis_type_int } = {1}
+  {
+    \ctex_after_end_preamble:n
+    {
+      \pdfbookmark{中文封面}{titlepage}
+      \int_case:Vn \g__whu_thesis_type_int  
+        {
+          % 本科
+          {2} 
+            {
+              \__whu_bachelor_cover_i:
+              \bool_if:NT \l__whu_bachelor_english_cover_bool
+                {
+                  \newpage
+                  \__whu_bachelor_cover_ii:
+                }
+              \newpage
+              \pagestyle{empty}
+              \__whu_bachelor_originality_statement:
+              \__whu_bachelor_copyright:
+              \newpage
+              \frontmatter
+              \pagenumbering{Roman}
+              \__whu_bachelor_abstract_output:
+              \newpage
+              \__whu_bachelor_abstract_en_output:
+              \newpage
+            }
+          % 硕士
+          {3} 
+            {
+              \__whu_master_cover_i:
+              \__whu_new_blank_page:
+              \thispagestyle{empty}
+              \__whu_master_cover_ii:
+              \__whu_new_blank_page:
+              \pagestyle{empty}
+              \__whu_master_statement:
+              \newpage
+              \frontmatter
+              \__whu_master_abstract_output:
+              \newpage
+              \__whu_master_abstract_en_output:
+              \newpage
+            }
+          % 博士
+          {4} 
+            {
+              \__whu_doctor_cover_i:
+              \__whu_new_blank_page:
+              \thispagestyle{empty}
+              \__whu_doctor_cover_ii:
+              \__whu_new_blank_page:
+              \pagestyle{empty}
+              \__whu_doctor_statement:
+              \__whu_new_blank_page:
+              \__whu_doctor_license_agreement:
+              \newpage
+              \frontmatter
+              \__whu_doctor_abstract_output:
+              \newpage
+              \__whu_doctor_abstract_en_output:
+              \newpage
+            }
+        }
+    }
+  }
+
 %region 目录
 
 %tag 本科 目录标题和正文标题相同（即不能输入 \chapter[]{} 只能输入 \chapter{}）
@@ -1993,187 +2177,6 @@
     \group_end:
   }
 %endregion 目录
-
-%region 摘要和关键词
-\iow_new:N \g__whu_abstract_zh_iow
-\iow_new:N \g__whu_abstract_en_iow
-\NewDocumentEnvironment { abstract } { +b }
-  {
-    \iow_open:Nn \g__whu_abstract_zh_iow { \jobname-zh.abstract }
-    \iow_now:Nn \g__whu_abstract_zh_iow {#1}
-    \iow_close:N \g__whu_abstract_zh_iow
-  }{}
-\NewDocumentEnvironment { abstract* } { +b }
-  {
-    \iow_open:Nn \g__whu_abstract_en_iow { \jobname-en.abstract }
-    \iow_now:Nn \g__whu_abstract_en_iow {#1}
-    \iow_close:N \g__whu_abstract_en_iow
-  }{}
-\cs_new:Npn \__whu_bachelor_abstract_output:
-  {
-    \group_begin:
-      \keys_set:nn { ctex } 
-        {
-          chapter =
-            {
-              numbering = false,
-              pagestyle = empty
-            }
-        }
-      \chapter{ \c__whu_name_abstract_tl }
-      \zihao{-4} \pagestyle{empty}
-      \file_if_exist:nT { \jobname-zh.abstract }
-        {
-          \file_input:n { \jobname-zh.abstract }
-        }
-      \__whu_abstract_keywords_zh_vsep_set:
-      {\heiti \c__whu_name_keywords_tl ：}
-    \clist_use:Nn \l__whu_info_keywords_clist {；}
-    \newpage
-    \group_end:
-  }
-\cs_new:Npn \__whu_bachelor_abstract_en_output:
-  {
-    \group_begin:
-      \keys_set:nn { ctex } 
-        {
-          chapter =
-            {
-              numbering = false,
-              format    = \normalfont\bfseries\centering\zihao{-2},
-              pagestyle = empty
-            }
-        }
-      \chapter{ \c__whu_name_abstract_en_tl }
-      \zihao{-4} \pagestyle{empty}
-      % \g__whu_abstract_en_content_tl
-      \file_if_exist:nT { \jobname-en.abstract }
-        {
-          \file_input:n { \jobname-en.abstract }
-        }
-      \__whu_abstract_keywords_zh_vsep_set:
-      {\textbf { \c__whu_name_keywords_en_tl :} ~}
-      \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
-      \newpage
-    \group_end:
-  }
-\cs_new:Npn \__whu_abstract_keywords_zh_vsep_set:
-  {
-    \str_case:Vn \l__whu_abstract_keywords_zh_type_str
-      {
-        { newline } { \par \noindent }
-        { blankline } { \par \vspace*{ .5\baselineskip } \noindent }
-        { vfill } { \par \vfill \noindent }
-      }
-  }
-\cs_new:Npn \__whu_abstract_keywords_en_vsep_set:
-  {
-    \str_case:Vn \l__whu_abstract_keywords_en_type_str
-      {
-        { newline } { \par \noindent}
-        { blankline } { \par \vspace*{ .5\baselineskip } \noindent }
-        { vfill } { \vfill }
-      }
-  }
-\cs_new:Npn \__whu_master_abstract_output:
-  {
-    \group_begin:
-      \keys_set:nn { ctex } 
-        {
-          chapter =
-            {
-              numbering = false,
-              format+ = \centering
-              % pagestyle = empty
-            }
-        }
-      \chapter{ \c__whu_name_abstract_tl }
-      \zihao{-4} \pagestyle{empty}
-      \file_if_exist:nT { \jobname-zh.abstract }
-        {
-          \file_input:n { \jobname-zh.abstract }
-        }
-      \__whu_abstract_keywords_zh_vsep_set:
-      {\heiti \c__whu_name_keywords_tl ：}
-    \clist_use:Nn \l__whu_info_keywords_clist {；}
-    \newpage
-    \group_end:
-  }
-\cs_new:Npn \__whu_master_abstract_en_output:
-  {
-    \group_begin:
-      \keys_set:nn { ctex } 
-        {
-          chapter =
-            {
-              numbering = false,
-              format    = \normalfont\bfseries\centering\zihao{-2},
-              % pagestyle = empty
-            }
-        }
-      \chapter{ \c__whu_name_abstract_en_tl }
-      \zihao{-4} \pagestyle{empty}
-      % \g__whu_abstract_en_content_tl
-      \file_if_exist:nT { \jobname-en.abstract }
-        {
-          \file_input:n { \jobname-en.abstract }
-        }
-      \__whu_abstract_keywords_zh_vsep_set:
-      {\textbf { \c__whu_name_keywords_en_tl :} ~}
-      \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
-      \newpage
-    \group_end:
-  }
-\cs_new:Npn \__whu_doctor_abstract_output:
-  {
-    \group_begin:
-      \keys_set:nn { ctex } 
-        {
-          chapter =
-            {
-              numbering = false,
-              format+ = \centering
-              % pagestyle = empty
-            }
-        }
-      \chapter{ \c__whu_name_abstract_tl }
-      \zihao{-4} \pagestyle{empty}
-      \file_if_exist:nT { \jobname-zh.abstract }
-        {
-          \file_input:n { \jobname-zh.abstract }
-        }
-      \__whu_abstract_keywords_zh_vsep_set:
-      {\heiti \c__whu_name_keywords_tl ：}
-    \clist_use:Nn \l__whu_info_keywords_clist {；}
-    \newpage
-    \group_end:
-  }
-\cs_new:Npn \__whu_doctor_abstract_en_output:
-  {
-    \group_begin:
-      \keys_set:nn { ctex } 
-        {
-          chapter =
-            {
-              numbering = false,
-              format    = \normalfont\bfseries\centering\zihao{-2},
-              % pagestyle = empty
-            }
-        }
-      \chapter{ \c__whu_name_abstract_en_tl }
-      \zihao{-4} \pagestyle{empty}
-      % \g__whu_abstract_en_content_tl
-      \file_if_exist:nT { \jobname-en.abstract }
-        {
-          \file_input:n { \jobname-en.abstract }
-        }
-      \__whu_abstract_keywords_zh_vsep_set:
-      {\textbf { \c__whu_name_keywords_en_tl :} ~}
-      \clist_use:Nn \l__whu_info_keywords_en_clist {;~}
-      \newpage
-    \group_end:
-  }
-%endregion
 
 %region 附录设置
 \cs_new:Npn \__whu_bachelor_set_appendix:
@@ -2711,12 +2714,18 @@
   }
 
 
-%tag 图表设置
+%region 图表设置
+% 本科的最新规定是：
+% 图标题位于图下方；图标题宋体粗体五号，图内容宋体五号
+% 表标题位于表格上方；表标题宋体粗体五号，表内容宋体五号
+% 硕博的规定不清楚，先按和本科一样处理
+
+% 图
 \DeclareCaptionFont { whufigurecaptionfont }
-  { \normalfont \zihao { -4 } }
-% 表格：中文黑体，英文数字加粗
+  { \bfseries \zihao { 5 } }
+% 表
 \DeclareCaptionFont { whutablecaptionfont }
-  { \heiti \zihao { -4 } \addCJKfontfeatures { BoldFont = * } \bfseries }
+  { \bfseries \zihao { 5 } }
 
 \captionsetup [ figure ]
   {
@@ -2732,9 +2741,9 @@
   }
 \AddToHook { env / tabular / begin }
   { \zihao{5} }
+%endregion 图表设置
 
-
-%tag 定理类环境 (theorem-like environments)
+%region 定理类环境 (theorem-like environments)
 
 % 去掉 . 号，但只能通过新定义 style 的方式进行
 \declaretheoremstyle
@@ -2833,6 +2842,7 @@
   {
     \popQED \endtrivlist \@endpefalse
   }
+%endregion 定理类环境
 
 % 删除章标题中的 \quad
 \cs_new_protected:Npn \__whu_sanitize_chapter_title:n #1
