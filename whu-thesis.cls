@@ -2189,6 +2189,20 @@
   }
 %endregion 目录
 
+%tag 致谢环境
+\NewDocumentEnvironment{acknowledgements}{ +b }
+  {
+    \group_begin:
+      \keys_set:nn { ctex }
+        {
+          chapter / format = \centering \zihao{-2} \heiti,
+        }
+      \chapter* { 致 \qquad 谢 }
+      \addcontentsline{toc}{chapter}{致谢}
+      #1
+    \group_end:
+  }{}
+
 %region 附录设置
 \cs_new:Npn \__whu_bachelor_set_appendix:
   {
