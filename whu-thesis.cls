@@ -2141,6 +2141,38 @@
   }
 %endregion 目录
 
+%region 插图目录和表格目录
+\keys_set:nn { ctex }
+  {
+    listfigurename = { 插\qquad 图 },
+    listtablename  = { 表\qquad 格 }
+  }
+\cs_set_eq:NN \__whu_old_listoffigures: \listoffigures
+\RenewDocumentCommand \listoffigures { }
+  {
+    \group_begin:
+    \keys_set:nn { ctex }
+      { 
+        chapter / format += \centering,
+        chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
+      }
+    \__whu_old_listoffigures:
+    \group_end:
+  }
+\cs_set_eq:NN \__whu_old_listoftables: \listoftables
+\RenewDocumentCommand \listoftables { }
+  {
+    \group_begin:
+    \keys_set:nn { ctex }
+      { 
+        chapter / format += \centering,
+        chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
+      }
+    \__whu_old_listoftables:
+    \group_end:
+  }
+%endregion 插图和表格
+
 %tag 致谢环境
 \NewDocumentEnvironment{acknowledgements}{ +b }
   {
@@ -2179,7 +2211,7 @@
 %region 脚注
 \cs_new_protected:Npn \__whu_define_fn_style:nn #1#2
   { \tl_const:cn { c__whu_fn_style_ #1 _tl } {#2} }
-\cs_new:Npn \__whu_symbol:n #1 { \tex_char:D #1 \scan_stop: }
+\cs_new:Npn \__whu_symbol:n #1 { \tex_char:D #1 \scan_stop: } % \tex_char:D = \char
 
 \clist_map_inline:nn
   {
@@ -2196,6 +2228,7 @@
     { xits_sans_neg   } { xits-sans*      }
   }
   { \__whu_define_fn_style:nn #1 }
+%tag 定义键
 \tl_new:N \l__whu_fn_style_tl
 \keys_define:nn { whu / style }
   {
@@ -2213,10 +2246,12 @@
       },
     footnote-style .value_required:n = true
   }
+%tag 设置键
 \keys_set:nn { whu / style }
   {
     footnote-style = libertinus
   }
+%tag libertinus
 \cs_new:Npn \__whu_fn_symbol_libertinus:n #1
   {
     \int_compare:nTF { #1 >= 21 }
@@ -2234,6 +2269,7 @@
       { \__whu_symbol:n { \int_eval:n { "2776 -  1 + #1 } } }
   }
 \cs_new_eq:NN \__whu_fn_symbol_libertinus_sans:n \__whu_fn_symbol_libertinus:n
+%tag pifont texdoc psnfss2e
 \cs_new:Npn \__whu_fn_symbol_pifont:n #1
   { \ding { \int_eval:n { 171 + #1 } } }
 \cs_new:Npn \__whu_fn_symbol_pifont_neg:n #1
@@ -2242,6 +2278,7 @@
   { \ding { \int_eval:n { 191 + #1 } } }
 \cs_new:Npn \__whu_fn_symbol_pifont_sans_neg:n #1
   { \ding { \int_eval:n { 201 + #1 } } }
+%tag xits
 \cs_new:Npn \__whu_fn_symbol_xits:n #1
   {
     \int_compare:nTF { #1 >= 10 }
@@ -2256,6 +2293,7 @@
   { \__whu_symbol:n { \int_eval:n { "2780 - 1 + #1 } } }
 \cs_new:Npn \__whu_fn_symbol_xits_sans_neg:n #1
   { \__whu_symbol:n { \int_eval:n { "278A - 1 + #1 } } }
+%tag 定义脚注计数器格式
 \cs_set:Npn \thefootnote { \whu_footnote_number:N \c@footnote }
 \cs_new:Npn \whu_footnote_number:N #1
   {
@@ -2311,7 +2349,7 @@
     \zihao{5}
     #1
   }
-% 修改脚注的横线长度
+%tag 修改脚注的横线长度
 \cs_set:Npn \footnoterule
   {\kern-3\p@ \hrule \@width 2in \@height 1pt \kern 2.6\p@ }
 %endregion 脚注
@@ -2648,25 +2686,16 @@
 %endregion
 
 %tag 符号表
-\NewDocumentEnvironment { notation } 
-  {
-    O{符号表}
-    O 
-      {
-        width = 0.3\textwidth,
-        colspec = {X[1,c]X[1,c]}
-      }
-  }
+\NewDocumentEnvironment { notation } { O{符号表} O{lp{7.5cm}} }
   {
     \newpage
     \__whu_notation_begin:n {#1}
     \group_begin:
-      \SetTblrTemplate { head, foot } { empty }
-      \longtblr {#2}
+      \centering
+      \tabular{ #2 }
   }
   {
-      \endlongtblr
-      \setcounter{table}{0}
+      \endtabular
       \newpage
     \group_end:
   }
@@ -2869,7 +2898,7 @@
       },
     bib-style .choice:,
     bib-style .value_required:n = true,
-    bib-style / numerical    .code:n =
+    bib-style / numerical   .code:n =
       {
         \tl_set:Nn  \l__whu_bib_gb_style_tl { numerical  }
         \tl_clear:N \l__whu_bib_style_tl
@@ -2887,10 +2916,10 @@
     cite-style .tl_set:N = \l__whu_cite_style_tl,
     bib-resource .clist_set:N = \l__whu_bib_resource_clist
   }
-
-% bib-backend = bibtex，此时分两种情况：
-%   Case 1. bib-style = numerical or author-year，则调用 gbt7714 宏包，此宏包内部调用 natbib 宏包
-%   Case 2. otherwise，直接调用 natbib
+%region 加载宏包
+%tag bibtex 此时分两种情况：
+% Case 1. bib-style = numerical or author-year，则调用 gbt7714 宏包，此宏包内部调用 natbib 宏包
+% Case 2. otherwise，直接调用 natbib
 \ctex_at_end_preamble:n
   {
     \tl_if_eq:NnT \l__whu_bib_backend_tl { bibtex }
@@ -2910,7 +2939,7 @@
       }
   }
 
-% bib-backend = biblatex，调用 biblatex 宏包
+%tag biblatex 调用 biblatex 宏包
 % biblatex 会写入 begindocument/before 钩子，因此需在其之前通过
 % env/document/begin 钩子载入 biblatex 宏包。注意这个
 % 钩子仅适用于 \begin{document} 的写法，对于 \document 命令本身无效。
@@ -2923,6 +2952,7 @@
         \__whu_biblatex_post_setup:
       }
   }
+%endregion
 
 %tag bibtex相关设置
 \cs_new_protected:Npn \__whu_bibtex_setup:
