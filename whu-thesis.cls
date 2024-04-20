@@ -819,21 +819,18 @@
 
 
 %region 个人信息
-\str_new:N \l__whu_abstract_keywords_zh_type_str  % 摘要和关键词之间的换行情况
-\str_new:N \l__whu_abstract_keywords_en_type_str  % 摘要和关键词之间的换行情况
-
-\clist_map_inline:nn
-  {
-    title, student_id, author, department,
-    major, supervisor , supervisor_academic_title,
-  }
-  { \tl_new:c { l__whu_info_ #1 _tl } }
-\clist_map_inline:nn
-  {
-    title, author, department,
-    major, supervisor , supervisor_academic_title,
-  }
-  { \tl_new:c { l__whu_info_ #1 _en_tl } }
+% \clist_map_inline:nn
+%   {
+%     title, student_id, author, department,
+%     major, supervisor , supervisor_academic_title,
+%   }
+%   { \tl_new:c { l__whu_info_ #1 _tl } }
+% \clist_map_inline:nn
+%   {
+%     title, author, department,
+%     major, supervisor , supervisor_academic_title,
+%   }
+%   { \tl_new:c { l__whu_info_ #1 _en_tl } }
 %tag 定义键
 \keys_define:nn { whu }
   {
@@ -868,20 +865,10 @@
     day            .int_set:N = \l__whu_info_day_int,
     keywords     .clist_set:N = \l__whu_info_keywords_clist,
     keywords*    .clist_set:N = \l__whu_info_keywords_en_clist,
-    abstract-keywords-type .choices:nn = { newline, blankline, vfill }
-                                         { \str_set:Nx \l__whu_abstract_keywords_zh_type_str { \l_keys_choice_tl } },
-    abstract-keywords-type* .choices:nn = { newline, blankline, vfill }
-                                          { \str_set:Nx \l__whu_abstract_keywords_en_type_str { \l_keys_choice_tl } },
     cover-en-type .choice:,
     cover-en-type .choices:nn = { normal, cs }
                                 { \tl_set_eq:NN \l__whu_cover_en_type_tl \l_keys_choice_tl },
     cover-en-type .initial:n = normal
-  }
-\AtEndPreamble
-  {
-    % 如果只设置了 zh 的就默认 en 和 zh 相同
-    \str_if_empty:NT \l__whu_abstract_keywords_en_type_str
-      { \str_set_eq:NN \l__whu_abstract_keywords_en_type_str \l__whu_abstract_keywords_zh_type_str }
   }
 %tag 初始化公共键
 \keys_set:nn { whu / info }
@@ -889,7 +876,6 @@
     year = \c_sys_year_int,
     month = \c_sys_month_int,
     day = \c_sys_day_int,
-    abstract-keywords-type = blankline,
     keywords = {\LaTeX{}, 毕业论文, 模版, 武汉大学},
     keywords* = {\LaTeX{}, Thesis, Template, Wuhan~University},
     clc = \c_empty_tl,
@@ -1773,6 +1759,23 @@
 
 
 %region 摘要和关键词
+%tag 摘要与关键词之间的间距样式
+\str_new:N \l__whu_abstract_keywords_zh_type_str  % 摘要和关键词之间的换行情况
+\str_new:N \l__whu_abstract_keywords_en_type_str  % 摘要和关键词之间的换行情况
+\keys_define:nn { whu / style }
+  {
+    abstract-keywords-type  .choices:nn = { newline, blankline, vfill }
+     { \str_set:Nx \l__whu_abstract_keywords_zh_type_str { \l_keys_choice_tl } },
+    abstract-keywords-type .initial:n = blankline,
+    abstract-keywords-type* .choices:nn = { newline, blankline, vfill }
+     { \str_set:Nx \l__whu_abstract_keywords_en_type_str { \l_keys_choice_tl } },
+  }
+% 如果只设置了 zh 的就默认 en 和 zh 相同
+\AtEndPreamble
+  {
+    \str_if_empty:NT \l__whu_abstract_keywords_en_type_str
+      { \str_set_eq:NN \l__whu_abstract_keywords_en_type_str \l__whu_abstract_keywords_zh_type_str }
+  }
 %tag 本科
 \cs_new:Npn \__whu_bachelor_abstract_output:
   {
