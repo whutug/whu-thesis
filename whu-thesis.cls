@@ -819,18 +819,6 @@
 
 
 %region 个人信息
-% \clist_map_inline:nn
-%   {
-%     title, student_id, author, department,
-%     major, supervisor , supervisor_academic_title,
-%   }
-%   { \tl_new:c { l__whu_info_ #1 _tl } }
-% \clist_map_inline:nn
-%   {
-%     title, author, department,
-%     major, supervisor , supervisor_academic_title,
-%   }
-%   { \tl_new:c { l__whu_info_ #1 _en_tl } }
 %tag 定义键
 \keys_define:nn { whu }
   {
