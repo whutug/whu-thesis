@@ -23,7 +23,7 @@
   {Thesis template for Wuhan University}
 
 
-%tag 简化 msg 模块的函数
+%tag 简化-msg-模块的函数
 \cs_new:Npn \__whu_msg_new:nn  { \msg_new:nnn      { whu-thesis } }
 \cs_new:Npn \__whu_warning:n   { \msg_warning:nn   { whu-thesis } }
 \cs_new:Npn \__whu_warning:nn  { \msg_warning:nnn  { whu-thesis } }
@@ -819,7 +819,6 @@
 
 
 %region 个人信息
-\str_new:N \l__whu_master_type_str  % 学硕 or 专硕
 \str_new:N \l__whu_abstract_keywords_zh_type_str  % 摘要和关键词之间的换行情况
 \str_new:N \l__whu_abstract_keywords_en_type_str  % 摘要和关键词之间的换行情况
 
@@ -850,6 +849,7 @@
     author          .tl_set:N = \l__whu_info_author_tl,
     author*         .tl_set:N = \l__whu_info_author_en_tl,
     subject         .tl_set:N = \l__whu_info_subject_tl,
+    subject*        .tl_set:N = \l__whu_info_subject_en_tl,
     major           .tl_set:N = \l__whu_info_major_tl,
     major*          .tl_set:N = \l__whu_info_major_en_tl,
     supervisor      .tl_set:N = \l__whu_info_supervisor_tl,
@@ -868,8 +868,6 @@
     day            .int_set:N = \l__whu_info_day_int,
     keywords     .clist_set:N = \l__whu_info_keywords_clist,
     keywords*    .clist_set:N = \l__whu_info_keywords_en_clist,
-    master-type   .choices:nn = { academic, professional }
-                                { \str_set:NV \l__whu_master_type_str \l_keys_choice_tl },
     abstract-keywords-type .choices:nn = { newline, blankline, vfill }
                                          { \str_set:Nx \l__whu_abstract_keywords_zh_type_str { \l_keys_choice_tl } },
     abstract-keywords-type* .choices:nn = { newline, blankline, vfill }
@@ -877,10 +875,7 @@
     cover-en-type .choice:,
     cover-en-type .choices:nn = { normal, cs }
                                 { \tl_set_eq:NN \l__whu_cover_en_type_tl \l_keys_choice_tl },
-    cover-en-type .initial:n = normal,
-    doctor-cover-withsubject .bool_gset:N = \g__whu_doctor_cover_with_subject_bool,
-    doctor-cover-info-spread .bool_gset:N = \g__whu_doctor_cover_info_spread_bool,
-    supervisor-name-title-separator .tl_set:N = \l__whu_info_supervisor_name_title_separator_tl,
+    cover-en-type .initial:n = normal
   }
 \AtEndPreamble
   {
@@ -947,7 +942,6 @@
         supervisor* = {XIA~Kangwei},
         academic-title = {教授},
         academic-title* = {Prof},
-        supervisor-name-title-separator = \qquad,
       }
   }
 %tag 硕博公共部分常量定义
@@ -1002,9 +996,7 @@
         supervisor    = {夏大鱼羊},
         supervisor*   = {XIA~Dayuyang},
         academic-title = {教授},
-        academic-title* = {Prof},
-        master-type   = professional,
-        supervisor-name-title-separator = \kern0.5em
+        academic-title* = {Prof}
       }
   }
 %tag 博士初始化
@@ -1031,9 +1023,6 @@
         supervisor*   = {XIA~Dayuyang},
         academic-title = {教授},
         academic-title* = {Prof},
-        doctor-cover-withsubject = true,
-        doctor-cover-info-spread = true,
-        supervisor-name-title-separator = \qquad
       }
   }
 %tag 执行初始化
@@ -1750,7 +1739,7 @@
     \group_end:
   }
 
-%tag 武汉大学学位论文使用授权协议书
+%tag 博士使用授权协议书
 \cs_new:Npn \__whu_doctor_license_agreement:
   {
     \group_begin:
