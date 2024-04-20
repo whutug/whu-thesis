@@ -36,7 +36,7 @@
 %     \item 在 \href{https://github.com/whutug/whu-thesis/issues}{GitHub Issues 页面}中搜索该问题的关键词；
 %     \item 提出新的 \href{https://github.com/whutug/whu-thesis/issues}{issue}，并说明系统、发行版与版本、出现的问题等关键信息。
 % \end{enumerate}
-% 如果是使用上的问题，可以前往 \href{https://github.com/whutug/whu-thesis/discussions}{discussions} 中讨论。
+% 如果是使用上的问题，可以前往 \href{https://github.com/whutug/whu-thesis/discussions}{Discussions} 中讨论。
 % 
 % \subsection*{关于本手册}
 % 本手册假定用户已经能处理一般的 \LaTeX{} 文档，并对 \BibTeX{} 有一定了解。如果从未接触过 \TeX{} 和 \LaTeX{}，建议先学习相关的基础知识，目前 \LaTeX{} 中文社区普遍推荐的入门资料是 \href{http://mirrors.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{lshort-zh-cn}。
@@ -111,10 +111,18 @@
 %   \begin{whusyntax}[emph={[1]type}]
 %     type = (*<(bachelor)|master|doctor|proposal>*)
 %   \end{whusyntax}
-%   选择学位类型。四种选项分别代表本科毕业论文、硕士学位论文、博士学位论文与本科开题报告。
+%   选择论文类型。四种选项分别代表本科毕业论文、硕士学位论文、博士学位论文与本科开题报告。
 % \end{function}
 % 
-% \kvopt{type}{opening} 时，\cls{whu-thesis} 会加载 \pkg{ctexart} 文档类，其他时候 \cls{whu-thesis} 则会加载 \cls{ctexbook} 文档类。\kvopt{type}{doctor} 时，由于需要编译书脊，请在编译时加入 \opt{-shell-escape} 选项，这时会在外部编译书脊，书脊使用 \pkg{\LuaTeX-ja} 的竖排文档类 \cls{ltjtarticle}。
+% 无论何时，\cls{whu-thesis} 都会加载 \cls{ctexbook} 文档类。\kvopt{type}{doctor} 时，由于需要编译书脊，请在编译时加入 \opt{-shell-escape} 选项，这时会在外部编译书脊，书脊使用 \pkg{\LuaTeX-ja} 的竖排文档类 \cls{ltjtarticle}。
+% 
+% \begin{function}{class}
+%   \begin{whusyntax}[emph={[1]class}]
+%     class = (*<(academic)|professional>*)
+%   \end{whusyntax}
+%   选择学位类型。两种选项分别代表学术学位和专业学位。
+%   此键值只有当 \kvopt{type}{master} 或 \kvopt{type}{doctor} 时才起作用。
+% \end{function}
 % 
 % \begin{function}{draft}
 %   \begin{whusyntax}[emph={[1]draft}]
@@ -242,6 +250,14 @@
 %   院（系）名称。
 % \end{function}
 % 
+% \begin{function}{info/subject, info/subject*}
+%   \begin{whusyntax}[emph={[1]subject, subject*}]
+%     subject  = (*\marg{中文学科名称}*)
+%     subject* = (*\marg{英文学科名称}*)
+%   \end{whusyntax}
+%   学科名称。如 \meta{数学} 和 \meta{Mathematics}。
+% \end{function}
+% 
 % \begin{function}{info/major, info/major*}
 %   \begin{whusyntax}[emph={[1]major, major*}]
 %     major  = (*\marg{中文专业名称}*)
@@ -263,7 +279,7 @@
 %     supervisor  = (*\marg{中文姓名}*)
 %     supervisor* = (*\marg{英文姓名}*)
 %   \end{whusyntax}
-%   指导教师中英文姓名。
+%   校内导师中英文姓名。
 % \end{function}
 %
 % \begin{function}{info/academic-title, info/academic-title*}
@@ -271,7 +287,21 @@
 %     academic-title  = (*\marg{中文职称名}*)
 %     academic-title* = (*\marg{英文职称名}*)
 %   \end{whusyntax}
-%   指导教师职称。
+%   校内导师职称。
+% \end{function}
+% 
+% \begin{function}{info/supervisor-outer}
+%   \begin{whusyntax}[emph={[1]supervisor-outer}]
+%     supervisor-outer = (*\marg{中文姓名}*)
+%   \end{whusyntax}
+%   校外导师中文姓名。
+% \end{function}
+% 
+% \begin{function}{info/academic-title-outer}
+%   \begin{whusyntax}[emph={[1]supervisor-outer}]
+%     academic-title-outer = (*\marg{中文职称名}*)
+%   \end{whusyntax}
+%   校外导师职称。
 % \end{function}
 % 
 % \begin{function}{info/year}
@@ -303,25 +333,12 @@
 %   关键词列表。各关键字之间需使用英文逗号隔开。为防止歧义，可以用分组括号“"{...}"”把各字段括起来。
 % \end{function}
 % 
-% \begin{function}{info/master-type}
-%   \begin{whusyntax}[emph={[1]master-type}]
-%     master-type = (*<academic|(professional)>*)
-%   \end{whusyntax}
-%   硕士学位的类型。两个值分别对应学术型硕士和专业型硕士。此键值影响中文封面。
-% \end{function}
 %
 % \begin{function}{info/cover-en-type}
 %   \begin{whusyntax}[emph={[1]cover-en-type}]
 %     cover-en-type = (*<(normal)|cs>*)
 %   \end{whusyntax}
 %   设置英文封面的样式。计算机学院和网络安全学院请选择 \opt{cs}。
-% \end{function}
-% 
-% \begin{function}{info/doctor-cover-withsubject}
-%   \begin{whusyntax}[emph={[1]doctor-cover-withsubject}]
-%     doctor-cover-withsubject = (*\TTF*)
-%   \end{whusyntax}
-%   博士封面的个人信息是否包含学科。
 % \end{function}
 % 
 %
@@ -514,6 +531,19 @@
 %   \end{tabular}
 % \end{table}
 %
+% \begin{function}{style/abstract-keywords-type, style/abstract-keywords-type*}
+%   \begin{whusyntax}[emph={[1]abstract-keywords-type, abstract-keywords-type*}]
+%     abstract-keywords-type  = (*<(blankline)|newline|vfill>*)
+%     abstract-keywords-type* = (*<(blankline)|newline|vfill>*)
+%   \end{whusyntax}
+%   设置摘要与关键词之间的样式，三种选项分别代表：
+%   \begin{itemize}
+%     \item 摘要与关键词之间空行；
+%     \item 摘要与关键词之间无空行；
+%     \item 摘要与关键词被拉开，关键词置于页面底部。
+%   \end{itemize}
+% \end{function}
+%
 %
 % \subsection{正文编写}
 %
@@ -527,11 +557,11 @@
 % \subsubsection{凤头}
 %
 % \begin{function}{\frontmatter}
-%   声明前置部分开始。
+%   声明前置部分开始。模版已经使用此声明，用户请勿再次使用。
 % \end{function}
 %
 % 在本模板中，前置部分包含目录、中英文摘要以及符号表等。
-% 前置部分的页码采用小写罗马字母，并且与正文分开计数。
+% 前置部分的页码采用罗马数字，并且与正文分开计数。
 %
 % \begin{function}{\tableofcontents,\listoffigures,\listoftables}
 %   生成目录。为了生成完整、正确的目录，您至少需要编译\emph{两次}。对于图表
@@ -539,26 +569,11 @@
 %   插图、表格目录。
 % \end{function}
 %
-%^^A TODO: \DescribeEnv{abstract}
-%^^A TODO: \DescribeEnv{abstract*}
-% \begin{function}{abstract}
-%   \begin{whusyntax}[emph={[2]abstract}]
-%     \begin{abstract}
-%       (*\meta{中文摘要}*)
-%     \end{abstract}
-%   \end{whusyntax}
-% \end{function}
-% \begin{function}{abstract*}
-%   \begin{whusyntax}[emph={[2]abstract*}]
-%     \begin{abstract*}
-%       (*\meta{英文摘要}*)
-%     \end{abstract*}
-%   \end{whusyntax}
-%   摘要。中文模板中，不带星号和带星号的版本分别用来输入中文摘要
-%   和英文摘要；英文模板中没有带星号的版本，您只需输入英文摘要。
+% \begin{function}{abstract, enabstract}
+%   中英文摘要请分别写入 \file{pages} 文件夹下面的 \file{abstract.tex}
+%   和 \file{enabstract.tex}。
 % \end{function}
 %
-%^^A TODO: \DescribeEnv{notation}
 % \begin{function}{notation}
 %   \begin{whusyntax}[emph={[2]notation}]
 %     \begin{notation}(*\oarg{列格式说明}*)
