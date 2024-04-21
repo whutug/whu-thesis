@@ -2284,6 +2284,7 @@
               \__whu_bachelor_copyright:
               \newpage
               \frontmatter
+              \pagenumbering{Roman}
               \pagestyle{ bachelor-frontmatter }
               \__whu_bachelor_abstract_output:
               \newpage
@@ -2331,8 +2332,8 @@
   }
 
 %region 目录
-
-%tag 本科 目录标题和正文标题相同（即不能输入 \chapter[]{} 只能输入 \chapter{}）
+%tag 本科吞参数
+% 目录标题和正文标题相同（即不能输入 \chapter[]{} 只能输入 \chapter{}）
 % 下面采用的是“吞参数”的方法：让 [] 的参数不起作用（被忽略）从而起到吞掉参数的效果
 \__whu_msg_new:nn { bachelor-no-optional-argument }
   {
@@ -2377,15 +2378,17 @@
         {2} { \__whu_bachelor_chapter_cmds_no_optional_argument: }
       }
   }
-
+%tag 本科设置
 \cs_new:Npn \__whu_bachelor_set_tocline:
   {
     \keys_set:nn { ctex }
       { contentsname   = \c__whu_name_toc_tl }
-    % 格式（用这个方法不会有 hyperref 的警告）
+    % 字体字号
     \renewcommand{\cftchapfont}{\bfseries \zihao{-4}}
     \renewcommand{\cftsecfont}{\normalfont \zihao{-4}}
     \renewcommand{\cftsubsecfont}{\normalfont \zihao{-4}}
+    \renewcommand{\cftchappagefont}{\normalfont \zihao{-4}}
+    % 引导线
     \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
     % 缩进
     \dim_set:Nn \cftchapindent { 0em }
@@ -2398,12 +2401,12 @@
     % 垂直间距
     \setlength{\cftbeforechapskip}{0pt}
   }
-%tag 硕士
+%tag 硕士设置
 \cs_new:Npn \__whu_master_set_tocline:
   {
     \keys_set:nn { ctex }
       { contentsname   = \c__whu_name_toc_tl }
-    % 格式（用这个方法不会有 hyperref 的警告）
+    % 字体字号
     \renewcommand{\cftchapfont}{\heiti \zihao{4}}
     \renewcommand{\cftsecfont}{\normalfont \zihao{-4}}
     \renewcommand{\cftsubsecfont}{\normalfont \zihao{-4}}
@@ -2422,12 +2425,12 @@
     % subsection前的额外垂直间距
     % \dim_set:Nn \cftbeforesubsecskip { 0pt }
   }
-%tag 博士
+%tag 博士设置
 \cs_new:Npn \__whu_doctor_set_tocline:
   {
     \keys_set:nn { ctex }
       { contentsname   = \c__whu_name_toc_tl }
-    % 格式（用这个方法不会有 hyperref 的警告）
+    % 字体字号
     \renewcommand{\cftchapfont}{\heiti \zihao{4}}
     \renewcommand{\cftsecfont}{\normalfont \zihao{-4}}
     \renewcommand{\cftsubsecfont}{\normalfont \zihao{-4}}
