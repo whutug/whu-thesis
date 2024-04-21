@@ -1096,7 +1096,7 @@
   {
     \fancyhf { }
     \fancyfoot[C] { \zihao{5} \arabic{page} }
-    \fancyhead[C] { \zihao{5} 武汉大学本科毕业论文（设计）}
+    \fancyhead[C] { \zihao{5} \__whu_spread_box:nn {8cm} {武汉大学本科毕业论文（设计）}}
     \renewcommand \headrulewidth { 0.5pt } 
     \setlength{\headheight}{13pt}
   }
@@ -2096,8 +2096,11 @@
         {
           chapter =
             {
-              numbering = false,
-              pagestyle = bachelor-frontmatter
+              numbering  = false,
+              pagestyle  = bachelor-frontmatter,
+              format     = \heiti \zihao{-2} \centering,
+              beforeskip = 15pt,
+              afterskip  = 20pt
             }
         }
       \chapter{ \c__whu_name_abstract_tl }
@@ -2119,9 +2122,11 @@
         {
           chapter =
             {
-              numbering = false,
-              format    = \normalfont\bfseries\centering\zihao{-2},
-              pagestyle = bachelor-frontmatter
+              numbering  = false,
+              format     = \normalfont \bfseries \centering \zihao{-2},
+              pagestyle  = bachelor-frontmatter,
+              beforeskip = 15pt,
+              afterskip  = 20pt
             }
         }
       \chapter{ \c__whu_name_abstract_en_tl }
