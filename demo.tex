@@ -1,326 +1,324 @@
 % \documentclass[type = bachelor]{whu-thesis}
 % \documentclass[type = master]{whu-thesis}
-\documentclass[type = doctor]{whu-thesis}
+\documentclass{whu-thesis}
 % \documentclass[type = master,showframe]{whu-thesis}
 % \documentclass[type = doctor,showframe]{whu-thesis}
 % \documentclass[type = bachelor,showframe]{whu-thesis}
 \whusetup{
   info = {
-    title      = {论文题目，楷体一号},
-    title*     = {A QoS-aware Self-Adaptive System Approach in Service Computing Environment},
-    department = {数学与统计学院},
-    department* = {School of Mathematics and Statistics},
-    author     = {张三},
-    author*    = {Xxxxxx Xxxxx},
-    student-id = {2021202012345},
-    supervisor = {李某某},
-    supervisor* = {Xxx Xxxxx},
+    % title      = {论文题目，楷体一号},
+    % title*     = {A QoS-aware Self-Adaptive System Approach in Service Computing Environment},
+    % department = {数学与统计学院},
+    % department* = {School of Mathematics and Statistics},
+    % author     = {张三},
+    % author*    = {Xxxxxx Xxxxx},
+    % student-id = {2021202012345},
+    % supervisor = {李某某},
+    % supervisor* = {Xxx Xxxxx},
     % supervisor-outer = {王某某},
-    academic-title = {教授},
-    academic-title* = {Prof},
+    % academic-title = {教授},
+    % academic-title* = {Prof},
     % academic-title-outer = {高级工程师},
-    subject = {英语},
-    major   = {英国语言文学},
-    research-area = {英语语言学},
-    research-area* = {Operator Theory},
-    year = 2024,
-    month = 4,
-    cover-en-type = cs,
+    % subject = {英语},
+    % major   = {英国语言文学},
+    % research-area = {英语语言学},
+    % research-area* = {Operator Theory},
+    % year = 2024,
+    % month = 4,
+    % cover-en-type = cs,
     % bachelor-english-cover=false
-    clc = O175.29,
-    udc = 517.9,
+    % clc = O175.29,
+    % udc = 517.9,
   },
-  style = {
-    font = times,
-    math-font = termes,
-    cjk-font = mac,
-    cjk-fakefont = true,
-  }
+  % style = {
+    % font = times,
+    % math-font = termes,
+    % cjk-font = mac,
+    % cjk-fakefont = true,
+  % }
 }
-\usepackage{zhlipsum}
-\usepackage{lipsum}
+% \usepackage{zhlipsum}
+% \usepackage{lipsum}
 \begin{document}
+\chapter{ 欢 迎 }
+\section{Welcome to whu-thesis!} 你好，\LaTeX{}!
+% \tableofcontents
+% \listoffigures
+% \listoftables
 
-\tableofcontents
-\listoffigures
-\listoftables
+% \begin{notation}
+%   $\omega_n$ & $n$-维欧氏空间中单位球的表面积 \\
+%   $\alpha_n$ & $n$-维欧氏空间中单位球的体积 \\
+% \end{notation}
 
-\begin{notation}
-  $\omega_n$ & $n$-维欧氏空间中单位球的表面积 \\
-  $\alpha_n$ & $n$-维欧氏空间中单位球的体积 \\
-\end{notation}
+% \mainmatter
 
+% \chapter{测试}
 
+% \section{文字测试}
 
-% 正文
-\mainmatter
+% 这是武汉大学学位论文模版，欢迎使用。
 
-\chapter{测试}
+% This is Wuhan University thesis template, welcome to use!
 
-\section{文字测试}
+% \section{公式}
 
-这是武汉大学学位论文模版，欢迎使用。
+% \subsection{算符、希腊字母}
 
-This is Wuhan University thesis template, welcome to use!
+% \[\sum\prod\int\iint\alpha\beta\gamma\xi\zeta\eta\epsilon\varepsilon\theta\vartheta
+%   \phi\varphi\psi\]
 
-\section{公式}
 
-\subsection{算符、希腊字母}
+% \subsection{几类数学字母表}
 
-\[\sum\prod\int\iint\alpha\beta\gamma\xi\zeta\eta\epsilon\varepsilon\theta\vartheta
-  \phi\varphi\psi\]
+% \begin{itemize}
+%   \item \verb|\mathcal|: $\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+%   \item \verb|\mathscr|: $\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+%   \item \verb|\mathbb|: $\mathbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+% \end{itemize}
 
 
-\subsection{几类数学字母表}
+% \subsection{（不）带编号单行公式}
 
-\begin{itemize}
-  \item \verb|\mathcal|: $\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
-  \item \verb|\mathscr|: $\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
-  \item \verb|\mathbb|: $\mathbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
-\end{itemize}
+% \begin{equation}
+%   a^2 + b^2 = c^2.
+% \end{equation}
 
+% \[ a^2 + b^2 = c^2.\]
 
-\subsection{（不）带编号单行公式}
+% \subsection{（不）带编号多行公式}
 
-\begin{equation}
-  a^2 + b^2 = c^2.
-\end{equation}
+% \begin{align}
+%   \text{sum} & = 1 + 2 + \cdots + n \\
+%              & = \frac12 n(n+1).
+% \end{align}
 
-\[ a^2 + b^2 = c^2.\]
+% \begin{align*}
+%   \text{sum} & = 1 + 2 + \cdots + n \\
+%              & = \frac12 n(n+1).
+% \end{align*}
 
-\subsection{（不）带编号多行公式}
+% \subsection{矩阵}
 
-\begin{align}
-  \text{sum} & = 1 + 2 + \cdots + n \\
-             & = \frac12 n(n+1).
-\end{align}
+% \[\begin{pmatrix}
+%   a_{11} & a_{22} & a_{33} \\
+%   a_{21} & a_{22} & a_{23} \\
+%   a_{31} & a_{32} & a_{33} \\
+% \end{pmatrix} \quad
+% \begin{vmatrix}
+%   a_{11} & a_{22} & a_{33} \\
+%   a_{21} & a_{22} & a_{23} \\
+%   a_{31} & a_{32} & a_{33} \\
+% \end{vmatrix} \quad
+% \begin{bmatrix}
+%   a_{11} & a_{22} & a_{33} \\
+%   a_{21} & a_{22} & a_{23} \\
+%   a_{31} & a_{32} & a_{33} \\
+% \end{bmatrix} \quad
+% \begin{Bmatrix}
+%   a_{11} & a_{22} & a_{33} \\
+%   a_{21} & a_{22} & a_{23} \\
+%   a_{31} & a_{32} & a_{33} \\
+% \end{Bmatrix}\]
 
-\begin{align*}
-  \text{sum} & = 1 + 2 + \cdots + n \\
-             & = \frac12 n(n+1).
-\end{align*}
+% \section{脚注测试}
 
-\subsection{矩阵}
+% 测试 \footnote{眼看他起朱楼，眼看他宴宾客，眼看他楼塌了。这青苔碧瓦堆，俺曾睡风流觉，将五十年兴亡看饱。
+% 金粉未消亡，闻得六朝香，满天涯烟草断人肠。怕催花信紧，风风雨雨，误了春光。}
 
-\[\begin{pmatrix}
-  a_{11} & a_{22} & a_{33} \\
-  a_{21} & a_{22} & a_{23} \\
-  a_{31} & a_{32} & a_{33} \\
-\end{pmatrix} \quad
-\begin{vmatrix}
-  a_{11} & a_{22} & a_{33} \\
-  a_{21} & a_{22} & a_{23} \\
-  a_{31} & a_{32} & a_{33} \\
-\end{vmatrix} \quad
-\begin{bmatrix}
-  a_{11} & a_{22} & a_{33} \\
-  a_{21} & a_{22} & a_{23} \\
-  a_{31} & a_{32} & a_{33} \\
-\end{bmatrix} \quad
-\begin{Bmatrix}
-  a_{11} & a_{22} & a_{33} \\
-  a_{21} & a_{22} & a_{23} \\
-  a_{31} & a_{32} & a_{33} \\
-\end{Bmatrix}\]
+% 测试 \footnote[3]{君不见，左纳言，右纳史，朝承恩，暮赐死。行路难，不在水，不在山，只在人情反覆间！}
 
-\section{脚注测试}
 
-测试 \footnote{眼看他起朱楼，眼看他宴宾客，眼看他楼塌了。这青苔碧瓦堆，俺曾睡风流觉，将五十年兴亡看饱。
-金粉未消亡，闻得六朝香，满天涯烟草断人肠。怕催花信紧，风风雨雨，误了春光。}
+% \section{引用测试}
 
-测试 \footnote[3]{君不见，左纳言，右纳史，朝承恩，暮赐死。行路难，不在水，不在山，只在人情反覆间！}
+% \subsection{参考文献}
 
+% 测试%\cite{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:5,whu-bachelor:7}
 
-\section{引用测试}
+% 测试%\cite*{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:7}
 
-\subsection{参考文献}
 
-测试%\cite{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:5,whu-bachelor:7}
 
-测试%\cite*{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:7}
+% \section{图表测试}
 
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width = 5cm]{whu-logo.pdf}
+%   \caption{武汉大学校徽}
+%   \label{fig:武汉大学校徽}
+% \end{figure}
 
+% 引用图~\ref{fig:武汉大学校徽}
 
-\section{图表测试}
+% \begin{table}[ht]
+%   \centering
+%   \caption{%
+%     简单的表格和引用 abc 123 %\cite{whu-bachelor:1}
+%   }
+%   \label{table:简单的表格}
+%   \begin{tabular}{cc}
+%     \hline
+%     a & b \\ \hline
+%     c & d \\ \hline
+%     测试 & 文本 \\ \hline
+%   \end{tabular}
+% \end{table}
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width = 5cm]{whu-logo.pdf}
-  \caption{武汉大学校徽}
-  \label{fig:武汉大学校徽}
-\end{figure}
+% 引用表~\ref{table:简单的表格}
+
+
+% \section{已定义好的一些数学定理环境}
+
+
+% \begin{definition}[测度]
+%   (参见文献xxx) 这是一段文字 $E = m c^2$  （中文括号）和 (西文括号)
+% \end{definition}
+
+% \begin{theorem}
+%   这是一段文字 $E = m c^2$
+% \end{theorem}
+
+
+% \begin{proof}
+%   这是一段文字 $E = m c^2$
+% \end{proof}
+
+% \begin{proof}[定理xx的证明]
+%   这是一段文字 $E = m c^2$
+% \end{proof}
 
-引用图~\ref{fig:武汉大学校徽}
+% \begin{example}
+%   这是一段文字 $E = m c^2$
+% \end{example}
 
-\begin{table}[ht]
-  \centering
-  \caption{%
-    简单的表格和引用 abc 123 %\cite{whu-bachelor:1}
-  }
-  \label{table:简单的表格}
-  \begin{tabular}{cc}
-    \hline
-    a & b \\ \hline
-    c & d \\ \hline
-    测试 & 文本 \\ \hline
-  \end{tabular}
-\end{table}
+% \begin{property}
+%   这是一段文字 $E = m c^2$
+% \end{property}
 
-引用表~\ref{table:简单的表格}
+% \begin{proposition}
+%   这是一段文字 $E = m c^2$
+% \end{proposition}
 
+% \begin{corollary}
+%   这是一段文字 $E = m c^2$
+% \end{corollary}
 
-\section{已定义好的一些数学定理环境}
-
-
-\begin{definition}[测度]
-  (参见文献xxx) 这是一段文字 $E = m c^2$  （中文括号）和 (西文括号)
-\end{definition}
+% \begin{lemma}
+%   这是一段文字 $E = m c^2$
+% \end{lemma}
 
-\begin{theorem}
-  这是一段文字 $E = m c^2$
-\end{theorem}
+% \begin{axiom}
+%   这是一段文字 $E = m c^2$
+% \end{axiom}
 
+% \begin{counterexample}
+%   这是一段文字 $E = m c^2$
+% \end{counterexample}
 
-\begin{proof}
-  这是一段文字 $E = m c^2$
-\end{proof}
+% \begin{conjecture}
+%   这是一段文字 $E = m c^2$
+% \end{conjecture}
 
-\begin{proof}[定理xx的证明]
-  这是一段文字 $E = m c^2$
-\end{proof}
+% \begin{question}
+%   这是一段文字 $E = m c^2$
+% \end{question}
 
-\begin{example}
-  这是一段文字 $E = m c^2$
-\end{example}
+% \begin{claim}
+%   这是一段文字 $E = m c^2$
+% \end{claim}
 
-\begin{property}
-  这是一段文字 $E = m c^2$
-\end{property}
+% \begin{remark}
+%   这是一段文字 $E = m c^2$
+% \end{remark}
 
-\begin{proposition}
-  这是一段文字 $E = m c^2$
-\end{proposition}
+% \begin{theorem}[Banach-Steinhaus]\label{thm:test}
+%   设 $E$ 是 Banach 空间, $F$ 是赋范空间, $(u_i)_{i\in I}$ 是一族从 $E$ 到 $F$ 的有界线性算子,
+%   即 $(u_i)_{i\in I}\subset \mathcal{B}(E,F)$. 若对每一点 $x\in E$, 有
+%   $\sup_{i\in I} \|u_i(x)\|<\infty$, 则
+%   \begin{equation}\label{eq:test1}
+%     \sup_{i\in I} \|u_i\| < \infty.
+%   \end{equation}
+% \end{theorem}
 
-\begin{corollary}
-  这是一段文字 $E = m c^2$
-\end{corollary}
+% 我想引用定理~\ref{thm:test} 和公式~\ref{eq:test1}
 
-\begin{lemma}
-  这是一段文字 $E = m c^2$
-\end{lemma}
 
-\begin{axiom}
-  这是一段文字 $E = m c^2$
-\end{axiom}
+% 定理括号测试：
 
-\begin{counterexample}
-  这是一段文字 $E = m c^2$
-\end{counterexample}
+% \begin{theorem}
+%   测试
+%   \begin{enumerate}
+%     \item 中文（括号）没输入空格的效果
+%     \item 中文 （括号） 输入空格的效果
+%     \item 西文(括号)没输入空格的效果
+%     \item 西文 (括号) 输入空格的效果
+%   \end{enumerate}
+% \end{theorem} 
 
-\begin{conjecture}
-  这是一段文字 $E = m c^2$
-\end{conjecture}
 
-\begin{question}
-  这是一段文字 $E = m c^2$
-\end{question}
+% \begin{proof}
+%   test
+%   \[
+%     \int_{0}^{1} x^2 \d x
+%   \]
+% \end{proof}
 
-\begin{claim}
-  这是一段文字 $E = m c^2$
-\end{claim}
+% \begin{proof}
+%   test
+%   \[
+%     \int_{0}^{1} x^2 \d x \qedhere
+%   \]
+% \end{proof}
 
-\begin{remark}
-  这是一段文字 $E = m c^2$
-\end{remark}
 
-\begin{theorem}[Banach-Steinhaus]\label{thm:test}
-  设 $E$ 是 Banach 空间, $F$ 是赋范空间, $(u_i)_{i\in I}$ 是一族从 $E$ 到 $F$ 的有界线性算子,
-  即 $(u_i)_{i\in I}\subset \mathcal{B}(E,F)$. 若对每一点 $x\in E$, 有
-  $\sup_{i\in I} \|u_i(x)\|<\infty$, 则
-  \begin{equation}\label{eq:test1}
-    \sup_{i\in I} \|u_i\| < \infty.
-  \end{equation}
-\end{theorem}
+% \section{字体测试}
+% 字体测试：\\
+% {宋体} {\heiti 黑体} {\kaishu 楷书} {\fangsong 仿宋}\\
+% {\rmfamily 罗马字族} {\sffamily 无衬线字族} {\ttfamily 打字机}\\
+% {\bfseries 粗体} {\itshape 意大利} {\slshape 倾斜}
 
-我想引用定理~\ref{thm:test} 和公式~\ref{eq:test1}
+% 伪粗体测试：\\
+% {\bfseries\songti 伪粗体} {\bfseries\kaishu 伪粗体} {\bfseries\heiti 伪粗体} {\bfseries\fangsong 伪粗体} {\bfseries 伪粗体}
 
+% 伪斜体测试：\\
+% {\itshape\songti 伪斜体} {\itshape\kaishu 伪斜体} {\itshape\heiti 伪斜体} {\itshape\fangsong 伪斜体} {\itshape 伪斜体}
 
-定理括号测试：
+% 叠加测试：\\
+% {\bfseries\itshape 伪粗斜体} {\bfseries\sffamily 伪粗黑体} {\bfseries\ttfamily 伪粗仿宋} {\itshape\sffamily 伪斜黑体} {\itshape\ttfamily 伪斜仿宋}
 
-\begin{theorem}
-  测试
-  \begin{enumerate}
-    \item 中文（括号）没输入空格的效果
-    \item 中文 （括号） 输入空格的效果
-    \item 西文(括号)没输入空格的效果
-    \item 西文 (括号) 输入空格的效果
-  \end{enumerate}
-\end{theorem} 
 
+% % 参考文献
+% % \nocite{*}
+% % \bibliography{bachelor-refs}
+% \begin{acknowledgements}
+%   致谢是以简短的文字对课题研究与论文撰写过程中直接给予帮助的人员(例如指导教师、答疑教师及其他人员)表示谢意。致谢是对他人劳动的尊重，也是学术规范。内容限一页。
+% \end{acknowledgements}
 
-\begin{proof}
-  test
-  \[
-    \int_{0}^{1} x^2 \d x
-  \]
-\end{proof}
+% \appendix
 
-\begin{proof}
-  test
-  \[
-    \int_{0}^{1} x^2 \d x \qedhere
-  \]
-\end{proof}
+% \chapter{测试}
 
+% \section{公式测试}
+% \section{公式测试}
 
-\section{字体测试}
-字体测试：\\
-{宋体} {\heiti 黑体} {\kaishu 楷书} {\fangsong 仿宋}\\
-{\rmfamily 罗马字族} {\sffamily 无衬线字族} {\ttfamily 打字机}\\
-{\bfseries 粗体} {\itshape 意大利} {\slshape 倾斜}
+% \begin{equation}
+%   a^2 + b^2 = c^2
+% \end{equation}
 
-伪粗体测试：\\
-{\bfseries\songti 伪粗体} {\bfseries\kaishu 伪粗体} {\bfseries\heiti 伪粗体} {\bfseries\fangsong 伪粗体} {\bfseries 伪粗体}
+% \chapter{测试}
 
-伪斜体测试：\\
-{\itshape\songti 伪斜体} {\itshape\kaishu 伪斜体} {\itshape\heiti 伪斜体} {\itshape\fangsong 伪斜体} {\itshape 伪斜体}
+% \section{公式测试}
+% \subsection{编号测试}
+% \subsection{编号测试}
+% \subsubsection{编号测试}
+% \subsubsection{编号测试}
 
-叠加测试：\\
-{\bfseries\itshape 伪粗斜体} {\bfseries\sffamily 伪粗黑体} {\bfseries\ttfamily 伪粗仿宋} {\itshape\sffamily 伪斜黑体} {\itshape\ttfamily 伪斜仿宋}
+% \section{公式测试}
 
+% \begin{equation}\label{equation:appendix-test}
+%   a^2 + b^2 = c^2
+% \end{equation}
 
-% 参考文献
-% \nocite{*}
-% \bibliography{bachelor-refs}
-\begin{acknowledgements}
-  致谢是以简短的文字对课题研究与论文撰写过程中直接给予帮助的人员(例如指导教师、答疑教师及其他人员)表示谢意。致谢是对他人劳动的尊重，也是学术规范。内容限一页。
-\end{acknowledgements}
-
-\appendix
-
-\chapter{测试}
-
-\section{公式测试}
-\section{公式测试}
-
-\begin{equation}
-  a^2 + b^2 = c^2
-\end{equation}
-
-\chapter{测试}
-
-\section{公式测试}
-\subsection{编号测试}
-\subsection{编号测试}
-\subsubsection{编号测试}
-\subsubsection{编号测试}
-
-\section{公式测试}
-
-\begin{equation}\label{equation:appendix-test}
-  a^2 + b^2 = c^2
-\end{equation}
-
-公式~\eqref{equation:appendix-test}
+% 公式~\eqref{equation:appendix-test}
 
 \end{document}

@@ -23,7 +23,14 @@
 % \section{概述}
 % \cls{whu-thesis}（\textbf{W}u\textbf{h}an \textbf{U}niversity \LaTeX{} \textbf{Thesis} Template）是为了帮助武汉大学毕业生撰写毕业论文（设计）而编写的 \LaTeX{} 模板，内部使用 \LaTeX3 语言，以适应 \TeX{} 技术发展潮流。
 % 
-% 模板根据《武汉大学本科生毕业论文（设计）书写印制规范》编写，力求合规、简洁、易于实现、用户友好。
+% 模板主要根据以下资料进行编写设计：
+\begin{itemize}
+  \item 《武汉大学本科生毕业论文（设计）书写印制规范》
+  \item \href{https://gs.whu.edu.cn/info/1022/3235.htm}{武汉大学硕士学位论文印制规定
+}
+  \item \href{https://gs.whu.edu.cn/info/1022/3231.htm}{武汉大学博士学位论文撰写及印制规格的规定}
+\end{itemize}
+力求合规、简洁、易于实现、用户友好。
 % 
 % 与 Microsoft Word 等所见即所得编辑工具不同，使用 \LaTeX{} 工具排版可以将写作与排版过程分离，写作者只需要关心文字的部分，而剩下的排版工作全部交给工具自动完成。
 % 
@@ -64,7 +71,7 @@
 %     \end{document}
 % \end{latexexample}
 % 
-% 按照 \ref{subsec:编译方式} 小节中的方式编译该文档，您应当得到一篇 9 页的文章。当然，这篇文章的绝大部分都是空白的。
+% 按照 \ref{subsec:编译方式} 小节中的方式编译该文档，您应当得到一篇 5 页的文章。
 % 
 % \subsection{编译方式} \label{subsec:编译方式}
 % 本模板只支持 \XeLaTeX{} 或 \LuaLaTeX{} 编译命令，其他编译方式会直接报错。为了生成正确的目录、脚注以及交叉引用，您至少需要连续编译两次。
@@ -342,7 +349,7 @@
 % \end{function}
 % 
 %
-% \subsubsection{论文样式}
+% \subsubsection{论文格式}\label{subsubsec:论文格式}
 % \begin{function}{style}
 %   \begin{whusyntax}[emph={[1]style}]
 %     style = (*\marg{键值列表}*)
@@ -378,7 +385,7 @@
 % 
 % \begin{function}{style/math-font}
 %   \begin{whusyntax}[emph={[1]math-font}]
-%     math-font = (*<default|xits|termes|mtpro>*)
+%     math-font = (*<default|xits|termes>*)
 %   \end{whusyntax}
 %   数学字体设置，若不显式设置，则使用默认的 Computer Modern 数学字体，具体见表 \ref{tab:math-font}。
 % \end{function}
@@ -395,13 +402,8 @@
 %         \opt{xits}    & XITS Math            \\
 %       \midrule
 %         \opt{termes}  & TeX Gyre Termes Math \\
-%       \midrule
-%         \opt{mtpro}   & MathTime Professional II\tnote{a} \\
 %       \bottomrule
 %     \end{tabular}
-%   \begin{tablenotes}
-%     \item[a] MathTime Professional II (mtpro2) 为付费字体，如需使用，请前往其\href{https://www.pctex.com/mtpro2.html}{官方网址}购买并安装。
-%   \end{tablenotes}
 %   \end{threeparttable}
 % \end{table}
 % 
@@ -449,7 +451,8 @@
 %   \begin{whusyntax}[emph={[1]bib-backend}]
 %     bib-backend = (*<(bibtex)|biblatex>*)
 %   \end{whusyntax}
-%   选择参考文献的支持方式。选择 "bibtex" 后，将使用 \BibTeX{} 处理文献，样式由 \pkg{natbib} 宏包和 \pkg{gbt7714} 宏包负责；选择 "biblatex" 后，将使用 biber 处理文献，样式则由 \pkg{biblatex} 宏包负责。
+%   选择参考文献的支持方式。选择 "bibtex" 后，将使用 \BibTeX{} 处理文献，
+%   样式由 \pkg{natbib} 宏包\cite{natbib}和 \pkg{gbt7714} 宏包\cite{gbt7714}负责；选择 "biblatex" 后，将使用 biber 处理文献，样式则由 \pkg{biblatex} 宏包\cite{biblatex}负责。
 % \end{function}
 % 
 % 
@@ -781,7 +784,7 @@
 %   声明后置部分开始。
 % \end{function}
 %
-% 后置部分包含参考文献、声明页等。
+% 后置部分包含参考文献、致谢、附录等。
 %
 % \begin{function}{\printbibliography}
 %   \begin{whusyntax}[morekeywords={\printbibliography}]
@@ -863,6 +866,11 @@
 %   \newblock \textit{The \LaTeX{} Companion} [M].
 %   \newblock 2nd ed.
 %   \newblock Boston: Addison--Wesley Publishing Company, 2004
+%
+%   \bibitem[()]{刘海洋2013latex入门}
+%   刘海洋.
+%   \newblock \textit{\LaTeX{} 入门} [M].
+%   \newblock 北京: 电子工业出版社, 2013
 %     
 %   \bibitem{source2e}
 %   \textsc{Braams J}, \textsc{Carlisle D}, \textsc{Jeffrey A}, et al.
