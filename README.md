@@ -5,67 +5,24 @@
 [![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
 [![](https://github.com/whutug/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/whutug/whu-thesis/actions)
 
+## Welcome to whu-thesis!
+
 本项目为武汉大学毕业论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
 
-**注意：由于模板更新频繁，请确保使用 whu-thesis 的最新版本，并在使用之前将所有宏包更新至最新。**
+## 使用步骤
 
-根据[《武汉大学本科生毕业论文（设计）书写印制规范》](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)、[武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1022/3231.htm)、[武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1022/3235.htm)编写，力求合规、简洁、易于实现、用户友好。
-
-## 样例展示
-
-<p style="align:center;">
-  <img src="https://user-images.githubusercontent.com/5097752/55679059-f250d300-5936-11e9-8dfe-937a64a0c6bf.png" width="800px">
-</p>
+1. 从 [Releases](https://github.com/whutug/whu-thesis/releases) 中下载 `zip` 文件，里面包含了模版源文件和使用手册；
+2. 请认真阅读使用手册 `whuthesis.pdf`；
+3. 开始您的论文写作并编译 PDF，编译方式主要有两种：
+   + 本地编译：本地编译要求您预先在计算机上安装 TeX 发行版，详细的安装指南见 [install-latex-guide-zh-cn](https://ctan.org/pkg/install-latex-guide-zh-cn)。
+   + Overleaf 在线编译：[Overleaf](https://www.overleaf.com/) 是一个在线 LaTeX 编译平台。其特点是无需安装，可实时共享与版本控制。
 
 
-## 如何使用
+## 重要提醒
 
-**使用前请认真阅读使用说明文档 `whu-thesis-doc.pdf`**。
-
-推荐两种方式进行编辑和编译：
-
-* [本地编译](#本地编译)
-* [Overleaf 在线编译](#overleaf-在线编译)
-
-### 本地编译
-
-本地编译需要安装 TeX 发行版软件, 具体可参见[本地安装使用指南](https://github.com/mtobeiyf/whu-thesis/wiki/%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85%E4%B8%8E%E7%BC%96%E8%AF%91)。
-
-### Overleaf 在线编译
-
-[![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
-
-[Overleaf](https://www.overleaf.com/) 是一个简洁的在线 LaTeX 编辑器。无需安装，实时共享，版本控制。该模板支持了 Overleaf 的在线编辑，可以从上面的模板链接直接创建自己的项目。
-
-使用该模板时，需要设置 `XeLaTeX` 或 `LuaLaTeX` 为编译器，具体步骤请查看 [Overleaf 在线编辑](https://github.com/mtobeiyf/whu-thesis/wiki/Overleaf-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91)。
-
-<p style="align:center;">
-  <img src="https://user-images.githubusercontent.com/5097752/55882483-319d4f00-5bd7-11e9-86ff-687106144e16.png" width="800px">
-</p>
-
-## 详细说明
-
-关于模板使用、参考文献引用等常见问题请移步 [Wiki](https://github.com/mtobeiyf/whu-thesis/wiki)。
-
-## 问题反馈
-
-如果在使用中发现 bug，请按照以下步骤操作：
-
-1. 阅读学校的[书写印制规范文件](https://github.com/mtobeiyf/whu-thesis/files/4638713/default.pdf)，判断是否符合要求；
-2. 前往项目 [Wiki](https://github.com/mtobeiyf/whu-thesis/wiki) 查看相关说明；
-3. 将 TeX 发行版和宏包升级到最新，并且将模板升级到 Github 上最新版本，查看问题是否已经修复；
-4. 在 [GitHub Issues](https://github.com/mtobeiyf/whu-thesis/issues) 中搜索该问题的关键词；
-5. 提出新的 [Issue](https://github.com/mtobeiyf/whu-thesis/issues)，并说明系统、TeX 版本、出现的问题等关键信息。
-
-如果只是使用上的问题，可以前往 [discussions](https://github.com/whutug/whu-thesis/discussions) 进行讨论。
-
-## 相关链接
-
-* [武汉大学关于做好 2023 届毕业论文（设计）工作的通知](https://uc.whu.edu.cn/info/1520/15421.htm)
-* [武汉大学本科生毕业论文（设计）工作管理办法（修订）](https://uc.whu.edu.cn/xs/bylw_sj_.htm)
-* [武汉大学毕业论文（设计）智能管理系统](http://210.42.121.231/bysj/)
-* [武汉大学硕士学位论文印制规定](https://gs.whu.edu.cn/info/1022/3235.htm)
-* [武汉大学博士学位论文撰写及印制规格的规定](https://gs.whu.edu.cn/info/1022/3231.htm)
+1. 本模板未经学校相关部门审核及授权，使用前请务必斟酌。
+2. 本模板仍处于开发中，不保证接口的稳定性。在撰写论文的过程中，请慎重考虑是否要同步进行更新。
+3. 任何由于使⽤本模板⽽引起的论⽂格式审查问题均与本模板作者⽆关。
 
 
 ## 致谢
