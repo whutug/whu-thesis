@@ -1,0 +1,38 @@
+name: 提交 BUG
+description: 请按模版规范进行提交
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 检查清单
+      description: 请确认已经完成以下事项
+      options:
+        - label: 我已在 issues 中进行搜索（包括已关闭的问题）
+          required: true
+  - type: input
+    id: os
+    attributes:
+      label: 操作系统
+      placeholder: Windows 11 / 10 / 8 / 8.1, mac OS 14 / Linux（说明发行版和版本）
+    validations:
+      required: true
+  - type: input
+    id: tex-distro
+    attributes:
+      label: TeX 发行版
+      placeholder: TeX Live 2024 / MiKTeX 24.1 / CTeX 套装 3.0.216.3 / 其他（请具体说明）
+    validations:
+      required: true
+  - type: input
+    id: branch
+    attributes:
+      label: 您使用的是仓库分支
+      placeholder: main / rebuild
+  - type: textarea
+    id: bug
+    attributes:
+      label: 描述 Bug
+      description: |
+        请在此处描述清楚您在使用本论文模版时所遇到的问题
+    validations:
+      required: true
