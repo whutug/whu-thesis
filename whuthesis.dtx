@@ -65,6 +65,7 @@
 %     % thesis.tex
 %     \documentclass{whu-thesis}
 %     \begin{document}
+%     \mainmatter
 %     \chapter{欢迎}
 %     \section{Welcome to whu-thesis!}
 %     你好，\LaTeX{}！
@@ -74,6 +75,7 @@
 % 按照 \ref{subsec:编译方式} 小节中的方式编译该文档，您应当得到一篇 5 页的文章。
 % 
 % \subsection{编译方式} \label{subsec:编译方式}
+%
 % 本模板只支持 \XeLaTeX{} 或 \LuaLaTeX{} 编译命令，其他编译方式会直接报错。为了生成正确的目录、脚注以及交叉引用，您至少需要连续编译两次。
 % 
 % 以下代码中，假设您的 \TeX{} 源文件名为 \file{thesis.tex}。使用 \XeLaTeX{} 与 \BibTeX{} 编译论文，请在命令行中执行
@@ -99,11 +101,11 @@
 % \begin{shellexample}[morekeywords={latexmk},emph={-lualatex}]
 %   latexmk -lualatex thesis
 % \end{shellexample}
+%
+% \subsubsection*{博士论文书脊}
 % 
-% 在特殊情况下（如 \kvopt{type}{doctor} 需要编译书脊时），可能需要在编译时加入 \opt{-shell-escape} 选项，如
-% \begin{shellexample}[morekeywords={latexmk},emph={-xelatex,-shell-escape}]
-%   latexmk -xelatex -shell-escape thesis
-% \end{shellexample}
+% 如果需要生成博士论文的书脊，请使用 \LuaLaTeX 单独编译 \file{spine}
+% 文件夹中的源文件 \file{whu-thesis-spine.tex}。
 % 
 % \subsection{模板选项}
 % 所谓“模板选项”，指需要在引入文档类的时候指定的选项：
@@ -120,8 +122,6 @@
 %   \end{whusyntax}
 %   选择论文类型。四种选项分别代表本科毕业论文、硕士学位论文、博士学位论文与本科开题报告。
 % \end{function}
-% 
-% 无论何时，\cls{whu-thesis} 都会加载 \cls{ctexbook} 文档类。\kvopt{type}{doctor} 时，由于需要编译书脊，请在编译时加入 \opt{-shell-escape} 选项，这时会在外部编译书脊，书脊使用 \pkg{\LuaTeX-ja} 的竖排文档类 \cls{ltjtarticle}。
 % 
 % \begin{function}{class}
 %   \begin{whusyntax}[emph={[1]class}]
@@ -360,9 +360,9 @@
 % 
 % \begin{function}{style/font}
 %   \begin{whusyntax}[emph={[1]font}]
-%     font = (*<default|times|xits|termes>*)
+%     font = (*<default|(times)|xits|termes>*)
 %   \end{whusyntax}
-%   西文字体设置，若不显式设置，则使用默认的 Latin Modern Roman 字体族，具体见表 \ref{tab:font}。
+%   西文字体设置，具体见表 \ref{tab:font}。
 % \end{function}
 % 
 % \begin{table}[!ht]
@@ -385,9 +385,9 @@
 % 
 % \begin{function}{style/math-font}
 %   \begin{whusyntax}[emph={[1]math-font}]
-%     math-font = (*<default|xits|termes>*)
+%     math-font = (*<default|xits|(termes)>*)
 %   \end{whusyntax}
-%   数学字体设置，若不显式设置，则使用默认的 Computer Modern 数学字体，具体见表 \ref{tab:math-font}。
+%   数学字体设置，具体见表 \ref{tab:math-font}。
 % \end{function}
 % 
 % \begin{table}[!ht]
@@ -409,7 +409,7 @@
 % 
 % \begin{function}{style/cjk-font}
 %   \begin{whusyntax}[emph={[1]cjk-font}]
-%     cjk-font = (*<windows|mac|fandol|sourcehan|none>*)
+%     cjk-font = (*<windows|mac|(fandol)|sourcehan|none>*)
 %   \end{whusyntax}
 %   中文字体设置，具体见表 \ref{tab:cjk-font}。
 % \end{function}
@@ -444,7 +444,9 @@
 %   \begin{whusyntax}[emph={[1]bachelor-encover}]
 %     bachelor-encover = (*<\TTF>*)
 %   \end{whusyntax}
-%   本科毕业论文是否显示英文封面。
+%   本科毕业论文是否显示英文封面。初始值为 \opt{false}，
+%   即用户不设置此键值对时，无英文封面。若需要英文封面，请显式设置键值对
+%   \kvopt{bachelor-encover}{true}，其中 \kvopt{}{true} 可以省略。
 % \end{function}
 % 
 % \begin{function}{style/bib-backend}
@@ -512,27 +514,8 @@
 %       ......\mbox{}~~~~~~~~~~~~~~~~~pifont|pifont*|pifont-sans|pifont-sans*|\\
 %       ......\mbox{}~~~~~~~~~~~~~~~~~xits|xits-sans|xits-sans*>*)
 %   \end{whusyntax}
-%   设置脚注编号样式。西文字体设置会影响其默认取值（见
-%   表~\ref{tab:footnote-font}）。因此，要使得该选项生效，需将其
-%   放置在 \opt{font} 选项之后。带有 |sans| 的为相应的无衬线字体
-%   版本；带有 |*| 的为阴文样式（即黑底白字）。
+%   设置脚注编号样式。带有 |sans| 的为相应的无衬线字体版本；带有 |*| 的为阴文样式（即黑底白字）。
 % \end{function}
-%
-% \begin{table}[ht]
-%   \caption{西文字体与脚注编号样式默认值的对应关系}
-%   \label{tab:footnote-font}
-%   \centering
-%   \small
-%   \begin{tabular}{ccccc}
-%     \toprule
-%       \textbf{西文字体设置} &
-%         |libertinus| & |lm|     & |palatino| & |times| \\
-%     \midrule
-%       \textbf{脚注编号样式默认值} &
-%         |libertinus| & |pifont| & |pifont|   & |xits|  \\
-%     \bottomrule
-%   \end{tabular}
-% \end{table}
 %
 % \begin{function}{style/abstract-keywords-type, style/abstract-keywords-type*}
 %   \begin{whusyntax}[emph={[1]abstract-keywords-type, abstract-keywords-type*}]
@@ -809,39 +792,32 @@
 %
 % 
 % \section{宏包依赖}
+%
 % 使用不同编译方式、指定不同选项，会导致宏包依赖情况有所不同。
 % 具体如下：
 % \begin{itemize}
-%     \item 在任何情况下，本模板都会\emph{显式}调用以下宏包（或文档类）：
-%           \begin{itemize}
-%               \item \pkg{expl3}、\pkg{xparse} 和 \pkg{l3keys2e}，用于构建 \LaTeX3 编程环境 \cite{source3}。它们分属 \pkg{l3kernel} 和 \pkg{l3packages} 宏集。
-%               \item \cls{ctex文档类}，提供中文排版的通用框架，属于 \CTeX{} 宏集\cite{CTeX}。
-%               \item \pkg{amsmath}、\pkg{amssymb} 与 \pkg{amsthm}，对 \LaTeX{} 的数学排版功能进行了全面扩展，并提供定理类环境定制功能。属于 \AmSLaTeX{} 套件。
-%               \item \pkg{mathtools}，是 \pkg{amsmath} 的扩充，修正了 \pkg{amsmath} 的 bug，并提供了更多数学排版功能。
-%               \item \pkg{ti\emph{k}z}、\pkg{pgfplots}，提供绘图（如圆圈数字）支持。
-%               \item \pkg{ulem}，提供绘制下划线功能。
-%               \item \pkg{siunitx}、\pkg{physics}，提供方便的单位、物理符号输入支持。
-%               \item \pkg{algorithm2e}，用于提供编写算法／伪代码的支持。
-%               \item \pkg{geometry}，用于调整页面尺寸。
-%               \item \pkg{fancyhdr}，处理页眉页脚。
-%               \item \pkg{tocloft}，调整目录样式。
-%               \item \pkg{subcaption}，提供子题注支持。
-%               \item \pkg{caption}，用于设置题注格式。
-%               \item \pkg{graphicx}，提供图形插入的接口。
-%               \item \pkg{tabularx}，用来创建给定总宽度的表格。
-%               \item \pkg{longtable}、\pkg{xltabular}，提供长表格（允许跨页的表格）与定宽长表格的支持。
-%               \item \pkg{booktabs}，提供三线表支持。
-%               \item \pkg{multirow}、\pkg{makecell}，提供纵向合并、“拆分”单元格功能。
-%               \item \pkg{diagbox}，用于绘制斜线表头。
-%               \item \pkg{enumitem}，用于删除列举环境额外的的纵向间距。
-%               \item \pkg{footmisc}，用于设置脚注序号每面更新。
-%               \item \pkg{unicode-math}，负责处理 Unicode 编码的 OpenType 数学字体。\cls{whu-thesis} 会调用 Times 风格的 XITS Math 字体。
-%               \item \pkg{natbib}，提供作者-年份引用格式。
-%               \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
-%           \end{itemize}
-%     \item 设置 \kvopt{class}{opening} 时，\cls{whu-thesis} 会调用 \cls{ctexart} 文档类，同时会调用 \pkg{needspace}，防止在“指导教师意见”中换页。且在 \kvopt{bib-backend}{bibtex} 时调用 \pkg{tocbibind} 宏包，对参考文献章节编号。其他时候 \cls{whu-thesis} 则会调用 \cls{ctexbook} 文档类。
+%   \item 在任何情况下，本模板都会\emph{显式}调用以下宏包（或文档类）：
+%     \begin{itemize}
+%       \item \pkg{expl3}、\pkg{xparse} 和 \pkg{l3keys2e}，用于构建 \LaTeX3 编程环境 \cite{source3}。它们分属 \pkg{l3kernel} 和 \pkg{l3packages} 宏集。
+%       \item \cls{ctex} 文档类，提供中文排版的通用框架，属于 \CTeX{} 宏集\cite{CTeX}。
+%       \item \pkg{amsmath}、\pkg{amssymb} 与 \pkg{amsthm}，对 \LaTeX{} 的数学排版功能进行了全面扩展，并提供定理类环境定制功能。属于 \AmSLaTeX{} 套件。
+%       \item \pkg{mathtools}，是 \pkg{amsmath} 的扩充，修正了 \pkg{amsmath} 的 bug，并提供了更多数学排版功能。
+%       \item \pkg{thmtools}，用于定制定理类环境。
+%       \item \pkg{tikzpagenodes}，用于页面绝对定位，此宏包内部加载 \pkg{ti\emph{k}z}。
+%       \item \pkg{geometry}，用于调整页面尺寸。
+%       \item \pkg{fancyhdr}，处理页眉页脚。
+%       \item \pkg{tocloft}，调整目录样式。
+%       \item \pkg{caption}，用于设置题注格式。
+%       \item \pkg{graphicx}，提供插图功能。
+%       \item \pkg{booktabs}，提供三线表支持。
+%       \item \pkg{enumitem}，提供高度定制化的列表环境。
+%       \item \pkg{footmisc}，用于设置脚注序号每面更新。
+%       \item \pkg{unicode-math}，负责处理 Unicode 编码的 OpenType 数学字体。
+%       \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
+%       \item \pkg{fixdif}，提供微分算符命令 \cmd{\d}。
+%       \item \pkg{xeCJKfntef}，用于排版下划线。
+%     \end{itemize}
 %     \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\cite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\cite{LuaTeX-ja} 宏包与 \pkg{chinese-jfm}。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
-%     \item \opt{draft} 选项开启时，如果使用 \LuaLaTeX{} 编译，会载入 \pkg{lua-visual-debug} 宏包。
 %     \item 开启 \kvopt{style/bib-backend}{bibtex} 后，会调用 \pkg{natbib} 宏包，并依赖 \BibTeX{} 程序。参考文献样式由 \pkg{gbt7714} 宏包提供 \cite{natbib,gbt7714}。
 %     \item 开启 \kvopt{style/bib-backend}{biblatex} 后，会调用 \pkg{biblatex} 宏包，并依赖 \biber{} 程序。参考文献样式由 \pkg{biblatex-gb7714-2015} 宏包提供 \cite{biblatex,biblatex-gb7714-2015}。
 % \end{itemize}
