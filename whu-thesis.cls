@@ -394,6 +394,7 @@
 \RequirePackage { amssymb }
 \RequirePackage { amsthm }
 \RequirePackage { bookmark }
+\RequirePackage { booktabs }
 \RequirePackage { caption }
 \RequirePackage { enumitem }
 \RequirePackage { etoolbox }
@@ -403,7 +404,6 @@
 \RequirePackage { footmisc }
 \RequirePackage { geometry }
 \RequirePackage { graphicx }
-\RequirePackage { tabularray }
 \RequirePackage { thmtools }
 \RequirePackage { tikzpagenodes }
 \RequirePackage { tocloft }
@@ -1662,6 +1662,7 @@
 \keys_define:nn { whu / style }
   {
     bachelor-encover .bool_set:N = \l__whu_bachelor_english_cover_bool,
+    bachelor-encover .initial:n = false,
     bachelor-encover .default:n = true
   }
 \cs_new:Npn \__whu_bachelor_cover_ii:
