@@ -1,0 +1,55 @@
+\documentclass[type=bachelor]{../whu-thesis}
+\whusetup{
+  style = {
+    bib-backend = bibtex,
+    bib-style = numerical,
+    bib-resource = {test},
+  }
+}
+\def\BibTeX{B\textsc{ib}\TeX}
+\begin{document}
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{引用}
+
+\section{文字与段落}
+
+\textbf{本段使用 \texttt{\string\cite}}
+Myriad，英语单词，意为「无数的」\cite{sunstein,gjhjbhjkjbzs,hblzsthjkjyxgs}。
+同时，「Myriad」也是一款字体的名字。
+由罗伯特·斯林巴赫（Robert Slimbach，1956年--）和卡罗·图温布利
+（Carol Twombly，1959年-）\cite{wyf,sunstein,zgtsgxh,lzp1}
+在1990年到1992年期间以 Frutiger 字体为蓝本为 Adobe 公司设计\cite{cdy}。
+Myriad 是早期数码字体时代的先驱，\cite{wfz,wfz1}
+伴随着技术的成长一路走来 \cite{hlswedl,zgdylsdag}。
+
+\textbf{本段使用 \texttt{\string\citep}}
+如今，它更多地和我们相见在显示屏幕上 \citep{wfz2}。当然，还有那著名的标榜设计的
+电子品牌 \citep{cgw,mks}。1992 年，耗时两年开发的 Myriad 终于发布了历史上第一个版本：
+Myriad MM \citep{wyf,hblzsthjkjyxgs,sunstein,zgtsgxh,aaas}。
+
+\section{title}
+
+\textbf{本段使用 \texttt{\string\citet}}
+这款温和且具有良好可读性的人文主义无衬线字体\citet{yjb}，集诸多当时最新的数字
+字体技术于一身。 后缀 MM，意为 Multiple Master，没有找到对应的中文
+译名\citet{lbm,calkin}，我们权且称之为「多母板技术」。Myriad 是最早采用 Multiple Master
+技术的无衬线字体之一。这项技术的原理是在坐标轴（Axis）的区间两端设计
+极限母板，中间的变量则采取线性或非线性变化，对于字体来说，字型的宽度、
+粗细甚至有无衬线\citet{xadzkjdx,yufin,cgw}，都可以在坐标轴上设置。此外，MM 技术还提供了在小字号
+下屏幕显示的视觉修正（Optical Adjustment），也就是说，同一款字体，在
+小字号时，其字间距和笔画粗细，会被适当地放大。而衬线字体，随着字号的
+变小，衬线会相对变粗。视觉修正可以提高小字号字体的识别性，对于远低于
+印刷分辨率的电脑屏幕来说，也具有重要意义。
+
+在 Multiple Master 的时代，字号是从6pt到72pt之间非线性设置的。这一传统
+保留到了今天 Truetype 和 Opentype 的 Single Master 时代。Adobe 软件的
+字体下拉菜单，仍然只显示6到72pt 的字号。
+
+\backmatter
+\printbibliography
+\end{document}
