@@ -407,7 +407,6 @@
 \RequirePackage { thmtools }
 \RequirePackage { tikzpagenodes }
 \RequirePackage { tocloft }
-\RequirePackage { varwidth }
 \RequirePackage { xeCJK }
 \RequirePackage { xeCJKfntef }
 
@@ -1409,7 +1408,7 @@
     \noindent
     \begin{minipage}[t][3.85cm]{\textwidth}
       \centering
-      \includegraphics[ width = 5.5cm ]{ logo/whu-name.pdf }
+      \includegraphics[ width = 5.5cm ]{ logo / whu-name.pdf }
       \skip_vertical:n { 0.46 cm }
       \zihao{2} \bfseries \c__whu_name_type_tl
     \end{minipage}\par
@@ -1523,7 +1522,7 @@
     \noindent
     \begin{minipage}[t][3.5cm]{\textwidth}
       \centering
-      \includegraphics [ width = 5 cm ] { data / whu.pdf }
+      \includegraphics [ width = 5 cm ] { logo / whu-name.pdf }
       \skip_vertical:n { 0.57cm }
       { \zihao{2} \bfseries 
         \__whu_spread_box_with_quad:n { \c__whu_name_type_tl } }
@@ -2104,7 +2103,8 @@
               afterskip  = 20pt
             }
         }
-      \chapter{ \c__whu_name_abstract_tl }
+      \chapter* { \c__whu_name_abstract_tl }
+      \addcontentsline{toc}{chapter}{摘要}
       \zihao{-4}
       \file_if_exist:nT { pages/abstract.tex }
         {
