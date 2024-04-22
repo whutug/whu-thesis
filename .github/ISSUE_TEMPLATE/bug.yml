@@ -26,8 +26,8 @@ body:
   - type: input
     id: branch
     attributes:
-      label: 您使用的是仓库分支
-      placeholder: main / rebuild
+      label: 您使用的模版来源
+      placeholder: main 分支 / rebuild 分支 / Releases (及其标签号)
   - type: textarea
     id: bug
     attributes:
