@@ -11,7 +11,7 @@
 % \author{whutug\thanks{\url{https://github.com/whutug}}}
 % \date{2024年4月7日}
 % \maketitle
-% \tableofcontents
+% \tableofcontents 
 %
 % \newgeometry{
 %   left   = 1.65 in,
@@ -24,13 +24,12 @@
 % \cls{whu-thesis}（\textbf{W}u\textbf{h}an \textbf{U}niversity \LaTeX{} \textbf{Thesis} Template）是为了帮助武汉大学毕业生撰写毕业论文（设计）而编写的 \LaTeX{} 模板，内部使用 \LaTeX3 语言，以适应 \TeX{} 技术发展潮流。
 % 
 % 模板主要根据以下资料进行编写设计：
-\begin{itemize}
-  \item 《武汉大学本科生毕业论文（设计）书写印制规范》
-  \item \href{https://gs.whu.edu.cn/info/1022/3235.htm}{武汉大学硕士学位论文印制规定
-}
-  \item \href{https://gs.whu.edu.cn/info/1022/3231.htm}{武汉大学博士学位论文撰写及印制规格的规定}
-\end{itemize}
-力求合规、简洁、易于实现、用户友好。
+% \begin{itemize}
+% \item 《武汉大学本科生毕业论文（设计）书写印制规范》
+% \item \href{https://gs.whu.edu.cn/info/1022/3235.htm}{武汉大学硕士学位论文印制规定}
+% \item \href{https://gs.whu.edu.cn/info/1022/3231.htm}{武汉大学博士学位论文撰写及印制规格的规定}
+% \end{itemize}
+% 力求合规、简洁、易于实现、用户友好。
 % 
 % 与 Microsoft Word 等所见即所得编辑工具不同，使用 \LaTeX{} 工具排版可以将写作与排版过程分离，写作者只需要关心文字的部分，而剩下的排版工作全部交给工具自动完成。
 % 
@@ -440,13 +439,18 @@
 %   \end{threeparttable}
 % \end{table}
 %
+% \begin{function}{style/cjk-fakefont}
+%   \begin{whusyntax}[emph={[1]cjk-fakefont}]
+%     cjk-fakefont = (*<\TFF>*)
+%   \end{whusyntax}
+%   设置是否使用伪粗体与伪斜体。
+% \end{function}
+%
 % \begin{function}{style/bachelor-encover}
 %   \begin{whusyntax}[emph={[1]bachelor-encover}]
-%     bachelor-encover = (*<\TTF>*)
+%     bachelor-encover = (*<\TFF>*)
 %   \end{whusyntax}
-%   本科毕业论文是否显示英文封面。初始值为 \opt{false}，
-%   即用户不设置此键值对时，无英文封面。若需要英文封面，请显式设置键值对
-%   \kvopt{bachelor-encover}{true}，其中 \kvopt{}{true} 可以省略。
+%   本科毕业论文是否显示英文封面，默认不显示。
 % \end{function}
 % 
 % \begin{function}{style/bib-backend}
@@ -481,6 +485,13 @@
 %   参考文献数据源。可以是单个文件，也可以是用英文逗号隔开的一组文件。
 %   如果 \kvopt{bib-backend}{biblatex}，则必须明确给出 \file{.bib}
 %   后缀名。
+% \end{function}
+% 
+% \begin{function}{style/library}
+%   \begin{whusyntax}[emph={[1]library}]
+%     library = (*<\TFF>*)
+%   \end{whusyntax}
+%   设置是否开启图书馆模式，若开启，则会去掉论文中所有的空白页。
 % \end{function}
 % 
 % \begin{function}{style/fullwidth-stop}
@@ -710,7 +721,7 @@
 %
 %^^A TODO: \DescribeEnv{proof}
 % \begin{function}{axiom,corollary,definition,example,lemma,
-%   proof,theorem}
+%   proof,theorem,problem,property,proposition,counterexample,conjecture,claim,remark}
 %   \begin{whusyntax}[emph={[2]proof}]
 %     \begin{proof}(*\oarg{小标题}*)
 %       (*\meta{证明过程}*)
@@ -816,6 +827,7 @@
 %       \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
 %       \item \pkg{fixdif}，提供微分算符命令 \cmd{\d}。
 %       \item \pkg{xeCJKfntef}，用于排版下划线。
+%       \item \pkg{filehooks}，用于消除 \pkg{fontspec} 宏包对部分字体缺失 CJK script 的警告。
 %     \end{itemize}
 %     \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\cite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\cite{LuaTeX-ja} 宏包与 \pkg{chinese-jfm}。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
 %     \item 开启 \kvopt{style/bib-backend}{bibtex} 后，会调用 \pkg{natbib} 宏包，并依赖 \BibTeX{} 程序。参考文献样式由 \pkg{gbt7714} 宏包提供 \cite{natbib,gbt7714}。
