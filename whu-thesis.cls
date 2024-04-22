@@ -487,6 +487,23 @@
   }
 %endregion 页面尺寸设置
 
+%region 图书馆版本 去除所有空白页
+\keys_define:nn { whu / style }
+  {
+    library .bool_gset:N = \g__whu_library_version_bool,
+    library .initial:n   = false,
+    library .default:n   = true,
+  }
+\ctex_after_end_preamble:n
+{
+  \bool_if:NT \g__whu_library_version_bool
+  {
+    \cs_set_eq:NN \__whu_new_blank_page: \newpage
+    \renewcommand{\cleardoublepage}{\clearpage}
+  }
+}
+%endregion 图书馆版本
+
 %region 字体配置 (font configuration)
 %tag 预备函数
 \cs_new_protected:Npn \__whu_set_cjk_main_font:nn #1#2
