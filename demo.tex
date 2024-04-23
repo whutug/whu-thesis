@@ -1,50 +1,52 @@
 % \documentclass[type = bachelor]{whu-thesis}
 % \documentclass[type = master]{whu-thesis}
-\documentclass{whu-thesis}
+\documentclass[type = master]{whu-thesis}
 % \documentclass[type = master,showframe]{whu-thesis}
 % \documentclass[type = doctor,showframe]{whu-thesis}
 % \documentclass[type = bachelor,showframe]{whu-thesis}
 \whusetup{
   info = {
-    % title      = {论文题目，楷体一号},
-    % title*     = {A QoS-aware Self-Adaptive System Approach in Service Computing Environment},
-    % department = {数学与统计学院},
-    % department* = {School of Mathematics and Statistics},
-    % author     = {张三},
-    % author*    = {Xxxxxx Xxxxx},
-    % student-id = {2021202012345},
-    % supervisor = {李某某},
-    % supervisor* = {Xxx Xxxxx},
-    % supervisor-outer = {王某某},
-    % academic-title = {教授},
-    % academic-title* = {Prof},
-    % academic-title-outer = {高级工程师},
-    % subject = {英语},
-    % major   = {英国语言文学},
-    % research-area = {英语语言学},
-    % research-area* = {Operator Theory},
-    % year = 2024,
-    % month = 4,
-    % cover-en-type = cs,
+    title      = {论文题目，楷体一号},
+    title*     = {A QoS-aware Self-Adaptive System Approach in Service Computing Environment},
+    department = {数学与统计学院},
+    department* = {School of Mathematics and Statistics},
+    author     = {张三},
+    author*    = {Xxxxxx Xxxxx},
+    student-id = {2021202012345},
+    supervisor = {李某某},
+    supervisor* = {Xxx Xxxxx},
+    supervisor-outer = {王某某},
+    academic-title = {教授},
+    academic-title* = {Prof},
+    academic-title-outer = {高级工程师},
+    subject = {英语},
+    major   = {英国语言文学},
+    research-area = {英语语言学},
+    research-area* = {Operator Theory},
+    year = 2024,
+    month = 4,
+    cover-en-type = cs,
     % bachelor-english-cover=false
-    % clc = O175.29,
-    % udc = 517.9,
+    clc = O175.29,
+    udc = 517.9,
   },
   style = {
-    footnote-style = libertinus-sans
-    % font = times,
-    % math-font = termes,
-    % cjk-font = mac,
+    % footnote-style = libertinus-sans,
+    font = times,
+    math-font = termes,
+    cjk-font = mac,
+    % library,
     % cjk-fakefont = true,
+    bib-backend = bibtex,
+    % bib-style = numerical,
+    bib-resource = {ref/bachelor-refs.bib}
   }
 }
-% \usepackage{zhlipsum}
-% \usepackage{lipsum}
 \begin{document}
 
 \tableofcontents
-\listoffigures
-\listoftables
+% \listoffigures
+% \listoftables
 
 \begin{notation}
   $\omega_n$ & $n$-维欧氏空间中单位球的表面积 \\
@@ -133,9 +135,9 @@ This is Wuhan University thesis template, welcome to use!
 
 \subsection{参考文献}
 
-测试%\cite{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:5,whu-bachelor:7}
+测试 \cite{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:5,whu-bachelor:7}
 
-测试%\cite*{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:7}
+测试 \cite*{whu-bachelor:1,whu-bachelor:2,whu-bachelor:3,whu-bachelor:7}
 
 
 
@@ -286,10 +288,15 @@ This is Wuhan University thesis template, welcome to use!
 叠加测试：\\
 {\bfseries\itshape 伪粗斜体} {\bfseries\sffamily 伪粗黑体} {\bfseries\ttfamily 伪粗仿宋} {\itshape\sffamily 伪斜黑体} {\itshape\ttfamily 伪斜仿宋}
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+\chapter{BBBB}
+
 
 % 参考文献
 % \nocite{*}
-% \bibliography{bachelor-refs}
+\printbibliography
+
 \begin{acknowledgements}
   致谢是以简短的文字对课题研究与论文撰写过程中直接给予帮助的人员(例如指导教师、答疑教师及其他人员)表示谢意。致谢是对他人劳动的尊重，也是学术规范。内容限一页。
 \end{acknowledgements}
