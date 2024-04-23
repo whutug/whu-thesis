@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-rm -f *.aux
+find . -name "*.aux" -type f -delete
 rm -f *.bak
 rm -f *.bbl
 rm -f *.bcf
