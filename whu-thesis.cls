@@ -2321,6 +2321,7 @@
               \newpage
               \frontmatter
               \pagestyle{ master-frontmatter }
+              \pagenumbering{Roman}
               \__whu_master_abstract_output:
               \newpage
               \__whu_master_abstract_en_output:
@@ -2340,6 +2341,7 @@
               \newpage
               \frontmatter
               \pagestyle{ doctor-frontmatter }
+              \pagenumbering{Roman}
               \__whu_doctor_abstract_output:
               \newpage
               \__whu_doctor_abstract_en_output:
