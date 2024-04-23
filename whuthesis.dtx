@@ -455,7 +455,7 @@
 % 
 % \begin{function}{style/bib-backend}
 %   \begin{whusyntax}[emph={[1]bib-backend}]
-%     bib-backend = (*<(bibtex)|biblatex>*)
+%     bib-backend = (*<bibtex|biblatex>*)
 %   \end{whusyntax}
 %   选择参考文献的支持方式。选择 "bibtex" 后，将使用 \BibTeX{} 处理文献，
 %   样式由 \pkg{natbib} 宏包\cite{natbib}和 \pkg{gbt7714} 宏包\cite{gbt7714}负责；选择 "biblatex" 后，将使用 biber 处理文献，样式则由 \pkg{biblatex} 宏包\cite{biblatex}负责。
@@ -466,7 +466,7 @@
 %   \begin{whusyntax}[emph={[1]bib-style}]
 %     bib-style = (*<numerical|author-year|\meta{其他样式}>*)
 %   \end{whusyntax}
-%   设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应国家标准 GB/T 7714—2015 中的著者-出版年制和顺序编码制。选择 \meta{其他样式} 时，需要保证相应的 ".bst"（\kvopt{bib-backend}{bibtex}）或 ".bbx"（\kvopt{bib-backend}{biblatex}）文件能够被读取。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
+%   设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应著者-出版年制和顺序编码制。根据最新标准，本科毕业论文使用国标 GB/T 7714-2015 中的顺序编码制，而硕士和博士学位论文使用国标 GB/T 7714-2005 中的著者-出版年制。选择 \meta{其他样式} 时，需要保证相应的 ".bst"（\kvopt{bib-backend}{bibtex}）或 ".bbx"（\kvopt{bib-backend}{biblatex}）文件能够被读取。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 或 \opt{opening} 时默认为 \opt{numerical}。
 % \end{function}
 % 
 % \begin{function}{style/cite-style}

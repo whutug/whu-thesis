@@ -488,20 +488,20 @@
 %endregion 页面尺寸设置
 
 %region 图书馆版本 去除所有空白页
-\keys_define:nn { whu / style }
-  {
-    library .bool_gset:N = \g__whu_library_version_bool,
-    library .initial:n   = false,
-    library .default:n   = true,
-  }
-\ctex_after_end_preamble:n
-{
-  \bool_if:NT \g__whu_library_version_bool
-  {
-    \cs_set_eq:NN \__whu_new_blank_page: \newpage
-    \renewcommand{\cleardoublepage}{\clearpage}
-  }
-}
+% \keys_define:nn { whu / style }
+%   {
+%     library .bool_gset:N = \g__whu_library_version_bool,
+%     library .initial:n   = false,
+%     library .default:n   = true,
+%   }
+% \ctex_after_end_preamble:n
+% {
+%   \bool_if:NT \g__whu_library_version_bool
+%   {
+%     \cs_set_eq:NN \__whu_new_blank_page: \newpage
+%     \renewcommand{\cleardoublepage}{\clearpage}
+%   }
+% }
 %endregion 图书馆版本
 
 %region 字体配置 (font configuration)
@@ -1403,7 +1403,7 @@
 
 %region 中文封面
 %region 本科
-\cs_new:Npn \__whu_bachelor_cover_i:
+\cs_new_protected:Npn \__whu_bachelor_cover_i:
   {
     \newgeometry { hmargin = 2.445 cm , vmargin = 2.54cm }
     % logo and type
@@ -1419,7 +1419,7 @@
 
 
 %tag logo-and-type
-\cs_new:Npn \__whu_bachelor_cover_i_logo_and_type:
+\cs_new_protected:Npn \__whu_bachelor_cover_i_logo_and_type:
   {
     \skip_vertical:n { 2.01 cm }\setlength{\fboxsep}{0pt}
     \noindent
@@ -1432,7 +1432,7 @@
   }
 
 %tag 论文标题
-\cs_new:Npn \__whu_bachelor_cover_i_title:
+\cs_new_protected:Npn \__whu_bachelor_cover_i_title:
   {
     \skip_vertical:n { 2.62cm }
     \noindent
@@ -1443,7 +1443,7 @@
     \end{minipage}\par
   }
 %tag 个人信息
-\cs_new:Npn \__whu_bachelor_cover_i_information:
+\cs_new_protected:Npn \__whu_bachelor_cover_i_information:
   {
     \clist_set:Nx \l__whu_tmpa_clist
       {
@@ -1479,7 +1479,7 @@
     \end{minipage}\par
   }
 %tag 时间
-\cs_new:Npn \__whu_bachelor_cover_i_date_zh:
+\cs_new_protected:Npn \__whu_bachelor_cover_i_date_zh:
   {
     \skip_vertical:n { 4.85cm }
     \noindent
@@ -1494,7 +1494,7 @@
 %endregion 本科
 
 %region 硕士
-\cs_new:Npn \__whu_master_cover_i:
+\cs_new_protected:Npn \__whu_master_cover_i:
   {
     \newgeometry { hmargin = 2.445 cm , vmargin = 2.54cm }
     % 顶部四项
@@ -1512,7 +1512,7 @@
     \restoregeometry
   }
 %tag 顶部四项
-\cs_new:Npn \__whu_master_cover_i_topmatter:
+\cs_new_protected:Npn \__whu_master_cover_i_topmatter:
   {
     \noindent
     \begin{minipage}[b][0.9cm][b]{\textwidth}
@@ -1534,7 +1534,7 @@
     \skip_vertical:n { 2cm }
   }
 %tag logo-and-type
-\cs_new:Npn \__whu_master_cover_i_logo_and_type:
+\cs_new_protected:Npn \__whu_master_cover_i_logo_and_type:
   {
     \noindent
     \begin{minipage}[t][3.5cm]{\textwidth}
@@ -1557,7 +1557,7 @@
     \end{minipage}\par
   }
 %tag 论文标题
-\cs_new:Npn \__whu_master_cover_i_title:
+\cs_new_protected:Npn \__whu_master_cover_i_title:
   {
     \noindent
     \begin{minipage}[t][4.49cm]{\textwidth}
@@ -1575,7 +1575,7 @@
       }
   }
 %tag 学术学位
-\cs_new:Npn \__whu_master_academic_cover_information:
+\cs_new_protected:Npn \__whu_master_academic_cover_information:
   {
     \clist_set:Nx \l__whu_tmpa_clist
       {
@@ -1612,7 +1612,7 @@
     \skip_vertical:n { 1.95cm }
   }
 %tag 专业学位 (比学术学位多一个校外导师项)
-\cs_new:Npn \__whu_master_professional_cover_information:
+\cs_new_protected:Npn \__whu_master_professional_cover_information:
   {
     \clist_set:Nx \l__whu_tmpa_clist
       {
@@ -1652,7 +1652,7 @@
   }
 %endregion 个人信息
 %tag 时间
-\cs_new:Npn \__whu_master_cover_i_date_zh:
+\cs_new_protected:Npn \__whu_master_cover_i_date_zh:
   {
     \noindent
     \begin{minipage}[c][0.81cm]{\textwidth}
@@ -2935,6 +2935,15 @@
     cite-style .tl_set:N = \l__whu_cite_style_tl,
     bib-resource .clist_set:N = \l__whu_bib_resource_clist
   }
+%tag 设置参考文献格式默认值
+% 本科默认使用顺序编码制，硕博默认使用著者-出版年制
+\tl_if_eq:VnTF \g__whu_thesis_type_tl { bachelor }
+  {
+    \keys_set:nn { whu / style } { bib-style = numerical }
+  }
+  {
+    \keys_set:nn { whu / style } { bib-style = author-year }
+  }
 %region 加载宏包
 %tag bibtex 此时分两种情况：
 % Case 1. bib-style = numerical or author-year，则调用 gbt7714 宏包，此宏包内部调用 natbib 宏包
@@ -2946,8 +2955,15 @@
         \tl_if_empty:NTF \l__whu_bib_style_tl
           {
             \RequirePackage [ sort & compress ] { gbt7714 }
-            \exp_args:No \bibliographystyle
-              { gbt7714- \l__whu_bib_gb_style_tl }
+            \tl_if_eq:NnTF \g__whu_thesis_type_tl { bachelor }
+              {
+                \exp_args:No \bibliographystyle
+                  { gbt7714- \l__whu_bib_gb_style_tl }
+              }
+              {
+                \exp_args:No \bibliographystyle
+                  { gbt7714-2005- \l__whu_bib_gb_style_tl }
+              }
           }
           {
             \RequirePackage [ sort & compress ] { natbib }
@@ -3014,8 +3030,15 @@
         style =
         \tl_if_empty:NTF \l__whu_bib_style_tl
           {
-            \str_if_eq:VnTF \l__whu_bib_gb_style_tl { numerical }
-              { gb7714-2015 } { gb7714-2015ay }
+            \tl_if_eq:VnTF \g__whu_thesis_type_tl { bachelor }
+              {
+                \str_if_eq:VnTF \l__whu_bib_gb_style_tl { numerical }
+                  { gb7714-2015 } { gb7714-2015ay }
+              }
+              {
+                \str_if_eq:VnTF \l__whu_bib_gb_style_tl { numerical }
+                  { gb7714-2005 } { gb7714-2005ay }
+              }
           }
           { \l__whu_bib_style_tl }
       }
@@ -3055,7 +3078,7 @@
           { \textendash \penalty \hyphenpenalty }
       }
   }
-%endregion
+%endregion 参考文献
 
 %tag full-width stop
 \keys_define:nn { whu / style }
