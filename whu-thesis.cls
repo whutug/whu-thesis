@@ -180,7 +180,7 @@
 \msg_new:nnn { whu } { invalid-circled-number }
   { Invalid~ circled~ number~ #1. }
 
-%tag tikz 绘制带圈数字
+%tag tikz-绘制带圈数字
 \fp_new:N \l__whu_tikz_circled_number_xscale_fp   % 水平压缩系数
 \fp_new:N \l__whu_tikz_circled_number_yscale_fp   % 垂直压缩系数
 \dim_new:N \l__whu_tikz_circled_number_total_hegiht_dim   % 数字的总高度
@@ -242,7 +242,7 @@
       }
   }
 
-%tag 获取宽度与 clist 的内容的最大宽度
+%tag 获取宽度与-clist-的内容的最大宽度
 \cs_new:Npn \__whu_get_text_width:Nn #1#2
   {
     \hbox_set:Nn \l__whu_tmpa_box {#2}
@@ -347,7 +347,7 @@
     {4} { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
   }
 
-%tag 页面的oneside和twoside设置
+%tag 页面的单双面设置
 \int_case:nn { \g__whu_thesis_type_int }
   {
     % 开题报告：oneside
@@ -386,7 +386,7 @@
     \defaultCJKfontfeatures { Script  = CJK }   
   }
 
-%tag 加载ctexbook
+%tag 加载-ctexbook
 \LoadClass { ctexbook }
 
 %tag 加载宏包 (in alphabetic order)
@@ -488,20 +488,20 @@
 %endregion 页面尺寸设置
 
 %region 图书馆版本 去除所有空白页
-% \keys_define:nn { whu / style }
-%   {
-%     library .bool_gset:N = \g__whu_library_version_bool,
-%     library .initial:n   = false,
-%     library .default:n   = true,
-%   }
-% \ctex_after_end_preamble:n
-% {
-%   \bool_if:NT \g__whu_library_version_bool
-%   {
-%     \cs_set_eq:NN \__whu_new_blank_page: \newpage
-%     \renewcommand{\cleardoublepage}{\clearpage}
-%   }
-% }
+\keys_define:nn { whu / style }
+  {
+    library .bool_gset:N = \g__whu_library_version_bool,
+    library .initial:n   = false,
+    library .default:n   = true,
+  }
+\ctex_after_end_preamble:n
+{
+  \bool_if:NT \g__whu_library_version_bool
+  {
+    \cs_set_eq:NN \__whu_new_blank_page: \newpage
+    \renewcommand{\cleardoublepage}{\clearpage}
+  }
+}
 %endregion 图书馆版本
 
 %region 字体配置 (font configuration)
@@ -565,6 +565,10 @@
 \cs_new_protected:Npn \__whu_style_font_set_times:
   {
     \setmainfont { Times ~ New ~ Roman }
+      [
+        SmallCapsFont = { TeX ~ Gyre ~ Termes },
+        SmallCapsFeatures = { Letters = SmallCaps }
+      ]
   }
 %tag xits
 \cs_new_protected:Npn \__whu_style_font_set_xits:
@@ -2074,7 +2078,7 @@
       \fontsize{12bp}{28bp}\selectfont
       本学位论文作者愿意遵守武汉大学关于保存、使用学位论文的管理办法及规定，即：学校有权保存学位论文的印刷本和电子版，并提供文献检索与阅览服务；学校可以采用影印、缩印、数字化或其它复制手段保存论文；在以教学与科研服务为目的前提下，学校可以在校园网内公布部分或全部内容。 \par
       \textbf{一、}在本论文提交当年，同意在校园网内以及中国高等教育文献保障系统（CALIS）、高校学位论文系统提供查询及前十六页浏览服务。 \par
-      \textbf{二、}在本论文提交 $\square$ 当年\!／\!$\square$一年\!／\!$\square$ 两年\!／\!$\square$ 三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
+      \textbf{二、}在本论文提交 $\square$ 当年／$\square$一年／$\square$ 两年／$\square$ 三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
       
       \vspace*{3em}
       \begin{minipage}{0.5\textwidth}
@@ -2093,12 +2097,12 @@
       {
         chapter =
           {
-            numbering = false,
             format+ = \centering,
             pagestyle = empty
           }
       }
-    \chapter{ 论文创新点 }
+    \chapter*{ 论文创新点 }
+    \pdfbookmark{ 论文创新点 }{ doctor-innovation }
     \zihao{-4}
     \file_if_exist:nT { pages / innovation.tex }
       {
@@ -2473,9 +2477,11 @@
     \keys_set:nn { ctex }
       { contentsname   = \c__whu_name_toc_tl }
     % 字体字号
-    \renewcommand{\cftchapfont}{\heiti \zihao{4}}
+    \renewcommand{\cftchapfont}{\bfseries \zihao{4}}
     \renewcommand{\cftsecfont}{\normalfont \zihao{-4}}
     \renewcommand{\cftsubsecfont}{\normalfont \zihao{-4}}
+    % 引导线
+    \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
     % % 缩进
     % \dim_set:Nn \cftchapindent { 0em }
     % \dim_set:Nn \cftsecindent  { 2em }
