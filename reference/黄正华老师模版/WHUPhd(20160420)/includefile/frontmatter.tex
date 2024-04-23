@@ -1,0 +1,120 @@
+% !Mode:: "TeX:UTF-8"
+
+%%% 说明: 此部分需要自己填写的内容:  论文创新点.
+
+%%% ``郑重申明'' 和``论文使用授权协议书'' 分别在 statement.tex 和 protocol.tex 中, 无需改动.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% -------------  英文封面 (无需改动)-------------   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\renewcommand{\baselinestretch}{1.5}  %下文的行距
+\vspace*{0.5cm}
+
+\begin{center}{\zihao{2} \the\Etitle \par}\end{center}
+
+\vfill
+
+\begin{center}
+\zihao{4}
+\begin{tabular}{ r l }
+ Candidate:      &  {\sc \the\Eauthor}      \\
+ Supervisor:     &  {\sc \the\Esupervisor}   \\
+ Major:          & \the\Emajor  \\
+ Speciality:     & \the\Especiality
+\end{tabular}
+
+\vspace*{2cm}
+\begin{center}
+  \iflib % 向图书馆提交电子文档, 使用黑白校徽.
+  \includegraphics[height=4cm]{whu.eps}       %%  黑白的. 很小, 只有 10k.
+  \else
+     \ifprint % 文档打印, 使用黑白校徽.
+  \includegraphics[height=4cm]{whu.eps}       %%  黑白的.
+  \else
+  \includegraphics[height=4cm]{whulogo.eps} %%  彩色的.
+  \fi
+  \fi
+\end{center}
+
+
+\zihao{-2}
+\the\Schoolname\\
+{\sc Wuhan University}
+
+\vspace*{1.0cm}
+
+\the\Edate
+
+\end{center}
+%%%%%%%--判断是否需要空白页-----------------------------
+  \iflib
+  \else
+  \newpage
+  \thispagestyle{empty}
+  \cleardoublepage
+  \fi
+%%%%%%%-------------------------------------------------
+{\pagestyle{empty}
+%%%--- 加入``郑重声明'' --- %%%%%%%%%%%%%%%%%
+\input{includefile/statement}%%%%%%%%%%%%%%%%%
+%%% ---加入``武汉大学学位论文使用授权协议书'' ---  %%%%%%
+\input{includefile/protocol}%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ------------------- 论文创新点----------------------- %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage\vspace*{20pt}\thispagestyle{empty}
+\begin{center}{\zihao{-2}\heiti 论文创新点}\end{center}
+\par\vspace*{30pt}
+\baselineskip=20pt
+
+
+  本文的主要创新点在于:
+
+\begin{enumerate}[(1)]
+  \item  给出了武汉大学博士毕业论文 \LaTeX{} 模板. 说明了编译方法.
+
+  \item  强调了公式排版的一些细节. 并用例子说明.
+
+  \item  强调了标点符号等的用法. 指出了初学者的一些常见错误.
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%--请勿删除以下内容 -------------------------------%
+%%%%%%%--判断是否需要空白页-----------------------------%
+  \iflib
+  \let\cleardoublepage\clearpage
+  \else
+  \newpage
+  \thispagestyle{empty}
+  \cleardoublepage
+  \fi
+%%%%%%%---------------------------------------------------%
+
+
+

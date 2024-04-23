@@ -1,0 +1,102 @@
+% !Mode:: "TeX:UTF-8"
+
+%%% 此部分需要自行填写: (1) 中文摘要及关键词 (2) 英文摘要及关键词
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% -------------  英文封面 (无需改动)-------------   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\renewcommand{\baselinestretch}{1.5}  %下文的行距
+\vspace*{0.5cm}
+\begin{center}
+{\Large \bf BACHELOR'S DEGREE THESIS \\[1ex] OF WUHAN UNIVERSITY }
+\end{center}
+\vspace{2.5cm}
+\begin{center}{\zihao{2} \the\Etitle \par}\end{center}
+
+\vfill
+
+\begin{center}
+\zihao{4}
+\begin{tabular}{ r l }
+ School (Department): & {\sc \the\Eschoolname}\\
+  Major:          &   {\sc\the\Emajor}  \\
+ Candidate:      &  {\sc \the\Eauthor}      \\
+ Supervisor:     &  {\sc \the\Esupervisor}
+\end{tabular}
+
+\vspace*{2cm}
+\begin{center}
+   \ifprint % 文档打印, 使用黑白校徽.
+  \includegraphics[height=4cm]{whu.eps}       %%  黑白的.
+  \else
+  \includegraphics[height=4cm]{whulogo.eps} %%  彩色的.
+  \fi
+\end{center}
+
+
+\zihao{-2}
+%\the\Schoolname\\
+{\sc Wuhan University}
+
+\vspace*{1.0cm}
+
+\the\Edate
+
+\end{center}
+%%% 郑重声明部分无需改动
+
+%%%---- 郑重声明 (无需改动)------------------------------------%
+\newpage
+\vspace*{20pt}
+\begin{center}{\ziju{0.8}\textbf{\songti\zihao{2} 郑重声明}}\end{center}
+\par\vspace*{30pt}
+\renewcommand{\baselinestretch}{2}
+
+{\zihao{4}%
+
+本人呈交的学位论文, 是在导师的指导下, 独立进行研究工作所取得的成果,
+所有数据、图片资料真实可靠. 尽我所知, 除文中已经注明引用的内容外,
+本学位论文的研究成果不包含他人享有著作权的内容.
+对本论文所涉及的研究工作做出贡献的其他个人和集体,
+均已在文中以明确的方式标明. 本学位论文的知识产权归属于培养单位.\\[2cm]
+
+\hspace*{1cm}本人签名: $\underline{\hspace{3.5cm}}$
+\hspace{2cm}日期: $\underline{\hspace{3.5cm}}$\hfill\par}
+%------------------------------------------------------------------------------
+\baselineskip=23pt  % 正文行距为 23 磅
+%------------------------------------------------------------------------------
+
+
+
+
+
+%%======中文摘要===========================%
+\begin{cnabstract}
+本文主要介绍和讨论了武汉大学本科毕业论文的~\LaTeX~模板.
+指明了编译方法, 强调了公式排版的一些细节问题, 也指出了一些常见的排版错误.
+
+
+
+\end{cnabstract}
+\par
+\vspace*{2em}
+
+
+%%%%--  关键词 -----------------------------------------%%%%%%%%
+%%%%-- 注意: 每个关键词之间用“；”分开，最后一个关键词不打标点符号
+\cnkeywords{毕业论文; \LaTeX{}; 模板;  }
+
+
+%%====英文摘要==========================%
+
+
+\begin{enabstract}
+This thesis is a study on the theory of \dots.
+
+\end{enabstract}
+\par
+\vspace*{2em}
+
+%%%%%-- Key words --------------------------------------%%%%%%%
+%%%%-- 注意: 每个关键词之间用“；”分开，最后一个关键词不打标点符号
+ \enkeywords{\LaTeX{};  }

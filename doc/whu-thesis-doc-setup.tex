@@ -1,0 +1,75 @@
+\usepackage{xeCJKfntef, xpinyin}
+\usepackage{graphicx}
+\usepackage{tabularray}
+\usepackage{circledtext}
+\usepackage{exam-zh-choices}
+
+\graphicspath{{figures/}}
+
+\hypersetup{
+  pdftitle  = {whu-thesis},
+  pdfauthor = {夏康玮}
+}
+% 全角标点放在引号中，需要改成半角式，否则间距过大，不好看
+\def\FSID{“{\xeCJKsetup{PunctStyle=banjiao}。}”} % U+3002
+\def\FSFW{“{\xeCJKsetup{PunctStyle=banjiao}．}”} % U+FF0E
+\def\COFW{“{\xeCJKsetup{PunctStyle=banjiao}：}”} % U+FF1A
+\def\SCFW{“{\xeCJKsetup{PunctStyle=banjiao}；}”} % U+FF1B
+
+
+\title{\textcolor{MaterialIndigo800}{%
+  \textbf{whu-thesis: 武汉大学学位论文 \LaTeX \xpinyin[font=\sffamily,format=\color{MaterialIndigo800}]{模}{mu2}板}}}
+\author{whutug%
+  \thanks{%
+    \url{https://github.com/whutug}
+  }
+}
+\date{2023/06/11\quad v0.0.1%
+  \thanks{%
+  \url{https://github.com/whutug/whu-thesis}
+  }
+}
+
+
+\ExplSyntaxOn
+\RenewDocumentCommand \emph { m }
+  {
+    \group_begin:
+      \bfseries 
+      \CJKunderline*{#1}
+    \group_end:
+  }
+
+\NewDocumentEnvironment { reference } { O{\ttfamily} +b }
+  {
+    \par
+    #1
+    #2
+  }{\par}
+
+\NewDocumentEnvironment { points } { O{要点} +b }
+  {
+    \par
+    \addvspace { .5em plus .5em }
+    \noindent \textbf{#1}：
+    \begin { enumerate }
+      [
+        leftmargin = 0pt ,
+        itemindent = 3.5em ,
+        labelsep   = 0.5em ,
+        labelwidth = 1.5em ,
+        align      = right ,
+        label      = { \arabic * . } ,
+      ]
+      #2
+  }
+  {
+    \end { enumerate }
+    \par \addvspace { 1em plus .5em }
+  }
+\ExplSyntaxOff
+
+\setlist[itemize, 1]
+  {
+    leftmargin = 3em
+  }

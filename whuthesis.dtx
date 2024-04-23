@@ -1,0 +1,984 @@
+% \iffalse
+%<*driver>
+\documentclass{whudoc}
+\usepackage{tikzpagenodes}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{The \cls{whu-thesis} class \\ \bfseries 武汉大学学位论文模板\thanks{\url{https://github.com/whutug/whu-thesis}}}
+% \author{whutug\thanks{\url{https://github.com/whutug}}}
+% \date{2024年4月7日}
+% \maketitle
+% \begin{abstract}
+%   武汉大学学位论文 \LaTeX{} 模板 \cls{whu-thesis} 基于本科生院的论文撰写规范制作，同时参考研究生院提供的《研究生学位论文规范》，用于生成符合武汉大学学位论文排版要求和相应的国家规范、行业标准的学位论文，旨在为同学提供毕业论文书写的方便。
+% \end{abstract}
+% 
+% \def\abstractname{Abstract}
+% \begin{abstract}
+% The \cls{whu-thesis} class is intended for typesetting Wuhan University dissertations with \LaTeX{}, providing support for bachelor, master, and doctoral thesis.
+% \end{abstract}
+% 
+% \vspace{2cm}
+% \def\abstractname{特别声明}
+% \begin{abstract}
+% 在使用本模板时，我们默认您同意以下内容：
+% \begin{enumerate}
+%   \item 本模板通过 LPPL 1.3c 协议开放源代码，您可以随意使用编译出的 PDF 文件。
+%   \item 本模板与学校官方部门并不存在合作关系，作者不对使用本模板产生的格式审查问题负责。
+%   \item 遇到本文档没有覆盖的问题属于正常情况，欢迎提交反馈意见。
+% \end{enumerate}
+% \end{abstract}
+% \begin{tikzpicture}[remember picture, overlay]
+%   \node[opacity = 0.1] at ([shift={(0.2\textwidth, -0.45\textheight)}]current page text area.north west){%
+%     \includegraphics[width=26cm]{logo/whu-logo.pdf}
+%   };
+% \end{tikzpicture}
+% \thispagestyle{empty}
+% \clearpage
+% \tableofcontents 
+%
+% \newgeometry{
+%   left   = 1.65 in,
+%   right  = 0.80 in,
+%   top    = 1.25 in,
+%   bottom = 1.00 in
+% }
+% 
+% \section{概述}
+% \cls{whu-thesis}（\textbf{W}u\textbf{h}an \textbf{U}niversity \LaTeX{} \textbf{Thesis} Template）是为了帮助武汉大学毕业生撰写毕业论文（设计）而编写的 \LaTeX{} 模板，内部使用 \LaTeX3 语言，以适应 \TeX{} 技术发展潮流。
+% 
+% 模板主要根据以下资料进行编写设计：
+% \begin{itemize}
+% \item 《武汉大学本科生毕业论文（设计）书写印制规范》
+% \item \href{https://gs.whu.edu.cn/info/1022/3235.htm}{武汉大学硕士学位论文印制规定}
+% \item \href{https://gs.whu.edu.cn/info/1022/3231.htm}{武汉大学博士学位论文撰写及印制规格的规定}
+% \end{itemize}
+% 力求合规、简洁、易于实现、用户友好。
+% 
+% 与 Microsoft Word 等所见即所得编辑工具不同，使用 \LaTeX{} 工具排版可以将写作与排版过程分离，写作者只需要关心文字的部分，而剩下的排版工作全部交给工具自动完成。
+% 
+% 模板的作用在于减少论文写作过程中格式调整的时间。前提是遵守模板的用法，否则即便用了 \cls{whu-thesis} 也难以保证输出的论文符合学校规范。
+% 
+% 用户如果遇到 bug，或者发现与学校《印制规范》的要求不一致，可以尝试以下办法：
+% \begin{enumerate}
+%     \item 阅读学校的书写印制规范文件，判断是否符合要求；
+%     \item 将 \TeX{} 发行版和宏包升级到最新，并且将模板升级到 Github 上最新版本，查看问题是否已经修复；
+%     \item 在 \href{https://github.com/whutug/whu-thesis/issues}{GitHub Issues 页面}中搜索该问题的关键词；
+%     \item 提出新的 \href{https://github.com/whutug/whu-thesis/issues}{issue}，并说明系统、发行版与版本、出现的问题等关键信息。
+% \end{enumerate}
+% 如果是使用上的问题，可以前往 \href{https://github.com/whutug/whu-thesis/discussions}{Discussions} 中讨论。
+% 
+% \subsection*{关于本手册}
+% 本手册假定用户已经能处理一般的 \LaTeX{} 文档，并对 \BibTeX{} 有一定了解。如果从未接触过 \TeX{} 和 \LaTeX{}，建议先学习相关的基础知识，目前 \LaTeX{} 中文社区普遍推荐的入门资料是 \href{http://mirrors.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{lshort-zh-cn}。
+% 
+% 本文采用不同字体表示不同内容。无衬线字体表示宏包名称，如 \pkg{xeCJK} 宏包、\cls{ctexbook} 文档类等；等宽字体表示代码或文件名，如 \cs{whusetup} 命令、\env{abstract} 环境、\TeX{} 文档 \file{thesis.tex} 等；带有尖括号的楷体（或西文斜体）表示命令参数，如 \meta{模板选项}、\meta{English title} 等。在使用时，参数两侧的尖括号不必输入。示例代码进行了语法高亮处理，以方便阅读。
+% 
+% 在用户手册中，带有蓝色侧边线的为 \LaTeX{} 代码，而带有粉色侧边线的则为命令行代码，请注意区分。模板提供的选项、命令、环境等，均用横线框起，同时给出使用语法和相关说明。
+% 
+% 本手册基于 \href{https://github.com/stone-zeng/fduthesis}{\cls{fduthesis}}\cite{fduthesis} 所附带的 \cls{fdudoc} 文档类编写，在此向 \cls{fduthesis} 的作者\href{https://github.com/stone-zeng}{曾祥东}先生表示感谢。
+% 
+% \section{使用说明}
+% 
+% \subsection{基本用法}
+% 
+% 以下是一份简单的 \TeX{} 文档，它演示了 \cls{whu-thesis} 的最基本用法：
+% \begin{latexexample}[deletetexcs={\documentclass},
+%         moretexcs={\chapter},morekeywords={\documentclass},
+%         emph={[2]document}]
+%     % thesis.tex
+%     \documentclass{whu-thesis}
+%     \begin{document}
+%     \mainmatter
+%     \chapter{欢迎}
+%     \section{Welcome to whu-thesis!}
+%     你好，\LaTeX{}！
+%     \end{document}
+% \end{latexexample}
+% 
+% 按照 \ref{subsec:编译方式} 小节中的方式编译该文档，您应当得到一篇 5 页的文章。
+% 
+% \subsection{编译方式} \label{subsec:编译方式}
+%
+% 本模板只支持 \XeLaTeX{} 或 \LuaLaTeX{} 编译命令，其他编译方式会直接报错。为了生成正确的目录、脚注以及交叉引用，您至少需要连续编译两次。
+% 
+% 以下代码中，假设您的 \TeX{} 源文件名为 \file{thesis.tex}。使用 \XeLaTeX{} 与 \BibTeX{} 编译论文，请在命令行中执行
+% \begin{shellexample}[morekeywords={xelatex,bibtex}]
+%   xelatex thesis
+%   bibtex  thesis
+%   xelatex thesis
+%   xelatex thesis
+% \end{shellexample}
+% 或使用 \pkg{latexmk}
+% \begin{shellexample}[morekeywords={latexmk},emph={-xelatex}]
+%   latexmk -xelatex thesis
+% \end{shellexample}
+% 
+% 若使用 \LuaLaTeX{} 与 biber 编译论文，请在命令行中执行
+% \begin{shellexample}[morekeywords={lualatex,bibtex}]
+%   lualatex thesis
+%   biber    thesis
+%   lualatex thesis
+%   lualatex thesis
+% \end{shellexample}
+% 或者
+% \begin{shellexample}[morekeywords={latexmk},emph={-lualatex}]
+%   latexmk -lualatex thesis
+% \end{shellexample}
+%
+% \subsubsection*{博士论文书脊}
+% 
+% 如果需要生成博士论文的书脊，请使用 \LuaLaTeX 单独编译 \file{spine}
+% 文件夹中的源文件 \file{whu-thesis-spine.tex}。
+% 
+% \subsection{模板选项}
+% 所谓“模板选项”，指需要在引入文档类的时候指定的选项：
+% \begin{latexexample}[deletetexcs={\documentclass},
+%         morekeywords={\documentclass}]
+%   \documentclass(*\oarg{模板选项}*){whu-thesis}
+% \end{latexexample}
+% 
+% 以下选项中，默认选项以\textbf{粗体}表示。有些模板选项为布尔型，它们只能在 \opt{true} 和 \opt{false} 中取值。对于这些选项，\kvopt{\meta{选项}}{true} 中的“\kvopt{}{true}”可以省略。
+% 
+% \begin{function}{type}
+%   \begin{whusyntax}[emph={[1]type}]
+%     type = (*<(bachelor)|master|doctor|proposal>*)
+%   \end{whusyntax}
+%   选择论文类型。四种选项分别代表本科毕业论文、硕士学位论文、博士学位论文与本科开题报告。
+% \end{function}
+% 
+% \begin{function}{class}
+%   \begin{whusyntax}[emph={[1]class}]
+%     class = (*<(academic)|professional>*)
+%   \end{whusyntax}
+%   选择学位类型。两种选项分别代表学术学位和专业学位。
+%   此键值只有当 \kvopt{type}{master} 或 \kvopt{type}{doctor} 时才起作用。
+% \end{function}
+% 
+% \begin{function}{draft}
+%   \begin{whusyntax}[emph={[1]draft}]
+%     draft = (*<\TFF>*)
+%   \end{whusyntax}
+%   选择是否开启草稿模式，默认关闭。
+% \end{function}
+% 
+% 草稿模式为全局选项，会影响到很多宏包的工作方式。开启之后，主要的变化有：
+% \begin{itemize}
+%     \item 把行溢出的盒子显示为黑色方块；
+%     \item 不实际插入图片，只输出一个占位方框；
+%     \item 关闭超链接渲染，也不再生成 PDF 书签；
+%     \item 显示页面边框，使用 \LuaLaTeX{} 编译时，还会加载 \pkg{lua-visual-debug} 宏包。
+% \end{itemize}
+% 
+% \begin{function}{oneside,twoside}
+%     指明论文的单双面模式，受 \opt{type} 选项，即加载的文档类影响。论文默认为 \opt{twoside}，开题报告与书脊默认为 \opt{oneside}。该选项会影响每章的开始位置。开题报告与书脊没有章一级，因此不受该选项限制。本科论文单双面打印均可，硕博论文要求双面打印。
+% \end{function}
+% 
+% 在双面模式（\opt{twoside}）下，按照通常的排版惯例，每章应只从奇数页（在右）开始；而在单页模式（\opt{oneside}）下，则可以从任意页面开始。
+% 
+% \begin{function}{punct}
+%   \begin{whusyntax}[emph={[1]punct}]
+%     punct = (*<(quanjiao)|banjiao|kaiming>*)
+%   \end{whusyntax}
+%   选择标点样式。三个选项分别为“全角”“半角”“开明”式标点。此选项来自于 \pkg{ctex} 宏包，具体可以查看 \pkg{ctex} 宏包文档获得详细说明。
+% \end{function}
+% 
+% \subsection{参数设置}
+% \begin{function}{\whusetup}
+%   \begin{whusyntax}[morekeywords={\whusetup}]
+%     \whusetup(*\marg{键值列表}*)
+%   \end{whusyntax}
+%   本模板提供了一系列选项，可由您自行配置。载入文档类之后，以下所有选项均可通过统一的命令 \cs{whusetup} 来设置。
+% \end{function}
+% 
+% \cs{whusetup} 的参数是一组由（英文）逗号隔开的选项列表，列表中的选项通常是 \kvopt{\meta{key}}{\meta{value}} 的形式。部分选项的 \meta{value} 可以省略。对于同一项，后面的设置将会覆盖前面的设置。同样，在下文的说明中，将用\textbf{粗体}表示默认值。
+% 
+% \cs{whusetup} 采用 \LaTeX3 风格的键值设置，支持不同类型以及多种层次的选项设定。键值列表中，“"="”左右的空格不影响设置；但需注意，参数列表中不可以出现空行。
+% 
+% 与模板选项相同，布尔型的参数可以省略 \kvopt{\meta{选项}}{true}中的“\kvopt{}{true}”。
+% 
+% 另有一些选项包含子选项，它们可以按如下两种等价方式来设定：
+% \begin{latexexample}[morekeywords={\whusetup},
+%         emph={[1]option-a,sub-option-a,option-b,sub-option-b}]
+%   \whusetup{
+%     option-a = {
+%             sub-option-a = value-a
+%         },
+%     option-b = {
+%             sub-option-b = value-b
+%         }
+%     }
+% \end{latexexample}
+% 或者
+% \begin{latexexample}[morekeywords={\whusetup},
+%         emph={[1]option-a,sub-option-a,option-b,sub-option-b}]
+%   \whusetup{
+%     option-a/sub-option-a = value-a,
+%     option-b/sub-option-b = value-b
+%     }
+% \end{latexexample}
+% 
+% 注意 “"/"” 的前后均不可以出现空白字符。
+% 
+% \subsubsection{信息录入}
+% \begin{function}{info}
+%   \begin{whusyntax}[emph={[1]info}]
+%     info = (*\marg{键值列表}*)
+%     info/(*\meta{key}*) = (*\meta{value}*)
+%   \end{whusyntax}
+%   该选项包含许多子项目，用于录入论文信息。具体内容见下。以下带“"*"”的项目表示对应的英文字段。
+% \end{function}
+% 
+% \begin{function}{info/title,info/title*}
+%   \begin{whusyntax}[emph={[1]title,title*}]
+%     title  = (*\marg{中文标题}*)
+%     title* = (*\marg{英文标题}*)
+%   \end{whusyntax}
+%   论文标题。默认会自动断行，但为了语义的连贯以及排版的美观，如果您的标题长于一行，建议使用“"\\"”手动断行。
+% \end{function}
+% 
+% \begin{function}{info/author,info/author*}
+%   \begin{whusyntax}[emph={[1]author,author*}]
+%     author  = (*\marg{中文姓名}*)
+%     author* = (*\marg{英文姓名}*)
+%   \end{whusyntax}
+%   作者姓名。
+% \end{function}
+% 
+% \begin{function}{info/clc}
+%   \begin{whusyntax}[emph={[1]clc}]
+%     clc = (*\marg{分类号}*)
+%   \end{whusyntax}
+%   《中国图书资料分类法》（CLC）分类号。默认为空。
+% \end{function}
+% 
+% \begin{function}{info/udc}
+%   \begin{whusyntax}[emph={[1]udc}]
+%     udc = (*\marg{分类号}*)
+%   \end{whusyntax}
+%   《通用十进制分类法》（UDC）分类号。默认为空。
+% \end{function}
+% 
+% \begin{function}{info/secrete-level}
+%   \begin{whusyntax}[emph={[1]secrete-level}]
+%     secrete-level = (*\marg{密级}*)
+%   \end{whusyntax}
+%   论文密级，公开型论文可不注明。默认为空。
+% \end{function}
+% 
+% \begin{function}{info/student-id}
+%   \begin{whusyntax}[emph={[1]student-id}]
+%     student-id = (*\marg{数字}*)
+%   \end{whusyntax}
+%   作者学号，共 13 位。
+% \end{function}
+% 
+% \begin{function}{info/department, info/department*}
+%   \begin{whusyntax}[emph={[1]department, department*}]
+%     department  = (*\marg{院系中文名称}*)
+%     department* = (*\marg{院系英文名称}*)
+%   \end{whusyntax}
+%   院（系）名称。
+% \end{function}
+% 
+% \begin{function}{info/subject, info/subject*}
+%   \begin{whusyntax}[emph={[1]subject, subject*}]
+%     subject  = (*\marg{中文学科名称}*)
+%     subject* = (*\marg{英文学科名称}*)
+%   \end{whusyntax}
+%   学科名称。如 \meta{数学} 和 \meta{Mathematics}。
+% \end{function}
+% 
+% \begin{function}{info/major, info/major*}
+%   \begin{whusyntax}[emph={[1]major, major*}]
+%     major  = (*\marg{中文专业名称}*)
+%     major* = (*\marg{英文专业名称}*)
+%   \end{whusyntax}
+%   专业名称。如 \meta{基础数学} 和 \meta{Fundamental Mathematics}。 
+% \end{function}
+% 
+% \begin{function}{info/research-area, info/research-area*}
+%   \begin{whusyntax}[emph={[1]research-area, research-area*}]
+%     research-area  = (*\marg{中文研究方向名称}*)
+%     research-area* = (*\marg{英文研究方向名称}*)
+%   \end{whusyntax}
+%   研究方向。如 \meta{偏微分方程} 和 \meta{Partial Differential Equations}。
+% \end{function}
+% 
+% \begin{function}{info/supervisor, info/supervisor*}
+%   \begin{whusyntax}[emph={[1]supervisor, supervisor*}]
+%     supervisor  = (*\marg{中文姓名}*)
+%     supervisor* = (*\marg{英文姓名}*)
+%   \end{whusyntax}
+%   校内导师中英文姓名。
+% \end{function}
+%
+% \begin{function}{info/academic-title, info/academic-title*}
+%   \begin{whusyntax}[emph={[1]academic-title, academic-title*}]
+%     academic-title  = (*\marg{中文职称名}*)
+%     academic-title* = (*\marg{英文职称名}*)
+%   \end{whusyntax}
+%   校内导师职称。
+% \end{function}
+% 
+% \begin{function}{info/supervisor-outer}
+%   \begin{whusyntax}[emph={[1]supervisor-outer}]
+%     supervisor-outer = (*\marg{中文姓名}*)
+%   \end{whusyntax}
+%   校外导师中文姓名。
+% \end{function}
+% 
+% \begin{function}{info/academic-title-outer}
+%   \begin{whusyntax}[emph={[1]supervisor-outer}]
+%     academic-title-outer = (*\marg{中文职称名}*)
+%   \end{whusyntax}
+%   校外导师职称。
+% \end{function}
+% 
+% \begin{function}{info/year}
+%   \begin{whusyntax}[emph={[1]year}]
+%     year = (*\marg{数字}*)
+%   \end{whusyntax}
+%   论文完成年份。默认为文档编译时的年份。
+% \end{function}
+% 
+% \begin{function}{info/month}
+%   \begin{whusyntax}[emph={[1]month}]
+%     month = (*\marg{数字}*)
+%   \end{whusyntax}
+%   论文完成月份。默认为文档编译时的月份。
+% \end{function}
+% 
+% \begin{function}{info/day}
+%   \begin{whusyntax}[emph={[1]day}]
+%     day = (*\marg{数字}*)
+%   \end{whusyntax}
+%   论文完成日期。默认为文档编译时的日期。
+% \end{function}
+% 
+% \begin{function}{info/keywords,info/keywords*}
+%   \begin{whusyntax}[emph={[1]keywords,keywords*}]
+%     keywords  = (*\marg{中文关键词}*)
+%     keywords* = (*\marg{英文关键词}*)
+%   \end{whusyntax}
+%   关键词列表。各关键字之间需使用英文逗号隔开。为防止歧义，可以用分组括号“"{...}"”把各字段括起来。
+% \end{function}
+% 
+%
+% \begin{function}{info/cover-en-type}
+%   \begin{whusyntax}[emph={[1]cover-en-type}]
+%     cover-en-type = (*<(normal)|cs>*)
+%   \end{whusyntax}
+%   设置英文封面的样式。计算机学院和网络安全学院请选择 \opt{cs}。
+% \end{function}
+% 
+%
+% \subsubsection{论文格式}\label{subsubsec:论文格式}
+% \begin{function}{style}
+%   \begin{whusyntax}[emph={[1]style}]
+%     style = (*\marg{键值列表}*)
+%     style/(*\meta{key}*) = (*\meta{value}*)
+%   \end{whusyntax}
+%   该选项包含许多子项目，用于设置论文格式。具体内容见下。
+% \end{function}
+% 
+% \begin{function}{style/font}
+%   \begin{whusyntax}[emph={[1]font}]
+%     font = (*<default|(times)|xits|termes>*)
+%   \end{whusyntax}
+%   西文字体设置，具体见表 \ref{tab:font}。
+% \end{function}
+% 
+% \begin{table}[!ht]
+%   \begin{threeparttable}
+%     \caption{\opt{style/font} 各选项字体配置}
+%     \label{tab:font}
+%     \begin{tabularx}{\textwidth}{CC}
+%       \toprule
+%         \opt{default} & Latin Modern Roman \\
+%       \midrule
+%         \opt{times}   & Times New Roman    \\
+%       \midrule 
+%         \opt{xits}    & XITS               \\
+%       \midrule 
+%         \opt{termes}  & TeX Gyre Termes    \\
+%       \bottomrule
+%     \end{tabularx}
+%   \end{threeparttable}
+% \end{table}
+% 
+% \begin{function}{style/math-font}
+%   \begin{whusyntax}[emph={[1]math-font}]
+%     math-font = (*<default|xits|(termes)>*)
+%   \end{whusyntax}
+%   数学字体设置，具体见表 \ref{tab:math-font}。
+% \end{function}
+% 
+% \begin{table}[!ht]
+%   \centering
+%   \begin{threeparttable}
+%     \caption{\opt{style/math-font} 各选项字体配置}
+%     \label{tab:math-font}
+%     \begin{tabular}{w{c}{2cm}w{c}{5cm}}
+%       \toprule
+%         \opt{default} & Computer Modern      \\
+%       \midrule
+%         \opt{xits}    & XITS Math            \\
+%       \midrule
+%         \opt{termes}  & TeX Gyre Termes Math \\
+%       \bottomrule
+%     \end{tabular}
+%   \end{threeparttable}
+% \end{table}
+% 
+% \begin{function}{style/cjk-font}
+%   \begin{whusyntax}[emph={[1]cjk-font}]
+%     cjk-font = (*<windows|mac|(fandol)|sourcehan|none>*)
+%   \end{whusyntax}
+%   中文字体设置，具体见表 \ref{tab:cjk-font}。
+% \end{function}
+% 
+% \begin{table}[!ht]
+%   \begin{threeparttable}
+%     \caption{\opt{style/cjk-font} 各选项字体配置}
+%     \label{tab:cjk-font}
+%     \begin{tabularx}{\textwidth}{CCCCC}
+%       \toprule
+%                                   & \textbf{宋体} & \textbf{黑体} & \textbf{仿宋} & \textbf{楷体}   \\
+%       \midrule
+%       \multirow{2}{*}{\opt{windows}} & （中易）宋体   & （中易）黑体      & （中易）仿宋   & （中易）楷体 \\
+%                                   & SimSun          & SimHei          & FangSong      & KaiTi           \\
+%       \midrule
+%       \multirow{2}*{\opt{mac}}    & （华文）宋体-简 & （华文）黑体-简 & 华文仿宋      & （华文）楷体-简 \\
+%                                   & Songti SC       & Heiti SC        & STFangsong    & Kaiti SC        \\
+%       \midrule
+%       \multirow{2}*{\opt{fandol}} & Fandol 宋体     & Fandol 黑体     & Fandol 仿宋   & Fandol 楷体     \\
+%                                   & FandolSong      & FandolHei       & FandolFang    & FandolKai       \\
+%       \midrule
+%       \opt{sourcehan}             & 思源宋体         & 思源黑体        & 方正仿宋     & 方正楷体 \\
+%       \midrule
+%       \opt{founder}               & 方正书宋         & 方正黑体        & 方正仿宋     & 方正楷体    \\
+%       \bottomrule
+%     \end{tabularx}
+%     \vspace*{10pt}
+%   \end{threeparttable}
+% \end{table}
+%
+% \begin{function}{style/cjk-fakefont}
+%   \begin{whusyntax}[emph={[1]cjk-fakefont}]
+%     cjk-fakefont = (*<\TFF>*)
+%   \end{whusyntax}
+%   设置是否使用伪粗体与伪斜体。
+% \end{function}
+%
+% \begin{function}{style/bachelor-encover}
+%   \begin{whusyntax}[emph={[1]bachelor-encover}]
+%     bachelor-encover = (*<\TFF>*)
+%   \end{whusyntax}
+%   本科毕业论文是否显示英文封面，默认不显示。
+% \end{function}
+% 
+% \begin{function}{style/bib-backend}
+%   \begin{whusyntax}[emph={[1]bib-backend}]
+%     bib-backend = (*<bibtex|biblatex>*)
+%   \end{whusyntax}
+%   选择参考文献的支持方式。选择 "bibtex" 后，将使用 \BibTeX{} 处理文献，
+%   样式由 \pkg{natbib} 宏包\cite{natbib}和 \pkg{gbt7714} 宏包\cite{gbt7714}负责；选择 "biblatex" 后，将使用 biber 处理文献，样式则由 \pkg{biblatex} 宏包\cite{biblatex}负责。
+% \end{function}
+% 
+% 
+% \begin{function}{style/bib-style}
+%   \begin{whusyntax}[emph={[1]bib-style}]
+%     bib-style = (*<numerical|author-year|\meta{其他样式}>*)
+%   \end{whusyntax}
+%   设置参考文献样式。\opt{author-year} 和 \opt{numerical} 分别对应著者-出版年制和顺序编码制。根据最新标准，本科毕业论文使用国标 GB/T 7714-2015 中的顺序编码制，而硕士和博士学位论文使用国标 GB/T 7714-2005 中的著者-出版年制。选择 \meta{其他样式} 时，需要保证相应的 ".bst"（\kvopt{bib-backend}{bibtex}）或 ".bbx"（\kvopt{bib-backend}{biblatex}）文件能够被读取。\kvopt{type}{doctor} 或 \opt{master} 时默认为 \opt{author-year}，\kvopt{type}{bachelor} 时默认为 \opt{numerical}。
+% \end{function}
+% 
+% \begin{function}{style/cite-style}
+%   \begin{whusyntax}[emph={[1]cite-style}]
+%     cite-style = (*\marg{引用样式}*)
+%   \end{whusyntax}
+%   选择引用格式。默认为空，即与参考文献样式（著者—出版年制或顺序
+%   编码制）保持一致。如果手动填写，需保证相应的 \file{.cbx} 格式文件
+%   能被调用。该选项在 \kvopt{bib-backend}{bibtex} 时无效。
+% \end{function}
+%
+% \begin{function}{style/bib-resource}
+%   \begin{whusyntax}[emph={[1]bib-resource}]
+%     bib-resource = (*\marg{文件}*)
+%   \end{whusyntax}
+%   参考文献数据源。可以是单个文件，也可以是用英文逗号隔开的一组文件。
+%   如果 \kvopt{bib-backend}{biblatex}，则必须明确给出 \file{.bib}
+%   后缀名。
+% \end{function}
+% 
+% \begin{function}{style/library}
+%   \begin{whusyntax}[emph={[1]library}]
+%     library = (*<\TFF>*)
+%   \end{whusyntax}
+%   设置是否开启图书馆模式，若开启，则会去掉论文中所有的空白页。
+% \end{function}
+% 
+% \begin{function}{style/fullwidth-stop}
+%   \begin{whusyntax}[emph={[1]fullwidth-stop}]
+%     fullwidth-stop = (*<\TFF>*)
+%   \end{whusyntax}
+%   选择是否把全角实心句点“．”作为默认的句号形状。这种句号一般用于科技类文章，以避免与下标“$_o$”或“$_0$”混淆。
+% \end{function}
+% 
+% 选择 \kvopt{fullwidth-stop}{catcode} 或 \opt{mapping} 后，都会实现上述效果。
+% 有所不同的是，在选择 \opt{catcode} 后，只有\emph{显式的}\FSID 会被替换
+% 为\FSFW；但在选择 \opt{mapping} 后，\emph{所有的}\FSID 都会被替换。例如，
+% 如果您用宏保存了一些含有\FSID 的文字，那么在选择 \opt{catcode} 时，其中
+% 的\FSID 不会将被替换为\FSFW。
+%
+% 如果您在选择 \kvopt{fullwidth-stop}{mapping} 后仍需要临时显示\FSID，
+% 可以按如下方法操作：
+% \begin{latexexample}[moretexcs={\CJKfontspec},emph={[1]Mapping}]
+%   % 请使用 XeTeX 编译
+%   % 外侧的花括号表示分组
+%   这是一个句号{\CJKfontspec{(*\meta{字体名}*)}[Mapping=full-stop]。}
+% \end{latexexample}
+%
+%
+% \begin{function}{style/footnote-style}
+%^^A 这里奇怪的东西是用来控制对齐的。whusyntax 会吃掉开头的几个
+%^^A 空格，因此这里用 . 来占位。
+%   \begin{whusyntax}[emph={[1]footnote-style}]
+%     footnote-style = (*<plain|\\
+%       ......\mbox{}~~~~~~~~~~~~~~~~~libertinus|libertinus*|libertinus-sans|\\
+%       ......\mbox{}~~~~~~~~~~~~~~~~~pifont|pifont*|pifont-sans|pifont-sans*|\\
+%       ......\mbox{}~~~~~~~~~~~~~~~~~xits|xits-sans|xits-sans*>*)
+%   \end{whusyntax}
+%   设置脚注编号样式。带有 |sans| 的为相应的无衬线字体版本；带有 |*| 的为阴文样式（即黑底白字）。
+% \end{function}
+%
+% \begin{function}{style/abstract-keywords-type, style/abstract-keywords-type*}
+%   \begin{whusyntax}[emph={[1]abstract-keywords-type, abstract-keywords-type*}]
+%     abstract-keywords-type  = (*<(blankline)|newline|vfill>*)
+%     abstract-keywords-type* = (*<(blankline)|newline|vfill>*)
+%   \end{whusyntax}
+%   设置摘要与关键词之间的样式，三种选项分别代表：
+%   \begin{itemize}
+%     \item 摘要与关键词之间空行；
+%     \item 摘要与关键词之间无空行；
+%     \item 摘要与关键词被拉开，关键词置于页面底部。
+%   \end{itemize}
+% \end{function}
+%
+%
+% \subsection{正文编写}
+%
+% \begin{quotation}
+%   喬孟符（吉）博學多能，以樂府稱。嘗云：「作樂府亦有法，
+%   曰\CJKunderdot{鳳頭、豬肚、豹尾}六字是也。」大概起要美麗，中要浩蕩，
+%   結要響亮。尤貴在首尾貫穿，意思清新。苟能若是，斯可以言樂府矣。
+% \end{quotation}
+% \hfill ^^^^2e3a陶宗儀《南村輟耕錄·作今樂府法》 ^^A ^^^^2e3a = 破折号
+%
+% \subsubsection{凤头}
+%
+% \begin{function}{\frontmatter}
+%   声明前置部分开始。模版已经使用此声明，用户请勿再次使用。
+% \end{function}
+%
+% 在本模板中，前置部分包含目录、中英文摘要以及符号表等。
+% 前置部分的页码采用罗马数字，并且与正文分开计数。
+%
+% \begin{function}{\tableofcontents,\listoffigures,\listoftables}
+%   生成目录。为了生成完整、正确的目录，您至少需要编译\emph{两次}。对于图表
+%   较多的论文，也可以使用 \cs{listoffigures} 和 \cs{listoftables} 生成单独的
+%   插图、表格目录。
+% \end{function}
+%
+% \begin{function}{abstract, enabstract}
+%   中英文摘要请分别写入 \file{pages} 文件夹下面的 \file{abstract.tex}
+%   和 \file{enabstract.tex}。
+% \end{function}
+%
+% \begin{function}{notation}
+%   \begin{whusyntax}[emph={[2]notation}]
+%     \begin{notation}(*\oarg{列格式说明}*)
+%       (*\meta{符号 1}*)  &  (*\meta{说明}*)  \\
+%       (*\meta{符号 2}*)  &  (*\meta{说明}*)  \\
+%       (*\phantom{\meta{符号 $n$}}*)  (*$\vdots$*)
+%       (*\meta{符号\ \kern-0.1em$n$}*)  &  (*\meta{说明}*)
+%     \end{notation}
+%   \end{whusyntax}
+%   符号表。可选参数 \meta{列格式说明}与 \LaTeX{} 中标准表格的列格
+%   式说明语法一致，默认值为“|lp{7.5cm}|”，即第一列宽度自动调整，
+%   第二列限宽 \qty{7.5}{cm}，两列均为左对齐。
+% \end{function}
+%
+% \subsubsection{猪肚}
+%
+% \begin{function}{\mainmatter}
+%   声明主体部分开始。
+% \end{function}
+%
+% 主体部分是论文的核心，您可以分章节撰写。如有需求，也可以采用
+% 多文件编译的方式。主体部分的页码采用阿拉伯数字。
+%
+% \begin{function}{\footnote}
+%   \begin{whusyntax}[deletetexcs={\footnote},morekeywords={\footnote}]
+%     \footnote(*\marg{脚注文字}*)
+%   \end{whusyntax}
+%   插入脚注。脚注编号样式可利用 \opt{style/footnote-style} 选项控制，
+%   具体见 \ref{subsubsec:论文格式}~小节。
+% \end{function}
+%
+% \begin{function}{\caption}
+%   \begin{whusyntax}[deletetexcs={\caption},morekeywords={\caption}]
+%     \caption(*\marg{图表标题}*)
+%     \caption(*\oarg{短标题}\marg{长标题}*)
+%   \end{whusyntax}
+%   插入图表标题。可选参数 \meta{短标题} 用于图表目录。在
+%   \meta{长标题} 中，您可以进行长达多段的叙述；但 \meta{短标题}
+%   和单独的 \meta{图表标题} 中则不允许分段。
+%   \cite{刘海洋2013latex入门}
+% \end{function}
+%
+% 按照排版惯例，建议您将表格的标题放置在绘制表格的命令之前，
+% 而将图片的标题放置在绘图或插图的命令之后。另需注意，
+% \tn{caption} 命令必须放置在浮动体环境（如 \env{table} 和
+% \env{figure}）中。
+%
+% \paragraph{参考文献引用}
+%
+% \begin{function}[updated=2021-09-20]{\cite}
+%   \begin{whusyntax}[deletetexcs={\cite},morekeywords={\cite}]
+%     \cite(*\marg{文献标签}*)
+%     \cite(*\oarg{页码}\marg{文献标签}*)
+%   \end{whusyntax}
+%   插入所引用的文献。可选参数 \meta{页码} 可用来标注引文的页码。在不同的
+%   参考文献样式中，引用的样式也不尽相同。根据需要，模板还提供了更多的命令
+%   用来标记引用。顺序编码制和著者—出版年制下的各种引用方式见
+%   表~\ref{tab:citation-numerical} 和表~\ref{tab:citation-author-year}。
+% \end{function}
+%
+%^^A+
+% \NewDocumentCommand\verbcite{O{cite}om}{^^A
+%   \IfNoValueTF{#2}{^^A
+%     \texttt{\textbackslash#1\{#3\}}^^A
+%   }{^^A
+%     \texttt{\textbackslash#1[#2]\{#3\}}^^A
+%   }}
+%^^A-
+%
+% \begin{table}[ht]
+%   \caption{顺序编码制下的引用样式} \label{tab:citation-numerical}
+%   \centering
+%   \small
+%   \begin{tabularx}{\textwidth}{cCll}
+%     \toprule
+%       \textbf{引用方式} &
+%       \textbf{排版效果} &
+%       \textbf{\kvopt{bib-backend}{bibtex}} &
+%       \textbf{\kvopt{bib-backend}{biblatex}} \\
+%     \midrule
+%     单篇文献 &
+%       引文\cite{texbook} &
+%       \verbcite{texbook} &
+%       同左 \\
+%     多篇文献 &
+%       引文\cite{texbook,companion} &
+%       \verbcite{texbook,companion} &
+%       同左 \\
+%     标注页码 &
+%       引文\cite[126--137]{texbook} &
+%       \verbcite[cite][126--137]{texbook} &
+%       同左 \\
+%     标注作者 &
+%       \citet{texbook}指出 &
+%       \verbcite[citet]{texbook} &
+%       \verbcite[authornumcite]{texbook} \\
+%     标注作者、页码 &
+%       \citet[42]{texbook}指出 &
+%       \verbcite[citet][42]{texbook} &
+%       \verbcite[authornumcite][42]{texbook} \\
+%     非上标 &
+%       引文{\citestyle{numbers}\cite{texbook}} &
+%       \verbcite[parencite]{texbook} &
+%       同左 \\
+%     \bottomrule
+%   \end{tabularx}
+% \end{table}
+%
+% \begin{table}[ht]
+%   \caption{著者—出版年制下的引用样式} \label{tab:citation-author-year}
+%   \centering
+%   \small
+%   \def\!{\kern-1.5pt}
+%   \begin{tabularx}{\textwidth}{cCll}
+%     \toprule
+%       \textbf{引用方式} &
+%       \textbf{排版效果} &
+%       \textbf{\kvopt{bib-backend}{bibtex}} &
+%       \textbf{\kvopt{bib-backend}{biblatex}} \\
+%     \midrule
+%     单篇文献 &
+%       (\citeauthor{texbook}\!, \citeyear{texbook}\!) &
+%       \verbcite[citep]{texbook} &
+%       \verbcite{texbook} \\
+%     多篇文献 &
+%       (\citeauthor{texbook}\!, \citeyear{texbook}\!;
+%         \citeauthor{companion}\!, \citeyear{companion}\!) &
+%       \verbcite[citep]{texbook,companion} &
+%       \verbcite{texbook,companion} \\
+%     标注页码 &
+%       (\citeauthor{texbook}\!, \citeyear{texbook}\!)^^A
+%         \textsuperscript{126--137} &
+%       \verbcite[citep][126--137]{texbook} &
+%       \verbcite[cite][126--137]{texbook} \\
+%     标注作者 &
+%       \citeauthor{texbook}(\citeyear{texbook}\!) &
+%       \verbcite[citet]{texbook} &
+%       同左 \\
+%     标注作者、页码 &
+%       \citeauthor{texbook}(\citeyear{texbook}\!)\textsuperscript{42} &
+%       \verbcite[citet][42]{texbook} &
+%       同左 \\
+%     \bottomrule
+%   \end{tabularx}
+% \end{table}
+%
+% \paragraph{定理类环境}
+%
+%^^A TODO: \DescribeEnv{proof}
+% \begin{function}{axiom,corollary,definition,example,lemma,
+%   proof,theorem,problem,property,proposition,counterexample,conjecture,claim,remark}
+%   \begin{whusyntax}[emph={[2]proof}]
+%     \begin{proof}(*\oarg{小标题}*)
+%       (*\meta{证明过程}*)
+%     \end{proof}
+%   \end{whusyntax}
+%   一系列预定义的数学环境。具体含义见表~\ref{tab:theorem}。
+% \end{function}
+%
+% \begin{table}[ht]
+%   \caption{预定义的数学环境} \label{tab:theorem}
+%   \centering
+%   \small
+%   \begin{tabular}{*{8}{c}}
+%     \toprule
+%       \textbf{名称} &
+%         \env{axiom} & \env{corollary} & \env{definition} & \env{example} &
+%         \env{lemma} & \env{proof}     & \env{theorem} \\
+%     \midrule
+%       \textbf{含义} &
+%         公理 & 推论 & 定义 & 例 &
+%         引理 & 证明 & 定理 \\
+%     \bottomrule
+%       \textbf{名称} &
+%       \env{problem} & \env{property} & \env{proposition} &
+%       \env{counterexample} & \env{conjecture} & \env{claim} & \env{remark} \\
+%     \midrule
+%       \textbf{含义} &
+%       问题 & 性质 & 命题 & 反例 & 猜想 & 断言 & 注 \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% 证明环境（\env{proof}）的最后会添加证毕符号“$\QED$”。要确保
+% 该符号在正确的位置显示，您需要按照 \ref{subsec:编译方式}~节
+% 中的有关说明编译\emph{两次}。
+%
+% \begin{function}{\whunewtheorem}
+%   \begin{whusyntax}[deletetexcs={\whunewtheorem},
+%       morekeywords={\whunewtheorem,\whunewtheorem*}]
+%     \whunewtheorem(*\oarg{选项}\marg{环境名}\marg{标题}*)
+%     \whunewtheorem*(*\oarg{选项}\marg{环境名}\marg{标题}*)
+%     \begin(*\marg{环境名}\oarg{小标题}*)
+%       (*\meta{内容}*)
+%     \end(*\marg{环境名}*)
+%   \end{whusyntax}
+%   声明新的定理类环境（数学环境），带星号的版本表示不进行编号。
+%   声明后，即可同预定义的数学环境一样使用。
+% \end{function}
+%
+%
+% \subsubsection{豹尾}
+%
+% \begin{function}{\backmatter}
+%   声明后置部分开始。
+% \end{function}
+%
+% 后置部分包含参考文献、致谢、附录等。
+%
+% \begin{function}{\printbibliography}
+%   \begin{whusyntax}[morekeywords={\printbibliography}]
+%     \printbibliography(*\oarg{选项}*)
+%   \end{whusyntax}
+%   打印参考文献列表。如果 \kvopt{bib-backend}{bibtex}，则 \meta{选项}
+%   无效，相当于 \tn{bibliography} \texttt{\marg{文献数据库}}，其中的
+%   \meta{文献数据库} 可利用 \opt{style/bib-resource} 选项指定，具体见
+%   \ref{subsubsec:论文格式}~小节；而如果 \kvopt{bib-backend}{biblatex}，
+%   则该命令由 \pkg{biblatex} 宏包直接提供，可用选项请参阅其文档
+%   \cite{biblatex}。
+% \end{function}
+%
+% \begin{function}{acknowledgements}
+%   \begin{whusyntax}[emph={[2]acknowledgements}]
+%     \begin{acknowledgements}
+%       (*\meta{致谢内容}*)
+%     \end{acknowledgements}
+%   \end{whusyntax}
+%   致谢。
+% \end{function}
+%
+% 
+% \section{宏包依赖}
+%
+% 使用不同编译方式、指定不同选项，会导致宏包依赖情况有所不同。
+% 具体如下：
+% \begin{itemize}
+%   \item 在任何情况下，本模板都会\emph{显式}调用以下宏包（或文档类）：
+%     \begin{itemize}
+%       \item \pkg{expl3}、\pkg{xparse} 和 \pkg{l3keys2e}，用于构建 \LaTeX3 编程环境 \cite{source3}。它们分属 \pkg{l3kernel} 和 \pkg{l3packages} 宏集。
+%       \item \cls{ctex} 文档类，提供中文排版的通用框架，属于 \CTeX{} 宏集\cite{CTeX}。
+%       \item \pkg{amsmath}、\pkg{amssymb} 与 \pkg{amsthm}，对 \LaTeX{} 的数学排版功能进行了全面扩展，并提供定理类环境定制功能。属于 \AmSLaTeX{} 套件。
+%       \item \pkg{mathtools}，是 \pkg{amsmath} 的扩充，修正了 \pkg{amsmath} 的 bug，并提供了更多数学排版功能。
+%       \item \pkg{thmtools}，用于定制定理类环境。
+%       \item \pkg{tikzpagenodes}，用于页面绝对定位，此宏包内部加载 \pkg{ti\emph{k}z}。
+%       \item \pkg{geometry}，用于调整页面尺寸。
+%       \item \pkg{fancyhdr}，处理页眉页脚。
+%       \item \pkg{tocloft}，调整目录样式。
+%       \item \pkg{caption}，用于设置题注格式。
+%       \item \pkg{graphicx}，提供插图功能。
+%       \item \pkg{booktabs}，提供三线表支持。
+%       \item \pkg{enumitem}，提供高度定制化的列表环境。
+%       \item \pkg{footmisc}，用于设置脚注序号每面更新。
+%       \item \pkg{unicode-math}，负责处理 Unicode 编码的 OpenType 数学字体。
+%       \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
+%       \item \pkg{fixdif}，提供微分算符命令 \cmd{\d}。
+%       \item \pkg{xeCJKfntef}，用于排版下划线。
+%       \item \pkg{filehooks}，用于消除 \pkg{fontspec} 宏包对部分字体缺失 CJK script 的警告。
+%     \end{itemize}
+%     \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\cite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\cite{LuaTeX-ja} 宏包与 \pkg{chinese-jfm}。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
+%     \item 开启 \kvopt{style/bib-backend}{bibtex} 后，会调用 \pkg{natbib} 宏包，并依赖 \BibTeX{} 程序。参考文献样式由 \pkg{gbt7714} 宏包提供 \cite{natbib,gbt7714}。
+%     \item 开启 \kvopt{style/bib-backend}{biblatex} 后，会调用 \pkg{biblatex} 宏包，并依赖 \biber{} 程序。参考文献样式由 \pkg{biblatex-gb7714-2015} 宏包提供 \cite{biblatex,biblatex-gb7714-2015}。
+% \end{itemize}
+% 
+% 这里只列出了本模板直接调用的宏包。这些宏包自身的调用情况，此处不再具体展开。如有需要，请参阅相关文档。
+% 
+% \begin{thebibliography}{99}
+%   \newcommand\urlprefix{\newline\hspace*{\fill}}
+%   \let\OldUrl=\url
+%   \renewcommand\url[2][]{{\small\textit{#1}~\OldUrl{#2}}}
+%   \newcommand\CTANurl[2][]{{\small\textit{#1}~\href{http://mirror.ctan.org/#2}{\ttfamily CTAN://#2}}}
+%   \bibitem[Knuth(1986)]{texbook}
+%   \textsc{Knuth D E}.
+%   \newblock \textit{The \TeX book: Computers \& Typesetting, volume A} [M].
+%   \newblock Boston: Addison--Wesley Publishing Company, 1986
+%   \urlprefix \CTANurl[源代码^^A
+%     \footnote{此代码只可作为学习之用。未经 Knuth 本人同意，您不应当编译此文档。}：]^^A
+%     {systems/knuth/dist/tex/texbook.tex}
+%
+%   \bibitem[Mittelbach et~al.(2004)]{companion}
+%   \textsc{Mittelbach F} and \textsc{Goossens M}.
+%   \newblock \textit{The \LaTeX{} Companion} [M].
+%   \newblock 2nd ed.
+%   \newblock Boston: Addison--Wesley Publishing Company, 2004
+%
+%   \bibitem[()]{刘海洋2013latex入门}
+%   刘海洋.
+%   \newblock \textit{\LaTeX{} 入门} [M].
+%   \newblock 北京: 电子工业出版社, 2013
+%     
+%   \bibitem{source2e}
+%   \textsc{Braams J}, \textsc{Carlisle D}, \textsc{Jeffrey A}, et al.
+%   \newblock \textit{The \LaTeXe{} Sources} [CP/OL].
+%   \newblock (2020-10-01)
+%   \urlprefix\url{https://ctan.org/pkg/latex}
+%   \urlprefix\CTANurl[源代码：]{macros/latex/base/source2e.pdf}
+%   
+%   \bibitem{source3}
+%   \textsc{The \LaTeX3 Project}.
+%   \newblock \textit{The \LaTeX3 Sources} [CP/OL].
+%   \newblock (2021-05-11)
+%   \urlprefix\url{https://ctan.org/pkg/l3kernel}
+%   \urlprefix\CTANurl[源代码：]{macros/latex/contrib/l3kernel/source3.pdf}
+%   
+%   \bibitem{CTeX}
+%   \textsc{CTEX.ORG}.
+%   \newblock \textit{\CTeX{} 宏集手册} [EB/OL].
+%   \newblock version 2.5.6,
+%   \newblock (2021-03-14)
+%   \urlprefix\url{https://ctan.org/pkg/ctex}
+%   \urlprefix\CTANurl[文档及源代码：]{language/chinese/ctex/ctex.pdf}
+%   
+%   \bibitem{xeCJK}
+%   \textsc{CTEX.ORG}.
+%   \newblock \textit{\pkg{xeCJK} 宏包} [EB/OL].
+%   \newblock version 3.8.6,
+%   \newblock (2020-10-19)
+%   \urlprefix\url{https://ctan.org/pkg/xecjk}
+%   \urlprefix\CTANurl[文档及源代码：]{macros/xetex/latex/xecjk/xeCJK.pdf}
+%   
+%   \bibitem{LuaTeX-ja}
+%   \LuaTeX-ja プロジェクトチーム.
+%   \newblock \textit{\LuaTeX-ja パッケージ} [EB/OL].
+%   \newblock version 2021\linebreak[1]0517.0,
+%   \newblock (2021-05-17)
+%   \urlprefix\url{https://ctan.org/pkg/luatexja}
+%   \urlprefix\CTANurl[文档：]{macros/luatex/generic/luatexja/doc/luatexja-ja.pdf}
+%   
+%   \bibitem{lshort-zh-cn}
+%   \textsc{Oetiker T}, \textsc{Partl H}, \textsc{Hyna I}, et al.
+%   \newblock \textit{一份（不太）简短的 \LaTeXe{} 介绍: 或 112 分钟了解 \LaTeXe{}} [EB/OL].
+%   \newblock \CTeX{} 开发小组, 译.
+%   \newblock 原版版本 version 6.2, 中文版本 version 6.02,
+%   \newblock (2020-08-03)
+%   \urlprefix\url{https://ctan.org/pkg/lshort-zh-cn}
+%   \urlprefix\CTANurl[文档：]{info/lshort/chinese/lshort-zh-cn.pdf}
+%   
+%   \bibitem{thuthesis}
+%   清华大学 TUNA 协会.
+%   \newblock \textit{\textsc{ThuThesis}：清华大学学位论文模板} [EB/OL].
+%   \newblock version 7.2.2,
+%   \newblock (2021-04-03)
+%   \urlprefix\url{https://ctan.org/pkg/thuthesis}
+%   \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/thuthesis/thuthesis.pdf}
+%   
+%   \bibitem{fduthesis}
+%   曾祥东.
+%   \newblock \textit{fduthesis: 复旦大学论文模板} [EB/OL].
+%   \newblock version 0.7e,
+%   \newblock (2020/08/30)
+%   \urlprefix\url{https://ctan.org/pkg/fduthesis}
+%   \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/fduthesis/fduthesis-code.pdf}
+%   
+%   \bibitem{natbib}
+%   \textsc{Daly P W}.
+%   \newblock \textit{Natural Sciences Citations and References} [EB/OL].
+%   \newblock version 8.31b,
+%   \newblock (2010-09-13)
+%   \urlprefix\url{https://ctan.org/pkg/natbib}
+%   \urlprefix\CTANurl[文档及源代码：]{macros/latex/contrib/natbib/natbib.pdf}
+%   
+%   \bibitem{gbt7714}
+%   李泽平（\textsc{Zeping L}）.
+%   \newblock \textit{GB/T 7714—2015 \BibTeX{} Style} [EB/OL].
+%   \newblock version 2.1,
+%   \newblock (2020-12-17)
+%   \urlprefix\url{https://ctan.org/pkg/gbt7714}
+%   \urlprefix\CTANurl[文档：]{biblio/bibtex/contrib/gbt7714/gbt7714.pdf}
+%   
+%   \bibitem{biblatex}
+%   \textsc{Lehman P}, \textsc{Kime P}, \textsc{Boruvka A}, et al.
+%   \newblock \textit{The \pkg{biblatex} Package} [EB/OL].
+%   \newblock version 3.16,
+%   \newblock (2020-12-31)
+%   \urlprefix\url{https://ctan.org/pkg/biblatex}
+%   \urlprefix\CTANurl[文档：]{macros/latex/contrib/biblatex/doc/biblatex.pdf}
+%   
+%   \bibitem{biblatex-gb7714-2015}
+%   胡振震.
+%   \newblock \textit{符合 GB/T 7714-2015 标准的 biblatex 参考文献样式} [EB/OL].
+%   \newblock version 1.0y,
+%   \newblock (2021-05-06)
+%   \urlprefix\url{https://ctan.org/pkg/biblatex-gb7714-2015}
+%   \urlprefix\CTANurl[文档：]{biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf}
+% \end{thebibliography}

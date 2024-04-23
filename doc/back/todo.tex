@@ -1,0 +1,113 @@
+% !TeX root = ../whu-thesis-doc.tex
+
+\section{To-do}
+
+\subsection{大方向}
+
+\begin{itemize}
+  \item 写一些用户注意事项
+    \begin{itemize}
+      \item 层级（见本科规范P11的 |（九）正文|）
+      \item \href{https://github.com/whutug/whu-thesis/issues/63}{\#63}：参考文献中出现重音时的处理和 backend 有关
+    \end{itemize}
+  \item 尽可能复刻黄老师的模版效果并优化代码
+  \item 参考外语学院的 word 模版，提供调整接口
+  \item 参考 BenjaminHb 对学术硕士的需求的调整
+  \item 尝试用 \LaTeX{} 复刻硕士开题报告的表格
+  \item 整理 github 上的 issues 和 discussions
+  \item 不放过规范的每一个细节，将一些细节给用户写清楚。基于不同的规范来写三个版本（本硕博）的模版示例
+  \item 不同学院的差异通过自主定义的配置文件实现（配合 issues 或者手册等让用户知道怎么改）
+  \item 学习 \cls{fduthesis}、 \cls{thuthesis}、\cls{ustcthesis}、\cls{ucasthesis}、 \cls{sjtuthesis}、\cls{gdutthesis}、\cls{xdupgthesis} 等模版的细节处理
+  \item 增加一些宏包使用样例，比如 \pkg{tabularray}、\pkg{fixdif}、\pkg{listings} 等
+  \item 学习 \cls{thuthesis} 等模版的程序文件来处理以及 github 的 actions
+  \item 模版完善后移植到 gitee 上
+\end{itemize}
+
+\subsection{细节问题}
+\begin{itemize}
+  \item 实现诸如 \tn{AtEndPreamble} 之类的钩子，取消对 \pkg{etoolbox} 的依赖
+\end{itemize}
+
+
+\subsection{待开发}
+
+\subsubsection{本科}
+
+\begin{itemize}
+  \item 封面接口
+\end{itemize}
+
+
+\subsubsection{硕士}
+
+\begin{itemize}
+  \item 封面接口
+\end{itemize}
+
+
+\subsubsection{博士}
+
+\begin{itemize}
+  \item 封面接口
+  \item 攻博期间发表的与学位论文相关的科研成果目录（参考 \cls{CCNUthesis}）
+\end{itemize}
+
+
+
+\subsection{issues 问题解决 To-do}
+
+\begin{itemize}
+  \item 图表目录的 label 宽度问题（参考西电论文模版的设置）
+  \item \href{https://github.com/whutug/whu-thesis/issues/159}{\#159}：增加页眉的上方横线的控制接口
+  \item \href{https://github.com/whutug/whu-thesis/issues/153}{\#153}、\href{https://github.com/whutug/whu-thesis/issues/142}{\#142}、\href{https://github.com/whutug/whu-thesis/issues/125}{\#125}、\href{https://github.com/whutug/whu-thesis/issues/120}{\#120}、\href{https://github.com/whutug/whu-thesis/issues/94}{\#94}、\href{https://github.com/whutug/whu-thesis/issues/8}{\#8}、\href{https://github.com/whutug/whu-thesis/discussions/123}{\#123}：数学字体的配置，注意 \tn{mathscr}、\tn{mathcal} 和 \tn{mathbb} 的效果（参考 \cls{fduthesis} 的 \href{https://github.com/stone-zeng/fduthesis/discussions/270}{\#270}
+  \item \href{https://github.com/whutug/whu-thesis/issues/151}{\#151}：参考文献的排序问题（提供接口选择）
+  \item \href{https://github.com/whutug/whu-thesis/issues/148}{issue \#148}、\href{https://github.com/whutug/whu-thesis/discussions/147}{discussion \#147}：本科模版增加接口使得中英文摘要和目录页的页码为罗马数字
+  \item \href{https://github.com/whutug/whu-thesis/issues/142}{\#142}：算法的配置问题、图表题的参考文献引用问题
+  \item \href{https://github.com/whutug/whu-thesis/issues/132}{\#132}、\href{https://github.com/whutug/whu-thesis/issues/24}{\#24}：增加超链接的框接口（参考 \cls{fduthesis}）
+  \item \href{https://github.com/whutug/whu-thesis/issues/131}{\#131}：处理浮动体和文字之间的间距（参考 \href{https://github.com/sikouhjw/gdutthesis/blob/c3cc2de5bfa47f7bf1b88c0884cca60119d6fd82/gdutthesis.cls#L1106-L1132}{\cls{gdutthesis} 的补丁}）
+  \item \href{https://github.com/whutug/whu-thesis/issues/130}{\#130}：配置好 A4 纸张
+  \item \href{https://github.com/whutug/whu-thesis/issues/152}{\#152}、\href{https://github.com/whutug/whu-thesis/issues/117}{\#117}、\href{https://github.com/whutug/whu-thesis/issues/44}{\#44}：硕博模版上传图书馆需要去掉所有空白页（关键点在于页码、页眉的处理）处理好空白页（给用户提供接口，比如要不要空白页，然后空白页有无页码等）
+  \item \href{https://github.com/whutug/whu-thesis/issues/128}{\#128}：个人信息接口需要填写两个的话，要允许有一个缺失
+  \item \href{https://github.com/whutug/whu-thesis/issues/92}{\#92}：攻博期间发表的科研成果编号问题（参考 \cls{CCNUthesis}），提供键值让用户选择是否编号（有没有可能通过 \tn{bibentry} 和 \tn{nobibliography} 之类进行处理）
+  \item \href{https://github.com/whutug/whu-thesis/issues/85}{\#85}、\href{https://github.com/whutug/whu-thesis/issues/76}{\#76}：处理参考文献的引用命令
+  \item \href{https://github.com/whutug/whu-thesis/issues/80}{\#80}：整合 zepinglee 写的本科 bst 到模版中
+  \item \href{https://github.com/whutug/whu-thesis/issues/74}{\#74}、\href{https://github.com/whutug/whu-thesis/issues/72}{\#72}、\href{https://github.com/whutug/whu-thesis/issues/56}{\#56}、\href{https://github.com/whutug/whu-thesis/issues/39}{\#39}、\href{https://github.com/whutug/whu-thesis/issues/30}{\#30}：中文字体的配置
+  \item \href{https://github.com/whutug/whu-thesis/issues/71}{\#71}：重定义 \tn{figureautorefname} 等名称来使用 \tn{autoref}
+  \item \href{https://github.com/whutug/whu-thesis/issues/70}{\#70}：配置好 \pkg{hyperref} 宏包
+  \item \href{https://github.com/whutug/whu-thesis/issues/67}{\#67}：本硕如果有硕士期间研究成果要添加，可以放在附录
+  \item \href{https://github.com/whutug/whu-thesis/issues/61}{\#61}、\href{https://github.com/whutug/whu-thesis/issues/53}{\#53}、\href{https://github.com/whutug/whu-thesis/issues/46}{\#46}、\href{https://github.com/whutug/whu-thesis/issues/36}{\#36}、\href{https://github.com/whutug/whu-thesis/issues/4}{\#4}：参考文献的样式问题
+  \item \href{https://github.com/whutug/whu-thesis/issues/135}{\#135}、\href{https://github.com/whutug/whu-thesis/issues/66}{\#66}、\href{https://github.com/whutug/whu-thesis/issues/51}{\#51}、\href{https://github.com/whutug/whu-thesis/issues/50}{\#50}、\href{https://github.com/whutug/whu-thesis/issues/3}{\#3}、\href{https://github.com/whutug/whu-thesis/discussions/103}{discussion \#103}：增加接口控制的目录缩进（subsub 的可以默认设置为 sub + 2em）
+  \item \href{https://github.com/whutug/whu-thesis/issues/55}{\#55}：测试图表标题内的参考文献引用
+  \item \href{https://github.com/whutug/whu-thesis/issues/52}{\#52}：兼容 \tn{bm} 宏包？
+  \item \href{https://github.com/whutug/whu-thesis/issues/47}{\#47}：title 中含有公式的测试
+  \item \href{https://github.com/whutug/whu-thesis/issues/38}{\#38}：\pkg{biblatex} 与钩子的问题
+  \item \href{https://github.com/whutug/whu-thesis/issues/10}{\#10}：\pkg{listings} 配置？
+  \item \href{https://github.com/whutug/whu-thesis/issues/1}{\#1}：提供用户几种编辑器或 overleaf 的编译方式示例
+\end{itemize}
+
+
+\subsection{discussions 问题解决 To-do}
+
+\begin{itemize}
+  \item \href{https://github.com/whutug/whu-thesis/discussions/164}{\#164}：增加联合导师的接口
+  \item \href{https://github.com/whutug/whu-thesis/discussions/163}{\#163}：\tn{section} 中引用测试
+  \item \href{https://github.com/whutug/whu-thesis/discussions/160}{\#160}：超链接的颜色接口
+  \item \href{https://github.com/whutug/whu-thesis/discussions/160}{\#160}：参考文献字号问题
+  \item \href{https://github.com/whutug/whu-thesis/discussions/157}{\#157}：公式和文本的数字字体测试
+  \item \href{https://github.com/whutug/whu-thesis/discussions/155}{\#155}：参考文献的同名问题
+  \item \href{https://github.com/whutug/whu-thesis/discussions/154}{\#154}：文献只引用标题问题
+  \item \href{https://github.com/whutug/whu-thesis/discussions/136}{\#136}：参考文献的溢出问题
+  \item \href{https://github.com/whutug/whu-thesis/discussions/134}{\#134}：参考文献的“标准”类的引用问题
+  \item \href{https://github.com/whutug/whu-thesis/discussions/124}{\#124}：设计硕博的目录层级接口
+  \item \href{https://github.com/whutug/whu-thesis/discussions/111}{\#111}：脚注的序号和文字的距离调整
+  \item \href{https://github.com/whutug/whu-thesis/discussions/105}{\#105}：宏包依赖（尽可能减少宏包依赖，而增加宏包载入的配置）
+  \item \href{https://github.com/whutug/whu-thesis/discussions/104}{\#104}：提供标点符号的接口（开明等）
+  \item \href{https://github.com/whutug/whu-thesis/discussions/103}{\#103}：参考文献中的破折号（页码等）
+  \item \href{https://github.com/whutug/whu-thesis/discussions/100}{\#100}：多 \file{.bib} 文件
+  \item \href{https://github.com/whutug/whu-thesis/discussions/98}{\#98}：word 模版制作？
+  \item \href{https://github.com/whutug/whu-thesis/discussions/89}{\#89}：重新设计图表索引（目录）接口（去掉键值而改为命令形式）
+  \item \href{https://github.com/whutug/whu-thesis/discussions/78}{\#78}：增加版本检测
+  \item \href{https://github.com/whutug/whu-thesis/discussions/75}{\#75}：参考文献的引用
+  \item \href{https://github.com/whutug/whu-thesis/discussions/42}{\#42}：考虑把封面和扉页用 \pkg{xtemplate} 重构使得能够兼容更多学院的要求
+  \item \href{https://github.com/whutug/whu-thesis/discussions/43}{\#43}：Docker 镜像、github 的actions
+\end{itemize}

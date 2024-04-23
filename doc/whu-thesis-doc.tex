@@ -1,0 +1,62 @@
+\documentclass{xdyydoc}
+\input{whu-thesis-doc-setup.tex}
+
+
+\begin{document}
+
+% 封面的页边距
+
+\newgeometry{
+  left   = 1.25 in,
+  right  = 1.25 in,
+  top    = 1.25 in,
+  bottom = 1.00 in
+}
+
+\maketitle
+
+\input{./body/cover.tex}
+
+
+% 用户手册的页边距
+
+\newgeometry{
+  left   = 1.75 in,
+  right  = 0.80 in,
+  top    = 1.25 in,
+  bottom = 1.00 in
+}
+
+\tableofcontents
+
+
+% 介绍
+\input{./body/introduction.tex}
+% 安装
+% \input{./body/installation.tex}
+
+% \clearpage
+% 使用
+% \input{./body/usage.tex}
+
+
+% 宏包依赖情况
+\input{./back/package.tex}
+% 主要更新
+% \input{./back/main-changelog.tex}
+
+% 参与开发
+% \input{./back/development.tex}
+
+
+% 关于作者
+% \input{./back/about-author.tex}
+
+
+% 模版开发要点
+\input{./back/template-points.tex}
+
+% To-do
+\input{./back/todo.tex}
+
+\end{document}
