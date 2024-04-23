@@ -27,7 +27,7 @@ body:
     id: branch
     attributes:
       label: 您使用的模版来源
-      placeholder: main 分支 / rebuild 分支 / Releases (及其标签号)
+      placeholder: main 分支 / dev 分支 / Releases (及其标签号)
   - type: textarea
     id: bug
     attributes:
