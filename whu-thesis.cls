@@ -2085,7 +2085,28 @@
       \hfill 日期：\hspace{3em} 年 \qquad 月 \qquad 日
     \group_end:
   }
-
+%tag 博士论文创新点
+\cs_new_protected:Npn \__whu_doctor_innovation:
+  {
+    \group_begin:
+    \keys_set:nn { ctex } 
+      {
+        chapter =
+          {
+            numbering = false,
+            format+ = \centering,
+            pagestyle = empty
+          }
+      }
+    \chapter{ 论文创新点 }
+    \zihao{-4}
+    \file_if_exist:nT { pages / innovation.tex }
+      {
+        \file_input:n { pages / innovation.tex }
+      }
+    \newpage
+    \group_end:
+  }
 
 %region 摘要和关键词
 %tag 摘要与关键词之间的间距样式
@@ -2338,7 +2359,8 @@
               \__whu_doctor_statement:
               \__whu_new_blank_page:
               \__whu_doctor_license_agreement:
-              \newpage
+              \__whu_new_blank_page:
+              \__whu_doctor_innovation:
               \frontmatter
               \pagestyle{ doctor-frontmatter }
               \pagenumbering{Roman}
