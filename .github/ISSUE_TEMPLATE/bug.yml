@@ -9,17 +9,43 @@ body:
       options:
         - label: 我已在 issues 中进行搜索（包括已关闭的问题）
           required: true
+  - type: dropdown
+    id: thesis-type
+    attributes:
+      label: 论文类型
+      multiple: false
+      options:
+        - 本科毕业论文
+        - 硕士学位论文
+        - 博士学位论文
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: thesis-class
+    attributes:
+      label: 学位类型
+      description: 针对硕博，本科的请忽略此条
+      multiple: false
+      options:
+        - 学术学位
+        - 专业学位
+      default: 0
+    validations:
+      required: true
   - type: input
     id: os
     attributes:
       label: 操作系统
-      placeholder: Windows 11 / 10 / 8 / 8.1, mac OS 14 / Linux（说明发行版和版本）
+      description: 请注明您使用的操作系统及其版本，如果您不是本地编译的话，请填写您使用的在线编译平台（如 Overleaf、TeXPage 等）
+      placeholder: Windows / macOS / Linux（说明发行版和版本）
     validations:
       required: true
   - type: input
     id: tex-distro
     attributes:
       label: TeX 发行版
+      description: 请注明您本地安装或在线使用的 TeX 发行版
       placeholder: TeX Live 2024 / MiKTeX 24.1 / CTeX 套装 3.0.216.3 / 其他（请具体说明）
     validations:
       required: true
@@ -35,6 +61,6 @@ body:
     attributes:
       label: 描述 Bug
       description: |
-        请在此处描述清楚您在使用本论文模版时所遇到的问题
+        请在此处描述清楚：您在使用本论文模版时所遇到的 BUG
     validations:
       required: true
