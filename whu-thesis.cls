@@ -2005,7 +2005,7 @@
         \__whu_spread_box:nn{2.5cm}{年月日}
     \group_end:
   }
-
+%tag 硕士原创性声明
 \fp_const:Nn \c__whu_master_statement_line_spread_fp
   { \dim_ratio:nn { 28 bp } { 14 bp } / 1.2 }
 \cs_new:Npn \__whu_master_statement:
@@ -2032,6 +2032,7 @@
       \end{flushright}
     \group_end:
   }
+%tag 博士原创性声明
 \cs_new:Npn \__whu_doctor_statement:
   {
     \group_begin:
