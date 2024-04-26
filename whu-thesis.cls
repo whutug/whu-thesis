@@ -2968,7 +2968,7 @@
   }
 %tag 设置参考文献格式默认值
 % 本科默认使用顺序编码制，硕博默认使用著者-出版年制
-\tl_if_eq:VnTF \g__whu_thesis_type_tl { bachelor }
+\tl_if_eq:NnTF \g__whu_thesis_type_tl { bachelor }
   {
     \keys_set:nn { whu / style } { bib-style = numerical }
   }
@@ -3023,7 +3023,7 @@
 %tag bibtex相关设置
 \cs_new_protected:Npn \__whu_bibtex_setup:
   {
-    \tl_if_eq:VnTF \l__whu_bib_gb_style_tl { numerical }
+    \tl_if_eq:NnTF \l__whu_bib_gb_style_tl { numerical }
       {
         \exp_args:NNx \DeclareRobustCommand \parencite
           { \exp_args:No \exp_not:o { \cs:w cite ~ \cs_end: } }
@@ -3061,7 +3061,7 @@
         style =
         \tl_if_empty:NTF \l__whu_bib_style_tl
           {
-            \tl_if_eq:VnTF \g__whu_thesis_type_tl { bachelor }
+            \tl_if_eq:NnTF \g__whu_thesis_type_tl { bachelor }
               {
                 \str_if_eq:VnTF \l__whu_bib_gb_style_tl { numerical }
                   { gb7714-2015 } { gb7714-2015ay }
