@@ -261,6 +261,30 @@
         }
     \group_end:
   }
+%tag 删除章标题中的-\quad
+\cs_new_protected:Npn \__whu_sanitize_chapter_title:n #1
+  {
+    \tl_clear:N \l__whu_tmpa_tl
+    \tl_set:No \l__whu_tmpa_tl {#1}
+    \tl_remove_all:Nn \l__whu_tmpa_tl { \quad }
+  }
+%tag 手动生成章的标题，用于摘要、参考文献等
+\cs_new_protected:Npn \__whu_chapter:n #1
+  {
+    \__whu_sanitize_chapter_title:n {#1}
+    \group_begin:
+      \ctexset { chapter / numbering = false }
+      \chapter [ \l__whu_tmpa_tl ] {#1}
+    \group_end:
+    \__whu_chapter_header:n {#1}
+  }
+\cs_generate_variant:Nn \__whu_chapter:n { V }
+\cs_new_protected:Npn \__whu_chapter_header:n #1
+  {
+    \bool_if:NTF \g__whu_twoside_bool
+      { \markboth {#1} {#1} }
+      { \markboth { \hfill #1 \hfill } { } }
+  }
 %endregion 基本函数
 
 %region 处理文档类的选项
@@ -1425,7 +1449,8 @@
 %tag logo-and-type
 \cs_new_protected:Npn \__whu_bachelor_cover_i_logo_and_type:
   {
-    \skip_vertical:n { 2.01 cm }\setlength{\fboxsep}{0pt}
+    \mode_leave_vertical:
+    \skip_vertical:n { 2.01 cm }
     \noindent
     \begin{minipage}[t][3.85cm]{\textwidth}
       \centering
@@ -2893,38 +2918,11 @@
   }
 %endregion 定理类环境
 
-% 删除章标题中的 \quad
-\cs_new_protected:Npn \__whu_sanitize_chapter_title:n #1
-  {
-    \tl_clear:N \l__whu_tmpa_tl
-    \tl_set:No \l__whu_tmpa_tl {#1}
-    \tl_remove_all:Nn \l__whu_tmpa_tl { \quad }
-  }
-% 手动生成章的标题，用于摘要、参考文献等。
-\cs_new_protected:Npn \__whu_chapter:n #1
-  {
-    \__whu_sanitize_chapter_title:n {#1}
-    \group_begin:
-      \ctexset { chapter / numbering = false }
-      \chapter [ \l__whu_tmpa_tl ] {#1}
-    \group_end:
-    \__whu_chapter_header:n {#1}
-  }
-\cs_generate_variant:Nn \__whu_chapter:n { V }
-\cs_new_protected:Npn \__whu_chapter_header:n #1
-  {
-    \bool_if:NTF \g__whu_twoside_bool
-      { \markboth {#1} {#1} }
-      { \markboth { \hfill #1 \hfill } { } }
-  }
-
 % 封装 LaTeX 的钩子管理机制。本模板中的字体加载命令位于
 % begindocument/before 钩子中，需确保在 xeCJK 之前执行。
 \cs_new_protected:Npn \__whu_gadd_ltxhook:nn #1#2
   { \hook_gput_code:nnn {#1} { . } {#2} }
 \hook_gset_rule:nnnn { begindocument/before } { . } { < } { xeCJK }
-
-
 
 %region 参考文献 (bibliography)
 %tag 定义变量
