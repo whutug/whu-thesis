@@ -23,7 +23,7 @@
 2. 请认真阅读使用手册 `whuthesis.pdf` 和使用示例文件 `demo.tex`；
 3. 开始您的论文写作并编译 PDF，编译方式主要有两种：
    + 本地编译：本地编译要求您预先在计算机上安装 TeX 发行版，详细的安装指南见 [install-latex-guide-zh-cn](https://ctan.org/pkg/install-latex-guide-zh-cn)。
-   + Overleaf 在线编译：[Overleaf](https://www.overleaf.com/) 是一个在线 LaTeX 编译平台。其特点是无需安装，可实时共享与版本控制。
+   + 在线编译：常见的在线编译平台有 [Overleaf](https://www.overleaf.com/) 和 [TeXPage](https://www.texpage.com/)。
 
 
 ## 重要提醒
