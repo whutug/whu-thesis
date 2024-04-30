@@ -820,7 +820,7 @@
 %tag 设置默认字体
 \keys_set:nn { whu / style }
   {
-    font         = times,
+    font         = termes,
     math-font    = termes,
     cjk-font     = fandol,
     cjk-fakefont = false,
