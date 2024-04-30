@@ -1687,7 +1687,7 @@
 \cs_new_protected:Npn \__whu_master_cover_ii_information:
   {
     \node (information) at
-      ( [shift = {(3em, 5em)}]current~page~text~area.center )
+      ( [shift = {(0em, 5em)}]current~page~text~area.center )
       {
         \tl_put_left:Nn \l__whu_info_supervisor_en_tl
           { \l__whu_info_supervisor_academic_title_en_tl .~ }
@@ -1784,7 +1784,7 @@
 \cs_new_protected:Npn \__whu_doctor_cover_ii_information:
   {
     \node (information) at
-      ( [shift = {(3em, 5em)}]current~page~text~area.center )
+      ( [shift = {(0em, 5em)}]current~page~text~area.center )
       {
         \tl_put_left:Nn \l__whu_info_supervisor_en_tl
           { \l__whu_info_supervisor_academic_title_en_tl .~ }
