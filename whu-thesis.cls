@@ -303,7 +303,7 @@
     type .choice:,
     type .value_required:n = true,
     type .choices:nn =
-      { proposal, bachelor, master, doctor }
+      { bachelor, master, doctor }
       {
         \int_gset_eq:NN \g__whu_thesis_type_int \l_keys_choice_int
         \tl_gset_eq:NN \g__whu_thesis_type_tl \l_keys_choice_tl
@@ -353,8 +353,6 @@
   { Class~ option~ "\l_keys_key_str"~ is~ unknown. }
 \ProcessKeysOptions { whu / option }
 
-
-
 %tag 行距
 
 % 本科的 linespread
@@ -368,25 +366,14 @@
   { \dim_ratio:nn { 20 bp } { 12 bp } / 1.2 }
 
 %tag 字号和行距处理
-\int_case:nn { \g__whu_thesis_type_int }
+\str_case:xn { \tl_to_str:N \g__whu_thesis_type_tl }
   {
-    % 开题报告字号小四
-    {1} { \PassOptionsToClass { zihao = -4 } { ctexbook } }
     % 本科小四，23磅
-    {2} { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
+    { bachelor } { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
     % 硕士小四，20磅
-    {3} { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
+    {  master  } { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
     % 博士小四，20磅
-    {4} { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
-  }
-
-%tag 页面的单双面设置
-\int_case:nn { \g__whu_thesis_type_int }
-  {
-    % 开题报告：oneside
-    {1} { \PassOptionsToClass { oneside } { ctexbook } }
-    % 本科：默认 oneside
-    {2} { \PassOptionsToClass { oneside } { ctexbook } }
+    {  doctor  } { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
   }
 
 \PassOptionsToClass
@@ -455,21 +442,8 @@
 % 统一都是 A4 纸大小
 \geometry{paper = a4paper}
 
-%tag 开题报告
-\cs_new:Npn \__whu_proposal_set_paper_size:
-  {
-    \geometry
-      {
-        left       = 31.75mm,
-        right      = 31.75mm,
-        top        = 25.4mm,
-        bottom     = 25.4mm,
-        headheight = 0pt,
-        headsep    = 0pt
-      }
-  }
 %tag 本科
-\cs_new:Npn \__whu_bachelor_set_paper_size:
+\cs_new_protected:Npn \__whu_bachelor_set_paper_size:
   {
     \geometry
       {
@@ -483,7 +457,7 @@
       }
   }
 %tag 硕士
-\cs_new:Npn \__whu_master_set_paper_size:
+\cs_new_protected:Npn \__whu_master_set_paper_size:
   {
     \geometry
       {
@@ -495,7 +469,7 @@
       }
   }
 %tag 博士
-\cs_new:Npn \__whu_doctor_set_paper_size:
+\cs_new_protected:Npn \__whu_doctor_set_paper_size:
   {
     \geometry
       {
@@ -506,18 +480,8 @@
         headheight = 15pt
       }
   }
-
-\int_case:Vn \g__whu_thesis_type_int  
-  {
-    % 开题报告
-    {1} { \__whu_proposal_set_paper_size: }
-    % 本科
-    {2} { \__whu_bachelor_set_paper_size: }
-    % 硕士
-    {3} { \__whu_master_set_paper_size: }
-    % 博士
-    {4} { \__whu_doctor_set_paper_size: }
-  }
+%tag 设置
+\use:c { __whu_ \g__whu_thesis_type_tl _set_paper_size: }
 %endregion 页面尺寸设置
 
 %region 图书馆版本 去除所有空白页
@@ -528,13 +492,13 @@
     library .default:n   = true,
   }
 \ctex_after_end_preamble:n
-{
-  \bool_if:NT \g__whu_library_version_bool
   {
-    \cs_set_eq:NN \__whu_new_blank_page: \newpage
-    \renewcommand{\cleardoublepage}{\clearpage}
+    \bool_if:NT \g__whu_library_version_bool
+    {
+      \cs_set_eq:NN \__whu_new_blank_page: \newpage
+      \renewcommand{\cleardoublepage}{\clearpage}
+    }
   }
-}
 %endregion 图书馆版本
 
 %region 字体配置 (font configuration)
@@ -867,53 +831,6 @@
 
 \setlist{nosep}
 
-%tag 开题报告
-\cs_new:Npn \__whu_proposal_report_set_ctex_format:
-  {
-    \keys_set:nn { ctex }
-      {
-        chapter = 
-          {
-            numbering   = false,
-            format      = \zihao{2}\bfseries\centering,
-            beforeskip  = -3.5ex,
-            afterskip   = 5ex plus 1ex minus 1ex,
-            pagestyle   = empty,
-            titleformat = \__whu_spread_box_with_quad:n
-          },
-        section = 
-          {
-            number      = \chinese{section},
-            name        = {,、},
-            aftername   = {},
-            format      = \zihao{4}
-          }
-    }
-  }
-
-%tag 本科毕业论文（设计）任务书
-\cs_new:Npn \__whu_proposal_tasks_set_ctex_format:
-  {
-    \keys_set:nn { ctex }
-      {
-        chapter = 
-          {
-            numbering   = false,
-            format      = \zihao{3}\bfseries\centering,
-            beforeskip  = 3ex,
-            afterskip   = 7.5ex,
-            pagestyle   = empty
-          },
-        section = 
-          {
-            number      = \chinese{section},
-            name        = {,、},
-            aftername   = {},
-            format      = \zihao{4}
-          }
-    }
-  }
-
 %tag 本科
 \cs_new_protected:Npn \__whu_bachelor_set_ctex_format:
   {
@@ -1099,41 +1016,9 @@
         label          = \roman{*}.
       }
   }
-
-\int_case:Vn \g__whu_thesis_type_int  
-  {
-    % 本科
-    {2}
-      {
-        \__whu_bachelor_set_enumerate_format:
-        \__whu_bachelor_set_ctex_format: 
-      }
-    % 硕士
-    {3}
-      {
-        \__whu_master_set_enumerate_format:
-        \__whu_master_set_ctex_format: 
-      }
-    % 博士
-    {4}
-      {
-        \__whu_doctor_set_enumerate_format:
-        \__whu_doctor_set_ctex_format: 
-      }
-  }
-
-\NewDocumentCommand { \ProposalTasks } { O{武汉大学本科毕业论文（设计）任务书} }
-  {
-    \__whu_proposal_tasks_set_ctex_format:
-    \chapter{#1}
-    \int_set:Nn \c@section {0}
-  }
-\NewDocumentCommand { \ProposalReport } { O{开题报告} }
-  {
-    \__whu_proposal_report_set_ctex_format:
-    \chapter{#1}
-    \int_set:Nn \c@section {0}
-  }
+%tag 设置
+\use:c { __whu_ \g__whu_thesis_type_tl _set_emunerate_format: }
+\use:c { __whu_ \g__whu_thesis_type_tl _set_ctex_format: }
 %endregion
 
 
@@ -1371,72 +1256,15 @@
       }
   }
 %tag 执行初始化
-\int_case:Vn \g__whu_thesis_type_int  
+\str_case:xn { \tl_to_str:N \g__whu_thesis_type_tl }
   {
-    % 本科
-    {2} { \__whu_bachelor_info_initial: }
-    % 硕士
-    {3} { \__whu_master_and_doctor_info_initial:
-          \__whu_master_info_initial: }
-    % 博士
-    {4} { \__whu_master_and_doctor_info_initial:
-          \__whu_doctor_info_initial: }
+    { bachelor } { \__whu_bachelor_info_initial: }
+    { master   } { \__whu_master_and_doctor_info_initial:
+                   \__whu_master_info_initial: }
+    { doctor   } { \__whu_master_and_doctor_info_initial:
+                   \__whu_doctor_info_initial: }
   }
 %endregion 个人信息
-
-%tag 本科任务书个人信息
-\NewDocumentCommand \ProposalTasksinformation { }
-  {
-    \par \noindent 
-    毕业论文（设计）题目：\CJKunderline*{ \l__whu_info_title_tl }\\[5pt]
-    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl 
-    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl 
-    姓名：\CJKunderline*{ \l__whu_info_author_tl } 
-  }
-% 本科开题报告个人信息
-\NewDocumentCommand \ProposalReportinformation { }
-  {
-    \par \noindent 
-    论文题目：\CJKunderline*{ \l__whu_info_title_tl }\\[10pt]
-    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl 
-    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl 
-    姓名：\CJKunderline*{ \l__whu_info_author_tl } 
-  }
-% 本科任务书落款
-\NewDocumentCommand \ProposalTasksSignature { }
-  {
-    \dim_compare:nNnTF 
-      { \pagetotal } < { .5 \textheight }
-      { \vfil \null \vfil }
-      {
-        \dim_compare:nNnTF 
-          { \pagegoal - \pagetotal } < { 8em }
-          { \vfill }
-          { \vfil \null \vfil }
-      }
-    \noindent
-    指导老师签名：\CJKunderline*{\hspace*{10em}}  \hfill 
-    年 \hspace*{2em} 月 \hspace*{2em} 日
-  }
-% 本科任务书落款
-\NewDocumentCommand \ProposalReportSignature { }
-  {
-    \dim_compare:nNnTF 
-      { \pagetotal } < { .5 \textheight }
-      { \vfil }
-      {
-        \dim_compare:nNnTF 
-          { \pagegoal - \pagetotal } < { 8em }
-          { \vfill }
-          { \vfil \null \vfil }
-      }
-    \begin{flushright}
-      指导老师签名：\hspace*{8em} \null\\[5pt]
-      年 \hspace*{2em} 月 \hspace*{2em} 日
-    \end{flushright} 
-  }
-
-
 
 %region 中文封面
 %region 本科
@@ -1453,8 +1281,6 @@
     \__whu_bachelor_cover_i_date_zh:
     \restoregeometry
   }
-
-
 %tag logo-and-type
 \cs_new_protected:Npn \__whu_bachelor_cover_i_logo_and_type:
   {
@@ -2403,12 +2229,9 @@
 %endregion
 
 %tag 输出封面、声明、摘要、目录
-\int_compare:nNnF { \g__whu_thesis_type_int } = {1}
+\ctex_after_end_preamble:n
   {
-    \ctex_after_end_preamble:n
-    {
-      \use:c { __whu_ \g__whu_thesis_type_tl _frontmatter_output: }
-    }
+    \use:c { __whu_ \g__whu_thesis_type_tl _frontmatter_output: }
   }
 
 %region 目录
@@ -2452,10 +2275,9 @@
   }
 \AddToHook { begindocument }
   {
-    \int_case:Vn \g__whu_thesis_type_int  
+    \tl_if_eq:NnT \g__whu_thesis_type_tl { bachelor }
       {
-        % 本科
-        {2} { \__whu_bachelor_chapter_cmds_no_optional_argument: }
+        \__whu_bachelor_chapter_cmds_no_optional_argument:
       }
   }
 %tag 本科设置
@@ -2531,15 +2353,9 @@
     % % subsection前的额外垂直间距
     % \dim_set:Nn \cftbeforesubsecskip { 0.1\baselineskip }
   }
-\int_case:Vn \g__whu_thesis_type_int  
-  {
-    % 本科
-    {2} { \__whu_bachelor_set_tocline: }
-    % 硕士
-    {3} { \__whu_master_set_tocline: }
-    % 博士
-    {4} { \__whu_doctor_set_tocline: }
-  }
+%tag 启动设置
+\use:c { __whu_ \g__whu_thesis_type_tl _set_tocline: }
+
 %tag 重定义目录
 \cs_set_eq:NN \__whu_old_tableofcontents: \tableofcontents
 \RenewDocumentCommand \tableofcontents { }
@@ -2615,10 +2431,9 @@
           }
       }
   }
-\int_case:Vn \g__whu_thesis_type_int  
+\tl_if_eq:NnT \g__whu_thesis_type_tl { bachelor }
   {
-    % 本科
-    {2} { \__whu_bachelor_set_appendix: }
+    \__whu_bachelor_set_appendix:
   }
 %endregion 附录设置
 
