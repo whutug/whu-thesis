@@ -34,6 +34,14 @@ body:
     validations:
       required: true
   - type: input
+    id: department
+    attributes:
+      label: 所在院系
+      description: 请注明您所在的院系
+      placeholder: 数院 / 物院 / 计算机院 / 网安等
+    validations:
+      required: true
+  - type: input
     id: os
     attributes:
       label: 操作系统
