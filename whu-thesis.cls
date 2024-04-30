@@ -66,6 +66,15 @@
 %tag 用户设置命令接口
 \NewDocumentCommand \whusetup { m }
   { \keys_set:nn { whu } {#1} }
+\NewDocumentCommand \whumodule { m }
+  { 
+    \ExplSyntaxOn
+    \clist_map_inline:nn { #1 }
+      {
+        \file_input:n { module / ##1 }
+      }
+    \ExplSyntaxOff
+  }
 
 %tag meta-key
 \keys_define:nn { whu }
@@ -906,7 +915,7 @@
   }
 
 %tag 本科
-\cs_new:Npn \__whu_bachelor_set_ctex_format:
+\cs_new_protected:Npn \__whu_bachelor_set_ctex_format:
   {
     \keys_set:nn { ctex }
       {
@@ -949,7 +958,7 @@
           },
     }
   }
-\cs_new:Npn \__whu_bachelor_set_enumerate_format:
+\cs_new_protected:Npn \__whu_bachelor_set_enumerate_format:
   {
     % enumerate
     \setenumerate[1]
@@ -971,7 +980,7 @@
       }
   }
 %tag 硕士
-\cs_new:Npn \__whu_master_set_ctex_format:
+\cs_new_protected:Npn \__whu_master_set_ctex_format:
   {
     \keys_set:nn { ctex }
       {
@@ -1009,7 +1018,7 @@
           },
     }
   }
-\cs_new:Npn \__whu_master_set_enumerate_format:
+\cs_new_protected:Npn \__whu_master_set_enumerate_format:
   {
     % enumerate
     \setenumerate[1]
@@ -1031,7 +1040,7 @@
       }
   }
 %tag 博士
-\cs_new:Npn \__whu_doctor_set_ctex_format:
+\cs_new_protected:Npn \__whu_doctor_set_ctex_format:
   {
     \keys_set:nn { ctex }
       {
@@ -1069,7 +1078,7 @@
           },
     }
   }
-\cs_new:Npn \__whu_doctor_set_enumerate_format:
+\cs_new_protected:Npn \__whu_doctor_set_enumerate_format:
   {
     % enumerate
     \setenumerate[1]
@@ -2157,14 +2166,13 @@
       { \str_set_eq:NN \l__whu_abstract_keywords_en_type_str \l__whu_abstract_keywords_zh_type_str }
   }
 %tag 本科
-\cs_new:Npn \__whu_bachelor_abstract_output:
+\cs_new_protected:Npn \__whu_bachelor_abstract_output:
   {
     \group_begin:
       \keys_set:nn { ctex } 
         {
           chapter =
             {
-              numbering  = false,
               pagestyle  = bachelor-frontmatter,
               format     = \heiti \zihao{-2} \centering,
               beforeskip = 15pt,
@@ -2184,7 +2192,7 @@
     \newpage
     \group_end:
   }
-\cs_new:Npn \__whu_bachelor_abstract_en_output:
+\cs_new_protected:Npn \__whu_bachelor_abstract_en_output:
   {
     \group_begin:
       \keys_set:nn { ctex } 
@@ -2330,76 +2338,76 @@
   }
 %endregion
 
-%tag 输出封面、声明、摘要
+%region 定义封面、声明、摘要、目录部分的输出格式
+%tag 本科
+\cs_new_protected:Npn \__whu_bachelor_frontmatter_output:
+  {
+    \pagestyle{empty}
+    \__whu_bachelor_cover_i:
+    \bool_if:NT \l__whu_bachelor_english_cover_bool
+      {
+        \newpage
+        \__whu_bachelor_cover_ii:
+      }
+    \newpage
+    \__whu_bachelor_originality_statement:
+    \__whu_bachelor_copyright:
+    \newpage
+    \frontmatter
+    \pagenumbering{Roman}
+    \pagestyle{ bachelor-frontmatter }
+    \__whu_bachelor_abstract_output:
+    \newpage
+    \__whu_bachelor_abstract_en_output:
+    \newpage
+  }
+%tag 硕士
+\cs_new_protected:Npn \__whu_master_frontmatter_output:
+  {
+    \pagestyle{empty}
+    \__whu_master_cover_i:
+    \__whu_new_blank_page:
+    \__whu_master_cover_ii:
+    \__whu_new_blank_page:
+    \__whu_master_statement:
+    \newpage
+    \frontmatter
+    \pagestyle{ master-frontmatter }
+    \pagenumbering{Roman}
+    \__whu_master_abstract_output:
+    \newpage
+    \__whu_master_abstract_en_output:
+    \newpage
+  }
+%tag 博士
+\cs_new_protected:Npn \__whu_doctor_frontmatter_output:
+  {
+    \pagestyle{empty}
+    \__whu_doctor_cover_i:
+    \__whu_new_blank_page:
+    \__whu_doctor_cover_ii:
+    \__whu_new_blank_page:
+    \__whu_doctor_statement:
+    \__whu_new_blank_page:
+    \__whu_doctor_license_agreement:
+    \__whu_new_blank_page:
+    \__whu_doctor_innovation:
+    \frontmatter
+    \pagestyle{ doctor-frontmatter }
+    \pagenumbering{Roman}
+    \__whu_doctor_abstract_output:
+    \newpage
+    \__whu_doctor_abstract_en_output:
+    \newpage
+  }
+%endregion
+
+%tag 输出封面、声明、摘要、目录
 \int_compare:nNnF { \g__whu_thesis_type_int } = {1}
   {
     \ctex_after_end_preamble:n
     {
-      \pdfbookmark{中文封面}{titlepage}
-      \int_case:Vn \g__whu_thesis_type_int  
-        {
-          % 本科
-          {2} 
-            {
-              \pagestyle{empty}
-              \__whu_bachelor_cover_i:
-              \bool_if:NT \l__whu_bachelor_english_cover_bool
-                {
-                  \newpage
-                  \__whu_bachelor_cover_ii:
-                }
-              \newpage
-              \__whu_bachelor_originality_statement:
-              \__whu_bachelor_copyright:
-              \newpage
-              \frontmatter
-              \pagenumbering{Roman}
-              \pagestyle{ bachelor-frontmatter }
-              \__whu_bachelor_abstract_output:
-              \newpage
-              \__whu_bachelor_abstract_en_output:
-              \newpage
-            }
-          % 硕士
-          {3} 
-            {
-              \pagestyle{empty}
-              \__whu_master_cover_i:
-              \__whu_new_blank_page:
-              \__whu_master_cover_ii:
-              \__whu_new_blank_page:
-              \__whu_master_statement:
-              \newpage
-              \frontmatter
-              \pagestyle{ master-frontmatter }
-              \pagenumbering{Roman}
-              \__whu_master_abstract_output:
-              \newpage
-              \__whu_master_abstract_en_output:
-              \newpage
-            }
-          % 博士
-          {4} 
-            {
-              \pagestyle{empty}
-              \__whu_doctor_cover_i:
-              \__whu_new_blank_page:
-              \__whu_doctor_cover_ii:
-              \__whu_new_blank_page:
-              \__whu_doctor_statement:
-              \__whu_new_blank_page:
-              \__whu_doctor_license_agreement:
-              \__whu_new_blank_page:
-              \__whu_doctor_innovation:
-              \frontmatter
-              \pagestyle{ doctor-frontmatter }
-              \pagenumbering{Roman}
-              \__whu_doctor_abstract_output:
-              \newpage
-              \__whu_doctor_abstract_en_output:
-              \newpage
-            }
-        }
+      \use:c { __whu_ \g__whu_thesis_type_tl _frontmatter_output: }
     }
   }
 
@@ -3146,3 +3154,5 @@
       { \c__whu_orig_decl_text_tl, \c__whu_auth_decl_text_tl }
       { \tl_set_rescan:Nno ##1 { } {##1} }
   }
+
+\endinput
