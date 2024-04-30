@@ -1545,7 +1545,7 @@
     bachelor-encover .initial:n = false,
     bachelor-encover .default:n = true
   }
-\cs_new:Npn \__whu_bachelor_cover_ii:
+\cs_new_protected:Npn \__whu_bachelor_cover_ii:
   {
     \begin{tikzpicture} [ remember~picture, overlay ]
       % 类型
@@ -1561,7 +1561,7 @@
     \end{tikzpicture}
   }
 %tag 类型
-\cs_new:Npn \__whu_bachelor_cover_ii_type:
+\cs_new_protected:Npn \__whu_bachelor_cover_ii_type:
   {
     \node [ anchor = north ] at
       ( [ shift = { ( 0 , -0.07\textheight ) } ] current~page~text~area.north )
@@ -1576,7 +1576,7 @@
       };
   }
 %tag 标题
-\cs_new:Npn \__whu_bachelor_cover_ii_title:
+\cs_new_protected:Npn \__whu_bachelor_cover_ii_title:
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.29\textheight ) } ] current~page~text~area.north )
@@ -1588,7 +1588,7 @@
       };
   }
 %tag 个人信息
-\cs_new:Npn \__whu_bachelor_cover_ii_information:
+\cs_new_protected:Npn \__whu_bachelor_cover_ii_information:
   {
     \node (information) at
       ( [shift = {(0em, 0em)}]current~page~text~area.center )
@@ -1604,7 +1604,7 @@
       };
   }
 %tag 学校名和logo
-\cs_new:Npn \__whu_bachelor_cover_ii_logo:
+\cs_new_protected:Npn \__whu_bachelor_cover_ii_logo:
   {
     \node [anchor = south] at ([ shift = { ( 0 , 2.5em ) } ] date.north)
       {
@@ -1637,7 +1637,7 @@
     \l__whu_tmpa_tl
   }
 \cs_generate_variant:Nn \__whu_month_cover_to_english_version:n { V }
-\cs_new:Npn \__whu_bachelor_cover_ii_date_en:
+\cs_new_protected:Npn \__whu_bachelor_cover_ii_date_en:
   {
     \node [anchor = south] (date) at
       ([ shift = { ( 0 , 0.05\textheight ) } ] current~page~text~area.south)
@@ -1648,7 +1648,7 @@
   }
 %endregion 本科
 %region 硕士
-\cs_new:Npn \__whu_master_cover_ii:
+\cs_new_protected:Npn \__whu_master_cover_ii:
   {
     \pdfbookmark{英文封面}{titlepage-en}
     \tl_if_eq:NnTF \l__whu_cover_en_type_tl { normal }
@@ -1672,7 +1672,7 @@
       }
   }
 %tag 标题
-\cs_new:Npn \__whu_master_cover_ii_title:
+\cs_new_protected:Npn \__whu_master_cover_ii_title:
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.1\textheight ) } ] current~page~text~area.north )
@@ -1684,7 +1684,7 @@
       };
   }
 %tag 个人信息
-\cs_new:Npn \__whu_master_cover_ii_information:
+\cs_new_protected:Npn \__whu_master_cover_ii_information:
   {
     \node (information) at
       ( [shift = {(3em, 5em)}]current~page~text~area.center )
@@ -1704,7 +1704,7 @@
       };
   }
 %tag 学校名和 logo
-\cs_new:Npn \__whu_master_cover_ii_logo:
+\cs_new_protected:Npn \__whu_master_cover_ii_logo:
   {
     \node [anchor = south] at ([ shift = { ( 0 , 2em ) } ] date.north)
       {
@@ -1716,7 +1716,7 @@
       };
   }
 %tag 时间
-\cs_new:Npn \__whu_master_cover_ii_date_en:
+\cs_new_protected:Npn \__whu_master_cover_ii_date_en:
   {
     \node [anchor = south] (date) at
       ([ shift = { ( 0 , 0.01\textheight ) } ] current~page~text~area.south)
@@ -1727,7 +1727,7 @@
   }
 % 计算机学院、网络安全学院英文封面，依据为计算机学院于
 % 2023-05-10 发布的链接文件 https://cs.whu.edu.cn/info/1140/4335.htm
-\cs_new:Npn \__whu_master_cs_cover_ii:
+\cs_new_protected:Npn \__whu_master_cs_cover_ii:
   {
     \begin{tikzpicture}[ remember~picture, overlay, align=center ]
       \node at ([shift = {(0,-4.16cm)}]current~page~text~area.north)
@@ -1754,7 +1754,7 @@
   }
 %endregion 硕士
 %region 博士
-\cs_new:Npn \__whu_doctor_cover_ii:
+\cs_new_protected:Npn \__whu_doctor_cover_ii:
   {
     \pdfbookmark{英文封面}{titlepage-en}
     \begin{tikzpicture} [ remember~picture, overlay ]
@@ -1769,7 +1769,7 @@
     \end{tikzpicture}
   }
 %tag 标题
-\cs_new:Npn \__whu_doctor_cover_ii_title:
+\cs_new_protected:Npn \__whu_doctor_cover_ii_title:
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.1\textheight ) } ] current~page~text~area.north )
@@ -1781,7 +1781,7 @@
       };
   }
 %tag 个人信息
-\cs_new:Npn \__whu_doctor_cover_ii_information:
+\cs_new_protected:Npn \__whu_doctor_cover_ii_information:
   {
     \node (information) at
       ( [shift = {(3em, 5em)}]current~page~text~area.center )
@@ -1800,7 +1800,7 @@
       };
   }
 %tag 学校名和logo
-\cs_new:Npn \__whu_doctor_cover_ii_logo:
+\cs_new_protected:Npn \__whu_doctor_cover_ii_logo:
   {
     \node [anchor = south] at ([ shift = { ( 0 , 2em ) } ] date.north)
       {
@@ -1814,7 +1814,7 @@
       };
   }
 %tag 时间
-\cs_new:Npn \__whu_doctor_cover_ii_date_en:
+\cs_new_protected:Npn \__whu_doctor_cover_ii_date_en:
   {
     \node [anchor = south] (date) at
       ([ shift = { ( 0 , 0.01\textheight ) } ] current~page~text~area.south)
@@ -1868,7 +1868,7 @@
 %tag 硕士原创性声明
 \fp_const:Nn \c__whu_master_statement_line_spread_fp
   { \dim_ratio:nn { 28 bp } { 14 bp } / 1.2 }
-\cs_new:Npn \__whu_master_statement:
+\cs_new_protected:Npn \__whu_master_statement:
   {
     \group_begin:
       \keys_set:nn { ctex }
@@ -1893,7 +1893,7 @@
     \group_end:
   }
 %tag 博士原创性声明
-\cs_new:Npn \__whu_doctor_statement:
+\cs_new_protected:Npn \__whu_doctor_statement:
   {
     \group_begin:
       \keys_set:nn { ctex }
@@ -1920,7 +1920,7 @@
   }
 
 %tag 博士使用授权协议书
-\cs_new:Npn \__whu_doctor_license_agreement:
+\cs_new_protected:Npn \__whu_doctor_license_agreement:
   {
     \group_begin:
       \keys_set:nn { ctex }
@@ -2064,7 +2064,7 @@
       }
   }
 %tag 硕士
-\cs_new:Npn \__whu_master_abstract_output:
+\cs_new_protected:Npn \__whu_master_abstract_output:
   {
     \group_begin:
       \keys_set:nn { ctex } 
@@ -2088,7 +2088,7 @@
     \newpage
     \group_end:
   }
-\cs_new:Npn \__whu_master_abstract_en_output:
+\cs_new_protected:Npn \__whu_master_abstract_en_output:
   {
     \group_begin:
       \keys_set:nn { ctex } 
@@ -2114,7 +2114,7 @@
     \group_end:
   }
 %tag 博士
-\cs_new:Npn \__whu_doctor_abstract_output:
+\cs_new_protected:Npn \__whu_doctor_abstract_output:
   {
     \group_begin:
       \keys_set:nn { ctex } 
@@ -2138,7 +2138,7 @@
     \newpage
     \group_end:
   }
-\cs_new:Npn \__whu_doctor_abstract_en_output:
+\cs_new_protected:Npn \__whu_doctor_abstract_en_output:
   {
     \group_begin:
       \keys_set:nn { ctex } 
