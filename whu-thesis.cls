@@ -1266,6 +1266,7 @@
 %region 本科
 \cs_new_protected:Npn \__whu_bachelor_cover_i:
   {
+    \pdfbookmark{中文封面}{titlepage-zh}
     \newgeometry { hmargin = 2.445 cm , vmargin = 2.54cm }
     % logo and type
     \__whu_bachelor_cover_i_logo_and_type:
@@ -1356,6 +1357,7 @@
 %region 硕士
 \cs_new_protected:Npn \__whu_master_cover_i:
   {
+    \pdfbookmark{中文封面}{titlepage-zh}
     \newgeometry { hmargin = 2.445 cm , vmargin = 2.54cm }
     % 顶部四项
     \__whu_master_cover_i_topmatter:
@@ -1817,6 +1819,7 @@
 %tag 本科原创性声明
 \cs_new_protected:Npn \__whu_bachelor_originality_statement:
   {
+    \pdfbookmark{原创性声明}{originality-statement}
     \noindent
     \begin{minipage}[b][0.8cm]{\textwidth}
       \centering \zihao{-2} \heiti 原创性声明
@@ -1836,6 +1839,7 @@
 %tag 本科版权使用授权书
 \cs_new_protected:Npn \__whu_bachelor_copyright:
   {
+    \pdfbookmark{版权使用授权书}{copyright}
     \skip_vertical:n { 2.3cm }
     \begin{center}
       \heiti \zihao{-2} 版权使用授权书
@@ -1857,6 +1861,7 @@
   { \dim_ratio:nn { 28 bp } { 14 bp } / 1.2 }
 \cs_new_protected:Npn \__whu_master_statement:
   {
+    \pdfbookmark{原创性声明}{statement}
     \group_begin:
       \keys_set:nn { ctex }
         {
@@ -1882,6 +1887,7 @@
 %tag 博士原创性声明
 \cs_new_protected:Npn \__whu_doctor_statement:
   {
+    \pdfbookmark{原创性声明}{statement}
     \group_begin:
       \keys_set:nn { ctex }
         {
@@ -1909,6 +1915,7 @@
 %tag 博士使用授权协议书
 \cs_new_protected:Npn \__whu_doctor_license_agreement:
   {
+    \pdfbookmark{使用授权协议书}{license-agreement}
     \group_begin:
       \keys_set:nn { ctex }
         {
@@ -1940,6 +1947,7 @@
 %tag 博士论文创新点
 \cs_new_protected:Npn \__whu_doctor_innovation:
   {
+    \pdfbookmark{论文创新点}{innovation}
     \group_begin:
     \keys_set:nn { ctex } 
       {
