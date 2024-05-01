@@ -71,7 +71,7 @@
     \ExplSyntaxOn
     \clist_map_inline:nn { #1 }
       {
-        \file_input:n { module / ##1 }
+        \file_input:n { module / module.##1 }
       }
     \ExplSyntaxOff
   }
@@ -1108,10 +1108,6 @@
     day            .int_set:N = \l__whu_info_day_int,
     keywords     .clist_set:N = \l__whu_info_keywords_clist,
     keywords*    .clist_set:N = \l__whu_info_keywords_en_clist,
-    cover-en-type .choice:,
-    cover-en-type .choices:nn = { normal, cs }
-                                { \tl_set_eq:NN \l__whu_cover_en_type_tl \l_keys_choice_tl },
-    cover-en-type .initial:n = normal
   }
 %tag 初始化公共键
 \keys_set:nn { whu / info }
@@ -1651,25 +1647,16 @@
 \cs_new_protected:Npn \__whu_master_cover_ii:
   {
     \pdfbookmark{英文封面}{titlepage-en}
-    \tl_if_eq:NnTF \l__whu_cover_en_type_tl { normal }
-      {
-        \begin{tikzpicture} [ remember~picture, overlay ]
-          % 标题
-          \__whu_master_cover_ii_title:
-          % 个人信息
-          \__whu_master_cover_ii_information:
-          % 时间
-          \__whu_master_cover_ii_date_en:
-          % 学校名和logo
-          \__whu_master_cover_ii_logo:
-        \end{tikzpicture}
-      }
-      {
-        \tl_if_eq:NnT \l__whu_cover_en_type_tl { cs }
-          {
-            \__whu_master_cs_cover_ii:
-          }
-      }
+    \begin{tikzpicture} [ remember~picture, overlay ]
+      % 标题
+      \__whu_master_cover_ii_title:
+      % 个人信息
+      \__whu_master_cover_ii_information:
+      % 时间
+      \__whu_master_cover_ii_date_en:
+      % 学校名和logo
+      \__whu_master_cover_ii_logo:
+    \end{tikzpicture}
   }
 %tag 标题
 \cs_new_protected:Npn \__whu_master_cover_ii_title:

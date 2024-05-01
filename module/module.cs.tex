@@ -1,0 +1,27 @@
+%tag 计算机学院
+
+%tag 英文封面
+\cs_set_protected:Npn \__whu_master_cover_ii:
+  {
+    \pdfbookmark{英文封面}{titlepage-en}
+    \group_begin:
+      \centering
+      \mode_leave_vertical:
+      \skip_vertical:n { 1.6cm }
+      { \zihao{2} \linespread{1.25}\selectfont \l__whu_info_title_en_tl\par }
+      \skip_vertical:n { 4.75cm }
+      \zihao{4} By
+      \skip_vertical:n { 0.65cm }
+      \l__whu_info_author_en_tl
+      \skip_vertical:n { 2.05cm }
+      Supervised ~ By
+      \skip_vertical:n { 0.65cm }
+      \l__whu_info_supervisor_academic_title_en_tl . \c_space_tl 
+        \l__whu_info_supervisor_en_tl
+      \skip_vertical:n { 4.9cm }
+      Wuhan ~ University
+      \skip_vertical:n { 0.65cm }
+      \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl 
+        \int_use:N \l__whu_info_year_int \par
+    \group_end:
+  }
