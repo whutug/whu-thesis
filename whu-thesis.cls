@@ -2863,6 +2863,9 @@
         \IfValueT {##1}
           { \__whu_warning:nn { invalid-option-in-bibtex } {##1} }
       }
+    % 行距与字号
+    \setlength{\bibsep}{0pt}
+    \renewcommand{\bibfont}{\zihao{-4}\linespread{1.625}\selectfont}
   }
 \__whu_msg_new:nn { invalid-option-in-bibtex }
   { Option(s)~ "#1"~ are~ invalid~ in~ BibTeX. }
@@ -2871,13 +2874,13 @@
   {
     \cs_undefine:N \addbibresource
     \clist_new:N \l__whu_biblatex_options_clist
-    \clist_put_right:Nn \l__whu_biblatex_options_clist { hyperref = manual }
+    \clist_put_right:Nn \l__whu_biblatex_options_clist { backend = biber }
     \clist_put_right:Nx \l__whu_biblatex_options_clist % 参考文献样式
       {
         style =
         \tl_if_empty:NTF \l__whu_bib_style_tl
           {
-            \tl_if_eq:NnTF \g__whu_thesis_type_tl { bachelor }
+            \str_if_eq:VnTF \g__whu_thesis_type_tl { bachelor }
               {
                 \str_if_eq:VnTF \l__whu_bib_gb_style_tl { numerical }
                   { gb7714-2015 } { gb7714-2015ay }
@@ -2903,6 +2906,8 @@
     \__whu_biblatex_allow_url_break:
     \__whu_biblatex_use_en_dash:
     \defbibheading { bibliography } [ \bibname ] { \__whu_chapter:n {##1} }
+    \setlength{\bibitemsep}{0pt}
+    \renewcommand{\bibfont}{\zihao{-4}\linespread{1.625}\selectfont}
   }
 % biblatex 下允许 URL 在字母、数字和一些特殊符号处断行
 \cs_new:Npn \__whu_biblatex_allow_url_break:
