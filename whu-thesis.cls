@@ -2230,51 +2230,6 @@
   }
 
 %region 目录
-%tag 本科吞参数
-% 目录标题和正文标题相同（即不能输入 \chapter[]{} 只能输入 \chapter{}）
-% 下面采用的是“吞参数”的方法：让 [] 的参数不起作用（被忽略）从而起到吞掉参数的效果
-\__whu_msg_new:nn { bachelor-no-optional-argument }
-  {
-    #1~shouldn't~be~used~with~optional~argument~in~bachelor's~thesis.\\
-    The~optional~argument~of~#1~is~ignored.
-  }
-\cs_new:Npn \__whu_bachelor_chapter_cmds_no_optional_argument:
-  {
-    \NewCommandCopy { \bachelorchapter } { \chapter }
-    \NewCommandCopy { \bachelorsection } { \section }
-    \NewCommandCopy { \bachelorsubsection } { \subsection }
-    \RenewDocumentCommand \chapter { s o m }
-      {
-        \IfBooleanTF {##1}
-          { \bachelorchapter* {##3} }
-          { \bachelorchapter {##3} }  % ]
-        \IfNoValueF {##2}
-          { \__whu_warning:nn { bachelor-no-optional-argument } { \chapter } }
-      }
-    \RenewDocumentCommand \section { s o m }
-      {
-        \IfBooleanTF {##1}
-          { \bachelorsection* {##3} }
-          { \bachelorsection {##3} }  % ]
-        \IfNoValueF {##2}
-          { \__whu_warning:nn { bachelor-no-optional-argument } { \section } }
-      }
-    \RenewDocumentCommand \subsection { s o m }
-      {
-        \IfBooleanTF {##1}
-          { \bachelorsubsection* {##3} }
-          { \bachelorsubsection {##3} }  % ]
-        \IfNoValueF {##2}
-          { \__whu_warning:nn { bachelor-no-optional-argument } { \subsection } }
-      }
-  }
-\AddToHook { begindocument }
-  {
-    \tl_if_eq:NnT \g__whu_thesis_type_tl { bachelor }
-      {
-        \__whu_bachelor_chapter_cmds_no_optional_argument:
-      }
-  }
 %tag 本科设置
 \cs_new:Npn \__whu_bachelor_set_tocline:
   {
