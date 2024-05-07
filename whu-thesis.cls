@@ -2030,7 +2030,7 @@
       \chapter{ \c__whu_name_abstract_en_tl }
       \zihao{-4}
       % \g__whu_abstract_en_content_tl
-      \file_if_exist:nT { pages/abstract.tex }
+      \file_if_exist:nT { pages/enabstract.tex }
         {
           \file_input:n { pages/enabstract.tex }
         }
