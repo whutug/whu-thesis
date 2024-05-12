@@ -8,9 +8,9 @@
 %</driver>
 % \fi
 %
-% \title{The \cls{whu-thesis} class \\ \bfseries 武汉大学学位论文模板\thanks{\url{https://github.com/whutug/whu-thesis}}}
+% \title{The \cls{whu-thesis} class \\ \bfseries 武汉大学学位论文模板\thanks{\url{https://github.com/whutug/whu-thesis} v2.0.0}}
 % \author{whutug\thanks{\url{https://github.com/whutug}}}
-% \date{2024年4月7日}
+% \date{2024 年 5 月 1 日}
 % \maketitle
 % \begin{abstract}
 %   武汉大学学位论文 \LaTeX{} 模板 \cls{whu-thesis} 基于本科生院的论文撰写规范制作，同时参考研究生院提供的《研究生学位论文规范》，用于生成符合武汉大学学位论文排版要求和相应的国家规范、行业标准的学位论文，旨在为同学提供毕业论文书写的方便。
@@ -367,14 +367,6 @@
 % \end{function}
 % 
 %
-% \begin{function}{info/cover-en-type}
-%   \begin{whusyntax}[emph={[1]cover-en-type}]
-%     cover-en-type = (*<(normal)|cs>*)
-%   \end{whusyntax}
-%   设置英文封面的样式。计算机学院和网络安全学院请选择 \opt{cs}。
-% \end{function}
-% 
-%
 % \subsubsection{论文格式}\label{subsubsec:论文格式}
 % \begin{function}{style}
 %   \begin{whusyntax}[emph={[1]style}]
@@ -386,7 +378,7 @@
 % 
 % \begin{function}{style/font}
 %   \begin{whusyntax}[emph={[1]font}]
-%     font = (*<default|(times)|xits|termes>*)
+%     font = (*<default|times|xits|(termes)>*)
 %   \end{whusyntax}
 %   西文字体设置，具体见表 \ref{tab:font}。
 % \end{function}
@@ -567,6 +559,22 @@
 %     \item 摘要与关键词被拉开，关键词置于页面底部。
 %   \end{itemize}
 % \end{function}
+% 
+% 
+% \subsection{模块设置}
+% 
+% 模块设置用于处理不同的院系对论文格式的差异化要求，基本命令为
+% \begin{function}{\whumodule}
+%   \begin{whusyntax}[morekeywords={\whumodule}]
+%     \whumodule (*\marg{列表}*)
+%   \end{whusyntax}
+%   此命令需在主文件导言区使用，其中 \meta{列表} 为使用的模块名列表，各模块名之间用西文逗号分隔。
+%   目前支持的模块为：
+%   \begin{itemize}
+%     \item \texttt{cse}: 网络安全学院
+%     \item \texttt{cs}: 计算机学院
+%   \end{itemize}
+% \end{function}
 %
 %
 % \subsection{正文编写}
@@ -591,6 +599,10 @@
 %   生成目录。为了生成完整、正确的目录，您至少需要编译\emph{两次}。对于图表
 %   较多的论文，也可以使用 \cs{listoffigures} 和 \cs{listoftables} 生成单独的
 %   插图、表格目录。
+% \end{function}
+% 
+% \begin{function}{innovation}
+%   博士学位论文的论文创新点请写入 \file{pages} 文件夹下面的 \file{innovation.tex}。
 % \end{function}
 %
 % \begin{function}{abstract, enabstract}
@@ -828,6 +840,13 @@
 %   致谢。
 % \end{function}
 %
+% \subsection{注意事项}
+% 
+% \begin{itemize}
+%   \item macOS 用户设置西文字体 \kvopt{font}{times} 时，需要将
+%     \href{https://www.ctan.org/pkg/tex-gyre-termes}{TeX Gyre Termes}
+%     字体安装至系统中。
+% \end{itemize}
 % 
 % \section{宏包依赖}
 %

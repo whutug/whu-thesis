@@ -1,4 +1,4 @@
-name: 提交 BUG
+name: 寻求帮助
 description: 请按模版规范进行提交
 body:
   - type: checkboxes
@@ -65,10 +65,10 @@ body:
     validations:
       required: true
   - type: textarea
-    id: bug
+    id: help
     attributes:
-      label: 描述 Bug
+      label: 您遇到了什么问题？
       description: |
-        请在此处描述清楚：您在使用本论文模版时所遇到的 BUG
+        请在此处描述清楚：您在使用本论文模版时所遇到的问题以及您希望得到的帮助
     validations:
       required: true

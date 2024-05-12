@@ -1,0 +1,83 @@
+%tag 网络安全学院
+
+%region 页眉页脚样式
+%tag 本科
+\fancypagestyle { bachelor-statement }
+  {
+    \fancyhf { }
+    \fancyhead[C] { \zihao{5} 武汉大学本科毕业论文（设计） }
+    \fancyfoot { }
+    \setlength{\headheight}{13pt}
+  }
+\fancypagestyle { bachelor-frontmatter }
+  {
+    \fancyhf { }
+    \fancyhead[C] { \zihao{5} 武汉大学本科毕业论文（设计） }
+    \fancyfoot[C] { \zihao{5} \Roman{page} }
+    \setlength{\headheight}{13pt}
+  }
+\fancypagestyle {  bachelor-mainmatter }
+  {
+    \fancyhf { }
+    \fancyfoot[C] { \zihao{5} \arabic{page} }
+    \fancyhead[C] { \zihao{5} 武汉大学本科毕业论文（设计）}
+    \renewcommand \headrulewidth { 0.5pt } 
+    \setlength{\headheight}{13pt}
+  }
+%endregion
+
+%region 重定义封面、声明、摘要、目录部分的输出格式
+%tag 本科
+\cs_set_protected:Npn \__whu_bachelor_frontmatter_output:
+  {
+    \pagestyle{empty}
+    \__whu_bachelor_cover_i:
+    \bool_if:NT \l__whu_bachelor_english_cover_bool
+      {
+        \newpage
+        \__whu_bachelor_cover_ii:
+      }
+    \newpage
+    \pagestyle{ bachelor-statement }
+    \mode_leave_vertical:
+    \skip_vertical:n { 10pt }
+    \__whu_bachelor_originality_statement:
+    \__whu_bachelor_copyright:
+    \newpage
+    \frontmatter
+    \pagenumbering{Roman}
+    \pagestyle{ bachelor-frontmatter }
+    \__whu_bachelor_abstract_output:
+    \newpage
+    \__whu_bachelor_abstract_en_output:
+    \newpage
+  }
+%endregion
+
+%tag 英文封面
+\cs_set_protected:Npn \__whu_master_cover_ii:
+  {
+    \pdfbookmark{英文封面}{titlepage-en}
+    \group_begin:
+      \centering
+      \mode_leave_vertical:
+      \skip_vertical:n { 1.6cm }
+      { \zihao{2} \linespread{1.25}\selectfont \l__whu_info_title_en_tl\par }
+      \skip_vertical:n { 4.75cm }
+      \zihao{4} By
+      \skip_vertical:n { 0.65cm }
+      \l__whu_info_author_en_tl
+      \skip_vertical:n { 2.05cm }
+      Supervised ~ By
+      \skip_vertical:n { 0.65cm }
+      \l__whu_info_supervisor_academic_title_en_tl . \c_space_tl 
+        \l__whu_info_supervisor_en_tl
+      \skip_vertical:n { 4.9cm }
+      Wuhan ~ University
+      \skip_vertical:n { 0.65cm }
+      \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl 
+        \int_use:N \l__whu_info_year_int \par
+    \group_end:
+  }
+
+\endinput
