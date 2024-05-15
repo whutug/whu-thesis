@@ -396,15 +396,6 @@
   }
   { \PassOptionsToPackage #1 }
 
-\RequirePackage { filehook }
-% 消去 CJK 警告
-\AtEndOfPackageFile* { fontspec }
-  { \msg_redirect_name:nnn { fontspec } { no-script } { none } }
-\AtEndOfPackageFile* { xeCJK }
-  {
-    \msg_redirect_name:nnn { xeCJK } { CJKfamily-redef } { none }
-    \defaultCJKfontfeatures { Script  = CJK }   
-  }
 
 %tag 加载-ctexbook
 \LoadClass { ctexbook }
