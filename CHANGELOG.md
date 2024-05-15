@@ -2,6 +2,12 @@
 
 本文档格式遵守[如何维护更新记录](https://keepachangelog.com/zh-CN/1.0.0/)。
 
+## Unreleased
+
+### 删除
+
++ 移除对 fontspec 的警告处理（见 https://github.com/latex3/fontspec/commit/0469638）
+
 ## v2.0.1 2024-5-6
 
 ### 修改
