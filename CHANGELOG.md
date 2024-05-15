@@ -8,6 +8,10 @@
 
 + 移除对 fontspec 的警告处理（见 https://github.com/latex3/fontspec/commit/0469638）
 
+### 新增
+
++ 增加 `algorithm2e` 模块
+
 ## v2.0.1 2024-5-6
 
 ### 修改

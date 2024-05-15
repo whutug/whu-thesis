@@ -563,7 +563,11 @@
 % 
 % \subsection{模块设置}
 % 
-% 模块设置用于处理不同的院系对论文格式的差异化要求，基本命令为
+% 模块用于
+% \begin{itemize}
+%   \item 处理不同的院系对论文格式的差异化要求;
+%   \item 加载及处理额外的功能性宏包。
+% 基本命令为
 % \begin{function}{\whumodule}
 %   \begin{whusyntax}[morekeywords={\whumodule}]
 %     \whumodule (*\marg{列表}*)
@@ -571,8 +575,15 @@
 %   此命令需在主文件导言区使用，其中 \meta{列表} 为使用的模块名列表，各模块名之间用西文逗号分隔。
 %   目前支持的模块为：
 %   \begin{itemize}
-%     \item \texttt{cse}: 网络安全学院
-%     \item \texttt{cs}: 计算机学院
+%     \item 院系处理模块：
+%     \begin{itemize}
+%       \item \texttt{cse}: 网络安全学院
+%       \item \texttt{cs}: 计算机学院
+%     \end{itemize}
+%     \item 宏包加载模块：
+%     \begin{itemize}
+%       \item \texttt{algorithm2e}: 加载 \pkg{algorithm2e} 宏包，用于排版伪代码。
+%     \end{itemize}
 %   \end{itemize}
 % \end{function}
 %

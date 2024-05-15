@@ -40,7 +40,7 @@
     bib-resource = {ref/bachelor-refs.bib}
   }
 }
-\whumodule{cse}
+\whumodule{algorithm2e}
 \begin{document}
 
 \tableofcontents
@@ -167,6 +167,23 @@ This is Wuhan University thesis template, welcome to use!
 
 引用表~\ref{table:简单的表格}
 
+
+\section{算法}
+
+\begin{algorithm}
+\caption{Simulation-optimization heuristic}\label{algorithm}
+\KwData{current period $t$, initial inventory $I_{t-1}$, initial capital $B_{t-1}$, demand samples}
+\KwResult{Optimal order quantity $Q^{\ast}_{t}$}
+$r\leftarrow t$\;
+$\Delta B^{\ast}\leftarrow -\infty$\;
+\While{$\Delta B\leq \Delta B^{\ast}$ and $r\leq T$}{$Q\leftarrow\arg\max_{Q\geq 0}\Delta B^{Q}_{t,r}(I_{t-1},B_{t-1})$\;
+$\Delta B\leftarrow \Delta B^{Q}_{t,r}(I_{t-1},B_{t-1})/(r-t+1)$\;
+\If{$\Delta B\geq \Delta B^{\ast}$}{$Q^{\ast}\leftarrow Q$\;
+$\Delta B^{\ast}\leftarrow \Delta B$\;}
+$r\leftarrow r+1$\;}
+\end{algorithm}
+
+引用 \autoref{algorithm}
 
 \section{已定义好的一些数学定理环境}
 
