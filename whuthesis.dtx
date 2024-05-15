@@ -873,7 +873,6 @@
 %       \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
 %       \item \pkg{fixdif}，提供微分算符命令 \cmd{\d}。
 %       \item \pkg{xeCJKfntef}，用于排版下划线。
-%       \item \pkg{filehooks}，用于消除 \pkg{fontspec} 宏包对部分字体缺失 CJK script 的警告。
 %     \end{itemize}
 %     \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\cite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\cite{LuaTeX-ja} 宏包与 \pkg{chinese-jfm}。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
 %     \item 开启 \kvopt{style/bib-backend}{bibtex} 后，会调用 \pkg{natbib} 宏包，并依赖 \BibTeX{} 程序。参考文献样式由 \pkg{gbt7714} 宏包提供 \cite{natbib,gbt7714}。
