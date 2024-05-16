@@ -867,10 +867,11 @@
 % \begin{itemize}
 %   \item 在任何情况下，本模板都会\emph{显式}调用以下宏包（或文档类）：
 %     \begin{itemize}
-%       \item \pkg{expl3}、\pkg{xparse} 和 \pkg{l3keys2e}，用于构建 \LaTeX3 编程环境 \cite{source3}。它们分属 \pkg{l3kernel} 和 \pkg{l3packages} 宏集。
-%       \item \cls{ctex} 文档类，提供中文排版的通用框架，属于 \CTeX{} 宏集\cite{CTeX}。
-%       \item \pkg{amsmath}、\pkg{amssymb} 与 \pkg{amsthm}，对 \LaTeX{} 的数学排版功能进行了全面扩展，并提供定理类环境定制功能。属于 \AmSLaTeX{} 套件。
-%       \item \pkg{mathtools}，是 \pkg{amsmath} 的扩充，修正了 \pkg{amsmath} 的 bug，并提供了更多数学排版功能。
+%       \item \pkg{expl3}、\pkg{xparse} 和 \pkg{l3keys2e}，用于构建
+%             \LaTeX3 编程环境 \cite{source3}。它们分属 \pkg{l3kernel} 和 \pkg{l3packages} 宏集。
+%       \item \cls{ctexbook} 文档类，提供中文排版的通用框架，属于 \CTeX{} 宏集\cite{CTeX}。
+%       \item \pkg{amsmath}、\pkg{amssymb} 与 \pkg{amsthm}，对 \LaTeX{} 的数学排版功能
+%             进行了全面扩展，并提供定理类环境定制功能。属于 \AmSLaTeX{} 套件。
 %       \item \pkg{thmtools}，用于定制定理类环境。
 %       \item \pkg{tikzpagenodes}，用于页面绝对定位，此宏包内部加载 \pkg{ti\emph{k}z}。
 %       \item \pkg{geometry}，用于调整页面尺寸。
@@ -881,14 +882,23 @@
 %       \item \pkg{booktabs}，提供三线表支持。
 %       \item \pkg{enumitem}，提供高度定制化的列表环境。
 %       \item \pkg{footmisc}，用于设置脚注序号每面更新。
-%       \item \pkg{unicode-math}，负责处理 Unicode 编码的 OpenType 数学字体。
 %       \item \pkg{hyperref}，提供交叉引用、超链接、电子书签等功能。
 %       \item \pkg{fixdif}，提供微分算符命令 \cmd{\d}。
 %       \item \pkg{xeCJKfntef}，用于排版下划线。
 %     \end{itemize}
-%     \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\cite{xeCJK} 宏包，而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\cite{LuaTeX-ja} 宏包与 \pkg{chinese-jfm}。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
-%     \item 开启 \kvopt{style/bib-backend}{bibtex} 后，会调用 \pkg{natbib} 宏包，并依赖 \BibTeX{} 程序。参考文献样式由 \pkg{gbt7714} 宏包提供 \cite{natbib,gbt7714}。
-%     \item 开启 \kvopt{style/bib-backend}{biblatex} 后，会调用 \pkg{biblatex} 宏包，并依赖 \biber{} 程序。参考文献样式由 \pkg{biblatex-gb7714-2015} 宏包提供 \cite{biblatex,biblatex-gb7714-2015}。
+%   \item 数学字体不使用 \opt{default} 时，会加载 \pkg{unicode-math} 宏包来调用 OpenType
+%         数学字体。
+%   \item 使用 \XeLaTeX{} 编译时，\CTeX{} 会调用 \pkg{xeCJK}\cite{xeCJK} 宏包，
+%         而使用 \LuaLaTeX{} 编译时，\CTeX{} 会调用 \pkg{luatexja}\cite{LuaTeX-ja} 宏包
+%         与 \pkg{chinese-jfm}。不同的编译方式和中文支持方式会在一定程度上影响 \CTeX{} 宏集的行为，
+%         如对空格、标点的处理等。一般来说，使用 \XeLaTeX{} 编译时，推荐在中西文间显式地插入一个
+%         西文空格，而使用 \LuaLaTeX{} 编译时中西文间不插入空格。博士论文会在外部编译书脊，
+%         书脊使用 \LuaTeX-ja 的竖排文档类 \cls{ltjtarticle}。
+%   \item 开启 \kvopt{style/bib-backend}{bibtex} 后，会调用 \pkg{natbib} 宏包，
+%         并依赖 \BibTeX{} 程序。参考文献样式由 \pkg{gbt7714} 宏包提供 \cite{natbib,gbt7714}。
+%   \item 开启 \kvopt{style/bib-backend}{biblatex} 后，会调用 \pkg{biblatex} 宏包，
+%         并依赖 \biber{} 程序。参考文献样式由 \pkg{biblatex-gb7714-2015} 宏包
+%         提供 \cite{biblatex,biblatex-gb7714-2015}。
 % \end{itemize}
 % 
 % 这里只列出了本模板直接调用的宏包。这些宏包自身的调用情况，此处不再具体展开。如有需要，请参阅相关文档。
