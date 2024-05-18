@@ -1421,87 +1421,44 @@
 %region 个人信息
 \cs_new:Npn \__whu_master_cover_i_information:
   {
-    \str_case:xn { \tl_to_str:N \g__whu_thesis_class_tl }
-      {
-        { academic } { \__whu_master_academic_cover_information: }
-        { professional } { \__whu_master_professional_cover_information: }
-      }
-  }
-%tag 学术学位
-\cs_new_protected:Npn \__whu_master_academic_cover_information:
-  {
-    \clist_set:Nx \l__whu_tmpa_clist
+    \clist_set:Nx \l__whu_tmpa_clist % 个人信息第一列
       {
         \c__whu_name_author_tl,
         \c__whu_name_student_id_tl,
         \c__whu_name_supervisor_tl,
-        \c__whu_name_subject_major_academic_tl,
+        \tl_if_empty:NF \l__whu_info_supervisor_outer_tl
+          { \c__whu_name_supervisor_outer_tl },
+        \use:c { c__whu_name_subject_major_ \g__whu_thesis_class_tl _tl },
         \c__whu_name_research_area_tl
       }
-    \clist_set:Nx \l__whu_tmpb_clist
+    \clist_set:Nx \l__whu_tmpb_clist % 个人信息第二列
       {
         \l__whu_info_author_tl,
         \l__whu_info_student_id_tl,
         \l__whu_info_supervisor_tl \l__whu_info_supervisor_academic_title_tl,
+        \tl_if_empty:NF \l__whu_info_supervisor_outer_tl
+          { \l__whu_info_supervisor_outer_tl 
+            \l__whu_info_supervisor_outer_academic_title_tl },
         \l__whu_info_subject_tl、\l__whu_info_major_tl,
         \l__whu_info_research_area_tl
       }
-    \noindent
-    \begin{minipage}[t][5.55cm]{\textwidth}
-      \zihao{4}
-      \skip_vertical:n { 0.35cm }
-      \bool_until_do:nn
-        { \clist_if_empty_p:N \l__whu_tmpa_clist }
-        {
-          \clist_pop:NN \l__whu_tmpa_clist \l__whu_tmpa_tl
-          \clist_pop:NN \l__whu_tmpb_clist \l__whu_tmpb_tl
-          \hspace*{2.19cm}
-          \__whu_spread_box_with_end_spaces:nn { 4.67cm } { \l__whu_tmpa_tl }
-          \makebox[0.42cm][c]{：}
-          \__whu_spread_box_with_end_spaces:nn { 6.17cm } { \l__whu_tmpb_tl }
-          \skip_vertical:n { .185cm }
-        }
-    \end{minipage}\par
-    \skip_vertical:n { 1.95cm }
-  }
-%tag 专业学位 (比学术学位多一个校外导师项)
-\cs_new_protected:Npn \__whu_master_professional_cover_information:
-  {
-    \clist_set:Nx \l__whu_tmpa_clist
-      {
-        \c__whu_name_author_tl,
-        \c__whu_name_student_id_tl,
-        \c__whu_name_supervisor_tl,
-        \c__whu_name_supervisor_outer_tl,
-        \c__whu_name_subject_major_professional_tl,
-        \c__whu_name_research_area_tl
-      }
-    \clist_set:Nx \l__whu_tmpb_clist
-      {
-        \l__whu_info_author_tl,
-        \l__whu_info_student_id_tl,
-        \l__whu_info_supervisor_tl \l__whu_info_supervisor_academic_title_tl,
-        \l__whu_info_supervisor_outer_tl \l__whu_info_supervisor_outer_academic_title_tl,
-        \l__whu_info_subject_tl、\l__whu_info_major_tl,
-        \l__whu_info_research_area_tl
-      }
-    \noindent
-    \begin{minipage}[t][6.66cm]{\textwidth}
-      \zihao{4}
-      \skip_vertical:n { 0.35cm }
-      \bool_until_do:nn
-        { \clist_if_empty_p:N \l__whu_tmpa_clist }
-        {
-          \clist_pop:NN \l__whu_tmpa_clist \l__whu_tmpa_tl
-          \clist_pop:NN \l__whu_tmpb_clist \l__whu_tmpb_tl
-          \hspace*{2.19cm}
-          \__whu_spread_box_with_end_spaces:nn { 4.67cm } { \l__whu_tmpa_tl }
-          \makebox[0.42cm][c]{：}
-          \__whu_spread_box_with_end_spaces:nn { 6.17cm } { \l__whu_tmpb_tl }
-          \skip_vertical:n { .185cm }
-        }
-    \end{minipage}\par
-    \skip_vertical:n { 1.95cm }
+      \noindent
+      \begin{minipage}{\textwidth}
+        \zihao{4}
+        \skip_vertical:n { 0.35cm }
+        \bool_until_do:nn
+          { \clist_if_empty_p:N \l__whu_tmpa_clist }
+          {
+            \clist_pop:NN \l__whu_tmpa_clist \l__whu_tmpa_tl
+            \clist_pop:NN \l__whu_tmpb_clist \l__whu_tmpb_tl
+            \hspace*{2.19cm}
+            \__whu_spread_box_with_end_spaces:nn { 4.67cm } { \l__whu_tmpa_tl }
+            \makebox[0.42cm][c]{：}
+            \__whu_spread_box_with_end_spaces:nn { 6.17cm } { \l__whu_tmpb_tl }
+            \skip_vertical:n { .185cm }
+          }
+      \end{minipage}\par
+      \skip_vertical:n { 1.95cm }
   }
 %endregion 个人信息
 %tag 时间
