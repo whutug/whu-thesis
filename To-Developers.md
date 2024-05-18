@@ -4,9 +4,11 @@
 
 1. `whu-thesis.cls` 中的 `%tag`、`%region`、`%endregion` 是为了配合 VS Code 插件 [Outline Map](https://github.com/Gerrnperl/outline-map) 生成代码大纲，使得光标可以快速跳转至特定位置。
 
-2. 每次发布新的 Release，不要忘了更新 `CHANGELOG.md` 日志，也不要忘了更新 `whu-thesis.cls` 和 `whuthesis.dtx` 中的版本号和版本日期。
+2. 本项目使用[语义化版本 (Semantic Versioning)](https://semver.org/) 进行版本管理。
 
-3. 若一个 commit 是为了解决一个特定的 issue 或者 discussion，则最好在该 commit 信息的最后加入形如 `(#15)` 的字符串，例如 `fix font bug (#15)`，github 会自动将 `#15` 转化为相应的链接。
+3. 每次发布新的 Release，不要忘了更新 `CHANGELOG.md` 日志，也不要忘了更新 `whu-thesis.cls` 和 `whuthesis.dtx` 中的版本号和版本日期。
+
+4. 若一个 commit 是为了解决一个特定的 issue 或者 discussion，则最好在该 commit 信息的最后加入形如 `(#15)` 的字符串，例如 `fix font bug (#15)`，github 会自动将 `#15` 转化为相应的链接。
 
 
 ### 开发者需要的技能
