@@ -1442,23 +1442,23 @@
         \l__whu_info_subject_tl、\l__whu_info_major_tl,
         \l__whu_info_research_area_tl
       }
-      \noindent
-      \begin{minipage}{\textwidth}
-        \zihao{4}
-        \skip_vertical:n { 0.35cm }
-        \bool_until_do:nn
-          { \clist_if_empty_p:N \l__whu_tmpa_clist }
-          {
-            \clist_pop:NN \l__whu_tmpa_clist \l__whu_tmpa_tl
-            \clist_pop:NN \l__whu_tmpb_clist \l__whu_tmpb_tl
-            \hspace*{2.19cm}
-            \__whu_spread_box_with_end_spaces:nn { 4.67cm } { \l__whu_tmpa_tl }
-            \makebox[0.42cm][c]{：}
-            \__whu_spread_box_with_end_spaces:nn { 6.17cm } { \l__whu_tmpb_tl }
-            \skip_vertical:n { .185cm }
-          }
-      \end{minipage}\par
-      \skip_vertical:n { 1.95cm }
+    \noindent
+    \begin{minipage}{\textwidth}
+      \zihao{4}
+      \skip_vertical:n { 0.35cm }
+      \bool_until_do:nn
+        { \clist_if_empty_p:N \l__whu_tmpa_clist }
+        {
+          \clist_pop:NN \l__whu_tmpa_clist \l__whu_tmpa_tl
+          \clist_pop:NN \l__whu_tmpb_clist \l__whu_tmpb_tl
+          \hspace*{2.19cm}
+          \__whu_spread_box_with_end_spaces:nn { 4.67cm } { \l__whu_tmpa_tl }
+          \makebox[0.42cm][c]{：}
+          \__whu_spread_box_with_end_spaces:nn { 6.17cm } { \l__whu_tmpb_tl }
+          \skip_vertical:n { .185cm }
+        }
+    \end{minipage}\par
+    \skip_vertical:n { 1.95cm }
   }
 %endregion 个人信息
 %tag 时间
@@ -1640,7 +1640,7 @@
         \end{tabular}       
       };
   }
-%tag 学校名和 logo
+%tag 学校名和logo
 \cs_new_protected:Npn \__whu_master_cover_ii_logo:
   {
     \node [anchor = south] at ([ shift = { ( 0 , 2em ) } ] date.north)
@@ -1661,33 +1661,6 @@
         \zihao{-2}
         \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl \int_use:N\l__whu_info_year_int
       };
-  }
-% 计算机学院、网络安全学院英文封面，依据为计算机学院于
-% 2023-05-10 发布的链接文件 https://cs.whu.edu.cn/info/1140/4335.htm
-\cs_new_protected:Npn \__whu_master_cs_cover_ii:
-  {
-    \begin{tikzpicture}[ remember~picture, overlay, align=center ]
-      \node at ([shift = {(0,-4.16cm)}]current~page~text~area.north)
-        { 
-          \begin{minipage}{\textwidth}
-            \zihao{2} \centering \linespread{1.2}\selectfont
-            \l__whu_info_title_en_tl
-          \end{minipage}
-        };
-      \node at ([shift={(0,1.35cm)}]current~page~text~area.center)
-        { \zihao{4} By \\ \l__whu_info_author_en_tl };
-      \node at ([shift={(0,-2.75cm)}]current~page~text~area.center)
-        { \zihao{4} Supervised~by \\
-          \l__whu_info_supervisor_academic_title_en_tl .\c_space_tl 
-          \l__whu_info_supervisor_en_tl };
-      \node [anchor=south] at ([shift={(0,1.45cm)}]current~page~text~area.south)
-        { \zihao{4} Wuhan~University \\ 
-          \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl 
-          \int_use:N \l__whu_info_year_int };
-      % 用于对比测试
-      % \node at (current~page.center)
-      %   { \includegraphics[width = \paperwidth, height = \paperheight]{./reference/b.pdf} };
-    \end{tikzpicture}
   }
 %endregion 硕士
 %region 博士
