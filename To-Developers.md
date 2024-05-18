@@ -29,7 +29,8 @@
     + `gbt7714`
     + `natbib`
     + `biblatex`
-3. 需要熟悉国标 GB/T 7714-2015《信息与文献 参考文献著录规则》
-4. 需要熟悉用户接口 [`usrguide.pdf`](http://mirrors.ctan.org/macros/latex/base/usrguide.pdf)
-5. 需要熟悉 Git 的基本用法（科学上网工具必不可少）
-6. 需要了解基本的命令行工具和指令，需要会写简单的自动化脚本
+3. 需要掌握 LaTeX 的钩子机制及用法，资料为 `texdoc lthooks`
+4. 需要熟悉国标 GB/T 7714-2015《信息与文献 参考文献著录规则》
+5. 需要熟悉用户接口 [`usrguide.pdf`](http://mirrors.ctan.org/macros/latex/base/usrguide.pdf)
+6. 需要熟悉 Git 的基本用法（科学上网工具必不可少）
+7. 需要了解基本的命令行工具和指令，会写简单的自动化脚本
