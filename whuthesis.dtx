@@ -395,9 +395,14 @@
 %       \midrule 
 %         \opt{xits}    & XITS               \\
 %       \midrule 
-%         \opt{termes}  & TeX Gyre Termes    \\
+%         \opt{termes}  & TeX Gyre Termes\tnote{a}    \\
 %       \bottomrule
 %     \end{tabularx}
+%     \vspace*{10pt}
+%     \begin{tablenotes}
+%       \item[a] \TeX{} Gyre Termes 是波兰 \TeX{} 用户组对 Times 进行的开源复刻字体，
+%         已被收录在 \TeX{} Live 中。
+%     \end{tablenotes}
 %   \end{threeparttable}
 % \end{table}
 % 
@@ -438,23 +443,30 @@
 %     \label{tab:cjk-font}
 %     \begin{tabularx}{\textwidth}{CCCCC}
 %       \toprule
-%                                   & \textbf{宋体} & \textbf{黑体} & \textbf{仿宋} & \textbf{楷体}   \\
+%             & \textbf{宋体} & \textbf{黑体} & \textbf{仿宋} & \textbf{楷体}   \\
 %       \midrule
-%       \multirow{2}{*}{\opt{windows}} & （中易）宋体   & （中易）黑体      & （中易）仿宋   & （中易）楷体 \\
-%                                   & SimSun          & SimHei          & FangSong      & KaiTi           \\
+%       \multirow{2}{*}{\opt{windows}}
+%             & （中易）宋体   & （中易）黑体      & （中易）仿宋   & （中易）楷体 \\
+%             &  SimSun      & SimHei          & FangSong      & KaiTi     \\
 %       \midrule
-%       \multirow{2}*{\opt{mac}}    & （华文）宋体-简 & （华文）黑体-简 & 华文仿宋      & （华文）楷体-简 \\
-%                                   & Songti SC       & Heiti SC        & STFangsong    & Kaiti SC        \\
+%       \multirow{2}*{\opt{mac}}
+%             & （华文）宋体-简 & （华文）黑体-简 & 华文仿宋      & （华文）楷体-简 \\
+%             &  Songti SC    & Heiti SC        & STFangsong    & Kaiti SC  \\
 %       \midrule
-%       \multirow{2}*{\opt{fandol}} & Fandol 宋体     & Fandol 黑体     & Fandol 仿宋   & Fandol 楷体     \\
-%                                   & FandolSong      & FandolHei       & FandolFang    & FandolKai       \\
+%       \multirow{2}*{\opt{fandol}}\tnote{a} 
+%             & Fandol 宋体    & Fandol 黑体     & Fandol 仿宋   & Fandol 楷体  \\
+%             & FandolSong    & FandolHei       & FandolFang    & FandolKai   \\
 %       \midrule
-%       \opt{sourcehan}             & 思源宋体         & 思源黑体        & 方正仿宋     & 方正楷体 \\
+%       \opt{sourcehan}\tnote{b} & 思源宋体 & 思源黑体 & 方正仿宋 & 方正楷体 \\
 %       \midrule
-%       \opt{founder}               & 方正书宋         & 方正黑体        & 方正仿宋     & 方正楷体    \\
+%       \opt{founder}   & 方正书宋 & 方正黑体 & 方正仿宋 & 方正楷体 \\
 %       \bottomrule
 %     \end{tabularx}
 %     \vspace*{10pt}
+%     \begin{tablenotes}
+%       \item[a] Fandol 字库为 \TeX{} Live 自带的开源中文字体，使用较为方便，但是缺字较严重，且部分字形有问题，请谨慎使用。
+%       \item[b] 思源字体的下载地址为 \url{https://github.com/adobe-fonts/source-han-sans}。
+%     \end{tablenotes}
 %   \end{threeparttable}
 % \end{table}
 %
