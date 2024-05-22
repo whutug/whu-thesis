@@ -435,6 +435,27 @@
 %     cjk-font = (*<windows|mac|(fandol)|sourcehan|none>*)
 %   \end{whusyntax}
 %   中文字体设置，具体见表 \ref{tab:cjk-font}。
+%   如果您是本地编译的话，那么 Windows 用户推荐使用 \kvopt{cjk-font}{windows}，
+%   macOS 用户推荐使用 \kvopt{cjk-font}{mac}，
+%   Linux 用户推荐使用 \kvopt{cjk-font}{fandol}。
+%   在线编译平台 Overleaf 和 TeX Page
+%   的服务器用的是 Linux 操作系统，如果您使用的是这二者的话，可以直接使用
+%   \kvopt{cjk-font}{fandol}。如果您想用其它的字体，例如 Windows 系统自带的中易字库，
+%   那么你需要按下述方法进行额外的操作：
+%   \begin{enumerate}
+%     \item 将字体文件上传至在线编译平台的项目文件夹中（这里不妨假设您上传的字体的文件名分别为 
+%       \file{simsun.ttf}、\file{simhei.ttf}、\file{simkai.ttf} 和 \file{simfang.ttf}）；
+%     \item 在 \cs{whusetup} 中设置 \kvopt{cjk-font}{none}；
+%     \item 在主文件的导言区自行设置：
+%       \begin{latexexample}[morekeywords={\setCJKmainfont,\setCJKsansfont,\setCJKmonofont},
+%          emph={[1]BoldFont,ItalicFont}]
+%   \setCJKmainfont{simsun.ttf}[
+%     BoldFont   = simhei.ttf,
+%     ItalicFont = simkai.ttf]
+%   \setCJKsansfont{simhei.ttf}
+%   \setCJKmonofont{simfang.ttf}
+%       \end{latexexample}
+%   \end{enumerate}
 % \end{function}
 % 
 % \begin{table}[!ht]
