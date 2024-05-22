@@ -447,15 +447,22 @@
 %       \file{simsun.ttf}、\file{simhei.ttf}、\file{simkai.ttf} 和 \file{simfang.ttf}）；
 %     \item 在 \cs{whusetup} 中设置 \kvopt{cjk-font}{none}；
 %     \item 在主文件的导言区自行设置：
-%       \begin{latexexample}[morekeywords={\setCJKmainfont,\setCJKsansfont,\setCJKmonofont},
+%       \begin{latexexample}[morekeywords={\setCJKmainfont,\setCJKsansfont,\setCJKmonofont,\newCJKfontfamily},
 %          emph={[1]BoldFont,ItalicFont}]
 %   \setCJKmainfont{simsun.ttf}[
 %     BoldFont   = simhei.ttf,
 %     ItalicFont = simkai.ttf]
 %   \setCJKsansfont{simhei.ttf}
 %   \setCJKmonofont{simfang.ttf}
+%   \newCJKfontfamily[zhsong]\songti{simsun.ttf}[
+%     BoldFont   = simhei.ttf,
+%     ItalicFont = simkai.ttf]
+%   \newCJKfontfamily[zhhei]\heiti{simhei.ttf}
+%   \newCJKfontfamily[zhfs]\fangsong{simfang.ttf}
+%   \newCJKfontfamily[zhkai]\kaishu{simkai.ttf}
 %       \end{latexexample}
 %   \end{enumerate}
+%   关于 \cs{setCJKmainfont} 等命令的详细用法请阅读 \href{https://ctan.org/pkg/xecjk}{xeCJK} 宏包手册。
 % \end{function}
 % 
 % \begin{table}[!ht]
