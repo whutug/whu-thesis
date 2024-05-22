@@ -11,5 +11,6 @@ cp -R pages whuthesis
 cp -R logo whuthesis
 cp -R ref whuthesis
 cp -R spine whuthesis
+cp -R module whuthesis
 zip -r whuthesis.zip whuthesis
 rm -R whuthesis
