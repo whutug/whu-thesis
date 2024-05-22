@@ -606,7 +606,7 @@
 
 
 %region 中文字体设置 (chinese font setting)
-%tag default
+%tag none
 \cs_new_protected:Npn \__whu_style_cjk_font_set_none: { }
 %tag windows
 \cs_new_protected:Npn \__whu_style_cjk_font_set_windows:
