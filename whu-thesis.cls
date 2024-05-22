@@ -19,7 +19,7 @@
 %tag 标识节
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
-\ProvidesExplClass {whu-thesis} {2024-05-18} {v2.1.0}
+\ProvidesExplClass {whu-thesis} {2024-05-22} {v2.1.1}
   {Thesis template for Wuhan University}
 
 
