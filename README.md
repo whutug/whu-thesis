@@ -12,6 +12,7 @@
 ## 模版组成
 
 + 核心文档类 `whu-thesis.cls`
++ 模块文件夹 `module/`
 + 使用示例文件 `demo.tex`
 + 用户手册
   + 手册专用文档类 `whudoc.cls`
