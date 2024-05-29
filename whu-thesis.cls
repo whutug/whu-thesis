@@ -1833,10 +1833,10 @@
     \group_end:
   }
 
-%tag 博士使用授权协议书
-\cs_new_protected:Npn \__whu_doctor_license_agreement:
+%region 硕博使用授权协议书
+%tag 协议书内容
+\cs_new_protected:Npn \__whu_master_doctor_license_agreement:
   {
-    \pdfbookmark{使用授权协议书}{license-agreement}
     \group_begin:
       \keys_set:nn { ctex }
         {
@@ -1848,8 +1848,8 @@
               pagestyle = empty
             }
         }
-      \pdfbookmark{使用授权协议书}{doctor-license-agreement}
       \chapter*{武汉大学学位论文使用授权协议书}
+      \pdfbookmark{使用授权协议书}{license-agreement}
       \linespread{1}
       \fontsize{12bp}{28bp}\selectfont
       本学位论文作者愿意遵守武汉大学关于保存、使用学位论文的管理办法及规定，即：学校有权保存学位论文的印刷本和电子版，并提供文献检索与阅览服务；学校可以采用影印、缩印、数字化或其它复制手段保存论文；在以教学与科研服务为目的前提下，学校可以在校园网内公布部分或全部内容。 \par
@@ -1858,13 +1858,26 @@
       
       \vspace*{3em}
       \begin{minipage}{0.5\textwidth}
-        论文作者（签名）：\CJKunderline*{\hfill}\\[12pt]
-        学号：\CJKunderline*{\hfill}\\[12pt]
-        学院：\CJKunderline*{\hfill}\\[12pt]
-      \end{minipage} \par 
+        论文作者（签名）：\CJKunderline*{\hfill} \\[12pt]
+        学号：          \CJKunderline*{\hfill} \\[12pt]
+        学院：          \CJKunderline*{\hfill}
+      \end{minipage} \par \skip_vertical:n { 18pt }
       \hfill 日期：\hspace{3em} 年 \qquad 月 \qquad 日
     \group_end:
   }
+%tag 控制协议书是否输出
+\keys_define:nn { whu / style }
+  {
+    license .bool_set:N = \l__whu_license_output_bool,
+    license .initial:n = true,
+    license .default:n = true,
+  }
+\AtEndDocument{
+  \bool_if:NT \l__whu_license_output_bool
+    \__whu_master_doctor_license_agreement:
+}
+%endregion 硕博使用授权协议书
+
 %tag 博士论文创新点
 \cs_new_protected:Npn \__whu_doctor_innovation:
   {
@@ -2130,8 +2143,6 @@
     \__whu_doctor_cover_ii:
     \__whu_new_blank_page:
     \__whu_doctor_statement:
-    \__whu_new_blank_page:
-    \__whu_doctor_license_agreement:
     \__whu_new_blank_page:
     \__whu_doctor_innovation:
     \frontmatter
