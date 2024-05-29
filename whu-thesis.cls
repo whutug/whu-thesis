@@ -16,7 +16,7 @@
 %%  The Current Maintainers of this work are
 %%    Siyu Wu <2401336502@qq.com>
 %%    Kangwei Xia <kangweixia_xdyy@163.com>
-%%    Anbo Tao <>
+%%    Anbo Tao <398943960@qq.com>
 
 %tag 标识节
 \NeedsTeXFormat{LaTeX2e}
