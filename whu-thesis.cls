@@ -13,13 +13,15 @@
 %% 
 %%  This work has the LPPL maintenance status `maintained'.
 %% 
-%%  The Current Maintainer of this work is Kangwei Xia <kangweixia_xdyy@163.com>.
-%%
+%%  The Current Maintainers of this work are
+%%    Siyu Wu <2401336502@qq.com>
+%%    Kangwei Xia <kangweixia_xdyy@163.com>
+%%    Anbo Tao <>
 
 %tag 标识节
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
-\ProvidesExplClass {whu-thesis} {2024-05-22} {v2.1.1}
+\ProvidesExplClass {whu-thesis} {2024-05-29} {v2.2.0}
   {Thesis template for Wuhan University}
 
 
