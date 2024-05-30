@@ -2008,7 +2008,7 @@
             }
         }
       \chapter{ \c__whu_name_abstract_tl }
-      \zihao{-4} \pagestyle{empty}
+      \zihao{-4}
       \file_if_exist:nT { pages/abstract.tex }
         {
           \file_input:n { pages/abstract.tex }
