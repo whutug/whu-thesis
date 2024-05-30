@@ -2,6 +2,12 @@
 
 本文档格式遵守[如何维护更新记录](https://keepachangelog.com/zh-CN/1.0.0/)。
 
+## Unreleased
+
+### Fixed
+
++ 修复中文摘要页眉页脚问题 (#288)
+
 ## v2.2.0 2024-05-29
 
 ### Added
