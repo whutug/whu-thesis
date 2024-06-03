@@ -31,6 +31,7 @@
     + `gbt7714`
     + `natbib`
     + `biblatex`
+    + `biblatex-gb7714-2015`
 3. 需要掌握 LaTeX 的钩子机制及用法，资料为 `texdoc lthooks`
 4. 需要熟悉国标 GB/T 7714-2015《信息与文献 参考文献著录规则》
 5. 需要熟悉用户接口 [`usrguide.pdf`](http://mirrors.ctan.org/macros/latex/base/usrguide.pdf)
