@@ -1,13 +1,15 @@
 # 武汉大学毕业论文 LaTeX 模板
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Last Commit](https://img.shields.io/github/last-commit/whutug/whu-thesis.svg)](https://github.com/whutug/whu-thesis/commits/)
-[![Overleaf](https://img.shields.io/badge/overleaf-whuthesis-green.svg)](https://www.overleaf.com/latex/templates/wuhan-university-latex-undergraduate-thesis-template/kpystysgbgmr)
-[![](https://github.com/whutug/whu-thesis/workflows/LaTeX%20Compile/badge.svg)](https://github.com/whutug/whu-thesis/actions)
+![GitHub last commit](https://img.shields.io/github/last-commit/whutug/whu-thesis)
+![GitHub Release](https://img.shields.io/github/v/release/whutug/whu-thesis)
+![GitHub repo size](https://img.shields.io/github/repo-size/whutug/whu-thesis)
+![GitHub Repo stars](https://img.shields.io/github/stars/whutug/whu-thesis)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/whutug/whu-thesis/total)
+
 
 ## Welcome to whu-thesis!
 
-本项目为武汉大学毕业论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
+本项目为武汉大学学位（毕业）论文 LaTeX 模板，支持本科生、硕士与博士的论文编写。
 
 ## 模版组成
 
@@ -36,14 +38,10 @@
 
 ## 致谢
 
+
 + [黄正华老师的模板](http://aff.whu.edu.cn/huangzh/)
-+ 其它高校的相关开源项目
-  * [bsThesisWHU](https://github.com/csarron/bsThesisWHU)
-  * 华中科技大学 [HUSTPaperTemp](https://github.com/skinaze/HUSTPaperTemp)
-  * 上海交通大学 [SJTUThesis](https://github.com/sjtug/SJTUThesis)
-  * 中国科学技术大学 [ustcthesis](https://github.com/ustctug/ustcthesis)
-  * 天津大学 [TJU-thesis-template](https://github.com/liangzhenduo0608/TJU-thesis-template)
-  * 西安电子科技大学 [xdba-thesis](https://github.com/xdlinux/xdba-thesis)
-  * 东北大学 [NEUBachelorThesis](https://github.com/tzaiyang/NEUBachelorThesis)
-  * 清华大学 [ThuThesis](https://github.com/tuna/thuthesis)
-  * 复旦大学 [fduthesis](https://github.com/stone-zeng/fduthesis)
++ 复旦大学 [fduthesis](https://github.com/stone-zeng/fduthesis)
++ 上海交通大学 [SJTUThesis](https://github.com/sjtug/SJTUThesis)
++ 中国科学技术大学 [ustcthesis](https://github.com/ustctug/ustcthesis)
++ 清华大学 [ThuThesis](https://github.com/tuna/thuthesis)
+
