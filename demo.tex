@@ -82,22 +82,27 @@ This is Wuhan University thesis template, welcome to use!
 
 \subsection{（不）带编号单行公式}
 
+Use \texttt{equation} environment:
 \begin{equation}
   a^2 + b^2 = c^2.
 \end{equation}
 
+Use \texttt{equation*} environment or \texttt{\textbackslash[...\textbackslash]}:
 \[ a^2 + b^2 = c^2.\]
 
 \subsection{（不）带编号多行公式}
 
+Use \texttt{align} environment:
 \begin{align}
-  \text{sum} & = 1 + 2 + \cdots + n \\
-             & = \frac12 n(n+1).
+  S_n & = 1 + 2 + \cdots + n \\
+      & = \frac12 n(n+1).
 \end{align}
 
+Use \texttt{align*} environment:
 \begin{align*}
-  \text{sum} & = 1 + 2 + \cdots + n \\
-             & = \frac12 n(n+1).
+  T_n & = 1^3 + 2^3 + \cdots + n^3 \\
+      & = \biggl(\frac{n(n+1)}{2}\biggr)^2 \\
+      & = S_n^2.
 \end{align*}
 
 \subsection{矩阵}
