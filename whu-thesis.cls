@@ -20,7 +20,6 @@
 
 %tag 标识节
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
 \ProvidesExplClass {whu-thesis} {2024-05-29} {v2.2.0}
   {Thesis template for Wuhan University}
 
@@ -33,9 +32,6 @@
 \cs_new:Npn \__whu_error:nn    { \msg_error:nnn    { whu-thesis } }
 \cs_new:Npn \__whu_fatal:nx    { \msg_fatal:nnx    { whu-thesis } }
 
-
-\cs_if_exist:NF \NewDocumentCommand
-  { \RequirePackage { xparse } }
 \RequirePackage { xtemplate, l3keys2e }
 
 \__whu_msg_new:nn { l3-too-old }
@@ -47,7 +43,7 @@
   }
 \clist_map_inline:nn { expl3, xtemplate, l3keys2e }
   {
-    \@ifpackagelater {#1} { 2018/05/12 }
+    \@ifpackagelater {#1} { 2020/02/02 }
       { } { \__whu_error:nn { l3-too-old } {#1} }
   }
 \sys_if_engine_xetex:F
