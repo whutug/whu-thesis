@@ -968,7 +968,7 @@
             afterskip   = 4 ex plus 0.5 ex,
             fixskip     = true,
             pagestyle   = \bool_if:nTF \l__whu_style_chapter_page_header_bool
-              { master-mainmatter } { empty }
+              { doctor-mainmatter } { empty }
           },
         section = 
           {
