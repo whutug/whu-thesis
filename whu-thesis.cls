@@ -2774,6 +2774,7 @@
     \cs_undefine:N \addbibresource
     \clist_new:N \l__whu_biblatex_options_clist
     \clist_put_right:Nn \l__whu_biblatex_options_clist { backend = biber }
+    \clist_put_right:Nn \l__whu_biblatex_options_clist { gbnamefmt = lowercase }
     \clist_put_right:Nx \l__whu_biblatex_options_clist % 参考文献样式
       {
         style =
