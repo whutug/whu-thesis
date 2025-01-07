@@ -63,12 +63,7 @@
 
 %tag 用户设置命令接口
 \NewDocumentCommand \whusetup { m }
-  {
-    \keys_set:nn { whu } {#1}
-    \tl_new:N \l__whu_info_header_title_tl
-    \tl_set_eq:NN \l__whu_info_header_title_tl \l__whu_info_title_tl
-    \tl_replace_all:Nnn \l__whu_info_header_title_tl { \\ } { }
-  }
+  { \keys_set:nn { whu } {#1} }
 \NewDocumentCommand \whumodule { m }
   { 
     \ExplSyntaxOn
@@ -1017,6 +1012,11 @@
 
 
 %region 页眉页脚样式
+\ctex_after_end_preamble:n {
+  \tl_new:N \l__whu_info_header_title_tl
+  \tl_set_eq:NN \l__whu_info_header_title_tl \l__whu_info_title_tl
+  \tl_remove_all:Nn \l__whu_info_header_title_tl { \\ }
+}
 %tag 本科
 \fancypagestyle { bachelor-frontmatter }
   {
