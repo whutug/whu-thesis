@@ -1451,7 +1451,9 @@
         \tl_if_empty:NF \l__whu_info_supervisor_outer_tl
           { \l__whu_info_supervisor_outer_tl 
             \l__whu_info_supervisor_outer_academic_title_tl },
-        \l__whu_info_subject_tl、\l__whu_info_major_tl,
+        \tl_if_empty:NF \l__whu_info_subject_tl
+          { \l__whu_info_subject_tl、}
+          \l__whu_info_major_tl,
         \l__whu_info_research_area_tl
       }
     \noindent
