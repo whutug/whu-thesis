@@ -1,5 +1,5 @@
 %%
-%%  Copyright (C) 2019--2024 WHUTUG <https://github.com/whutug>
+%%  Copyright (C) 2019--2025 WHUTUG <https://github.com/whutug>
 %% 
 %%  This work may be distributed and/or modified under the
 %%  conditions of the LaTeX Project Public License, either
@@ -20,7 +20,7 @@
 
 %tag 标识节
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesExplClass {whu-thesis} {2024-05-29} {v2.2.0}
+\ProvidesExplClass {whu-thesis} {2025-01-07} {v2.3.0}
   {Thesis template for Wuhan University}
 
 
