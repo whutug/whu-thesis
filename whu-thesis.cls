@@ -819,7 +819,12 @@
 %region 章节标题设置与列表设置
 
 \setlist{nosep}
-
+\keys_define:nn { whu / style }
+  {
+    chapter-page-header .bool_set:N = \l__whu_style_chapter_page_header_bool,
+    chapter-page-header .initial:n = false,
+    chapter-page-header .default:n = true,
+  }
 %tag 本科
 \cs_new_protected:Npn \__whu_bachelor_set_ctex_format:
   {
@@ -900,6 +905,8 @@
             beforeskip  = 4 ex plus 0.5 ex,
             afterskip   = 4 ex plus 0.5 ex,
             fixskip     = true,
+            pagestyle   = \bool_if:nTF \l__whu_style_chapter_page_header_bool
+              { master-mainmatter } { empty }
           },
         section = 
           {
@@ -960,6 +967,8 @@
             beforeskip  = 4 ex plus 0.5 ex,
             afterskip   = 4 ex plus 0.5 ex,
             fixskip     = true,
+            pagestyle   = \bool_if:nTF \l__whu_style_chapter_page_header_bool
+              { master-mainmatter } { empty }
           },
         section = 
           {
