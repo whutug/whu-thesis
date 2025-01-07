@@ -1729,7 +1729,7 @@
       {
         \zihao{-2}
         \__whu_month_cover_to_english_version:V \l__whu_info_month_int
-        \c_space_tl \int_use:N\c_sys_day_int, \c_space_tl \int_use:N\l__whu_info_year_int
+        \c_space_tl \int_use:N\l__whu_info_day_int, \c_space_tl \int_use:N\l__whu_info_year_int
       };
   }
 %endregion 博士
