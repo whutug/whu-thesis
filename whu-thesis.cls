@@ -63,7 +63,12 @@
 
 %tag 用户设置命令接口
 \NewDocumentCommand \whusetup { m }
-  { \keys_set:nn { whu } {#1} }
+  {
+    \keys_set:nn { whu } {#1}
+    \tl_new:N \l__whu_info_header_title_tl
+    \tl_set_eq:NN \l__whu_info_header_title_tl \l__whu_info_title_tl
+    \tl_replace_all:Nnn \l__whu_info_header_title_tl { \\ } { }
+  }
 \NewDocumentCommand \whumodule { m }
   { 
     \ExplSyntaxOn
@@ -1034,14 +1039,14 @@
   {
     \fancyhf { }
     \fancyhead [CE] { 武汉大学硕士学位论文 }
-    \fancyhead [CO] { \l__whu_info_title_tl }
+    \fancyhead [CO] { \l__whu_info_header_title_tl }
     \fancyfoot [C]  { \zihao{5} \Roman{page} }
   }
 \fancypagestyle { master-mainmatter  }
   {
     \fancyhf { }
     \fancyhead [CE] { 武汉大学硕士学位论文 }
-    \fancyhead [CO] { \l__whu_info_title_tl }
+    \fancyhead [CO] { \l__whu_info_header_title_tl }
     \fancyfoot [C]  { \zihao{5} \arabic{page} }
   }
 %tag 博士
@@ -1050,14 +1055,14 @@
   {
     \fancyhf { }
     \fancyhead [CE] { 武汉大学博士学位论文 }
-    \fancyhead [CO] { \l__whu_info_title_tl }
+    \fancyhead [CO] { \l__whu_info_header_title_tl }
     \fancyfoot [C]  { \zihao{5} \Roman{page} }
   }
 \fancypagestyle { doctor-mainmatter  }
   {
     \fancyhf { }
     \fancyhead [CE] { 武汉大学博士学位论文 }
-    \fancyhead [CO] { \l__whu_info_title_tl }
+    \fancyhead [CO] { \l__whu_info_header_title_tl }
     \fancyfoot [C]  { \zihao{5} \arabic{page} }
   }
 %tag 给-\mainmatter-添加钩子
