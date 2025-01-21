@@ -248,6 +248,11 @@
           circle ( \l__whu_tikz_circled_number_radius_dim );
       }
   }
+%tag 下划线
+\cs_new:Npn \__whu_rulefill:
+  {
+    \leaders\hrule\@width0pt\@height-2pt\@depth2.5pt\hfill\kern\z@
+  }
 
 %tag 获取宽度与-clist-的内容的最大宽度
 \cs_new:Npn \__whu_get_text_width:Nn #1#2
@@ -416,8 +421,6 @@
 \RequirePackage { thmtools }
 \RequirePackage { tikzpagenodes }
 \RequirePackage { tocloft }
-\RequirePackage { xeCJK }
-\RequirePackage { xeCJKfntef }
 
 \AtEndPreamble
   {
@@ -1383,18 +1386,18 @@
     \begin{minipage}[b][0.9cm][b]{\textwidth}
       \fangsong \zihao{4} \mode_leave_vertical:
       \__whu_spread_box_with_end_spaces:nn { 2.04cm } { 分类号 }
-      \CJKunderline { \hbox_to_wd:nn { 2.41cm } { \hfill \l__whu_info_clc_tl \hfill } }
+      \underline { \hbox_to_wd:nn { 2.41cm } { \hfill \l__whu_info_clc_tl \hfill } }
       \hfill
       \__whu_spread_box_with_end_spaces:nn { 1.67cm } { 密级 }
-      \CJKunderline { \hbox_to_wd:nn { 2.4cm } { \hfill \l__whu_info_secret_level_tl \hfill } }
+      \underline { \hbox_to_wd:nn { 2.4cm } { \hfill \l__whu_info_secret_level_tl \hfill } }
     \end{minipage}\par\noindent
     \begin{minipage}[b][0.9cm][b]{\textwidth}
       \fangsong \zihao{4} \mode_leave_vertical:
       \__whu_spread_box_with_end_spaces:nn { 2.04cm } { UDC }
-      \CJKunderline { \hbox_to_wd:nn { 2.41cm } { \hfill \l__whu_info_udc_tl \hfill } }
+      \underline { \hbox_to_wd:nn { 2.41cm } { \hfill \l__whu_info_udc_tl \hfill } }
       \hfill
       \__whu_spread_box_with_end_spaces:nn { 1.67cm } { 编号 }
-      \CJKunderline { \hbox_to_wd:nn { 2.4cm } { \hfill 10486 \hfill } }
+      \underline { \hbox_to_wd:nn { 2.4cm } { \hfill 10486 \hfill } }
     \end{minipage}\par
     \skip_vertical:n { 2cm }
   }
@@ -1872,9 +1875,9 @@
       
       \vspace*{3em}
       \begin{minipage}{0.5\textwidth}
-        论文作者（签名）：\CJKunderline*{\hfill} \\[12pt]
-        学号：          \CJKunderline*{\hfill} \\[12pt]
-        学院：          \CJKunderline*{\hfill}
+        论文作者（签名）：\__whu_rulefill: \\[12pt]
+        学号：          \__whu_rulefill: \\[12pt]
+        学院：          \__whu_rulefill:
       \end{minipage} \par \skip_vertical:n { 18pt }
       \hfill 日期：\hspace{3em} 年 \qquad 月 \qquad 日
     \group_end:
