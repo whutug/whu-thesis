@@ -374,9 +374,9 @@
     % 本科小四，23磅
     { bachelor } { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
     % 硕士小四，20磅
-    {  master  } { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
+    {  master  } { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_master_line_spread_fp } { ctexbook } }
     % 博士小四，20磅
-    {  doctor  } { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_bachelor_line_spread_fp } { ctexbook } }
+    {  doctor  } { \PassOptionsToClass { zihao = -4 , linespread = \c__whu_doctor_line_spread_fp } { ctexbook } }
   }
 
 \PassOptionsToClass
