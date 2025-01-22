@@ -58,21 +58,25 @@
 % \end{itemize}
 % 力求合规、简洁、易于实现、用户友好。
 % 
-% 与 Microsoft Word 等所见即所得编辑工具不同，使用 \LaTeX{} 工具排版可以将写作与排版过程分离，写作者只需要关心文字的部分，而剩下的排版工作全部交给工具自动完成。
+% 与 Microsoft Word 等所见即所得编辑工具不同，使用 \LaTeX{} 工具排版可以将写作与排版过程分离，
+% 写作者基本只需要关心论文的内容，而剩下的排版工作大部分交给工具自动完成。
 % 
 % 模板的作用在于减少论文写作过程中格式调整的时间。前提是遵守模板的用法，否则即便用了 \cls{whu-thesis} 也难以保证输出的论文符合学校规范。
 % 
 % 用户如果遇到 bug，或者发现与学校《印制规范》的要求不一致，可以尝试以下办法：
 % \begin{enumerate}
 %     \item 阅读学校的书写印制规范文件，判断是否符合要求；
-%     \item 将 \TeX{} 发行版和宏包升级到最新，并且将模板升级到 Github 上最新版本，查看问题是否已经修复；
-%     \item 在 \href{https://github.com/whutug/whu-thesis/issues}{GitHub Issues 页面}中搜索该问题的关键词；
+%     \item 将 \TeX{} 发行版和宏包升级到最新，并且将模板升级到 Github 上最新版本，查看问题是否已经被修复；
+%     \item 在 \href{https://github.com/whutug/whu-thesis/issues}{Github Issues 页面}中搜索该问题的关键词；
 %     \item 提出新的 \href{https://github.com/whutug/whu-thesis/issues}{issue}，并说明系统、发行版与版本、出现的问题等关键信息。
 % \end{enumerate}
 % 如果是使用上的问题，可以前往 \href{https://github.com/whutug/whu-thesis/discussions}{Discussions} 中讨论。
 % 
 % \subsection*{关于本手册}
-% 本手册假定用户已经能处理一般的 \LaTeX{} 文档，并对 \BibTeX{} 有一定了解。如果从未接触过 \TeX{} 和 \LaTeX{}，建议先学习相关的基础知识，目前 \LaTeX{} 中文社区普遍推荐的入门资料是 \href{http://mirrors.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{lshort-zh-cn}。
+% 本手册假定用户已经能处理一般的 \LaTeX{} 文档，并对 \BibTeX{} 和 \biber{} 有一定了解。
+% 如果从未接触过 \TeX{} 和 \LaTeX{}，建议先学习相关的基础知识，
+% 目前 \LaTeX{} 中文社区普遍推荐的入门资料是 
+% \href{http://mirrors.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{lshort-zh-cn}。
 % 
 % 本文采用不同字体表示不同内容。无衬线字体表示宏包和文档类名称，如 \pkg{xeCJK} 宏包、\cls{ctexbook} 文档类等；等宽字体表示代码或文件名，如 \cs{whusetup} 命令、\env{abstract} 环境、\TeX{} 文档 \file{thesis.tex} 等；带有尖括号的楷体（或西文斜体）表示命令参数，如 \meta{模板选项}、\meta{English title} 等。在使用时，参数两侧的尖括号不必输入。示例代码进行了语法高亮处理，以方便阅读。
 % 
@@ -168,8 +172,7 @@
 % \begin{itemize}
 %     \item 把行溢出的盒子显示为黑色方块；
 %     \item 不实际插入图片，只输出一个占位方框；
-%     \item 关闭超链接渲染，也不再生成 PDF 书签；
-%     \item 显示页面边框，使用 \LuaLaTeX{} 编译时，还会加载 \pkg{lua-visual-debug} 宏包。
+%     \item 关闭超链接渲染，也不再生成 PDF 书签。
 % \end{itemize}
 % 
 % \begin{function}{oneside,twoside}
@@ -429,7 +432,7 @@
 % 
 % \begin{function}{style/cjk-font}
 %   \begin{whusyntax}[emph={[1]cjk-font}]
-%     cjk-font = (*<windows|mac|(fandol)|sourcehan|none>*)
+%     cjk-font = (*<windows|mac|(fandol)|sourcehan|founder|none>*)
 %   \end{whusyntax}
 %   中文字体设置，具体见表 \ref{tab:cjk-font}。
 %   如果您是本地编译的话，那么 Windows 用户推荐使用 \kvopt{cjk-font}{windows}，
