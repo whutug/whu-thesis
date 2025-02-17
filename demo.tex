@@ -33,6 +33,8 @@
     month = 4,
     % clc = , % 分类号
     % udc = ,
+    keywords  = {\LaTeX{}, 毕业论文, 模版, 武汉大学}, % 中文关键词
+    keywords* = {\LaTeX{}, Thesis, Template, Wuhan~University}, % 英文关键词
   },
   style = {
     % 字体相关选项
@@ -58,6 +60,7 @@
 }
 \whumodule{algorithm2e}
 \begin{document}
+% \raggedbottom % 使得空白都置于前一页底部，可参考https://github.com/whutug/whu-thesis/issues/276
 
 \tableofcontents % 目录
 % \listoffigures % 图目录
@@ -79,6 +82,9 @@
 % 参考文献
 % \nocite{*}
 \printbibliography
+
+% 发表的与学位论文相关的科研成果目录
+% \include{pages/achievement.tex}
 
 % 致谢
 \begin{acknowledgements}
