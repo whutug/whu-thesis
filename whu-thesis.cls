@@ -20,7 +20,7 @@
 
 %tag 标识节
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesExplClass {whu-thesis} {2025-01-07} {v2.3.0}
+\ProvidesExplClass {whu-thesis} {2025-01-07} {v2.4.0}
   {Thesis template for Wuhan University}
 
 
