@@ -2,7 +2,22 @@
 
 本文档格式遵守[如何维护更新记录](https://keepachangelog.com/zh-CN/1.0.0/)。
 
-## v2.3.0
+## Unreleased
+
+## v2.4.0 2025-03-17
+
+### Added
+
++ 当 `subject` 为空时只显示 `major`
++ 在 `demo.tex` 中新增了部分使用注释
++ 新增 `achievement.tex` 用于添加科研成果
++ 增加对 lualatex 的支持
+
+### Deleted
+
++ 移除对 xeCJKfntef 的依赖
+
+## v2.3.0 2025-01-07
 
 ### Fixed
 
