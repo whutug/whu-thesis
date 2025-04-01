@@ -1018,7 +1018,7 @@
       }
   }
 %tag 设置
-\use:c { __whu_ \g__whu_thesis_type_tl _set_emunerate_format: }
+\use:c { __whu_ \g__whu_thesis_type_tl _set_enumerate_format: }
 \use:c { __whu_ \g__whu_thesis_type_tl _set_ctex_format: }
 %endregion
 
