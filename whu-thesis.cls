@@ -407,7 +407,6 @@
 \RequirePackage { amsmath }
 \RequirePackage { amssymb }
 \RequirePackage { amsthm }
-\RequirePackage { bookmark }
 \RequirePackage { booktabs }
 \RequirePackage { caption }
 \RequirePackage { enumitem }
@@ -421,11 +420,7 @@
 \RequirePackage { thmtools }
 \RequirePackage { tikzpagenodes }
 \RequirePackage { tocloft }
-
-\AtEndPreamble
-  {
-    \RequirePackage { hyperref }
-  }
+\RequirePackage { bookmark }
 
 %tag 图片路径
 \graphicspath{{figures/}{logo/}}
