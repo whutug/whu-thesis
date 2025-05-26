@@ -902,35 +902,39 @@
         secnumdepth = 3,
         chapter = 
           {
-            format      = \zihao{-2}\sffamily\raggedright,
-            number      = \arabic{chapter},
-            name        = {},
-            beforeskip  = 4 ex plus 0.5 ex,
-            afterskip   = 4 ex plus 0.5 ex,
-            fixskip     = true,
-            pagestyle   = \bool_if:nTF \l__whu_style_chapter_page_header_bool
+            format       = \zihao{-2}\sffamily\raggedright,
+            number       = \arabic{chapter},
+            numberformat = \rmfamily,
+            name         = {},
+            beforeskip   = 4 ex plus 0.5 ex,
+            afterskip    = 4 ex plus 0.5 ex,
+            fixskip      = true,
+            pagestyle    = \bool_if:nTF \l__whu_style_chapter_page_header_bool
               { master-mainmatter } { empty }
           },
         section = 
           {
-            format      = \zihao{4}\sffamily,
+            format       = \zihao{4}\sffamily,
+            numberformat = \rmfamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            fixskip      = true,
           },
         subsection = 
           {
-            format      = \zihao{-4}\sffamily,
+            format       = \zihao{-4}\sffamily,
+            numberformat = \rmfamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            fixskip      = true,
           },
         subsubsection = 
           {
-            format      = \zihao{-4}\sffamily,
+            format       = \zihao{-4}\sffamily,
+            numberformat = \rmfamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            fixskip      = true,
           },
     }
   }
@@ -964,35 +968,39 @@
         secnumdepth = 3,
         chapter = 
           {
-            format      = \zihao{-2}\sffamily\raggedright,
-            number      = \arabic{chapter},
-            name        = {},
-            beforeskip  = 4 ex plus 0.5 ex,
-            afterskip   = 4 ex plus 0.5 ex,
-            fixskip     = true,
-            pagestyle   = \bool_if:nTF \l__whu_style_chapter_page_header_bool
+            format       = \zihao{-2}\sffamily\raggedright,
+            number       = \arabic{chapter},
+            numberformat = \rmfamily,
+            name         = {},
+            beforeskip   = 4 ex plus 0.5 ex,
+            afterskip    = 4 ex plus 0.5 ex,
+            fixskip      = true,
+            pagestyle    = \bool_if:nTF \l__whu_style_chapter_page_header_bool
               { doctor-mainmatter } { empty }
           },
         section = 
           {
-            format      = \zihao{4}\sffamily,
+            format       = \zihao{4}\sffamily,
+            numberformat = \rmfamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            fixskip      = true,
           },
         subsection = 
           {
-            format      = \zihao{-4}\sffamily,
+            format       = \zihao{-4}\sffamily,
+            numberformat = \rmfamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            fixskip      = true,
           },
         subsubsection = 
           {
-            format      = \zihao{-4}\sffamily,
-            % beforeskip  = 0.5 \baselineskip,
-            % afterskip   = 0.5 \baselineskip,
-            fixskip     = true,
+            format       = \zihao{-4}\sffamily,
+            numberformat = \rmfamily,
+            % beforeskip   = 0.5 \baselineskip,
+            % afterskip    = 0.5 \baselineskip,
+            fixskip      = true,
           },
     }
   }
