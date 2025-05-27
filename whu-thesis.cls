@@ -897,9 +897,8 @@
         secnumdepth = 3,
         chapter = 
           {
-            format       = \zihao{-2}\sffamily\raggedright,
+            format       = \zihao{-2}\heiti\raggedright,
             number       = \arabic{chapter},
-            numberformat = \rmfamily,
             name         = {},
             beforeskip   = 4 ex plus 0.5 ex,
             afterskip    = 4 ex plus 0.5 ex,
@@ -909,24 +908,21 @@
           },
         section = 
           {
-            format       = \zihao{4}\sffamily,
-            numberformat = \rmfamily,
+            format       = \zihao{4}\heiti,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip      = true,
           },
         subsection = 
           {
-            format       = \zihao{-4}\sffamily,
-            numberformat = \rmfamily,
+            format       = \zihao{-4}\heiti,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip      = true,
           },
         subsubsection = 
           {
-            format       = \zihao{-4}\sffamily,
-            numberformat = \rmfamily,
+            format       = \zihao{-4}\heiti,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip      = true,
@@ -963,9 +959,8 @@
         secnumdepth = 3,
         chapter = 
           {
-            format       = \zihao{-2}\sffamily\raggedright,
+            format       = \zihao{-2}\heiti\raggedright,
             number       = \arabic{chapter},
-            numberformat = \rmfamily,
             name         = {},
             beforeskip   = 4 ex plus 0.5 ex,
             afterskip    = 4 ex plus 0.5 ex,
@@ -975,24 +970,21 @@
           },
         section = 
           {
-            format       = \zihao{4}\sffamily,
-            numberformat = \rmfamily,
+            format       = \zihao{4}\heiti,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip      = true,
           },
         subsection = 
           {
-            format       = \zihao{-4}\sffamily,
-            numberformat = \rmfamily,
+            format       = \zihao{-4}\heiti,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip      = true,
           },
         subsubsection = 
           {
-            format       = \zihao{-4}\sffamily,
-            numberformat = \rmfamily,
+            format       = \zihao{-4}\heiti,
             % beforeskip   = 0.5 \baselineskip,
             % afterskip    = 0.5 \baselineskip,
             fixskip      = true,
