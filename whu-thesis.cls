@@ -832,7 +832,7 @@
         secnumdepth = 3,
         chapter = 
           {
-            format       = \zihao{-2}\sffamily\centering,
+            format       = \zihao{-2}\heiti\centering,
             number       = \arabic{chapter},
             numberformat = \rmfamily,
             name         = {},
@@ -843,7 +843,7 @@
           },
         section = 
           {
-            format       = \zihao{4}\sffamily,
+            format       = \zihao{4}\heiti,
             numberformat = \rmfamily,
             beforeskip   = 0.5 \baselineskip,
             afterskip    = 0.5 \baselineskip,
@@ -851,7 +851,7 @@
           },
         subsection = 
           {
-            format       = \zihao{-4}\sffamily,
+            format       = \zihao{-4}\heiti,
             numberformat = \rmfamily,
             beforeskip   = 0.5 \baselineskip,
             afterskip    = 0.5 \baselineskip,
@@ -859,7 +859,7 @@
           },
         subsubsection = 
           {
-            format       = \zihao{-4}\sffamily,
+            format       = \zihao{-4}\heiti,
             numberformat = \rmfamily,
             beforeskip   = 0.5 \baselineskip,
             afterskip    = 0.5 \baselineskip,
